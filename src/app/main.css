@@ -11,3 +11,7 @@
 .text-hover {
     @apply bg-blue-700
 }
+
+body{
+    font-family: 'Poppins', sans-serif;
+}

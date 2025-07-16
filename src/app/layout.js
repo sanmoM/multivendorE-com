@@ -44,9 +44,9 @@ export default function RootLayout({ children }) {
         {/* <link rel="stylesheet" href="./custom.css" /> */}
       </head>
       <body className="bg-background text-foreground">
-        <Header />
+        {/* <Header /> */}
         {children}
-        <Footer />
+        {/* <Footer /> */}
       </body>
     </html>
   );
