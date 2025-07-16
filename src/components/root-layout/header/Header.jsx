@@ -3,11 +3,12 @@
 import React, { useState } from 'react';
 import Link from 'next/link';
 import Container from '@/components/shared/container/Container';
+import { navItems } from '@/data';
+import NavItem from './components/nav-item/NavItem';
 
 export default function Header() {
     const [showCategory, setShowCategory] = useState(false);
     const [showMenu, setShowMenu] = useState(false);
-
     return (
         <Container>
             <header>
@@ -60,16 +61,15 @@ export default function Header() {
 
                         {/* Mobile Slide Menu */}
                         <div
-                            className={`absolute rounded-md top-16 bg-[#f4f1f7] -left-5 w-1/2 sm:w-[320px] md:w-2/5 lg:hidden shadow-xl z-50 transition-transform duration-300 ease-in-out overflow-y-auto ${showMenu ? 'translate-x-0' : '-translate-x-full hidden'
-                                }`}
+                            className={`absolute rounded-md top-16 bg-[#f4f1f7] -left-5 w-1/2 sm:w-[320px] md:w-2/5 lg:hidden shadow-xl z-50 transition-transform duration-300 ease-linear overflow-y-auto ${showMenu ? 'translate-x-0' : "-translate-x-1/2"}`}
                         >
                             <div className="p-4 pl-6 font-bold text-[14px]">
-                                <ul className="space-y-2 font-medium">
-                                    <li><Link href="/">Home</Link></li>
-                                    <li><Link href="#">Blog</Link></li>
-                                    <li><Link href="#">Contacts</Link></li>
-                                    <li><Link href="#">About Us</Link></li>
-                                    <li><Link href="#">Auction</Link></li>
+                                <ul className={`space-y-2 font-medium `}>
+                                    {
+                                        navItems.map((item, index) => (
+                                            <NavItem path={item.path} text={item.text} />
+                                        ))
+                                    }
                                 </ul>
                             </div>
                         </div>
@@ -120,12 +120,11 @@ export default function Header() {
 
                                 {/* Desktop Navigation */}
                                 <nav className="flex items-center space-x-6 ml-12 text-[15px] font-medium">
-                                    <Link href="/" className="hover:text-[#ff2631] transition duration-200">Home</Link>
-                                    <Link href="/shopPage" className="hover:text-[#ff2631] transition duration-200">Shop</Link>
-                                    <Link href="#" className="hover:text-[#ff2631] transition duration-200">Blog</Link>
-                                    <Link href="#" className="hover:text-[#ff2631] transition duration-200">Contacts</Link>
-                                    <Link href="#" className="hover:text-[#ff2631] transition duration-200">About Us</Link>
-                                    <Link href="#" className="hover:text-[#ff2631] transition duration-200">Auction</Link>
+                                    {
+                                        navItems.map((item, index) => (
+                                            <NavItem path={item.path} text={item.text} />
+                                        ))
+                                    }
                                 </nav>
                             </div>
 
@@ -179,9 +178,9 @@ export default function Header() {
 
                         {/* Floating Button */}
                         <div className="absolute -top-8 left-1/2 z-50"
-                        style={{
-                            transform: 'translate(-50%)',
-                        }}
+                            style={{
+                                transform: 'translate(-50%)',
+                            }}
                         >
                             <div className="bg-black shadow-xl flex justify-center items-center text-white font-bold text-4xl h-16 w-16 rounded-full">
                                 e

@@ -20,3 +20,30 @@ export const categories = [
         label: 'Restaurant',
     },
 ]
+
+export const navItems = [
+    {
+        path: '/',
+        text: 'Home',
+    },
+    {
+        path: '/shopPage',
+        text: 'Shop',
+    },
+    {
+        path: '/blogPage',
+        text: 'Blog',
+    },
+    {
+        path: '/contactPage',
+        text: 'Contacts',
+    },
+    {
+        path: '/aboutPage',
+        text: 'About Us',
+    },
+    {
+        path: '/auctionPage',
+        text: 'Auction',
+    },
+]
