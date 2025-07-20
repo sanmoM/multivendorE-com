@@ -129,7 +129,7 @@ export default function page() {
                                     <button
                                         key={tab.name}
                                         onClick={() => handleTabClick(tab)}
-                                        className={`${activeTab === tab.name ? 'bg-black text-white' : 'bg-white text-black'} px-5 my-1 py-3 duration-300 transition rounded-sm text-[16px] max-sm:text-[14px] font-bold hover:bg-white hover:text-black`}
+                                        className={`${activeTab === tab.name ? 'bg-black text-white hover:bg-white hover:text-black' : 'bg-white text-black hover:bg-black hover:text-white'} px-5 my-1 py-3 duration-300 transition rounded-sm text-[16px] max-sm:text-[14px] font-bold `}
                                     >
                                         {tab.label}
                                     </button>
