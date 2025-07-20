@@ -5,7 +5,7 @@ import Link from 'next/link';
 import Container from '@/components/shared/container/Container';
 import { navItems, navItems2 } from '@/data';
 import NavItem from './components/nav-item/NavItem';
-import NavItem2 from './components/nav-item/navItem2/NavItem2';
+import NavItem2 from './components/navItem2/NavItem2';
 
 export default function Header() {
     const [showCategory, setShowCategory] = useState(false);
@@ -119,7 +119,7 @@ export default function Header() {
                                 </nav>
                             </div>
 
-                            <div className="flex items-center space-x-6 text-[12px] font-medium">
+                            <div className="flex items-center gap-6 text-[12px] font-medium">
                                 <Link href="#" className="flex items-center hover:text-[#ff2631] transition duration-200">
                                     <i className="fa-solid fa-user-plus text-[#ff2631] mr-1" /> New User Zone
                                 </Link>

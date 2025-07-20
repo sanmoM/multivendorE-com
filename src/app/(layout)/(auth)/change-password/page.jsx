@@ -243,8 +243,7 @@ export default function page() {
                                 <div className="w-full mx-auto px-4 max-sm:px-0 py-3">
                                     <div className="flex flex-col gap-2">
                                         <label for="ch_pass" className="text-[16px] max-sm:text-[14px]"
-                                        >New Password</label
-                                        >
+                                        >New Password</label>
                                         <input
                                             type="password"
                                             name="current_pass"
@@ -257,8 +256,7 @@ export default function page() {
                                 <div className="w-full mx-auto px-4 max-sm:px-0 py-3">
                                     <div className="flex flex-col gap-2">
                                         <label for="ch_pass" className="text-[16px] max-sm:text-[14px]"
-                                        >Confirm Password</label
-                                        >
+                                        >Confirm Password</label>
                                         <input
                                             type="password"
                                             name="current_pass"
