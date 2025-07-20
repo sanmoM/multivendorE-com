@@ -1,8 +1,11 @@
 "use client";
+import OrderCard from '@/components/my-order/order-card/OrderCard';
 import AccountSideBar from '@/components/shared/AccountSideBar/AccountSideBar'
 import MobileAccountSideBar from '@/components/shared/AccountSideBar/MobileAccountSideBar'
 import SelectInput from '@/components/shared/inputs/select-input/SelectInput';
+import Pagination from '@/components/shared/pagination/Pagination';
 import TabButton from '@/components/shared/tab-button/TabButton';
+import { orders } from '@/data';
 import React, { useState } from 'react'
 const tabs = [
     {
@@ -34,6 +37,7 @@ const selectOptions = [
 export default function page() {
     const [activeTab, setActiveTab] = useState('all');
     const [lastOrders, setLastOrders] = useState("all");
+    const [currentPage, setCurrentPage] = useState(1);
 
     const handleTabClick = (tab) => {
         setActiveTab(tab);
@@ -112,196 +116,11 @@ export default function page() {
                                     </div>
                                 </div>
                             </div>
-                            <div
-                                className="mx-4 md:mx-5 flex sm:flex-wrap max-md:flex-row items-center justify-between max-sm:gap-2 gap-5 p-3 my-3 mb-5 border rounded-md"
-                            >
-                                <div
-                                    className="flex items-center gap-4 max-sm:gap-2 w-full sm:w-auto max-sm:flex-col"
-                                >
-                                    <div
-                                        className="w-[80px] h-[80px] flex items-center justify-center overflow-hidden rounded"
-                                    >
-                                        <img
-                                            src="https://amazcart.ischooll.com/public/uploads/images/15-12-2022/639abee15eef1.webp"
-                                            alt="Product"
-                                            className="w-full h-full object-cover"
-                                        />
-                                    </div>
-                                    <h3
-                                        className="text-[16px] max-md:hidden max-sm:text-[14px] font-semibold"
-                                    >
-                                        ProductName
-                                    </h3>
-                                </div>
-
-                                <div
-                                    className="flex gap-5 max-sm:text-[14px] w-full sm:w-auto max-sm:gap-1 max-sm:flex-col"
-                                >
-                                    <h3
-                                        className="text-[16px] md:hidden max-sm:text-[14px] font-semibold"
-                                    >
-                                        ProductName
-                                    </h3>
-                                    <h3 className="font-medium">
-                                        Qty: <span className="font-normal text-gray-400">2</span>
-                                    </h3>
-                                    <h5 className="font-medium">
-                                        Amount: <span className="font-normal text-gray-400">$500</span>
-                                    </h5>
-                                </div>
-                            </div>
-                            <div
-                                className="mx-4 md:mx-5 flex sm:flex-wrap max-md:flex-row items-center justify-between max-sm:gap-2 gap-5 p-3 my-3 mb-5 border rounded-md"
-                            >
-                                <div
-                                    className="flex items-center gap-4 max-sm:gap-2 w-full sm:w-auto max-sm:flex-col"
-                                >
-                                    <div
-                                        className="w-[80px] h-[80px] flex items-center justify-center overflow-hidden rounded"
-                                    >
-                                        <img
-                                            src="https://amazcart.ischooll.com/public/uploads/images/15-12-2022/639abee15eef1.webp"
-                                            alt="Product"
-                                            className="w-full h-full object-cover"
-                                        />
-                                    </div>
-                                    <h3
-                                        className="text-[16px] max-md:hidden max-sm:text-[14px] font-semibold"
-                                    >
-                                        ProductName
-                                    </h3>
-                                </div>
-
-                                <div
-                                    className="flex gap-5 max-sm:text-[14px] w-full sm:w-auto max-sm:gap-1 max-sm:flex-col"
-                                >
-                                    <h3
-                                        className="text-[16px] md:hidden max-sm:text-[14px] font-semibold"
-                                    >
-                                        ProductName
-                                    </h3>
-                                    <h3 className="font-medium">
-                                        Qty: <span className="font-normal text-gray-400">2</span>
-                                    </h3>
-                                    <h5 className="font-medium">
-                                        Amount: <span className="font-normal text-gray-400">$500</span>
-                                    </h5>
-                                </div>
-                            </div>
-                            <div
-                                className="mx-4 md:mx-5 flex sm:flex-wrap max-md:flex-row items-center justify-between max-sm:gap-2 gap-5 p-3 my-3 mb-5 border rounded-md"
-                            >
-                                <div
-                                    className="flex items-center gap-4 max-sm:gap-2 w-full sm:w-auto max-sm:flex-col"
-                                >
-                                    <div
-                                        className="w-[80px] h-[80px] flex items-center justify-center overflow-hidden rounded"
-                                    >
-                                        <img
-                                            src="https://amazcart.ischooll.com/public/uploads/images/15-12-2022/639abee15eef1.webp"
-                                            alt="Product"
-                                            className="w-full h-full object-cover"
-                                        />
-                                    </div>
-                                    <h3
-                                        className="text-[16px] max-md:hidden max-sm:text-[14px] font-semibold"
-                                    >
-                                        ProductName
-                                    </h3>
-                                </div>
-
-                                <div
-                                    className="flex gap-5 max-sm:text-[14px] w-full sm:w-auto max-sm:gap-1 max-sm:flex-col"
-                                >
-                                    <h3
-                                        className="text-[16px] md:hidden max-sm:text-[14px] font-semibold"
-                                    >
-                                        ProductName
-                                    </h3>
-                                    <h3 className="font-medium">
-                                        Qty: <span className="font-normal text-gray-400">2</span>
-                                    </h3>
-                                    <h5 className="font-medium">
-                                        Amount: <span className="font-normal text-gray-400">$500</span>
-                                    </h5>
-                                </div>
-                            </div>
-                            <div
-                                className="mx-4 md:mx-5 flex sm:flex-wrap max-md:flex-row items-center justify-between max-sm:gap-2 gap-5 p-3 my-3 mb-5 border rounded-md"
-                            >
-                                <div
-                                    className="flex items-center gap-4 max-sm:gap-2 w-full sm:w-auto max-sm:flex-col"
-                                >
-                                    <div
-                                        className="w-[80px] h-[80px] flex items-center justify-center overflow-hidden rounded"
-                                    >
-                                        <img
-                                            src="https://amazcart.ischooll.com/public/uploads/images/15-12-2022/639abee15eef1.webp"
-                                            alt="Product"
-                                            className="w-full h-full object-cover"
-                                        />
-                                    </div>
-                                    <h3
-                                        className="text-[16px] max-md:hidden max-sm:text-[14px] font-semibold"
-                                    >
-                                        ProductName
-                                    </h3>
-                                </div>
-
-                                <div
-                                    className="flex gap-5 max-sm:text-[14px] w-full sm:w-auto max-sm:gap-1 max-sm:flex-col"
-                                >
-                                    <h3
-                                        className="text-[16px] md:hidden max-sm:text-[14px] font-semibold"
-                                    >
-                                        ProductName
-                                    </h3>
-                                    <h3 className="font-medium">
-                                        Qty: <span className="font-normal text-gray-400">2</span>
-                                    </h3>
-                                    <h5 className="font-medium">
-                                        Amount: <span className="font-normal text-gray-400">$500</span>
-                                    </h5>
-                                </div>
-                            </div>
-                            <div
-                                className="mx-4 md:mx-5 flex sm:flex-wrap max-md:flex-row items-center justify-between max-sm:gap-2 gap-5 p-3 my-3 mb-5 border rounded-md"
-                            >
-                                <div
-                                    className="flex items-center gap-4 max-sm:gap-2 w-full sm:w-auto max-sm:flex-col"
-                                >
-                                    <div
-                                        className="w-[80px] h-[80px] flex items-center justify-center overflow-hidden rounded"
-                                    >
-                                        <img
-                                            src="https://amazcart.ischooll.com/public/uploads/images/15-12-2022/639abee15eef1.webp"
-                                            alt="Product"
-                                            className="w-full h-full object-cover"
-                                        />
-                                    </div>
-                                    <h3
-                                        className="text-[16px] max-md:hidden max-sm:text-[14px] font-semibold"
-                                    >
-                                        ProductName
-                                    </h3>
-                                </div>
-
-                                <div
-                                    className="flex gap-5 max-sm:text-[14px] w-full sm:w-auto max-sm:gap-1 max-sm:flex-col"
-                                >
-                                    <h3
-                                        className="text-[16px] md:hidden max-sm:text-[14px] font-semibold"
-                                    >
-                                        ProductName
-                                    </h3>
-                                    <h3 className="font-medium">
-                                        Qty: <span className="font-normal text-gray-400">2</span>
-                                    </h3>
-                                    <h5 className="font-medium">
-                                        Amount: <span className="font-normal text-gray-400">$500</span>
-                                    </h5>
-                                </div>
-                            </div>
+                            {
+                                orders.map((item, index) => (
+                                    <OrderCard item={item} />
+                                ))
+                            }
 
                             <div className="flex justify-end max-sm:justify-start gap-5 mx-5">
                                 <div className="">
@@ -315,7 +134,8 @@ export default function page() {
                         </div>
                     </div>
 
-                    <div className="flex items-center justify-center gap-2 flex-wrap py-5">
+                    <Pagination totalPages={5} currentPage={currentPage} setCurrentPage={setCurrentPage} />
+                    {/* <div className="flex items-center justify-center gap-2 flex-wrap py-5">
                         <button className="px-4 py-2 text-sm">Prev</button>
 
                         <button className="px-4 py-2 text-sm bg-black text-white rounded-full">
@@ -333,7 +153,7 @@ export default function page() {
                         </button>
 
                         <button className="px-4 py-2 text-sm">Next</button>
-                    </div>
+                    </div> */}
                 </div>
             </div>
         </div>
