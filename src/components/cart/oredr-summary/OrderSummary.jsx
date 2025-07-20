@@ -1,4 +1,5 @@
-import React from 'react'
+"use client";
+
 
 export default function OrderSummary({ items }) {
     const subtotal = items.reduce((acc, item) => {

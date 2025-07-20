@@ -1,6 +1,12 @@
-import React from 'react'
+"use client";
+
+import OrderSummary from '@/components/cart/oredr-summary/OrderSummary';
+import CheckoutCard from '@/components/checkout/checkout-card/CheckoutCard';
+import CheckoutForm from '@/components/checkout/checkout-form/CheckoutForm';
+import { useSelector } from 'react-redux';
 
 export default function page() {
+    const cartItems = useSelector(state => state.cart);
     return (
         <div
             className="max-w-7xl grid grid-cols-1 lg:grid-cols-3 lg:gap-10 container lg:my-12 my-4 mx-auto md:px-4 px-2"
@@ -38,60 +44,21 @@ export default function page() {
                 <hr />
                 <div className="mt-3 py-4 md:py-6 overflow-x-auto">
                     <div className="w-full">
-                        <div
-                            className="flex-shrink-0 flex justify-between items-center border p-3 rounded-md bg-white"
-                        >
-                            <div className="flex gap-2 md:gap-4 items-center">
-                                <img
-                                    className="w-8 sm:w-20"
-                                    src="https://amazcart.ischooll.com/public/uploads/images/16-01-2023/63c4ebab0fcf9.jpeg"
-                                    alt=""
-                                />
-                                <h4 className="text-[8px] sm:text-sm font-semibold text-gray-700">
-                                    Minimalistic living Room....
-                                </h4>
-                            </div>
-                            <div
-                                className="text-[8px] sm:text-sm flex gap-4 md:gap-6 lg:gap-12 font-semibold items-end text-right"
-                            >
-                                <p>$ 105.00</p>
-                                <p className="text-gray-600">Qty: 1</p>
-                                <p>$ 105.00</p>
-                            </div>
-                        </div>
-
-                        <div
-                            className="flex-shrink-0 mt-4 flex justify-between items-center border p-3 rounded-md bg-white"
-                        >
-                            <div className="flex gap-2 md:gap-4 items-center">
-                                <img
-                                    className="w-8 sm:w-20"
-                                    src="https://amazcart.ischooll.com/public/uploads/images/16-01-2023/63c4ebab0fcf9.jpeg"
-                                    alt=""
-                                />
-                                <h4 className="text-[8px] sm:text-sm font-semibold text-gray-700">
-                                    Minimalistic living Room....
-                                </h4>
-                            </div>
-                            <div
-                                className="text-[8px] sm:text-sm flex gap-4 md:gap-6 lg:gap-12 font-semibold items-end text-right"
-                            >
-                                <p>$ 105.00</p>
-                                <p className="text-gray-600">Qty: 1</p>
-                                <p>$ 105.00</p>
-                            </div>
-                        </div>
+                        {
+                            cartItems.map((item, index) => (
+                                <CheckoutCard item={item} />
+                            ))
+                        }
                     </div>
                 </div>
 
-                <div className="border mx-auto rounded px-4 py-8 w-full">
+                {/* <div className="border mx-auto rounded px-4 py-8 w-full">
                     <h2 className="text-lg font-bold text-gray-900 mb-4">
                         Contact Information
                     </h2>
                     <div className="mb-4">
                         <label className="block text-sm font-medium text-gray-700 mb-1"
-                        >Email *</label
-                        >
+                        >Email *</label>
                         <input
                             type="email"
                             placeholder="Email"
@@ -101,16 +68,14 @@ export default function page() {
                     <div className="mb-6 flex items-center gap-2">
                         <input type="checkbox" id="subscribe" className="accent-black" />
                         <label for="subscribe" className="text-sm text-gray-700"
-                        >Email me with news and offers</label
-                        >
+                        >Email me with news and offers</label>
                     </div>
 
                     <h2 className="text-lg font-bold text-gray-900 mb-4">Shipping Address</h2>
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                         <div>
                             <label className="block text-sm font-medium text-gray-700 mb-1"
-                            >Name *</label
-                            >
+                            >Name *</label>
                             <input
                                 type="text"
                                 placeholder="Name"
@@ -119,8 +84,7 @@ export default function page() {
                         </div>
                         <div>
                             <label className="block text-sm font-medium text-gray-700 mb-1"
-                            >Address *</label
-                            >
+                            >Address *</label>
                             <input
                                 type="text"
                                 placeholder="Address"
@@ -129,8 +93,7 @@ export default function page() {
                         </div>
                         <div>
                             <label className="block text-sm font-medium text-gray-700 mb-1"
-                            >Phone *</label
-                            >
+                            >Phone *</label>
                             <input
                                 type="tel"
                                 placeholder="Phone"
@@ -139,8 +102,7 @@ export default function page() {
                         </div>
                         <div>
                             <label className="block text-sm font-medium text-gray-700 mb-1"
-                            >Country *</label
-                            >
+                            >Country *</label>
                             <select
                                 className="w-full border rounded px-4 py-2 text-sm bg-white focus:outline-none focus:ring-1 focus:ring-black"
                             >
@@ -152,8 +114,7 @@ export default function page() {
                         </div>
                         <div>
                             <label className="block text-sm font-medium text-gray-700 mb-1"
-                            >State *</label
-                            >
+                            >State *</label>
                             <select
                                 className="w-full border rounded px-4 py-2 text-sm bg-white focus:outline-none focus:ring-1 focus:ring-black"
                             >
@@ -165,8 +126,7 @@ export default function page() {
                         </div>
                         <div>
                             <label className="block text-sm font-medium text-gray-700 mb-1"
-                            >City *</label
-                            >
+                            >City *</label>
                             <select
                                 className="w-full border rounded px-4 py-2 text-sm bg-white focus:outline-none focus:ring-1 focus:ring-black"
                             >
@@ -179,8 +139,7 @@ export default function page() {
                         </div>
                         <div className="md:col-span-2">
                             <label className="block text-sm font-medium text-gray-700 mb-1"
-                            >Postal Code / Pin Code *</label
-                            >
+                            >Postal Code / Pin Code *</label>
                             <input
                                 type="text"
                                 placeholder="Postal code"
@@ -189,8 +148,7 @@ export default function page() {
                         </div>
                         <div className="md:col-span-2">
                             <label className="block text-sm font-medium text-gray-700 mb-1"
-                            >Note</label
-                            >
+                            >Note</label>
                             <textarea
                                 rows="4"
                                 placeholder="Note"
@@ -202,8 +160,7 @@ export default function page() {
                     <div className="mt-6 flex items-start gap-2">
                         <input type="checkbox" id="terms" className="accent-black" />
                         <label for="terms" className="text-sm text-gray-700"
-                        >I agree with the terms and conditions.</label
-                        >
+                        >I agree with the terms and conditions.</label>
                     </div>
 
                     <div className="mt-6 flex flex-wrap gap-4">
@@ -218,39 +175,11 @@ export default function page() {
                             RETURN TO CART
                         </button>
                     </div>
-                </div>
+                </div> */}
+                <CheckoutForm />
             </div>
-            <div className="col-span-1 mt-6 lg:mt-0 p-4">
-                <h2 className="text-lg font-bold text-gray-900 mb-4">Order Summary</h2>
-                <div className="space-y-3">
-                    <div className="text-sm flex justify-between items-center">
-                        <p>Subtotal</p>
-                        <p className="text-gray-600">+$ 133.00</p>
-                    </div>
-                    <div className="text-sm flex justify-between items-center">
-                        <div>
-                            <p>Shipping Charge</p>
-                            <p className="text-gray-600 text-[10px] font-light">
-                                PACKAGE WISE SHIPPING CHANGE
-                            </p>
-                        </div>
-                        <p className="text-gray-600">+$ 30.00</p>
-                    </div>
-                    <div className="text-sm flex justify-between items-center">
-                        <p>Discount</p>
-                        <p className="text-gray-600">+$ 2.00</p>
-                    </div>
-                    <div className="text-sm flex justify-between items-center">
-                        <p>VAT/TAX/GST</p>
-                        <p className="text-gray-600">+$ 5.00</p>
-                    </div>
-                    <hr />
-                    <div className="flex justify-between items-center">
-                        <p className="font-bold text-sm text-gray-500">TOTAL</p>
-                        <p className="font-bold">$ 167.00</p>
-                    </div>
-                </div>
-            </div>
+            {/* order summary */}
+            <OrderSummary items={cartItems} />
         </div>
     )
 }
