@@ -1,6 +1,6 @@
 import React from 'react'
 
-export default function UserInfo() {
+export default function AccountSideBar() {
     return (
         <div className="lg:w-[500px] max-sm:w-full max-md:w-full gap-5 p-3">
             <div className="p-5 rounded-md bg-white border">

@@ -1,6 +1,18 @@
-import React from 'react'
+"use client";
+import AuthTextInput from '@/components/auth/auth-inputs/auth-text-input/AuthTextInput';
+import CheckBoxWithLabel from '@/components/shared/inputs/check-box-with-label/CheckBoxWithLabel';
+import TextInput from '@/components/shared/inputs/text-input/TextInput';
+import { useState } from 'react';
 
 export default function page() {
+    const [email, setEmail] = useState('');
+    const [password, setPassword] = useState('');
+    const [remember, setRemember] = useState(false);
+
+    const handleSubmit = (e) => {
+        e.preventDefault();
+        console.log(email, password, remember);
+    };
     return (
         <div className='bg-[#f4f7f9]'>
             <div
@@ -39,36 +51,14 @@ export default function page() {
                         </div>
 
                         <form>
-                            <div class="mb-4">
-                                <label class="block text-sm font-medium text-gray-700 mb-1">
-                                    Phone number <span class="text-red-500">*</span>
-                                </label>
-                                <input
-                                    type="text"
-                                    placeholder="Phone number"
-                                    class="w-full px-4 py-3 border rounded-md text-sm outline-none focus:ring-2 focus:ring-black"
-                                />
+                            <div class="mb-4 space-y-4">
+                                <AuthTextInput label="Email" placeholder="Email" value={email} setValue={setEmail} isRequired />
+                                <AuthTextInput label="Password" placeholder="Password" value={password} setValue={setPassword} isRequired />
                             </div>
-
-                            <div class="mb-4">
-                                <label class="block text-sm font-medium text-gray-700 mb-1">
-                                    Password <span class="text-red-500">*</span>
-                                </label>
-                                <input
-                                    type="password"
-                                    placeholder="Min. 8 Character"
-                                    class="w-full px-4 py-3 border rounded-md text-sm outline-none focus:ring-2 focus:ring-black"
-                                />
-                            </div>
-
-                            <div class="flex items-center mb-6">
-                                <input type="checkbox" id="remember" class="mr-2" />
-                                <label for="remember" class="text-sm text-gray-600"
-                                >Remember me</label
-                                >
-                            </div>
+                            <CheckBoxWithLabel label="Remember me" checked={remember} setChecked={setRemember} />
 
                             <button
+                                onClick={handleSubmit}
                                 type="submit"
                                 class="w-full py-3 bg-black text-white font-bold rounded-md text-sm"
                             >

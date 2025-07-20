@@ -1,6 +1,20 @@
-import React from 'react'
+"use client";
+import AuthTextInput from '@/components/auth/auth-inputs/auth-text-input/AuthTextInput';
+import CheckBoxWithLabel from '@/components/shared/inputs/check-box-with-label/CheckBoxWithLabel';
+import { useState } from 'react';
 
 export default function page() {
+    const [firstName, setFirstName] = useState('');
+    const [lastName, setLastName] = useState('');
+    const [phone, setPhone] = useState('');
+    const [password, setPassword] = useState('');
+    const [confirmPassword, setConfirmPassword] = useState('');
+    const [checked, setChecked] = useState(false);
+
+    const handleSubmit = (e) => {
+        e.preventDefault();
+        console.log(firstName, lastName, phone, password, confirmPassword);
+    };
     return (
         <div className='bg-[#f4f7f9]'>
             <div
@@ -39,75 +53,24 @@ export default function page() {
                         </div>
 
                         <form>
-                            <div class="mb-4">
-                                <label class="block text-sm font-medium text-gray-700 mb-1">
-                                    First Name <span class="text-red-500">*</span>
-                                </label>
-                                <input
-                                    type="text"
-                                    placeholder="Frist Name"
-                                    class="w-full px-4 py-3 border rounded-md text-sm outline-none focus:ring-2 focus:ring-black"
-                                />
-                            </div>
-                            <div class="mb-4">
-                                <label class="block text-sm font-medium text-gray-700 mb-1">
-                                    Last Name <span class="text-red-500">*</span>
-                                </label>
-                                <input
-                                    type="text"
-                                    placeholder="Last Name"
-                                    class="w-full px-4 py-3 border rounded-md text-sm outline-none focus:ring-2 focus:ring-black"
-                                />
-                            </div>
-                            <div class="mb-4">
-                                <label class="block text-sm font-medium text-gray-700 mb-1">
-                                    Phone number <span class="text-red-500">*</span>
-                                </label>
-                                <input
-                                    type="text"
-                                    placeholder="Phone number"
-                                    class="w-full px-4 py-3 border rounded-md text-sm outline-none focus:ring-2 focus:ring-black"
-                                />
-                            </div>
-
-                            <div class="mb-4">
-                                <label class="block text-sm font-medium text-gray-700 mb-1">
-                                    Password <span class="text-red-500">*</span>
-                                </label>
-                                <input
-                                    type="password"
-                                    placeholder="Min. 8 Character"
-                                    class="w-full px-4 py-3 border rounded-md text-sm outline-none focus:ring-2 focus:ring-black"
-                                />
-                            </div>
-                            <div class="mb-4">
-                                <label class="block text-sm font-medium text-gray-700 mb-1">
-                                    Confirm password <span class="text-red-500">*</span>
-                                </label>
-                                <input
-                                    type="password"
-                                    placeholder="Min. 8 Character"
-                                    class="w-full px-4 py-3 border rounded-md text-sm outline-none focus:ring-2 focus:ring-black"
-                                />
+                            <div className='space-y-4 mb-4'>
+                                <AuthTextInput label="First Name" placeholder="First Name" value={firstName} setValue={setFirstName} isRequired />
+                                <AuthTextInput label="Last Name" placeholder="Last Name" value={lastName} setValue={setLastName} isRequired />
+                                <AuthTextInput label="Phone number" placeholder="Phone number" value={phone} setValue={setPhone} isRequired />
+                                <AuthTextInput label="Password" placeholder="Password" value={password} setValue={setPassword} isRequired />
+                                <AuthTextInput label="Confirm password" placeholder="Confirm password" value={confirmPassword} setValue={setConfirmPassword} isRequired />
                             </div>
 
                             <button
+                                onClick={handleSubmit}
                                 type="submit"
                                 class="w-full py-3 bg-black text-white font-bold rounded-md text-sm"
                             >
                                 SIGN UP
                             </button>
                         </form>
-
                         <div class="mt-6 text-sm">
-                            <div class="flex items-center gap-1 mb-6 mt-8">
-                                <input type="checkbox" id="remember" class="mr-2" />
-                                <label for="remember" class="text-sm text-gray-600"
-                                >By signing up, you agree to
-                                    <a class="text-blue-500" href="">Teams of Service</a> and
-                                    <a class="text-blue-500" href="">Privacy Policy</a></label
-                                >
-                            </div>
+                            <CheckBoxWithLabel label="By signing up, you agree to <a class=text-blue-500 href=''>Teams of Service</a> and <a class=text-blue-500 href=''>Privacy Policy</a>" checked={checked} setChecked={setChecked} />
                             <p class="text-gray-600 mt-1">
                                 Already have an Account?
                                 <a href="/login.html" class="text-black font-medium">Sign In</a>

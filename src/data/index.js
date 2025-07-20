@@ -120,3 +120,48 @@ export const cartItems = [
         quantity: 1,
     },
 ]
+
+export const orders = [
+    {
+        id: 1,
+        image: "https://amazcart.ischooll.com/public/uploads/images/16-01-2023/63c4ebab0fcf9.jpeg",
+        name: 'Minimalistic Living Room...',
+        price: 105,
+        quantity: 1,
+    },
+    {
+        id: 2,
+        image: "https://amazcart.ischooll.com/public/uploads/images/16-01-2023/63c4ebab0fcf9.jpeg",
+        name: 'Minimalistic Living Room...',
+        price: 105,
+        quantity: 1,
+    },
+    {
+        id: 3,
+        image: "https://amazcart.ischooll.com/public/uploads/images/16-01-2023/63c4ebab0fcf9.jpeg",
+        name: 'Minimalistic Living Room...',
+        price: 105,
+        quantity: 1,
+    },
+    {
+        id: 4,
+        image: "https://amazcart.ischooll.com/public/uploads/images/16-01-2023/63c4ebab0fcf9.jpeg",
+        name: 'Minimalistic Living Room...',
+        price: 105,
+        quantity: 1,
+    },
+    {
+        id: 5,
+        image: "https://amazcart.ischooll.com/public/uploads/images/16-01-2023/63c4ebab0fcf9.jpeg",
+        name: 'Minimalistic Living Room...',
+        price: 105,
+        quantity: 1,
+    },
+    {
+        id: 6,
+        image: "https://amazcart.ischooll.com/public/uploads/images/16-01-2023/63c4ebab0fcf9.jpeg",
+        name: 'Minimalistic Living Room...',
+        price: 105.00,
+        quantity: 1,
+    },
+]       
