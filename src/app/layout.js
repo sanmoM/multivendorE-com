@@ -4,6 +4,7 @@ import "./custom.css";
 import "./main.css";
 // import "./output.css";
 import Script from 'next/script'
+import StoreProvider from "@/lib/redux/StoreProvider";
 
 
 // ✅ Correct place to specify weights
@@ -38,7 +39,9 @@ export default function RootLayout({ children }) {
         />
       </head>
       <body className="bg-background text-foreground">
-        {children}
+        <StoreProvider>
+          {children}
+        </StoreProvider>
       </body>
     </html>
   );
