@@ -1,3 +1,6 @@
+import { FaShoppingCart } from "react-icons/fa";
+import { FaCodeCompare, FaHeart, FaTruck } from "react-icons/fa6";
+
 export const categories = [
     {
         icon: 'fa-utensils',
@@ -27,11 +30,11 @@ export const navItems = [
         text: 'Home',
     },
     {
-        path: '/shopPage',
+        path: '/shop',
         text: 'Shop',
     },
     {
-        path: '/blogPage',
+        path: '/blog',
         text: 'Blog',
     },
     {
@@ -46,4 +49,28 @@ export const navItems = [
         path: '/auctionPage',
         text: 'Auction',
     },
+]
+
+export const navItems2 = [
+    {
+        path: '/',
+        text: 'TRACK YOUR ORDER',
+        icon: FaTruck,
+    },
+    {
+        path: '/',
+        text: 'COMPARE (0)',
+        icon: FaCodeCompare,
+    },
+    {
+        path: '/',
+        text: 'WISHLIST (0)',
+        icon: FaHeart,
+    },
+    {
+        path: '/cart',
+        text: 'CART (0)',
+        icon: FaShoppingCart,
+    },
+
 ]

@@ -3,8 +3,9 @@
 import React, { useState } from 'react';
 import Link from 'next/link';
 import Container from '@/components/shared/container/Container';
-import { navItems } from '@/data';
+import { navItems, navItems2 } from '@/data';
 import NavItem from './components/nav-item/NavItem';
+import NavItem2 from './components/nav-item/navItem2/NavItem2';
 
 export default function Header() {
     const [showCategory, setShowCategory] = useState(false);
@@ -20,22 +21,12 @@ export default function Header() {
                         <Link href="#" className="hover:text-[#ff2631] transition duration-200">APP STORE</Link>
                     </div>
 
-                    <div className="flex items-center space-x-3 text-gray-700">
-                        <Link href="#" className="hover:text-[#ff2631] transition duration-200">
-                            <i className="fa-solid fa-truck text-red-600" /> TRACK YOUR ORDER
-                        </Link>
-                        <span className="h-3 w-px bg-gray-300"></span>
-                        <Link href="#" className="hover:text-[#ff2631] transition duration-200">
-                            <i className="fa-solid fa-code-compare text-red-600" /> COMPARE (0)
-                        </Link>
-                        <span className="h-3 w-px bg-gray-300"></span>
-                        <Link href="/my_wishList" className="hover:text-[#ff2631] transition duration-200">
-                            <i className="fa-solid fa-heart text-red-600" /> WISHLIST (0)
-                        </Link>
-                        <span className="h-3 w-px bg-gray-300"></span>
-                        <Link href="/cartPage" className="hover:text-[#ff2631] transition duration-200">
-                            <i className="fa-solid fa-cart-shopping text-red-600" /> CART (0)
-                        </Link>
+                    <div className="flex items-center space-x-2 text-gray-700">
+                        {
+                            navItems2.map((item, index) => (
+                                <NavItem2 path={item.path} text={item.text} Icon={item.icon} />
+                            ))
+                        }
                     </div>
                 </div>
 
@@ -97,7 +88,7 @@ export default function Header() {
                                 <i className="fa-solid fa-user text-red-600" /> LOGIN
                             </Link>
                             <span className="mx-1">/</span>
-                            <Link href="/signUp" className="hover:text-[#ff2631] transition duration-200">REGISTER</Link>
+                            <Link href="/signup" className="hover:text-[#ff2631] transition duration-200">REGISTER</Link>
                         </div>
                     </div>
 
@@ -119,7 +110,7 @@ export default function Header() {
                                 </button>
 
                                 {/* Desktop Navigation */}
-                                <nav className="flex items-center space-x-6 ml-12 text-[15px] font-medium">
+                                <nav className="flex items-center ml-12 text-[15px] font-medium gap-6">
                                     {
                                         navItems.map((item, index) => (
                                             <NavItem path={item.path} text={item.text} />
