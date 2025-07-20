@@ -1,12 +1,14 @@
 import React from 'react'
 
-export default function DateInput({ label, placeholder }) {
+export default function DateInput({ label, placeholder, value, setValue }) {
     return (
         <div className="flex flex-col gap-2">
             <label for="dob" className="text-[16px] max-sm:text-[14px]"
             >{label}</label>
             <input
                 type="date"
+                value={value}
+                onChange={(e) => setValue(e.target.value)}
                 name="dob"
                 id="dob"
                 placeholder={placeholder}
