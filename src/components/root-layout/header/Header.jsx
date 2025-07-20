@@ -1,15 +1,17 @@
 'use client';
 
-import React, { useState } from 'react';
-import Link from 'next/link';
 import Container from '@/components/shared/container/Container';
 import { navItems, navItems2 } from '@/data';
+import Link from 'next/link';
+import { usePathname } from 'next/navigation';
+import { useState } from 'react';
 import NavItem from './components/nav-item/NavItem';
 import NavItem2 from './components/navItem2/NavItem2';
 
 export default function Header() {
     const [showCategory, setShowCategory] = useState(false);
     const [showMenu, setShowMenu] = useState(false);
+    const path = usePathname();
     return (
         <Container>
             <header>
@@ -52,7 +54,7 @@ export default function Header() {
 
                         {/* Mobile Slide Menu */}
                         <div
-                            className={`absolute rounded-md top-16 bg-[#f4f1f7] -left-5 w-1/2 sm:w-[320px] md:w-2/5 lg:hidden shadow-xl z-50 transition-transform duration-300 ease-linear overflow-y-auto ${showMenu ? 'translate-x-0' : "-translate-x-1/2"}`}
+                            className={`absolute rounded-md top-16 bg-[#f4f1f7] -left-5 w-1/2 sm:w-[320px] md:w-2/5 lg:hidden shadow-xl z-50 transition-transform duration-300 ease-linear overflow-y-auto ${showMenu ? 'translate-x-0' : "-translate-x-full"}`}
                         >
                             <div className="p-4 pl-6 font-bold text-[14px]">
                                 <ul className={`space-y-2 font-medium `}>
@@ -94,20 +96,22 @@ export default function Header() {
 
                     {/* Header 3 (Desktop Nav) */}
                     <div className="bg-[#f7f7fc] relative mx-4 mt-6 hidden lg:block pr-6">
-                        <div className="flex items-center justify-between">
+                        <div className="flex items-center justify-between h-12">
                             <div className="flex items-center">
-                                <button
-                                    onClick={() => setShowCategory((prev) => !prev)}
-                                    className="flex items-center px-4 py-3 bg-black text-white text-sm font-semibold rounded-sm"
-                                >
-                                    <svg className="w-8 h-6 mr-2" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24">
-                                        <path strokeLinecap="round" strokeLinejoin="round" d="M4 6h16M4 12h16M4 18h16" />
-                                    </svg>
-                                    All Categories
-                                    <svg className="w-4 h-6 ml-14" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24">
-                                        <path strokeLinecap="round" strokeLinejoin="round" d="M19 9l-7 7-7-7" />
-                                    </svg>
-                                </button>
+                                {
+                                    path !== "/user-profile" && <button
+                                        onClick={() => setShowCategory((prev) => !prev)}
+                                        className="flex items-center px-4 py-3 bg-black text-white text-sm font-semibold rounded-sm"
+                                    >
+                                        <svg className="w-8 h-6 mr-2" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24">
+                                            <path strokeLinecap="round" strokeLinejoin="round" d="M4 6h16M4 12h16M4 18h16" />
+                                        </svg>
+                                        All Categories
+                                        <svg className="w-4 h-6 ml-14" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24">
+                                            <path strokeLinecap="round" strokeLinejoin="round" d="M19 9l-7 7-7-7" />
+                                        </svg>
+                                    </button>
+                                }
 
                                 {/* Desktop Navigation */}
                                 <nav className="flex items-center ml-12 text-[15px] font-medium gap-6">
