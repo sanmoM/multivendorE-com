@@ -164,4 +164,28 @@ export const orders = [
         price: 105.00,
         quantity: 1,
     },
-]       
+]
+
+export const products = [
+    {
+        id: 1,
+        image: 'https://amazcart.ischooll.com/public/uploads/images/14-12-2022/6399b91de39f1.webp',
+        name: 'Minimalistic Living Room Sofa 3pcs',
+        price: 30,
+        discount: 20
+    },
+    {
+        id: 2,
+        image: 'https://amazcart.ischooll.com/public/uploads/images/14-12-2022/6399b882ce24f.webp',
+        name: 'Minimalistic Living Room Sofa 3pcs',
+        price: 30,
+        discount: 20
+    },
+    {
+        id: 3,
+        image: 'https://amazcart.ischooll.com/public/uploads/images/14-12-2022/6399c876defe6.webp',
+        name: 'Minimalistic Living Room Sofa 3pcs',
+        price: 30,
+        discount: 20
+    },
+]

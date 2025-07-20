@@ -1,3 +1,5 @@
+import ProductCard from '@/components/shared/product-card/ProductCard'
+import { products } from '@/data'
 import React from 'react'
 
 export default function page() {
@@ -256,7 +258,7 @@ export default function page() {
 
                     <div className="w-full px-2 py-2">
                         <div className="grid grid-cols-3 gap-4">
-                            <div
+                            {/* <div
                                 className="group rounded-lg border border-gray-300 shadow-lg bg-[#ffffff38] overflow-hidden transition-all duration-300"
                             >
                                 <div className="relative">
@@ -499,7 +501,12 @@ export default function page() {
                                         </a>
                                     </div>
                                 </div>
-                            </div>
+                            </div> */}
+                            {
+                                products.map((item, index) => (
+                                    <ProductCard item={item}  key={index} />
+                                ))
+                            }
                         </div>
                     </div>
                     <div className="bg-white p-3 mx-5 rounded-sm">
