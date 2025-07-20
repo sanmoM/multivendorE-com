@@ -97,9 +97,12 @@ export default function Header() {
                     {/* Header 3 (Desktop Nav) */}
                     <div className="bg-[#f7f7fc] relative mx-4 mt-6 hidden lg:block pr-6">
                         <div className="flex items-center justify-between h-12">
+                            {
+                                console.log(path)
+                            }
                             <div className="flex items-center">
                                 {
-                                    path !== "/user-profile" && <button
+                                    path !== "/user-profile" && path !== "/cart" && <button
                                         onClick={() => setShowCategory((prev) => !prev)}
                                         className="flex items-center px-4 py-3 bg-black text-white text-sm font-semibold rounded-sm"
                                     >
