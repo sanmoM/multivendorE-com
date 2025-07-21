@@ -1,6 +1,19 @@
-import React from 'react'
+"use client"
+
+import SelectInput from '@/components/shared/inputs/select-input/SelectInput'
+import React, { useState } from 'react'
 
 export default function page() {
+    const [state, setState] = useState("Dhaka")
+    const [area, setArea] = useState("Pathapath")
+    const [quantity, setQuantity] = useState(1)
+    const [color, setColor] = useState("Red")
+    const [size, setSize] = useState("1 pound")
+
+    const handleSubmit = (e) => {
+        e.preventDefault()
+        console.log(state, area, quantity, color, size)
+    }
     return (
         <div
             class="grid container max-w-7xl px-3 mt-6 mx-auto grid-cols-1 lg:grid-cols-4 lg:gap-6"
@@ -92,9 +105,13 @@ export default function page() {
                         <div class="flex my-4 gap-3 items-center">
                             <p class="text-sm text-[#687083]">Quantity:</p>
                             <div class="flex border text-center">
-                                <p class="py-1 px-3 bg-slate-200 cursor-pointer">-</p>
-                                <p class="py-1 px-3">1</p>
-                                <p class="py-1 px-3 bg-slate-200 cursor-pointer">+</p>
+                                <button class="py-1 px-3 bg-slate-200 cursor-pointer" onClick={() => {
+                                    if (quantity > 1) {
+                                        setQuantity(quantity - 1)
+                                    }
+                                }}>-</button>
+                                <p class="py-1 px-3">{quantity}</p>
+                                <button class="py-1 px-3 bg-slate-200 cursor-pointer" onClick={() => setQuantity(quantity + 1)}>+</button>
                             </div>
                         </div>
 
@@ -155,16 +172,15 @@ export default function page() {
                         </div>
 
                         <div class="flex gap-4 mt-6">
-                            <a
+                            <button
+                                onClick={handleSubmit}
                                 class="px-2 py-3 md:py-4 w-1/2 rounded-md flex justify-center bg-black text-white font-medium text-sm"
                                 href="#"
-                            >Add to Cart</a
-                            >
+                            >Add to Cart</button>
                             <a
                                 class="px-2 py-2 md:py-4 w-1/2 rounded-md flex justify-center border border-black text-black font-medium text-sm"
                                 href="/checkOutPage.html"
-                            >Buy Now</a
-                            >
+                            >Buy Now</a>
                         </div>
 
                         <div class="text-sm mt-4 font-semibold">
@@ -180,20 +196,16 @@ export default function page() {
                             <p class="text-sm text-[#687083]">TAG:</p>
                             <span
                                 class="p-1 text-sm rounded bg-slate-300 text-black whitespace-nowrap"
-                            >furniture</span
-                            >
+                            >furniture</span>
                             <span
                                 class="p-1 text-sm rounded bg-slate-300 text-black whitespace-nowrap"
-                            >wooden furniture</span
-                            >
+                            >wooden furniture</span>
                             <span
                                 class="p-1 text-sm rounded bg-slate-300 text-black whitespace-nowrap"
-                            >beautiful furniture</span
-                            >
+                            >beautiful furniture</span>
                             <span
                                 class="p-1 text-sm rounded bg-slate-300 text-black whitespace-nowrap"
-                            >wooden design beautiful furniture 001</span
-                            >
+                            >wooden design beautiful furniture 001</span>
                         </div>
 
                         <div class="mt-4">
@@ -382,22 +394,8 @@ export default function page() {
                     </h2>
                     <div class="p-4">
                         <div class="space-y-4 w-full max-w-xs">
-                            <select
-                                class="w-full border border-gray-300 rounded px-4 py-2 text-gray-600 text-sm focus:outline-none focus:ring-2 focus:ring-black"
-                            >
-                                <option>Dhaka</option>
-                                <option>Chattogram</option>
-                                <option>Khulna</option>
-                                <option>Rajshahi</option>
-                            </select>
-                            <select
-                                class="w-full border border-gray-300 rounded px-4 py-2 text-gray-600 text-sm focus:outline-none focus:ring-2 focus:ring-black"
-                            >
-                                <option>Panthapath, Dhaka</option>
-                                <option>Dhanmondi, Dhaka</option>
-                                <option>Uttara, Dhaka</option>
-                                <option>Mirpur, Dhaka</option>
-                            </select>
+                            <SelectInput inputClass={"shadow-none"} options={[{ value: "Dhaka", label: "Dhaka" }, { value: "Pathapath", label: "Pathapath" }, { value: "Dhanmondi", label: "Dhanmondi" }, { value: "Uttara", label: "Uttara" }, { value: "Mirpur", label: "Mirpur" }]} value={area} setValue={setArea} variant={"small"} />
+                            <SelectInput inputClass={"shadow-none"} options={[{ value: "Dhaka", label: "Dhaka" }, { value: "Pathapath", label: "Pathapath" }, { value: "Dhanmondi", label: "Dhanmondi" }, { value: "Uttara", label: "Uttara" }, { value: "Mirpur", label: "Mirpur" }]} value={state} setValue={setState} variant={"small"} />
                         </div>
 
                         <div class="mt-8 flex gap-2">
