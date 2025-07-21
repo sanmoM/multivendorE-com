@@ -178,7 +178,7 @@ export default function page() {
                                 href="#"
                             >Add to Cart</button>
                             <a
-                                class="px-2 py-2 md:py-4 w-1/2 rounded-md flex justify-center border border-black text-black font-medium text-sm"
+                                class="px-2 py-2 md:py-4 w-1/2 rounded-md flex justify-center border !border-black text-black font-medium text-sm"
                                 href="/checkOutPage.html"
                             >Buy Now</a>
                         </div>
@@ -212,17 +212,13 @@ export default function page() {
                             <p class="text-sm mb-1">SHARE ON:</p>
                             <div class="flex gap-4">
                                 <a class="border px-4 py-3 flex items-center" href="#"
-                                ><i class="fa-solid fa-tree"></i
-                                ></a>
+                                ><i class="fa-solid fa-tree"></i></a>
                                 <a class="border px-4 py-3 flex items-center" href="#"
-                                ><i class="fa-solid fa-building-columns"></i
-                                ></a>
+                                ><i class="fa-solid fa-building-columns"></i></a>
                                 <a class="border px-4 py-3 flex items-center" href="#"
-                                ><i class="fa-solid fa-seedling"></i
-                                ></a>
+                                ><i class="fa-solid fa-seedling"></i></a>
                                 <a class="border px-4 py-3 flex items-center" href="#"
-                                ><i class="fa-solid fa-globe"></i
-                                ></a>
+                                ><i class="fa-solid fa-globe"></i></a>
                             </div>
                         </div>
                     </div>
