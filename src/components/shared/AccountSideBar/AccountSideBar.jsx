@@ -1,4 +1,4 @@
-import React from 'react'
+import AccountNavigationItems from './components/account-navigation-items/AccountNavigationItems'
 
 export default function AccountSideBar() {
     return (
@@ -36,82 +36,7 @@ export default function AccountSideBar() {
                 </div>
             </div>
             <div className="p-5 bg-white border rounded-md my-5 max-sm:hidden">
-                <ul className="flex flex-col gap-5">
-                    <li
-                        className="flex items-center hover:text-red-600 transition duration-300 justify-between"
-                    >
-                        <a href="/profile-dashboard.html">
-                            <div className="flex gap-3 items-center">
-                                <i className="fa-solid fa-table-columns text-[14px]"></i>
-                                <p className="text-[14px] font-semibold">Dashboard</p>
-                            </div>
-                        </a>
-                        <span className="inline-block h-4 border-r-2 border-r-red-600"></span>
-                    </li>
-                    <li
-                        className="flex items-center hover:text-red-600 transition duration-300 justify-between"
-                    >
-                        <a href="/purchase_history.html">
-                            <div className="flex gap-3 items-center">
-                                <i className="fa-solid fa-table-columns text-[14px]"></i>
-                                <p className="text-[14px] font-semibold">Purchase History</p>
-                            </div>
-                        </a>
-                        <span className="h-4 hidden border-r-2 border-r-red-600"></span>
-                    </li>
-                    <li
-                        className="flex items-center hover:text-red-600 transition duration-300 justify-between"
-                    >
-                        <a href="/my_wishList.html">
-                            <div className="flex gap-3 items-center">
-                                <i className="fa-solid fa-heart text-[14px]"></i>
-                                <p className="text-[14px] font-semibold">My Wishlist</p>
-                            </div>
-                        </a>
-                        <span className="h-4 hidden border-r-2 border-r-red-600"></span>
-                    </li>
-                    <li
-                        className="flex items-center hover:text-red-600 transition duration-300 justify-between"
-                    >
-                        <a href="/my_order.html">
-                            <div className="flex gap-3 items-center">
-                                <i className="fa-solid fa-star text-[14px]"></i>
-                                <p className="text-[14px] font-semibold">My Order</p>
-                            </div>
-                        </a>
-                        <span className="h-4 hidden border-r-2 border-r-red-600"></span>
-                    </li>
-
-                    <li
-                        className="flex items-center hover:text-red-600 transition duration-300 justify-between"
-                    >
-                        <a href="/user_profile.html">
-                            <div className="flex gap-3 items-center">
-                                <i className="fa-solid fa-circle-user text-[14px]"></i>
-                                <p className="text-[14px] font-semibold">My Account</p>
-                            </div>
-                        </a>
-                        <span className="h-4 hidden border-r-2 border-r-red-600"></span>
-                    </li>
-                </ul>
-                <hr style={
-                    {
-                        "border": "1px solid #ccc",
-                        "margin": "20px 10px"
-                    }
-                } />
-
-                <ul className="flex flex-col gap-3">
-                    <li
-                        className="flex items-center hover:text-red-600 transition duration-300 justify-between"
-                    >
-                        <div className="flex gap-3 items-center">
-                            <i className="fa-solid text-[14px] fa-arrow-right-from-bracket"></i>
-                            <p className="text-[14px] font-semibold">Logout</p>
-                        </div>
-                        <span className="h-4 hidden border-r-2 border-r-red-600"></span>
-                    </li>
-                </ul>
+                <AccountNavigationItems />
             </div>
         </div>
     )

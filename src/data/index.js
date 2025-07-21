@@ -1,5 +1,5 @@
 import { FaCheck, FaShoppingCart, FaStar, FaTags } from "react-icons/fa";
-import { FaArrowRotateLeft, FaCodeCompare, FaHeart, FaTruck } from "react-icons/fa6";
+import { FaArrowRotateLeft, FaCircleUser, FaCodeCompare, FaHeart, FaTableColumns, FaTruck } from "react-icons/fa6";
 
 export const categories = [
     {
@@ -227,50 +227,56 @@ export const purchaseHistory = [
     {
         id: 1,
         orderId: '20250616001110',
-        packetge: '20250616001110',
+        packageId: '20250616001110',
         date: '22 June 2025',
         amount: '$40.22',
         status: 'Processing',
+        paymentStatus: 'Unpaid',
     },
     {
         id: 2,
         orderId: '20250616001110',
-        packetge: '20250616001110',
+        packageId: '20250616001110',
         date: '22 June 2025',
         amount: '$40.22',
         status: 'Completed',
+        paymentStatus: 'Paid',
     },
     {
         id: 3,
         orderId: '20250616001110',
-        packetge: '20250616001110',
+        packageId: '20250616001110',
         date: '22 June 2025',
         amount: '$40.22',
         status: 'Cancelled',
+        paymentStatus: 'Unpaid',
     },
     {
         id: 4,
         orderId: '20250616001110',
-        packetge: '20250616001110',
+        packageId: '20250616001110',
         date: '22 June 2025',
         amount: '$40.22',
         status: 'Pending',
+        paymentStatus: 'Unpaid',
     },
     {
         id: 5,
         orderId: '20250616001110',
-        packetge: '20250616001110',
+        packageId: '20250616001110',
         date: '22 June 2025',
         amount: '$40.22',
         status: 'Cancelled',
+        paymentStatus: 'Unpaid',
     },
     {
         id: 6,
         orderId: '20250616001110',
-        packetge: '20250616001110',
+        packageId: '20250616001110',
         date: '22 June 2025',
         amount: '$40.22',
         status: 'Processing',
+        paymentStatus: 'Unpaid',
     }
 ]
 
@@ -310,5 +316,33 @@ export const wishlist = [
         image: 'https://amazcart.ischooll.com/public/uploads/images/14-12-2022/6399b882ce24f.webp',
         name: 'Living Room',
         price: 30,
+    },
+]
+
+export const accountSideBarItems = [
+    {
+        path: '/dashboard',
+        label: 'Dashboard',
+        icon: FaTableColumns,
+    },
+    {
+        path: '/purchase-history',
+        label: 'Purchase History',
+        icon: FaTableColumns,
+    },
+    {
+        path: '/my-wishlist',
+        label: 'My Wishlist',
+        icon: FaHeart,
+    },
+    {
+        path: '/my-order',
+        label: 'My Order',
+        icon: FaStar,
+    },
+    {
+        path: '/user-profile',
+        label: 'My Account',
+        icon: FaCircleUser,
     },
 ]
