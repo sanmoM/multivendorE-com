@@ -1,6 +1,11 @@
-import React from 'react'
+"use client"
+
+import AuthTextInput from '@/components/auth/auth-inputs/auth-text-input/AuthTextInput'
+import TextInput from '@/components/shared/inputs/text-input/TextInput'
+import React, { useState } from 'react'
 
 export default function page() {
+    const [email, setEmail] = useState('')
     return (
         <div className='bg-[#f4f7f9]'>
             <div
@@ -19,14 +24,7 @@ export default function page() {
 
                         <form>
                             <div class="mb-4">
-                                <label class="block text-sm font-medium text-gray-700 mb-1">
-                                    Email Address <span class="text-red-500">*</span>
-                                </label>
-                                <input
-                                    type="text"
-                                    placeholder="Email Address"
-                                    class="w-full px-4 py-3 border rounded-md text-sm outline-none focus:ring-2 focus:ring-black"
-                                />
+                                <AuthTextInput label="Email Address" placeholder="Email Address" type="text" value={email} setValue={setEmail} variant={'medium'} inputClass={"shadow-none"} isRequired />
                             </div>
 
                             <button

@@ -10,7 +10,7 @@ export default function SelectInput({ label, options, value, setValue, variant, 
             }
             <select
                 id="country"
-                class={cn("w-full px-5 py-3 border rounded-sm shadow-sm bg-white", variant === "small" && "text-sm py-2", inputClass)}
+                class={cn("w-full text-gray-600 px-5 py-3 border rounded-sm shadow-sm bg-white", variant === "small" && "text-sm py-2", variant === "x-small" && "text-sm py-1.5", inputClass)}
                 defaultValue={value}
                 onChange={(e) => setValue(e.target.value)}
             >

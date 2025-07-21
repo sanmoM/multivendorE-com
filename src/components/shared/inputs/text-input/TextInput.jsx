@@ -14,7 +14,7 @@ export default function TextInput({ label, placeholder, theme = "light", value, 
                 name="fname"
                 id="fname"
                 placeholder={placeholder}
-                className={cn(`w-full px-5 py-3 border rounded-sm shadow-sm max-sm:text-sm ${theme === "light" ? "bg-white" : ""}`, variant === "small" && "text-sm py-2", inputClass)}
+                className={cn(`w-full px-5 py-3 border rounded-sm shadow-sm max-sm:text-sm ${theme === "light" ? "bg-white" : ""}`, variant === "small" && "text-sm py-2", variant === "medium" && "py-2.5", inputClass)}
             />
         </div>
     )
