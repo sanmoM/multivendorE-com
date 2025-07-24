@@ -38,7 +38,7 @@ export default function RootLayout({ children }) {
           rel="stylesheet"
         />
       </head>
-      <body className="bg-background text-foreground">
+      <body className="bg-white">
         <StoreProvider>
           {children}
         </StoreProvider>
