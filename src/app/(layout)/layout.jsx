@@ -4,10 +4,10 @@ import React from 'react'
 
 export default function layout({ children }) {
     return (
-        <div>
+        <div className='pb-28'>
             <Header />
             {children}
-            <Footer />
+            {/* <Footer /> */}
         </div>
     )
 }

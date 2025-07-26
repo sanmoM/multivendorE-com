@@ -38,7 +38,7 @@ export default function FeaturedProducts() {
                     ))
                 }
             </div>
-            <LoadMoreBtn className='mt-6' />
+            <LoadMoreBtn className='mt-6 hidden md:block' />
         </div>
     )
 }

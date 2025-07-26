@@ -11,7 +11,7 @@ export default function Home() {
       <Banner />
       <PromotionalSection />
       <BrowseSection />
-      <Container className={"space-y-16 mt-6 lg:mt-10 px-4"}>
+      <Container className={"space-y-10 lg:space-y-16 mt-6 lg:mt-10 px-4"}>
         <FeaturedProducts />
         <MoreFeaturedProducts />
       </Container>

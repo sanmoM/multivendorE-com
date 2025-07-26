@@ -9,7 +9,7 @@ export default function DesktopNavbar() {
             {/* Left Section: Logo and Navigation */}
             <div className="flex items-center space-x-14">
                 {/* Logo */}
-                <Link href="#" className="flex items-center space-x-2 text-primary text-xl font-bold">
+                <Link href="/" className="flex items-center space-x-2 text-primary text-xl font-bold">
                     {/* Star/Sparkle Icon */}
                     <svg
                         className="h-6 w-6 text-gray-800"
@@ -24,7 +24,7 @@ export default function DesktopNavbar() {
                 {/* Navigation Links */}
                 <nav className="hidden md:flex space-x-8 text-gray-700 text-base">
                     <Link href="#" className="text-primary hover:text-secondary font-medium">Category</Link>
-                    <Link href="#" className="text-primary hover:text-secondary font-medium">Shop</Link>
+                    <Link href="/shop" className="text-primary hover:text-secondary font-medium">Shop</Link>
                     <Link href="#" className="text-primary hover:text-secondary font-medium">Reseller</Link>
                 </nav>
             </div>

@@ -2,6 +2,7 @@ import React from 'react'
 import { FaRegBell } from 'react-icons/fa'
 import { LuUserRound } from 'react-icons/lu'
 import NavbarSearchbar from '../navbar-searchbar/NavbarSearchbar'
+import BottomNavbar from './components/bottom-navbar/BottomNavbar'
 
 export default function MobileNavbar() {
     return (
@@ -25,6 +26,7 @@ export default function MobileNavbar() {
             <div className="container mx-auto px-4 py-3">
                 <NavbarSearchbar />
             </div>
+            <BottomNavbar />
         </div>
     )
 }
