@@ -1,32 +1,60 @@
-import React from 'react'
-import { FaRegBell } from 'react-icons/fa'
-import { LuUserRound } from 'react-icons/lu'
-import NavbarSearchbar from '../navbar-searchbar/NavbarSearchbar'
-import BottomNavbar from './components/bottom-navbar/BottomNavbar'
+import { BsCart3 } from "react-icons/bs";
+import { HiMiniHome } from "react-icons/hi2";
+import { IoDocumentTextOutline } from "react-icons/io5";
+import { LuUserRound } from "react-icons/lu";
+import { TfiMenuAlt } from "react-icons/tfi";
 
-export default function MobileNavbar() {
+const BottomNavbar = () => {
+    const navItems = [
+        {
+            name: 'Home',
+            // Reverted to inline SVG for Home icon
+            icon: <HiMiniHome className="h-6 w-6" />,
+            path: "#"
+        },
+        {
+            name: 'Categories',
+            // Reverted to inline SVG for Categories icon
+            icon: <TfiMenuAlt className="h-6 w-6" />,
+            path: "#"
+        },
+        {
+            name: 'Cart',
+            // Reverted to inline SVG for Cart icon
+            icon: <BsCart3 className="h-6 w-6" />,
+            path: "#"
+        },
+        {
+            name: 'Orders',
+            // Reverted to inline SVG for Orders icon
+            icon: <IoDocumentTextOutline className="h-6 w-6" />,
+            path: "#"
+        },
+        {
+            name: 'Profile',
+            // Reverted to inline SVG for Profile icon
+            icon: <LuUserRound className="h-6 w-6" />,
+            path: "#"
+        },
+    ];
+
     return (
-        <div className='lg:hidden'>
-            <div className="container mx-auto px-4 pt-3 flex items-center justify-between">
-                {/* Left Section: Notification Icon */}
-                <button className="p-2 rounded-full hover:bg-gray-100 transition-colors duration-200 focus:outline-none focus:ring-1 focus:ring-gray-300">
-                    <FaRegBell className='w-6 h-6 text-primary' />
-                </button>
-
-                {/* Center Section: Home Title */}
-                <h1 className="text-xl font-semibold text-gray-900">Home</h1>
-
-                {/* Right Section: Profile Icon */}
-                <button className="p-2 rounded-full hover:bg-gray-100 transition-colors duration-200 focus:outline-none focus:ring-1 focus:ring-gray-300">
-                    <LuUserRound className='w-6 h-6 text-primary' />
-                </button>
-            </div>
-
-            {/* Search Bar Section */}
-            <div className="container mx-auto px-4 py-3">
-                <NavbarSearchbar />
-            </div>
-            <BottomNavbar />
+        <div className="flex items-center justify-center font-sans bg-gray-50 fixed bottom-0 left-0 right-0 z-50 lg:hidden">
+            <nav className="w-full max-w-lg bg-white rounded-lg shadow-lg py-3 px-2">
+                <div className="flex justify-around items-center text-secondary">
+                    {navItems.map((item, index) => (
+                        <button
+                            key={index}
+                            className={`flex flex-col items-center p-2 rounded-md transition-colors duration-200 ${item.active && 'text-primary font-semibold'}`}
+                        >
+                            <div className={`mb-1 ${item.active && 'text-primary font-semibold'}`}>{item.icon}</div>
+                            <span className={`text-xs ${item.active && 'text-primary font-semibold'}`}>{item.name}</span>
+                        </button>
+                    ))}
+                </div>
+            </nav>
         </div>
-    )
-}
+    );
+};
+
+export default BottomNavbar;

@@ -1,3 +1,4 @@
+import Header from "@/components/home-page/header/Header";
 import Banner from "@/components/home-page/sections/banner/Banner";
 import BrowseSection from "@/components/home-page/sections/browse-section/BrowseSection";
 import FeaturedProducts from "@/components/home-page/sections/featured-products/FeaturedProducts";
@@ -8,6 +9,7 @@ import Container from "@/components/shared/container/Container";
 export default function Home() {
   return (
     <div>
+      <Header />
       <Banner />
       <PromotionalSection />
       <BrowseSection />

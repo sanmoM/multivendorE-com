@@ -1,7 +1,7 @@
 import Link from 'next/link';
 import { IoCartOutline, IoSearchOutline } from "react-icons/io5";
 import { LuUserRound } from "react-icons/lu";
-import NavbarSearchbar from '../navbar-searchbar/NavbarSearchbar';
+import NavbarSearchbar from '../../../../shared/navbar-searchbar/NavbarSearchbar';
 
 export default function DesktopNavbar() {
     return (
