@@ -3,24 +3,28 @@ import { FaArrowRotateLeft, FaCircleUser, FaCodeCompare, FaHeart, FaTableColumns
 
 export const categories = [
     {
-        icon: 'fa-utensils',
-        color: 'text-red-500',
-        label: 'Food',
+        image: '/images/product/product-1.svg',
+        title: 'Cakes',
     },
     {
-        icon: 'fa-child',
-        color: 'text-blue-500',
-        label: 'Kids',
+        image: '/images/product/product-2.svg',
+        title: 'Food',
     },
     {
-        icon: 'fa-cake-candles',
-        color: 'text-yellow-500',
-        label: 'Cake',
+        image: '/images/product/product-3.svg',
+        title: 'Baby & Mom Care',
     },
     {
-        icon: 'fa-store',
-        color: 'text-green-500',
-        label: 'Restaurant',
+        image: '/images/product/product-1.svg',
+        title: 'Cakes',
+    },
+    {
+        image: '/images/product/product-2.svg',
+        title: 'Food',
+    },
+    {
+        image: '/images/product/product-3.svg',
+        title: 'Baby & Mom Care',
     },
 ]
 
@@ -365,5 +369,44 @@ export const accountSideBarItems = [
         path: '/user-profile',
         label: 'My Account',
         icon: FaCircleUser,
+    },
+]
+
+export const shops = [
+    {
+        id: 1,
+        image: '/images/product/product-1.svg',
+        name: 'Sweet Delights Bakery',
+        subtitle: '4.8 • 1.2 mi',
+    },
+    {
+        id: 2,
+        image: '/images/product/product-2.svg',
+        name: 'Mom & Baby Essentials',
+        subtitle: '4.6 • 2.5 mi',
+    },
+    {
+        id: 3,
+        image: '/images/product/product-3.svg',
+        name: 'Tech Gadget Store',
+        subtitle: '4.7 • 3.1 mi',
+    },
+    {
+        id: 1,
+        image: '/images/product/product-1.svg',
+        name: 'Sweet Delights Bakery',
+        subtitle: '4.8 • 1.2 mi',
+    },
+    {
+        id: 2,
+        image: '/images/product/product-2.svg',
+        name: 'Mom & Baby Essentials',
+        subtitle: '4.6 • 2.5 mi',
+    },
+    {
+        id: 3,
+        image: '/images/product/product-3.svg',
+        name: 'Tech Gadget Store',
+        subtitle: '4.7 • 3.1 mi',
     },
 ]

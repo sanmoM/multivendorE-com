@@ -1,4 +1,4 @@
-import Header from "@/components/home-page/header/Header";
+import HomePageHeader from "@/components/home-page/sections/home-page-header/HomePageHeader";
 import Banner from "@/components/home-page/sections/banner/Banner";
 import BrowseSection from "@/components/home-page/sections/browse-section/BrowseSection";
 import FeaturedProducts from "@/components/home-page/sections/featured-products/FeaturedProducts";
@@ -9,11 +9,11 @@ import Container from "@/components/shared/container/Container";
 export default function Home() {
   return (
     <div>
-      <Header />
+      <HomePageHeader />
       <Banner />
       <PromotionalSection />
       <BrowseSection />
-      <Container className={"space-y-10 lg:space-y-16 mt-6 lg:mt-10 px-4"}>
+      <Container className={"space-y-10 lg:space-y-16 mt-6 lg:mt-10 "}>
         <FeaturedProducts />
         <MoreFeaturedProducts />
       </Container>

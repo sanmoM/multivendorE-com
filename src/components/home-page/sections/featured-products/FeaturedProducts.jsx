@@ -1,9 +1,9 @@
 "use client";
 
-import SectionTitle from '@/components/shared/section-title/SectionTitle'
-import { products } from '@/data'
-import FeaturedProductCard from '../../components/product-card/ProductCard'
-import LoadMoreBtn from '@/components/shared/load-more-btn/LoadMoreBtn'
+import Card2 from '@/components/shared/card-2/Card2';
+import LoadMoreBtn from '@/components/shared/load-more-btn/LoadMoreBtn';
+import SectionTitle from '@/components/shared/section-title/SectionTitle';
+import { products } from '@/data';
 import { useEffect, useState } from 'react';
 
 export default function FeaturedProducts() {
@@ -31,10 +31,10 @@ export default function FeaturedProducts() {
     return (
         <div>
             <SectionTitle title='Featured Products' />
-            <div className='grid grid-cols-3 lg:grid-cols-5 gap-x-4 gap-y-8 mt-4 lg:mt-6'>
+            <div className='grid grid-cols-3 lg:grid-cols-5 gap-x-4 gap-y-8 mt-6'>
                 {
                     visibleProducts.map((product) => (
-                        <FeaturedProductCard key={product.id} item={product} />
+                        <Card2 key={product.id} item={{ image: product?.image, name: product?.name, subtitle: `$${product?.price}` }} />
                     ))
                 }
             </div>

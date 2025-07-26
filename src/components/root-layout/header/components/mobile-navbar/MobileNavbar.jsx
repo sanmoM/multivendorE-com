@@ -8,31 +8,26 @@ const BottomNavbar = () => {
     const navItems = [
         {
             name: 'Home',
-            // Reverted to inline SVG for Home icon
             icon: <HiMiniHome className="h-6 w-6" />,
             path: "#"
         },
         {
             name: 'Categories',
-            // Reverted to inline SVG for Categories icon
             icon: <TfiMenuAlt className="h-6 w-6" />,
             path: "#"
         },
         {
             name: 'Cart',
-            // Reverted to inline SVG for Cart icon
             icon: <BsCart3 className="h-6 w-6" />,
             path: "#"
         },
         {
             name: 'Orders',
-            // Reverted to inline SVG for Orders icon
             icon: <IoDocumentTextOutline className="h-6 w-6" />,
             path: "#"
         },
         {
             name: 'Profile',
-            // Reverted to inline SVG for Profile icon
             icon: <LuUserRound className="h-6 w-6" />,
             path: "#"
         },
