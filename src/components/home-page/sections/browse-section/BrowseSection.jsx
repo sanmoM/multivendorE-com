@@ -50,7 +50,7 @@ export default function BrowseSection() {
     const [activeTab, setActiveTab] = useState('category');
 
     return (
-        <div className="mt-2 md:mt-8 max-w-7xl mx-auto">
+        <div className="mt-2 md:mt-8 max-w-[calc(1280px+2rem)] mx-auto">
             {/* Tabs Section */}
             <div className="flex justify-around border-b !border-secondary mb-6 pb-1 lg:pb-4">
                 {tabs.map((tab) => (

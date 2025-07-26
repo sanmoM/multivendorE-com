@@ -36,12 +36,12 @@ export default function DesktopNavbar() {
 
                 <div className='space-x-2'>
                     {/* User Icon */}
-                    <button className="p-3 rounded-full bg-[#F0EBEB] hover:bg-secondary/50 transition-colors duration-200 focus:outline-none focus:ring-1 focus:ring-gray-300">
+                    <button className="p-3 rounded-full bg-tertiary hover:bg-secondary/50 transition-colors duration-200 focus:outline-none focus:ring-1 focus:ring-gray-300">
                         <LuUserRound className='w-6 h-6 text-secondary' />
                     </button>
 
                     {/* Cart Icon */}
-                    <button className="p-3 rounded-full bg-[#F0EBEB] hover:bg-gray-200 transition-colors duration-200 focus:outline-none focus:ring-1 focus:ring-gray-300">
+                    <button className="p-3 rounded-full bg-tertiary hover:bg-gray-200 transition-colors duration-200 focus:outline-none focus:ring-1 focus:ring-gray-300">
                         <IoCartOutline className='w-6 h-6 text-secondary' />
                     </button>
                 </div>
