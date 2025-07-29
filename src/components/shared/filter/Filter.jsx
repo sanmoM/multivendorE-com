@@ -56,7 +56,7 @@ const filterButtons = [
         options: ['5 Stars', '4 Stars & Up', '3 Stars & Up'],
     },
 ];
-export default function ShopFilter() {
+export default function Filter() {
 
     const [openDropdown, setOpenDropdown] = useState(null); // State to track which dropdown is open
 

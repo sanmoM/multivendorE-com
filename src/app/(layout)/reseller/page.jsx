@@ -7,19 +7,17 @@ import MobileHeaderWithSearchbar from "@/components/shared/mobile-header-withSea
 export default function page() {
     return (
         <div>
-            {/* <ShopHeader /> */}
-            <MobileHeaderWithSearchbar title={"Shops"} />
+            <MobileHeaderWithSearchbar title={"Resellers"} />
             <Container>
                 <div>
-                    <h1 className="hidden lg:block text-3xl text-primary font-semibold mb-7">Shops</h1>
-                    {/* <ShopFilter /> */}
+                    <h1 className="hidden lg:block text-3xl text-primary font-semibold mb-7">Resellers</h1>
                     <Filter />
                 </div>
                 <div className={"space-y-10 lg:space-y-16 mt-6 lg:mt-10 "}>
-                    <Items title={"Shops"} desktopView={5} mobileView={3} />
-                    <Items title={"All Shops"} desktopView={5} mobileView={3} />
-                    {/* <FeaturedShop title={"Featured Products"} /> */}
+                    {/* <FeaturedShop /> */}
                     {/* <AllShops /> */}
+                    <Items title={"Resellers"} desktopView={5} mobileView={3} />
+                    <Items title={"All Resellers"} desktopView={5} mobileView={3} />
                 </div>
             </Container>
         </div>
