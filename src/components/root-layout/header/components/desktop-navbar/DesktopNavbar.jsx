@@ -2,10 +2,11 @@ import Link from 'next/link';
 import { IoCartOutline, IoSearchOutline } from "react-icons/io5";
 import { LuUserRound } from "react-icons/lu";
 import NavbarSearchbar from '../../../../shared/navbar-searchbar/NavbarSearchbar';
+import SecondaryContainer from '@/components/shared/container/SecondaryContainer';
 
 export default function DesktopNavbar() {
     return (
-        <div className="max-w-[1550px] mx-auto px-4 py-5 lg:flex items-center justify-between hidden">
+        <SecondaryContainer className="max-w-[1550px] mx-auto px-4 py-5 lg:flex items-center justify-between hidden">
             {/* Left Section: Logo and Navigation */}
             <div className="flex items-center space-x-14">
                 {/* Logo */}
@@ -46,6 +47,6 @@ export default function DesktopNavbar() {
                     </button>
                 </div>
             </div>
-        </div>
+        </SecondaryContainer>
     )
 }

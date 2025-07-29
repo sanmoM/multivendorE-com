@@ -1,7 +1,8 @@
+import { cn } from '@/utils/cn'
 import React from 'react'
 
-export default function SectionTitle({ title }) {
+export default function SectionTitle({ title, className }) {
     return (
-        <h1 className='text-primary text-2xl font-bold'>{title}</h1>
+        <h1 className={cn('text-primary text-3xl font-bold', className)}>{title}</h1>
     )
 }
