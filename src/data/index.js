@@ -176,42 +176,48 @@ export const products = [
         image: '/images/product/product-1.svg',
         name: 'Decadent Chocolate Cake',
         price: 30,
-        discount: 20
+        discount: 20,
+        link: "/single-item"
     },
     {
         id: 2,
         image: '/images/product/product-2.svg',
         name: 'Delicious Pizza',
         price: 30,
-        discount: 20
+        discount: 20,
+        link: "/single-item"
     },
     {
         id: 3,
         image: '/images/product/product-3.svg',
         name: 'Freshly Baked Bread',
         price: 30,
-        discount: 20
+        discount: 20,
+        link: "/single-item"
     },
     {
         id: 1,
         image: '/images/product/product-1.svg',
         name: 'Decadent Chocolate Cake',
         price: 30,
-        discount: 20
+        discount: 20,
+        link: "/single-item"
     },
     {
         id: 2,
         image: '/images/product/product-2.svg',
         name: 'Delicious Pizza',
         price: 30,
-        discount: 20
+        discount: 20,
+        link: "/single-item"
     },
     {
         id: 3,
         image: '/images/product/product-3.svg',
         name: 'Freshly Baked Bread',
         price: 30,
-        discount: 20
+        discount: 20,
+        link: "/single-item"
     },
 ]
 
@@ -408,5 +414,43 @@ export const shops = [
         image: '/images/product/product-3.svg',
         name: 'Tech Gadget Store',
         subtitle: '4.7 • 3.1 mi',
+    },
+]
+export const resellers = [
+    {
+        id: 1,
+        image: '/images/product/product-1.svg',
+        name: 'Sweet Delights Bakery',
+        subtitle: 'Food',
+    },
+    {
+        id: 2,
+        image: '/images/product/product-2.svg',
+        name: 'Mom & Baby Essentials',
+        subtitle: 'cake',
+    },
+    {
+        id: 3,
+        image: '/images/product/product-3.svg',
+        name: 'Tech Gadget Store',
+        subtitle: 'cake',
+    },
+    {
+        id: 1,
+        image: '/images/product/product-1.svg',
+        name: 'Sweet Delights Bakery',
+        subtitle: 'cake',
+    },
+    {
+        id: 2,
+        image: '/images/product/product-2.svg',
+        name: 'Mom & Baby Essentials',
+        subtitle: 'cake',
+    },
+    {
+        id: 3,
+        image: '/images/product/product-3.svg',
+        name: 'Tech Gadget Store',
+        subtitle: 'cake',
     },
 ]

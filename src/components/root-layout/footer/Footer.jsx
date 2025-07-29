@@ -1,116 +1,43 @@
+import SecondaryContainer from '@/components/shared/container/SecondaryContainer';
+import { CiFacebook } from "react-icons/ci";
+import { PiInstagramLogoLight, PiTwitterLogoThin } from 'react-icons/pi';
 
-import Link from "next/link";
-import React from "react";
-
-const Footer = () => {
+const App = () => {
     return (
-        <footer className="bg-gray-950 pb-12 md:pb-0 mt-12">
-            <div className="grid container mx-auto px-6 max-w-7xl grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 pt-14 md:pt-28 pb-8">
-                {/* Footer Links */}
-                <div className="col-span-1 md:col-span-2 grid grid-cols-2 gap-4">
-                    <ul className="text-[12px] md:text-[16px] space-y-1 font-normal text-white">
-                        <li>
-                            <Link href="#" className="hover:text-[#ff2631] transition duration-200">
-                                My Account
-                            </Link>
-                        </li>
-                        <li>
-                            <Link href="#" className="hover:text-[#ff2631] transition duration-200">
-                                Order Status
-                            </Link>
-                        </li>
-                        <li>
-                            <Link href="#" className="hover:text-[#ff2631] transition duration-200">
-                                Referral
-                            </Link>
-                        </li>
-                        <li>
-                            <Link href="#" className="hover:text-[#ff2631] transition duration-200">
-                                Coupons
-                            </Link>
-                        </li>
-                    </ul>
-                    <ul className="text-[12px] md:text-[16px] space-y-1 font-normal text-white">
-                        <li>
-                            <Link href="#" className="hover:text-[#ff2631] transition duration-200">
-                                About us
-                            </Link>
-                        </li>
-                        <li>
-                            <Link href="#" className="hover:text-[#ff2631] transition duration-200">
-                                Help & Support
-                            </Link>
-                        </li>
-                        <li>
-                            <Link href="#" className="hover:text-[#ff2631] transition duration-200">
-                                Career
-                            </Link>
-                        </li>
-                        <li>
-                            <Link href="#" className="hover:text-[#ff2631] transition duration-200">
-                                Refund Policy
-                            </Link>
-                        </li>
-                    </ul>
+        <footer className="w-full font-sans pt-28 pb-8 text-secondary">
+            <SecondaryContainer>
+                {/* Navigation Links */}
+                <div className="flex flex-wrap justify-between gap-x-8 gap-y-4 mb-6  text-lg max-w-4xl mx-auto">
+                    <a href="#" className="hover: transition-colors duration-200">About</a>
+                    <a href="#" className="hover: transition-colors duration-200">Contact</a>
+                    <a href="#" className="hover: transition-colors duration-200">FAQ</a>
+                    <a href="#" className="hover: transition-colors duration-200">Privacy Policy</a>
+                    <a href="#" className="hover: transition-colors duration-200">Terms of Service</a>
                 </div>
 
-                {/* Store Buttons */}
-                <div className="flex flex-row md:flex-col items-center md:items-start justify-center md:justify-start md:space-y-2 space-x-2 md:space-x-0">
-                    <Link
-                        href="#"
-                        className="bg-[#ff2631] px-4 md:max-w-44 py-3 w-1/2 md:w-[80%] rounded-lg text-white"
-                    >
-                        <div className="flex items-center gap-2">
-                            <span>
-                                <i className="fa-solid text-3xl fa-gamepad"></i>
-                            </span>
-                            <span>
-                                <p className="text-[9px] md:text-[12px]">GET IT ON</p>
-                                <span className="font-bold text-[11px] md:text-[14px]">
-                                    Google Play
-                                </span>
-                            </span>
-                        </div>
-                    </Link>
-                    <Link
-                        href="#"
-                        className="bg-[#ff2631] px-4 md:max-w-44 py-3 w-1/2 md:w-[80%] rounded-lg text-white"
-                    >
-                        <div className="flex items-center gap-2">
-                            <span>
-                                <i className="fa-solid text-3xl fa-apple-whole"></i>
-                            </span>
-                            <span>
-                                <p className="text-[9px] md:text-[12px]">GET IT ON</p>
-                                <span className="font-bold text-[11px] md:text-[14px]">
-                                    Apple Store
-                                </span>
-                            </span>
-                        </div>
-                    </Link>
+                {/* Social Media Icons */}
+                <div className="flex justify-center space-x-6 mb-6">
+                    {/* Instagram Icon */}
+                    <a href="#" className=" hover: transition-colors duration-200">
+                        <PiInstagramLogoLight className="h-6 w-6 text-secondary" />
+                    </a>
+                    {/* Dribbble Icon (or similar, based on visual) */}
+                    <a href="#" className=" hover: transition-colors duration-200">
+                        <CiFacebook className="h-6 w-6 text-secondary" />
+                    </a>
+                    {/* Twitter Icon */}
+                    <a href="#" className=" hover: transition-colors duration-200">
+                        <PiTwitterLogoThin className="h-6 w-6 text-secondary" />
+                    </a>
                 </div>
 
-                {/* Estimate Subscription */}
-                <div className="flex flex-col items-center md:items-start">
-                    <h3 className="text-xl md:text-[16px] mb-2 font-bold text-white">
-                        GET TO KNOW PROJECT ESTIMATE?
-                    </h3>
-                    <input
-                        placeholder="Enter email address"
-                        className="bg-white px-4 text-[10px] md:text-[14px] mb-2 py-3 md:max-w-72 w-full rounded-lg border-none outline-none"
-                        type="email"
-                    />
-                    <button className="bg-[#ff2631] text-[9px] md:text-[14px] font-bold px-4 py-3 rounded-lg text-white md:max-w-72 w-full">
-                        SUBSCRIBE
-                    </button>
-                </div>
-            </div>
-
-            <p className="text-white text-center text-[10px] md:text-[14px] border-gray-400 border-y font-normal py-6 lg:pb-6 pb-16">
-                Copyright © Amazcart 2025. All rights reserved.
-            </p>
+                {/* Copyright */}
+                <p className=" text-sm text-center">
+                    ©2024 Fresh Foods. All rights reserved.
+                </p>
+            </SecondaryContainer>
         </footer>
     );
 };
 
-export default Footer;
+export default App;

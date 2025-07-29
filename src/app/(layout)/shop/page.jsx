@@ -1,7 +1,10 @@
+import Card2 from "@/components/shared/card-2/Card2";
 import Container from "@/components/shared/container/Container";
+import FeaturedItems from "@/components/shared/featured-items/FeaturedItems";
 import Filter from "@/components/shared/filter/Filter";
 import Items from "@/components/shared/items/Items";
 import MobileHeaderWithSearchbar from "@/components/shared/mobile-header-withSearchbar/MobileHeaderWithSearchbar";
+import { shops } from "@/data";
 
 
 export default function page() {
@@ -12,14 +15,24 @@ export default function page() {
             <Container>
                 <div>
                     <h1 className="hidden lg:block text-3xl text-primary font-semibold mb-7">Shops</h1>
-                    {/* <ShopFilter /> */}
                     <Filter />
                 </div>
                 <div className={"space-y-10 lg:space-y-16 mt-6 lg:mt-10 "}>
-                    <Items title={"Shops"} desktopView={5} mobileView={3} />
-                    <Items title={"All Shops"} desktopView={5} mobileView={3} />
-                    {/* <FeaturedShop title={"Featured Products"} /> */}
-                    {/* <AllShops /> */}
+                    <FeaturedItems title={"Featured Shops"} desktopView={5} mobileView={3} >
+                        {
+                            shops?.map((shop) => (
+                                <Card2 key={shop.id} item={shop} containerClassName={"px-2"} />
+                            ))
+                        }
+                    </FeaturedItems>
+                    <Items title={"All Shops"} desktopView={5} mobileView={3} >
+
+                        {
+                            shops?.map((shop) => (
+                                <Card2 key={shop.id} item={shop} containerClassName={"px-2"} />
+                            ))
+                        }
+                    </Items>
                 </div>
             </Container>
         </div>

@@ -24,9 +24,10 @@ export default function DesktopNavbar() {
                 </Link>
                 {/* Navigation Links */}
                 <nav className="hidden md:flex space-x-8 text-gray-700 text-base">
+                    <Link href="/" className="text-primary hover:text-secondary font-medium">Home</Link>
                     <Link href="/category" className="text-primary hover:text-secondary font-medium">Category</Link>
                     <Link href="/shop" className="text-primary hover:text-secondary font-medium">Shop</Link>
-                    <Link href="#" className="text-primary hover:text-secondary font-medium">Reseller</Link>
+                    <Link href="/reseller" className="text-primary hover:text-secondary font-medium">Reseller</Link>
                 </nav>
             </div>
 

@@ -71,7 +71,7 @@ export default function Filter() {
     return (
         <div>
             {/* mobile filter */}
-            <div className=" font-sans bg-gray-50 lg:hidden mt-8">
+            <div className=" font-sans lg:hidden mt-8">
                 <div className="grid grid-cols-3 gap-4 w-full">
                     {filterButtons.map((button, index) => (
                         <div key={index} className="relative">
