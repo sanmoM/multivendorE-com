@@ -1,10 +1,14 @@
+"use client";
+
+import SecondaryContainer from '@/components/shared/container/SecondaryContainer';
 import Link from 'next/link';
-import { IoCartOutline, IoSearchOutline } from "react-icons/io5";
+import { IoMdNotificationsOutline } from "react-icons/io";
+import { IoCartOutline } from "react-icons/io5";
 import { LuUserRound } from "react-icons/lu";
 import NavbarSearchbar from '../../../../shared/navbar-searchbar/NavbarSearchbar';
-import SecondaryContainer from '@/components/shared/container/SecondaryContainer';
+import { useState } from 'react';
 
-export default function DesktopNavbar() {
+export default function DesktopNavbar({ setIsCartOpen }) {
     return (
         <SecondaryContainer className="max-w-[1550px] mx-auto px-4 py-5 lg:flex items-center justify-between hidden">
             {/* Left Section: Logo and Navigation */}
@@ -37,14 +41,17 @@ export default function DesktopNavbar() {
                 <NavbarSearchbar inputClassName={'w-48'} />
 
                 <div className='space-x-2'>
-                    {/* User Icon */}
                     <button className="p-3 rounded-full bg-tertiary hover:bg-secondary/50 transition-colors duration-200 focus:outline-none focus:ring-1 focus:ring-gray-300">
-                        <LuUserRound className='w-6 h-6 text-secondary' />
+                        <IoMdNotificationsOutline className='w-6 h-6 text-secondary' />
                     </button>
 
                     {/* Cart Icon */}
-                    <button className="p-3 rounded-full bg-tertiary hover:bg-gray-200 transition-colors duration-200 focus:outline-none focus:ring-1 focus:ring-gray-300">
+                    <button onClick={() => setIsCartOpen(true)} className="p-3 rounded-full bg-tertiary hover:bg-gray-200 transition-colors duration-200 focus:outline-none focus:ring-1 focus:ring-gray-300">
                         <IoCartOutline className='w-6 h-6 text-secondary' />
+                    </button>
+                    {/* User Icon */}
+                    <button className="p-3 rounded-full bg-tertiary hover:bg-secondary/50 transition-colors duration-200 focus:outline-none focus:ring-1 focus:ring-gray-300">
+                        <LuUserRound className='w-6 h-6 text-secondary' />
                     </button>
                 </div>
             </div>

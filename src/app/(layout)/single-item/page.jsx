@@ -1,9 +1,13 @@
+"use client";
+
 import Button from '@/components/shared/button/Button';
 import SecondaryContainer from '@/components/shared/container/SecondaryContainer';
 import MobileHeader from '@/components/shared/mobile-header/MobileHeader';
+import Modal from '@/components/shared/modal/Modal';
 import SectionTitle from '@/components/shared/section-title/SectionTitle';
 import PrimaryTitle from '@/components/shared/title/PrimaryTitle';
 import ChooseCake from '@/components/single-item/cake-options/CakeOptions';
+import CustomOrderModalContents from '@/components/single-item/custom-order/CustomOrder';
 import CustomerReviews from '@/components/single-item/customer-reviews/CustomerReviews';
 import DeliveryOptions from '@/components/single-item/delivery-options/DeliveryOptions';
 import PaymentMethods from '@/components/single-item/payment-methods/PaymentMethods';
@@ -12,8 +16,10 @@ import SellerInfo from '@/components/single-item/seller-info/SellerInfo';
 import SimilarProducts from '@/components/single-item/similar-products/SimilarProducts';
 import SingleItemTabs from '@/components/single-item/single-item-tabs/SingleItemTabs';
 import Image from 'next/image';
+import { useState } from 'react';
 
 const App = () => {
+    const [isCustomOrderModalOpen, setIsCustomOrderModalOpen] = useState(false);
     return (
         <div>
             <MobileHeader title={"Single Item"} containerClassName={"mb-6"} />
@@ -48,8 +54,8 @@ const App = () => {
                     <p className='text-sm text-secondary mt-4 mb-6'>$1,500</p>
                     <div className='space-x-4'>
                         <Button text="Add to Cart" />
-                        <Button text="Buy Now" className={"bg-tertiary"} />
-                        <Button text="Custom Order" className={"bg-tertiary"} />
+                        <Button text="Buy Now" className={"bg-tertiary"} /> <br />
+                        <Button onClick={() => setIsCustomOrderModalOpen(true)} onC text="Custom Order" className={"bg-tertiary mt-6"} />
                     </div>
                     <SellerInfo className="lg:hidden" />
                 </div>
@@ -63,7 +69,11 @@ const App = () => {
                 <CustomerReviews />
                 <SimilarProducts />
             </SecondaryContainer>
-        </div>
+
+            <Modal isLef={false} isOpen={isCustomOrderModalOpen} setIsOpen={setIsCustomOrderModalOpen} title={"Custom Order"}>
+            <CustomOrderModalContents />
+        </Modal>
+        </div >
     );
 };
 

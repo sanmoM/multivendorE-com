@@ -15,7 +15,7 @@ export default function Home() {
       <Banner />
       <PromotionalSection />
       <BrowseSection />
-      <Container className={"space-y-10 lg:space-y-16 mt-6 lg:mt-10 "}>
+      <Container className={"mt-6 lg:mt-10 "}>
         <FeaturedItems title={"Featured Products"} desktopView={5} mobileView={3} >
           {
             products?.map((product) => (

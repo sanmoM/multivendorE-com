@@ -12,6 +12,7 @@ export default function CustomSlider({ children, mobileView=3, desktopView=4 }) 
         speed: 500,
         slidesToShow: desktopView, // show 4 slides
         slidesToScroll: 1,
+        arrows: false,
         responsive: [
             {
                 breakpoint: 1024,
