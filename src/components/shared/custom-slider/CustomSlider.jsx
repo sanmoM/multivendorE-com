@@ -11,7 +11,7 @@ export default function CustomSlider({ children, mobileView = 3, desktopView = 4
         infinite: true,
         speed: 500,
         slidesToShow: desktopView,
-        slidesToScroll: 1,
+        slidesToScroll: 2,
         arrows: false,
         centerMode: true,
         centerPadding: paddingDesktop || 0, // adjust this for half visibility
