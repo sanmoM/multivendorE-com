@@ -12,21 +12,21 @@ const CartModalContents = () => {
             name: 'Chocolate Cake',
             price: 45,
             quantity: 1,
-            image: 'https://placehold.co/80x80/6A5A58/FFFFFF?text=Cake',
+            image: '/images/product/product-1.svg',
         },
         {
             id: 2,
             name: 'Organic Baby Wipes',
             price: 30,
             quantity: 2,
-            image: 'https://placehold.co/80x80/B0D9B1/000000?text=Wipes',
+            image: '/images/product/product-2.svg',
         },
         {
             id: 3,
             name: 'Gourmet Cookies',
             price: 50,
             quantity: 1,
-            image: 'https://placehold.co/80x80/A08A7C/FFFFFF?text=Cookies',
+            image: '/images/product/product-3.svg',
         },
     ]);
 
@@ -62,10 +62,10 @@ const CartModalContents = () => {
         <div className=" w-full flex flex-col h-full">
             {/* Header */}
             {/* <h1 className="text-2xl font-bold text-gray-800">Shopping Bag ({totalItems})</h1> */}
-            <SectionTitle title={"Shopping Bag(3)"} className={"mb-6"} />
+            <SectionTitle title={"Shopping Bag(3)"} />
 
             {/* Totals Section */}
-            <div className="space-y-2 text-gray-700">
+            <div className="space-y-2 text-gray-700 my-6">
                 <div className="flex justify-between items-center text-secondary">
                     <p>Subtotal</p>
                     <p className='text-primary'>${subtotal.toFixed(2)}</p>
