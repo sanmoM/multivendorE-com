@@ -6,6 +6,7 @@ import CakeOptionSelect from './components/cake-option-select/CakeOptionSelect';
 import OptionBox from '@/components/shared/option-box/OptionBox';
 import SecondaryTitle from '@/components/shared/title/SecondaryTitle';
 import IncreaseDecreaseButtons from '@/components/shared/increase-decrease-buttons/IncreaseDecreaseButtons';
+import ColorPicker from '@/components/shared/color-picker/ColorPicker';
 
 const ChooseCake = () => {
     const [selectedSlices, setSelectedSlices] = useState(null);
@@ -13,9 +14,18 @@ const ChooseCake = () => {
     const [cakeQuantity, setCakeQuantity] = useState(1);
     const [cakeWeight, setCakeWeight] = useState(1);
     const [selectedDeliveryOption, setSelectedDeliveryOption] = useState(null);
+    const [selectedColor, setSelectedColor] = useState(null);
+
+    const cakeColors = [
+        { name: 'Pink', hex: '#FFC0CB' },
+        { name: 'Light Blue', hex: '#ADD8E6' },
+        { name: 'Light Green', hex: '#90EE90' },
+        { name: 'Light Yellow', hex: '#FFFFE0' },
+    ];
 
     const sliceOptions = ['4 Slices', '6 Slices', '8 Slices', '10 Slices'];
     const flavorOptions = ['Chocolate', 'Vanilla', 'Red Velvet'];
+    const colorOptions = ['Chocolate', 'Vanilla', 'Red Velvet'];
     const deliveryOptions = [
         {
             label: 'Self-Collection', icon: (
@@ -64,6 +74,26 @@ const ChooseCake = () => {
             {/* Cake Flavor */}
             <div className="mb-6">
                 <SecondaryTitle title={"Cake Flavor"} />
+                <div className="flex flex-wrap gap-3">
+                    {flavorOptions.map((flavor) => (
+                        <OptionBox value={flavor} setValue={setSelectedFlavor} currentValue={selectedFlavor} label={flavor} />
+                    ))}
+                </div>
+            </div>
+
+            {/* Cake Flavor */}
+            <div className="mb-6">
+                <SecondaryTitle title={"Color"} />
+                <div className="flex flex-wrap gap-3">
+                    {cakeColors.map((color) => (
+                        <ColorPicker setColor={setSelectedColor} color={color} selectedColor={selectedColor} />
+                    ))}
+                </div>
+            </div>
+
+            {/* Cake Color */}
+            <div className="mb-6">
+                <SecondaryTitle title={"Color"} />
                 <div className="flex flex-wrap gap-3">
                     {flavorOptions.map((flavor) => (
                         <OptionBox value={flavor} setValue={setSelectedFlavor} currentValue={selectedFlavor} label={flavor} />

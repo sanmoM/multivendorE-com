@@ -1,12 +1,10 @@
+import { cn } from '@/utils/cn'
 import React from 'react'
 
-export default function TabButton({ value, label, handleTabClick, activeTab }) {
+export default function TabButton({ text, activeTab, setActiveTab, value }) {
     return (
-        <button
-            onClick={() => handleTabClick(value)}
-            className={`${activeTab === value ? 'bg-black text-white hover:bg-white hover:text-black' : 'bg-white text-black hover:bg-black hover:text-white'} px-5 my-1 py-3 duration-300 transition rounded-sm text-[16px] max-sm:text-[14px] font-bold `}
-        >
-            {label}
+        <button onClick={() => setActiveTab(value)} className={cn("py-2 px-4 text-center text-gray-700 font-semibold  !border-yellow-300", activeTab === value ? "text-primary border-b-2" : "text-secondary")}>
+            {text}
         </button>
     )
 }

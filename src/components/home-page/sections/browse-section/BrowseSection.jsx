@@ -1,14 +1,14 @@
 'use client';
 
-import Link from "next/link";
 import { useState } from "react";
 import { CgCoffee } from "react-icons/cg";
 import { PiBowlFood } from "react-icons/pi";
-import TabButton from "./components/TabButton";
-import CategoryTabContents from "./components/tab-components/CategoryTabContents";
-import ShopTabContents from "./components/tab-components/ShopTabContents";
+// import TabButton from "./components/TabButton";
 import { resellers, shops } from "@/data";
+import CategoryTabContents from "./components/tab-components/CategoryTabContents";
 import ResellerTabContents from "./components/tab-components/ResellerTabContents";
+import ShopTabContents from "./components/tab-components/ShopTabContents";
+import TabButton from "@/components/shared/tab-button/TabButton";
 
 const tabItems = {
     category: [
@@ -58,7 +58,7 @@ export default function BrowseSection() {
     return (
         <div className="mt-2 md:mt-8 max-w-[calc(1280px+2rem)] mx-auto">
             {/* Tabs Section */}
-            <div className="flex justify-around border-b !border-secondary mb-6 pb-1 lg:pb-4">
+            <div className="flex justify-around border-b !border-secondary mb-6">
                 {tabs.map((tab) => (
                     <TabButton
                         key={tab.value}

@@ -1,7 +1,8 @@
 "use client";
 
+import TabButton from '@/components/shared/tab-button/TabButton';
 import { useState } from 'react'
-import TabButton from './components/tab-button/TabButton'
+// import TabButton from './components/tab-button/TabButton'
 
 const tabs = [
     {
@@ -36,7 +37,7 @@ export default function SingleItemTabs() {
                         tabs.map((tab, index) => {
                             return (
                                 <div key={index}>
-                                    <TabButton activeTab={activeTab} setActiveTab={setActiveTab} tabName={tab.name} value={tab.value} />
+                                    <TabButton activeTab={activeTab} setActiveTab={setActiveTab} text={tab.name} value={tab.value} />
                                 </div>
                             )
                         })

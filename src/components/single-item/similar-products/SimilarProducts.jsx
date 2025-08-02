@@ -48,7 +48,7 @@ export default function SimilarProducts() {
     return (
         <div className='mt-8'>
             <PrimaryTitle title={"Similar Products"} className={"mb-6"} />
-            <CustomSlider desktopView={6} mobileView={2} paddingDesktop={60} paddingMobile={30}>
+            <CustomSlider desktopView={6} mobileView={2} paddingDesktop={60} paddingMobile={30} autoplay>
                 {
                     sliderItems.map((item, index) => (
                         <div key={index} className="px-2 outline-0">
