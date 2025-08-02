@@ -7,8 +7,14 @@ import { IoCartOutline } from "react-icons/io5";
 import { LuUserRound } from "react-icons/lu";
 import NavbarSearchbar from '../../../../shared/navbar-searchbar/NavbarSearchbar';
 import { useState } from 'react';
+import { useDispatch } from 'react-redux';
+import { handleCartOpenClose } from '@/lib/redux/features/cartSlice';
 
 export default function DesktopNavbar({ setIsCartOpen }) {
+    const dispatch = useDispatch();
+    const handleCartOpen = () => {
+        dispatch(handleCartOpenClose());
+    };
     return (
         <SecondaryContainer className="max-w-[1550px] mx-auto px-4 py-5 lg:flex items-center justify-between hidden">
             {/* Left Section: Logo and Navigation */}
@@ -46,7 +52,7 @@ export default function DesktopNavbar({ setIsCartOpen }) {
                     </button>
 
                     {/* Cart Icon */}
-                    <button onClick={() => setIsCartOpen(true)} className="p-3 rounded-full bg-tertiary hover:bg-gray-200 transition-colors duration-200 focus:outline-none focus:ring-1 focus:ring-gray-300">
+                    <button onClick={() => setIsCartOpen(true)} className="p-3 rounded-full bg-tertiary hover:bg-secondary/50 transition-colors duration-200 focus:outline-none focus:ring-1 focus:ring-gray-300">
                         <IoCartOutline className='w-6 h-6 text-secondary' />
                     </button>
                     {/* User Icon */}

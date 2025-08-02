@@ -4,6 +4,8 @@
 import { useState } from 'react';
 import DesktopNavbar from './components/desktop-navbar/DesktopNavbar';
 import MobileNavbar from './components/mobile-navbar/MobileNavbar';
+import Modal from '@/components/shared/modal/Modal';
+import CartModalContents from '@/components/modal-contents/cart-modal-contents/CartModalContents';
 
 export default function Header() {
     const [isCartOpen, setIsCartOpen] = useState(false);
@@ -12,11 +14,10 @@ export default function Header() {
             <DesktopNavbar setIsCartOpen={setIsCartOpen} />
             <MobileNavbar setIsCartOpen={setIsCartOpen} />
 
-            {
-                isCartOpen && <div>
-                    
-                </div>
-            }
+            {/* cart modal */}
+            <Modal isOpen={isCartOpen} setIsOpen={setIsCartOpen} title={"Shopping Bag"}>
+                <CartModalContents />
+            </Modal>
         </header>
     );
 }

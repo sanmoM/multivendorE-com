@@ -18,6 +18,7 @@ import SimilarProducts from '@/components/single-item/similar-products/SimilarPr
 import SingleItemTabs from '@/components/single-item/single-item-tabs/SingleItemTabs';
 import Image from 'next/image';
 import { useRef, useState } from 'react';
+import { useDispatch } from 'react-redux';
 const sliderItems = [
     {
         id: 1,
@@ -46,7 +47,11 @@ const sliderItems = [
 
 const App = () => {
     const [isCustomOrderModalOpen, setIsCustomOrderModalOpen] = useState(false);
+    const dispatch = useDispatch();
     const sliderRef = useRef(null);
+    const handleCloseCart = () => {
+        dispatch(handleCartOpen());
+    };
     return (
         <div>
             <MobileHeader title={"Single Item"} containerClassName={"mb-6"} />
