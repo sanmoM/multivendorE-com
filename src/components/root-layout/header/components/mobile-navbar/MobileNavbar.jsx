@@ -4,7 +4,7 @@ import { IoDocumentTextOutline } from "react-icons/io5";
 import { LuUserRound } from "react-icons/lu";
 import { TfiMenuAlt } from "react-icons/tfi";
 
-const BottomNavbar = () => {
+const BottomNavbar = ({ setIsCartOpen }) => {
     const navItems = [
         {
             name: 'Home',
@@ -19,7 +19,9 @@ const BottomNavbar = () => {
         {
             name: 'Cart',
             icon: <BsCart3 className="h-6 w-6" />,
-            path: "#"
+            path: "#",
+            type: "button",
+            handleClick: () => setIsCartOpen(true)
         },
         {
             name: 'Orders',
@@ -39,6 +41,7 @@ const BottomNavbar = () => {
                 <div className="flex justify-around items-center text-secondary">
                     {navItems.map((item, index) => (
                         <button
+                            {...item.type === "button" && { onClick: item.handleClick }}
                             key={index}
                             className={`flex flex-col items-center p-2 rounded-md transition-colors duration-200 ${item.active && 'text-primary font-semibold'}`}
                         >

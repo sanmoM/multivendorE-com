@@ -1,9 +1,15 @@
 import IncreaseDecreaseButtons from '@/components/shared/increase-decrease-buttons/IncreaseDecreaseButtons';
+import { handleQuantity } from '@/lib/redux/features/cartSlice';
 import Image from 'next/image';
 import React, { useState } from 'react'
+import { useDispatch } from 'react-redux';
 
 export default function CartCard({ item }) {
     const [quantity, setQuantity] = useState(1);
+    const dispatch = useDispatch();
+    const handleQuantityChange = (quantity) => {
+        dispatch(handleQuantity({ id: item.id, quantity }));
+    };
     return (
         <div key={item.id} className="flex items-center justify-between gap-8">
             <div className="flex items-center space-x-4">
@@ -24,7 +30,7 @@ export default function CartCard({ item }) {
 
             {/* Quantity Selector */}
             <div className="flex items-center space-x-2">
-                <IncreaseDecreaseButtons setValue={setQuantity} value={quantity} />
+                <IncreaseDecreaseButtons setValue={handleQuantityChange} value={item.quantity} />
             </div>
         </div>
     )

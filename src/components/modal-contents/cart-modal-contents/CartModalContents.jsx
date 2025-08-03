@@ -4,40 +4,22 @@ import Button from '@/components/shared/button/Button';
 import SectionTitle from '@/components/shared/section-title/SectionTitle';
 import React, { useState, useEffect } from 'react';
 import CartCard from './components/cart-card/CartCard';
+import { useSelector } from 'react-redux';
+import PrimaryTitle from '@/components/shared/title/PrimaryTitle';
 
-const CartModalContents = () => {
-    const [items, setItems] = useState([
-        {
-            id: 1,
-            name: 'Chocolate Cake',
-            price: 45,
-            quantity: 1,
-            image: '/images/product/product-1.svg',
-        },
-        {
-            id: 2,
-            name: 'Organic Baby Wipes',
-            price: 30,
-            quantity: 2,
-            image: '/images/product/product-2.svg',
-        },
-        {
-            id: 3,
-            name: 'Gourmet Cookies',
-            price: 50,
-            quantity: 1,
-            image: '/images/product/product-3.svg',
-        },
-    ]);
+const CartModalContents = ({ setIsCartOpen, setIsCheckoutOpen }) => {
+    const cartItems = useSelector((state) => state.cart.cartItems);
 
-    const [subtotal, setSubtotal] = useState(0);
     const [shipping, setShipping] = useState(5);
-    const totalItems = items.reduce((acc, item) => acc + item.quantity, 0);
+    const totalItems = cartItems.reduce((acc, item) => acc + item.quantity, 0);
+    // const [subtotal, setSubtotal] = useState(0);
+    const subtotal = cartItems.reduce((acc, item) => acc + item.price * item.quantity, 0);
+
 
     useEffect(() => {
-        const newSubtotal = items.reduce((acc, item) => acc + item.price * item.quantity, 0);
-        setSubtotal(newSubtotal);
-    }, [items]);
+        const newSubtotal = cartItems.reduce((acc, item) => acc + item.price * item.quantity, 0);
+        // setSubtotal(newSubtotal);
+    }, [cartItems]);
 
     const handleQuantityChange = (id, type) => {
         setItems(prevItems =>
@@ -59,10 +41,10 @@ const CartModalContents = () => {
     };
 
     return (
-        <div className=" w-full flex flex-col h-full">
+        <div className=" w-full flex flex-col h-full ">
             {/* Header */}
             {/* <h1 className="text-2xl font-bold text-gray-800">Shopping Bag ({totalItems})</h1> */}
-            <SectionTitle title={"Shopping Bag(3)"} />
+            <PrimaryTitle title={"Shopping Bag(3)"} />
 
             {/* Totals Section */}
             <div className="space-y-2 text-gray-700 my-6">
@@ -82,15 +64,20 @@ const CartModalContents = () => {
 
             {/* Product Items */}
             <div className="grow space-y-4 lg:space-y-6">
-                {items.map((item) => (
+                {cartItems.map((item) => (
                     <CartCard item={item} />
                 ))}
             </div>
 
             {/* Action Buttons */}
             <div className="grid grid-cols-2 gap-4">
-                <Button text={"Checkout"} className={"bg-red-600 text-white w-full"} />
-                <Button text={"Checkout"} className={"bg-transparent text-primary border !border-primary w-full"} />
+                <Button text={"Checkout"} className={"bg-red-600 text-white w-full"} onClick={() => {
+                    setIsCartOpen(false);
+                    setTimeout(() => {
+                        setIsCheckoutOpen(true);
+                    }, 300);
+                }} />
+                <Button text={"Buy Now"} className={"bg-transparent text-primary border !border-primary w-full"} />
             </div>
         </div>
     );
