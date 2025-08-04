@@ -4,11 +4,18 @@ import Dropdown from '@/components/shared/dropdown/Dropdown';
 import Link from 'next/link';
 import { useState } from 'react';
 import { LuUserRound } from "react-icons/lu";
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
+import { RxExit } from "react-icons/rx";
+import { setUser } from '@/lib/redux/features/userSlice';
 
 export default function ProfileDropDown() {
     const [isDropdownOpen, setIsDropdownOpen] = useState(false);
     const user = useSelector(state => state.user);
+    const dispatch = useDispatch();
+
+    const handleLogout = () => {
+        dispatch(setUser({ email: "" }))
+    }
 
     const handleClose = () => {
         setIsDropdownOpen(!isDropdownOpen)
@@ -20,16 +27,19 @@ export default function ProfileDropDown() {
         </button>
     )
 
+
     console.log(user)
     const contents = (
         <div className="" role="menu" aria-orientation="vertical" aria-labelledby="options-menu">
             {
-                user?.phone ? (
+                user?.email ? (
                     <>
                         <a href="#" className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-secondary" role="menuitem">Account settings</a>
                         <a href="#" className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-secondary" role="menuitem">Support</a>
                         <a href="#" className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-secondary" role="menuitem">License</a>
-                        <Button className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-secondary" role="menuitem">Logout</Button>
+                        <button onClick={handleLogout} className="px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-secondary flex gap-2 items-center w-full" role="menuitem">
+                            <RxExit /><span>Logout</span>
+                        </button>
                     </>
                 ) : (
                     <>

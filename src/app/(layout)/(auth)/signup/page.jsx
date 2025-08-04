@@ -11,7 +11,7 @@ import { useDispatch } from 'react-redux';
 export default function page() {
     const [firstName, setFirstName] = useState('');
     const [lastName, setLastName] = useState('');
-    const [phone, setPhone] = useState('');
+    const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [confirmPassword, setConfirmPassword] = useState('');
     const [checked, setChecked] = useState(false);
@@ -20,8 +20,10 @@ export default function page() {
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        dispatch(setUser({ phone }))
-        router.push("/")
+        if (email) {
+            dispatch(setUser({ email }))
+            router.push("/")
+        }
     };
 
     return (
@@ -50,7 +52,7 @@ export default function page() {
 
                     <div class="text-center text-gray-500 text-sm mb-6 relative">
                         <span class="bg-[#f4f7f9] px-2 z-10 relative"
-                        >Sign up with Phone</span
+                        >Sign up with Email</span
                         >
                         <div
                             class="absolute left-0 top-1/2 w-full h-px bg-gray-300 -z-0"
@@ -63,9 +65,9 @@ export default function page() {
                             <AuthTextInput label="Last Name" placeholder="Last Name" value={lastName} setValue={setLastName} isRequired />
                         </div>
                         <div className='space-y-4 gap-4'>
-                            <AuthTextInput label="Phone number" placeholder="Phone number" value={phone} setValue={setPhone} isRequired />
-                            <AuthTextInput label="Password" placeholder="Password" value={password} setValue={setPassword} isRequired />
-                            <AuthTextInput label="Confirm password" placeholder="Confirm password" value={confirmPassword} setValue={setConfirmPassword} isRequired />
+                            <AuthTextInput label="Email" placeholder="Email" value={email} setValue={setEmail} isRequired type='email' />
+                            <AuthTextInput label="Password" placeholder="Password" value={password} setValue={setPassword} isRequired type='password' />
+                            <AuthTextInput label="Confirm password" placeholder="Confirm password" value={confirmPassword} setValue={setConfirmPassword} isRequired type="password" />
                         </div>
 
                         <button

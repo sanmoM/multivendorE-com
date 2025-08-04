@@ -9,12 +9,17 @@ const cartConfig = {
     key: 'cart',
     storage,
 }
+const userConfig = {
+    key: 'user',
+    storage,
+}
 
 const cartPersistReducer = persistReducer(cartConfig, cartSlice);
+const userPersistReducer = persistReducer(userConfig, userSlice);
 export const store = configureStore({
     reducer: {
         cart: cartPersistReducer,
-        user: userSlice,
+        user: userPersistReducer,
     },
 })
 

@@ -3,17 +3,26 @@ import AuthTextInput from '@/components/auth/auth-inputs/auth-text-input/AuthTex
 import Container from '@/components/shared/container/Container';
 import CheckBoxWithLabel from '@/components/shared/inputs/check-box-with-label/CheckBoxWithLabel';
 import TextInput from '@/components/shared/inputs/text-input/TextInput';
+import { setUser } from '@/lib/redux/features/userSlice';
+import { useRouter } from 'next/navigation';
 import { useState } from 'react';
+import { useDispatch } from 'react-redux';
 
 export default function page() {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [remember, setRemember] = useState(false);
+    const dispatch = useDispatch();
+    const router = useRouter()
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        console.log(email, password, remember);
+        if (email) {
+            dispatch(setUser({ email }))
+            router.push("/")
+        }
     };
+
     return (
         <Container
             class="lg:min-h-auto min-h-[calc(100svh-73.5px)] grid place-items-center"
@@ -46,8 +55,8 @@ export default function page() {
 
                 <form onSubmit={handleSubmit}>
                     <div class="mb-4 space-y-4">
-                        <AuthTextInput label="Email" placeholder="Email" value={email} setValue={setEmail} isRequired />
-                        <AuthTextInput label="Password" placeholder="Password" value={password} setValue={setPassword} isRequired />
+                        <AuthTextInput label="Email" placeholder="Email" value={email} setValue={setEmail} isRequired type='email' />
+                        <AuthTextInput label="Password" placeholder="Password" value={password} setValue={setPassword} isRequired type='password' />
                     </div>
                     <CheckBoxWithLabel label="Remember me" checked={remember} setChecked={setRemember} />
 

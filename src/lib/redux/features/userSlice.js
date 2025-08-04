@@ -2,7 +2,7 @@ import { userItems } from '@/data'
 import { createSlice } from '@reduxjs/toolkit'
 
 const initialState = {
-    phone: "",
+    email: "",
 };
 
 export const userSlice = createSlice({
@@ -10,8 +10,8 @@ export const userSlice = createSlice({
     initialState,
     reducers: {
         setUser: (state, action) => {
-            const { phone } = action.payload;
-            state.phone = phone;
+            const { email } = action.payload;
+            state.email = email;
         }
 
     },
