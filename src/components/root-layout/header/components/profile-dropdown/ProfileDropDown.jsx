@@ -7,8 +7,9 @@ import { LuUserRound } from "react-icons/lu";
 import { useDispatch, useSelector } from 'react-redux';
 import { RxExit } from "react-icons/rx";
 import { setUser } from '@/lib/redux/features/userSlice';
+import { cn } from '@/utils/cn';
 
-export default function ProfileDropDown() {
+export default function ProfileDropDown({ isMobile }) {
     const [isDropdownOpen, setIsDropdownOpen] = useState(false);
     const user = useSelector(state => state.user);
     const dispatch = useDispatch();
@@ -22,13 +23,23 @@ export default function ProfileDropDown() {
     }
 
     const placeholder = (
-        <button className="p-3 rounded-full bg-tertiary hover:bg-secondary/50 transition-colors duration-200 focus:outline-none focus:ring-1 focus:ring-gray-300" onClick={handleClose}>
-            <LuUserRound className='w-6 h-6 text-secondary' />
-        </button>
+        <div className='inline'>
+            {
+                isMobile ? (
+                    <button onClick={handleClose} className='flex flex-col items-center'>
+                        <LuUserRound className='w-6 h-6 text-secondary' />
+                        <span className='text-xs '>Profile</span>
+                    </button>
+                ) : (
+                    <button className="p-3 rounded-full bg-tertiary hover:bg-secondary/50 transition-colors duration-200 focus:outline-none focus:ring-1 focus:ring-gray-300" onClick={handleClose}>
+                        <LuUserRound className='w-6 h-6 text-secondary' />
+                    </button>
+                )
+            }
+        </div >
     )
 
 
-    console.log(user)
     const contents = (
         <div className="" role="menu" aria-orientation="vertical" aria-labelledby="options-menu">
             {
@@ -52,6 +63,6 @@ export default function ProfileDropDown() {
     )
 
     return (
-        <Dropdown containerClassName="inline" isDropdownOpen={isDropdownOpen} placeholder={placeholder} contents={contents} />
+        <Dropdown containerClassName="inline" isDropdownOpen={isDropdownOpen} placeholder={placeholder} contents={contents} contentsClassName={cn(isMobile ? "!bottom-[calc(100%+0.5rem)] !top-auto !-right-2 !left-auto" : "")} />
     )
 }

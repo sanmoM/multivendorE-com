@@ -3,7 +3,7 @@ import Container from "@/components/shared/container/Container";
 import FeaturedItems from "@/components/shared/featured-items/FeaturedItems";
 import Filter from "@/components/shared/filter/Filter";
 import Items from "@/components/shared/items/Items";
-import MobileHeaderWithSearchbar from "@/components/shared/mobile-header-withSearchbar/MobileHeaderWithSearchbar";
+import MobileHeaderWithSearchbar from "@/components/root-layout/header/components/mobile-header-withSearchbar/MobileHeaderWithSearchbar";
 import { shops } from "@/data";
 
 

@@ -1,7 +1,7 @@
 "use client";
 
 import BackBtn from '@/components/shared/back-btn/BackBtn';
-import HeaderTitle from '@/components/shared/header-title/HeaderTitle';
+import HeaderTitle from '@/components/root-layout/header/components/header-title/HeaderTitle';
 import { useRouter } from 'next/navigation';
 
 export default function HeaderWithBackBtn() {

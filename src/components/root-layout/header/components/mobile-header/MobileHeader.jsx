@@ -1,7 +1,7 @@
-import HeaderTitle from '@/components/shared/header-title/HeaderTitle';
+import HeaderTitle from '@/components/root-layout/header/components/header-title/HeaderTitle';
 import { cn } from '@/utils/cn';
 import { IoMdNotificationsOutline } from "react-icons/io";
-import BackBtn from '../back-btn/BackBtn';
+import BackBtn from '../../../../shared/back-btn/BackBtn';
 
 export default function MobileHeader({ title, containerClassName }) {
     return (

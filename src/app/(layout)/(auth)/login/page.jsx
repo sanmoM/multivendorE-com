@@ -2,7 +2,6 @@
 import AuthTextInput from '@/components/auth/auth-inputs/auth-text-input/AuthTextInput';
 import Container from '@/components/shared/container/Container';
 import CheckBoxWithLabel from '@/components/shared/inputs/check-box-with-label/CheckBoxWithLabel';
-import TextInput from '@/components/shared/inputs/text-input/TextInput';
 import { setUser } from '@/lib/redux/features/userSlice';
 import { useRouter } from 'next/navigation';
 import { useState } from 'react';

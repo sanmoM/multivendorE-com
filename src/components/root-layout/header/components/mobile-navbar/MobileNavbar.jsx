@@ -1,13 +1,10 @@
 "use client";
 
-import Dropdown from "@/components/shared/dropdown/Dropdown";
 import { useRouter } from "next/navigation";
 import { BsCart3 } from "react-icons/bs";
 import { HiMiniHome } from "react-icons/hi2";
-import { IoDocumentTextOutline } from "react-icons/io5";
-import { LuUserRound } from "react-icons/lu";
 import { TfiMenuAlt } from "react-icons/tfi";
-import MobileProfileDropdown from "./components/mobile-profile-dropdown/MobileProfileDropdown";
+import ProfileDropDown from "../profile-dropdown/ProfileDropDown";
 
 const BottomNavbar = ({ setIsCartOpen }) => {
     const router = useRouter()
@@ -61,7 +58,8 @@ const BottomNavbar = ({ setIsCartOpen }) => {
                         </button>
                     ))}
                     {/* <Dropdown /> */}
-                    <MobileProfileDropdown />
+                    {/* <MobileProfileDropdown /> */}
+                    <ProfileDropDown isMobile />
                 </div>
             </nav>
         </div>

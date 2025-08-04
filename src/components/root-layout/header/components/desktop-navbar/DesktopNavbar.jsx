@@ -3,8 +3,8 @@ import SecondaryContainer from '@/components/shared/container/SecondaryContainer
 import Link from 'next/link';
 import { IoMdNotificationsOutline } from "react-icons/io";
 import { IoCartOutline } from "react-icons/io5";
-import NavbarSearchbar from '../../../../shared/navbar-searchbar/NavbarSearchbar';
-import ProfileDropDown from './components/profile-dropdown/ProfileDropDown';
+import NavbarSearchbar from '../navbar-searchbar/NavbarSearchbar';
+import ProfileDropDown from '../profile-dropdown/ProfileDropDown';
 
 export default function DesktopNavbar({ setIsCartOpen }) {
     return (

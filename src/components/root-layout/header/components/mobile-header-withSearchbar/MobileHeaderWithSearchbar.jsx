@@ -1,6 +1,6 @@
 import Container from '@/components/shared/container/Container'
-import MobileHeader from '@/components/shared/mobile-header/MobileHeader'
-import NavbarSearchbar from '@/components/shared/navbar-searchbar/NavbarSearchbar'
+import MobileHeader from '@/components/root-layout/header/components/mobile-header/MobileHeader'
+import NavbarSearchbar from '@/components/root-layout/header/components/navbar-searchbar/NavbarSearchbar'
 
 export default function MobileHeaderWithSearchbar({title}) {
     return (
