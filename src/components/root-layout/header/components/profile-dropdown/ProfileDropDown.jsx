@@ -1,17 +1,19 @@
 "use client";
 
 import Dropdown from '@/components/shared/dropdown/Dropdown';
-import Link from 'next/link';
-import { useState } from 'react';
-import { LuUserRound } from "react-icons/lu";
-import { useDispatch, useSelector } from 'react-redux';
-import { RxExit } from "react-icons/rx";
+import Modal from '@/components/shared/modal/Modal';
+import AccountSettingsModalContents from '@/components/shared/modal/components/modal-contents/account-settings-modal-contents/AccountSettingsModalContents';
+import OrderModalContents from '@/components/shared/modal/components/modal-contents/order-modal-contents/OrderModalContents';
+import ProductsModalContents from '@/components/shared/modal/components/modal-contents/products-modal-contents/ProductsModalContents';
 import { setUser } from '@/lib/redux/features/userSlice';
 import { cn } from '@/utils/cn';
-import Modal from '@/components/shared/modal/Modal';
-import OrderModalContents from '@/components/shared/modal/components/modal-contents/order-modal-contents/OrderModalContents';
-import AccountSettingsModalContents from '@/components/shared/modal/components/modal-contents/account-settings-modal-contents/AccountSettingsModalContents';
-import ProductsModalContents from '@/components/shared/modal/components/modal-contents/products-modal-contents/ProductsModalContents';
+import Link from 'next/link';
+import { useState } from 'react';
+import { FaInbox } from 'react-icons/fa';
+import { LuUserRound } from "react-icons/lu";
+import { RxExit } from "react-icons/rx";
+import { TbSitemap } from "react-icons/tb";
+import { useDispatch, useSelector } from 'react-redux';
 
 
 export default function ProfileDropDown({ isMobile }) {
@@ -49,11 +51,103 @@ export default function ProfileDropDown({ isMobile }) {
         },
     ];
 
+    const accountMenuItems = [
+        {
+            category: 'Account',
+            items: [
+                {
+                    title: 'Account Information',
+                    subtitle: 'Manage your account information',
+                    icon: (
+                        <svg className="h-6 w-6 text-gray-700" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"></path>
+                        </svg>
+                    ),
+                },
+                {
+                    title: 'Notifications',
+                    subtitle: 'Manage your notification preferences',
+                    icon: (
+                        <svg className="h-6 w-6 text-gray-700" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V5a2 2 0 10-4 0v.341C7.67 6.165 6 8.388 6 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9"></path>
+                        </svg>
+                    ),
+                },
+            ],
+            mobileMenuItems: [
+                {
+                    title: 'Orders',
+                    subtitle: 'Manage your orders',
+                    handleClick: () => {
+                        setIsAccountSettingsOpen(false)
+                        setTimeout(() => {
+                            setIsOrdersOpen(true)
+                        }, 300);
+                    },
+                    icon: (
+                        <TbSitemap className="h-6 w-6 text-gray-700" />
+                    )
+                },
+                {
+                    title: 'Products',
+                    subtitle: 'Manage your products',
+                    handleClick: () => {
+                        setIsAccountSettingsOpen(false)
+                        setTimeout(() => {
+                            setIsProductOpen(true)
+                        }, 300);
+                    },
+                    icon: (
+                        <FaInbox className="h-6 w-6 text-gray-700" />
+                    )
+                },
+            ]
+        },
+        {
+            category: 'Preferences',
+            items: [
+                {
+                    title: 'Language',
+                    subtitle: 'Select your preferred language',
+                    icon: (
+                        <svg className="h-6 w-6 text-gray-700" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M3 5h12M9 3v2m1.025 15l-1.34-4.66m-1.025-5.34H2.4m6.825 0H14m6.825 0H17m-1.025-5.34L17 5m6.825 0L19 12m-2.28 7H5.28A2.28 2.28 0 013 17.72V6.28A2.28 2.28 0 015.28 4H18.72A2.28 2.28 0 0121 6.28v11.44a2.28 2.28 0 01-2.28 2.28z"></path>
+                        </svg>
+                    ),
+                },
+            ],
+        },
+        {
+            category: 'About',
+            items: [
+                {
+                    title: 'App Version',
+                    subtitle: 'Version 1.2.3',
+                    icon: (
+                        <svg className="h-6 w-6 text-gray-700" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                        </svg>
+                    ),
+                },
+                {
+                    title: 'Terms of Service',
+                    subtitle: 'View our terms of service',
+                    icon: (
+                        <svg className="h-6 w-6 text-gray-700" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-3 7h3m-3 4h3m-6-4h.01M9 16h.01"></path>
+                        </svg>
+                    ),
+                },
+            ],
+        },
+    ];
+
+
     const placeholder = (
         <div className='inline'>
             {
                 isMobile ? (
-                    <button onClick={handleClose} className='flex flex-col items-center'>
+                    <button onClick={() => setIsAccountSettingsOpen(!isAccountSettingsOpen)} className='flex flex-col items-center'>
                         <LuUserRound className='w-6 h-6 text-secondary' />
                         <span className='text-xs '>Profile</span>
                     </button>
@@ -118,7 +212,7 @@ export default function ProfileDropDown({ isMobile }) {
                 <OrderModalContents />
             </Modal>
             <Modal isLeft={false} isOpen={isAccountSettingsOpen} setIsOpen={setIsAccountSettingsOpen} title={"Account Settings"}>
-                <AccountSettingsModalContents />
+                <AccountSettingsModalContents isMobile={isMobile} accountMenuItems={accountMenuItems} />
             </Modal>
             <Modal isLeft={false} isOpen={isProductOpen} setIsOpen={setIsProductOpen} title={"My Products"}>
                 <ProductsModalContents />
