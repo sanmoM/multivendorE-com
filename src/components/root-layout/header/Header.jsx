@@ -12,7 +12,7 @@ export default function Header() {
     const [isCartOpen, setIsCartOpen] = useState(false);
     const [isCheckoutOpen, setIsCheckoutOpen] = useState(false);
     return (
-        <header className="w-full bg-white shadow-sm font-sans lg:mb-10">
+        <header className="w-full bg-white shadow-sm font-sans">
             <DesktopNavbar setIsCartOpen={setIsCartOpen} />
             <MobileNavbar setIsCartOpen={setIsCartOpen} />
 

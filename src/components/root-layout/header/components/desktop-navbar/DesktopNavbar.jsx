@@ -1,20 +1,12 @@
-"use client";
 
 import SecondaryContainer from '@/components/shared/container/SecondaryContainer';
 import Link from 'next/link';
 import { IoMdNotificationsOutline } from "react-icons/io";
 import { IoCartOutline } from "react-icons/io5";
-import { LuUserRound } from "react-icons/lu";
 import NavbarSearchbar from '../../../../shared/navbar-searchbar/NavbarSearchbar';
-// import { useState } from 'react';
-// import { useDispatch } from 'react-redux';
-// import { handleCartOpenClose } from '@/lib/redux/features/cartSlice';
+import ProfileDropDown from './components/profile-dropdown/ProfileDropDown';
 
 export default function DesktopNavbar({ setIsCartOpen }) {
-    // const dispatch = useDispatch();
-    // const handleCartOpen = () => {
-    //     dispatch(handleCartOpenClose());
-    // };
     return (
         <SecondaryContainer className="max-w-[1550px] mx-auto px-4 py-5 lg:flex items-center justify-between hidden">
             {/* Left Section: Logo and Navigation */}
@@ -55,10 +47,7 @@ export default function DesktopNavbar({ setIsCartOpen }) {
                     <button onClick={() => setIsCartOpen(true)} className="p-3 rounded-full bg-tertiary hover:bg-secondary/50 transition-colors duration-200 focus:outline-none focus:ring-1 focus:ring-gray-300">
                         <IoCartOutline className='w-6 h-6 text-secondary' />
                     </button>
-                    {/* User Icon */}
-                    <button className="p-3 rounded-full bg-tertiary hover:bg-secondary/50 transition-colors duration-200 focus:outline-none focus:ring-1 focus:ring-gray-300">
-                        <LuUserRound className='w-6 h-6 text-secondary' />
-                    </button>
+                    <ProfileDropDown />
                 </div>
             </div>
         </SecondaryContainer>

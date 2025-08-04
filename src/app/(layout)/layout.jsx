@@ -7,7 +7,7 @@ export default function layout({ children }) {
 
 
     return (
-        <div className='pb-28 lg:pb-0'>
+        <div className='pb-[73.5px] lg:pb-0'>
             <Header />
             {children}
             <Footer />
