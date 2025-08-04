@@ -25,7 +25,7 @@ export default function page() {
 
     return (
         <Container
-            class="lg:min-h-auto min-h-[calc(100svh-73.5px)] grid place-items-center"
+            className="lg:min-h-auto min-h-[calc(100svh-73.5px)] md:min-h-[calc(100svh-84px)] grid place-items-center"
         >
             <div class="w-full max-w-md mx-auto">
 

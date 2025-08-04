@@ -1,10 +1,16 @@
+"use client";
+
+import Dropdown from "@/components/shared/dropdown/Dropdown";
+import { useRouter } from "next/navigation";
 import { BsCart3 } from "react-icons/bs";
 import { HiMiniHome } from "react-icons/hi2";
 import { IoDocumentTextOutline } from "react-icons/io5";
 import { LuUserRound } from "react-icons/lu";
 import { TfiMenuAlt } from "react-icons/tfi";
+import MobileProfileDropdown from "./components/mobile-profile-dropdown/MobileProfileDropdown";
 
 const BottomNavbar = ({ setIsCartOpen }) => {
+    const router = useRouter()
     const navItems = [
         {
             name: 'Home',
@@ -23,22 +29,27 @@ const BottomNavbar = ({ setIsCartOpen }) => {
             type: "button",
             handleClick: () => setIsCartOpen(true)
         },
-        {
-            name: 'Orders',
-            icon: <IoDocumentTextOutline className="h-6 w-6" />,
-            path: "#"
-        },
-        {
-            name: 'Profile',
-            icon: <LuUserRound className="h-6 w-6" />,
-            path: "#"
-        },
+        // {
+        //     name: 'Orders',
+        //     icon: <IoDocumentTextOutline className="h-6 w-6" />,
+        //     path: "#"
+        // },
+        // {
+        //     name: 'Profile',
+        //     icon: <LuUserRound className="h-6 w-6" />,
+        //     path: "#"
+        // },
     ];
+
+    // this function will be called when the user clicks on a navigation item
+    const handleNavigate = (path) => {
+        router.push(path)
+    }
 
     return (
         <div className="flex items-center justify-center font-sans bg-gray-50 fixed bottom-0 left-0 right-0 z-50 lg:hidden">
-            <nav className="w-full max-w-lg bg-white rounded-lg shadow-lg py-3 px-2">
-                <div className="flex justify-around items-center text-secondary">
+            <nav className="w-full bg-white rounded-lg shadow-lg py-3 px-2">
+                <div className="grid grid-cols-4 place-items-center items-center text-secondary">
                     {navItems.map((item, index) => (
                         <button
                             {...item.type === "button" && { onClick: item.handleClick }}
@@ -49,6 +60,8 @@ const BottomNavbar = ({ setIsCartOpen }) => {
                             <span className={`text-xs ${item.active && 'text-primary font-semibold'}`}>{item.name}</span>
                         </button>
                     ))}
+                    {/* <Dropdown /> */}
+                    <MobileProfileDropdown />
                 </div>
             </nav>
         </div>
