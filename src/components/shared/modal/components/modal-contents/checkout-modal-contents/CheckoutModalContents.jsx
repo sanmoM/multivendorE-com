@@ -83,20 +83,20 @@ const CheckoutModalContents = () => {
                     <PrimaryTitle title={"Order Summary"} />
                     <div className="space-y-2 text-gray-700">
                         <div className="flex justify-between items-center">
-                            <p>Subtotal</p>
-                            <p className='text-secondary'>$45.00</p>
+                            <p className='text-secondary'>Subtotal</p>
+                            <p className='text-primary'>$45.00</p>
                         </div>
                         <div className="flex justify-between items-center">
-                            <p>Delivery</p>
-                            <p className='text-secondary'>$5.00</p>
+                            <p className='text-secondary'>Delivery</p>
+                            <p className='text-primary'>$5.00</p>
                         </div>
                         <div className="flex justify-between items-center">
-                            <p>Taxes</p>
-                            <p className='text-secondary'>$3.75</p>
+                            <p className='text-secondary'>Taxes</p>
+                            <p className='text-primary'>$3.75</p>
                         </div>
                         <div className="flex justify-between items-center">
-                            <p>Total</p>
-                            <p className='text-secondary'>$53.75</p>
+                            <p className='text-secondary'>Total</p>
+                            <p className='text-primary'>$53.75</p>
                         </div>
                     </div>
                 </div>

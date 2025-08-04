@@ -26,16 +26,6 @@ const BottomNavbar = ({ setIsCartOpen }) => {
             type: "button",
             handleClick: () => setIsCartOpen(true)
         },
-        // {
-        //     name: 'Orders',
-        //     icon: <IoDocumentTextOutline className="h-6 w-6" />,
-        //     path: "#"
-        // },
-        // {
-        //     name: 'Profile',
-        //     icon: <LuUserRound className="h-6 w-6" />,
-        //     path: "#"
-        // },
     ];
 
     // this function will be called when the user clicks on a navigation item

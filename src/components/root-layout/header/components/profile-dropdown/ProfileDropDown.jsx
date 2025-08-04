@@ -8,11 +8,19 @@ import { useDispatch, useSelector } from 'react-redux';
 import { RxExit } from "react-icons/rx";
 import { setUser } from '@/lib/redux/features/userSlice';
 import { cn } from '@/utils/cn';
+import Modal from '@/components/shared/modal/Modal';
+import OrderModalContents from '@/components/shared/modal/components/modal-contents/order-modal-contents/OrderModalContents';
+import AccountSettingsModalContents from '@/components/shared/modal/components/modal-contents/account-settings-modal-contents/AccountSettingsModalContents';
+import ProductsModalContents from '@/components/shared/modal/components/modal-contents/products-modal-contents/ProductsModalContents';
+
 
 export default function ProfileDropDown({ isMobile }) {
     const [isDropdownOpen, setIsDropdownOpen] = useState(false);
     const user = useSelector(state => state.user);
     const dispatch = useDispatch();
+    const [isOrdersOpen, setIsOrdersOpen] = useState(false);
+    const [isAccountSettingsOpen, setIsAccountSettingsOpen] = useState(false);
+    const [isProductOpen, setIsProductOpen] = useState(false);
 
     const handleLogout = () => {
         dispatch(setUser({ email: "" }))
@@ -21,6 +29,25 @@ export default function ProfileDropDown({ isMobile }) {
     const handleClose = () => {
         setIsDropdownOpen(!isDropdownOpen)
     }
+
+
+    const profileMenuItems = [
+        {
+            name: 'Account settings',
+            type: "button",
+            handleClick: () => setIsAccountSettingsOpen(true)
+        },
+        {
+            name: 'Orders',
+            type: "button",
+            handleClick: () => setIsOrdersOpen(true)
+        },
+        {
+            name: 'Products',
+            type: "button",
+            handleClick: () => setIsProductOpen(true)
+        },
+    ];
 
     const placeholder = (
         <div className='inline'>
@@ -45,9 +72,31 @@ export default function ProfileDropDown({ isMobile }) {
             {
                 user?.email ? (
                     <>
-                        <a href="#" className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-secondary" role="menuitem">Account settings</a>
-                        <a href="#" className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-secondary" role="menuitem">Support</a>
-                        <a href="#" className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-secondary" role="menuitem">License</a>
+                        {
+                            profileMenuItems.map((item, index) => (
+                                <>
+                                    {
+                                        item.type === "button" ? (
+                                            <button onClick={() => {
+                                                item.handleClick();
+                                                setIsDropdownOpen(false);
+                                            }} className="px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-secondary flex gap-2 items-center w-full" role="menuitem">
+                                                <span>{item.name}</span>
+                                            </button>
+                                        ) : (
+                                            <Link
+                                                onClick={() => {
+                                                    setIsDropdownOpen(false);
+                                                }}
+                                                href={item.path || "#"} className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-secondary" role="menuitem">
+                                                <span>{item.name}</span>
+                                            </Link>
+                                        )
+                                    }
+
+                                </>
+                            ))
+                        }
                         <button onClick={handleLogout} className="px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-secondary flex gap-2 items-center w-full" role="menuitem">
                             <RxExit /><span>Logout</span>
                         </button>
@@ -63,6 +112,17 @@ export default function ProfileDropDown({ isMobile }) {
     )
 
     return (
-        <Dropdown containerClassName="inline" isDropdownOpen={isDropdownOpen} placeholder={placeholder} contents={contents} contentsClassName={cn(isMobile ? "!bottom-[calc(100%+0.5rem)] !top-auto !-right-2 !left-auto" : "")} />
+        <div className='inline'>
+            <Dropdown containerClassName="inline" isDropdownOpen={isDropdownOpen} placeholder={placeholder} contents={contents} contentsClassName={cn(isMobile ? "!bottom-[calc(100%+0.5rem)] !top-auto !-right-2 !left-auto" : "")} />
+            <Modal isLeft={false} isOpen={isOrdersOpen} setIsOpen={setIsOrdersOpen} title={"Orders"}>
+                <OrderModalContents />
+            </Modal>
+            <Modal isLeft={false} isOpen={isAccountSettingsOpen} setIsOpen={setIsAccountSettingsOpen} title={"Account Settings"}>
+                <AccountSettingsModalContents />
+            </Modal>
+            <Modal isLeft={false} isOpen={isProductOpen} setIsOpen={setIsProductOpen} title={"My Products"}>
+                <ProductsModalContents />
+            </Modal>
+        </div>
     )
 }
