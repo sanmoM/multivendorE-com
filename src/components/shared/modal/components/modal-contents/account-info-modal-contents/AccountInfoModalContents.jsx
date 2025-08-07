@@ -1,9 +1,13 @@
-import React from 'react'
+import ModalNavigationCard from '../components/modal-navigation-card/ModalNavigationCard';
 
-export default function AccountInfoModalContents() {
+export default function AccountInfoModalContents({ accountInfoItems }) {
+
+
     return (
-        <div>
-            
+        <div className="space-y-4">
+            {accountInfoItems.map((item, itemIndex) => (
+                <ModalNavigationCard item={{ title: item.name, icon: item.icon, subtitle: item.subtitle, handleClick: item.handleClick }} />
+            ))}
         </div>
     )
 }

@@ -2,17 +2,24 @@
 
 import Dropdown from '@/components/shared/dropdown/Dropdown';
 import Modal from '@/components/shared/modal/Modal';
+import AccountInfoModalContents from '@/components/shared/modal/components/modal-contents/account-info-modal-contents/AccountInfoModalContents';
+import MyOrderModalContents from '@/components/shared/modal/components/modal-contents/account-info-modal-contents/account-info-inner-modal-contents/my-order-modal-contents/MyOrderModalContents';
+import PaymentModalContents from '@/components/shared/modal/components/modal-contents/account-info-modal-contents/account-info-inner-modal-contents/payment-modal-contents/PaymentModalContents';
 import AccountSettingsModalContents from '@/components/shared/modal/components/modal-contents/account-settings-modal-contents/AccountSettingsModalContents';
+import BecomeASellerModalContents from '@/components/shared/modal/components/modal-contents/become-a-seller-modal-contents/BecomeASellerModalContents';
 import HelpModalContents from '@/components/shared/modal/components/modal-contents/help-modal-contents/HelpModalContents';
 import OrderModalContents from '@/components/shared/modal/components/modal-contents/order-modal-contents/OrderModalContents';
 import ProductsModalContents from '@/components/shared/modal/components/modal-contents/products-modal-contents/ProductsModalContents';
 import { setUser } from '@/lib/redux/features/userSlice';
 import { cn } from '@/utils/cn';
 import Link from 'next/link';
-import { useState } from 'react';
+import { useState } from "react";
+import { BsShopWindow } from 'react-icons/bs';
 import { FaInbox } from 'react-icons/fa';
 import { FiHelpCircle } from "react-icons/fi";
+import { IoIosCard } from "react-icons/io";
 import { LuUserRound } from "react-icons/lu";
+import { RiInformation2Line } from "react-icons/ri";
 import { RxExit } from "react-icons/rx";
 import { TbSitemap } from "react-icons/tb";
 import { useDispatch, useSelector } from 'react-redux';
@@ -27,6 +34,9 @@ export default function ProfileDropDown({ isMobile }) {
     const [isProductOpen, setIsProductOpen] = useState(false);
     const [isHelpOpen, setIsHelpOpen] = useState(false);
     const [isAccountInformationOpen, setIsAccountInformationOpen] = useState(false);
+    const [isPaymentOpen, setIsPaymentOpen] = useState(false);
+    const [isMyOrdersOpen, setIsMyOrdersOpen] = useState(false);
+    const [isBecomeASellerOpen, setIsBecomeASellerOpen] = useState(false);
 
     const handleLogout = () => {
         dispatch(setUser({ email: "" }))
@@ -89,6 +99,19 @@ export default function ProfileDropDown({ isMobile }) {
                             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V5a2 2 0 10-4 0v.341C7.67 6.165 6 8.388 6 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9"></path>
                         </svg>
                     ),
+                },
+                {
+                    title: 'Become a Seller',
+                    subtitle: 'Become a seller',
+                    icon: (
+                        <BsShopWindow className="h-6 w-6 text-gray-700" />
+                    ),
+                    handleClick: () => {
+                        setIsAccountSettingsOpen(false)
+                        setTimeout(() => {
+                            setIsBecomeASellerOpen(true)
+                        }, 300);
+                    },
                 },
             ],
             mobileMenuItems: [
@@ -237,13 +260,55 @@ export default function ProfileDropDown({ isMobile }) {
         </div>
     )
 
+    // account information items
+    const accountInfoItems = [
+        {
+            name: 'Personal Information',
+            subtitle: 'Manage your personal information',
+            type: "button",
+            handleClick: () => {
+                console.log("clicked")
+                setIsAccountSettingsOpen(false)
+                setTimeout(() => {
+                    setIsPaymentOpen(true)
+                }, 300);
+            },
+            icon: <RiInformation2Line className="h-6 w-6 text-gray-700" />
+        },
+        {
+            name: 'My Orders',
+            subtitle: 'View your orders',
+            type: "button",
+            handleClick: () => {
+                console.log("clicked")
+                setIsAccountInformationOpen(false)
+                setTimeout(() => {
+                    setIsMyOrdersOpen(true)
+                }, 300);
+            },
+            icon: <TbSitemap className="h-6 w-6 text-gray-700" />
+        },
+        {
+            name: 'Payment Methods',
+            subtitle: 'Manage your payment methods',
+            type: "button",
+            handleClick: () => {
+                console.log("clicked")
+                setIsAccountInformationOpen(false)
+                setTimeout(() => {
+                    setIsPaymentOpen(true)
+                }, 300);
+            },
+            icon: <IoIosCard className="h-6 w-6 text-gray-700" />
+        },
+    ];
+
     return (
         <div className='inline'>
             {/* all dropdown contents */}
             <Dropdown containerClassName="inline" isDropdownOpen={isDropdownOpen} placeholder={placeholder} contents={contents} contentsClassName={cn(isMobile ? "!bottom-[calc(100%+0.5rem)] !top-auto !-right-2 !left-auto" : "")} />
 
-            {/* modals */}
-
+            {/* all modal for profile  */}
             <Modal isLeft={false} isOpen={isOrdersOpen} setIsOpen={setIsOrdersOpen} title={"Orders"}>
                 <OrderModalContents />
             </Modal>
@@ -257,7 +322,20 @@ export default function ProfileDropDown({ isMobile }) {
                 <HelpModalContents />
             </Modal>
             <Modal isLeft={false} isOpen={isAccountInformationOpen} setIsOpen={setIsAccountInformationOpen} title={"Account Information"}>
-                <HelpModalContents />
+                <AccountInfoModalContents accountInfoItems={accountInfoItems} />
+            </Modal>
+            <Modal isLeft={false} isOpen={isBecomeASellerOpen} setIsOpen={setIsBecomeASellerOpen} title={"Become a Seller"}>
+                <BecomeASellerModalContents />
+            </Modal>
+
+
+
+            {/* account information modals */}
+            <Modal isLeft={false} isOpen={isPaymentOpen} setIsOpen={setIsPaymentOpen} title={"Payment Methods"}>
+                <PaymentModalContents />
+            </Modal>
+            <Modal isLeft={false} isOpen={isMyOrdersOpen} setIsOpen={setIsMyOrdersOpen} title={"My Orders"}>
+                <MyOrderModalContents />
             </Modal>
         </div>
     )
