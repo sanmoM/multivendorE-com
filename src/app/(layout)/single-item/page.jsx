@@ -53,7 +53,7 @@ const App = () => {
         dispatch(handleCartOpen());
     };
     return (
-        <div>
+        <div className='my-6 lg:my-10'>
             <MobileHeader title={"Single Item"} containerClassName={"mb-6"} />
             <SecondaryContainer className={"overflow-hidden"}>
                 {/* single item header */}

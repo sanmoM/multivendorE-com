@@ -74,7 +74,7 @@ export default function page() {
                         <Button
                             // onClick={handleSubmit}
                             type="submit"
-                            className="w-full py-3 bg-red-500 text-white font-bold rounded-md text-sm mt-4"
+                            className="w-full py-3 bg-red-600 text-white font-bold rounded-md text-sm mt-4"
                             text={"SIGN UP"}
                         />
                     </form>
