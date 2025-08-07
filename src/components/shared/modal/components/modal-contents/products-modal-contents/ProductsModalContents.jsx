@@ -1,5 +1,5 @@
 import { products } from '@/data'
-import ModalProductCard2 from '../../modal-product-card/ModalProductCard2'
+import HorizontalCard from '../../../../horizontal-card/HorizontalCard'
 import PrimaryTitle from '@/components/shared/title/PrimaryTitle'
 
 export default function ProductsModalContents() {
@@ -9,7 +9,7 @@ export default function ProductsModalContents() {
             <div className="w-full space-y-6">
                 {
                     products?.map((product) => (
-                        <ModalProductCard2 key={product.id} item={{ id: product.id, image: product?.image, title: product?.name, text2: "100+ sold" }} />
+                        <HorizontalCard key={product.id} item={{ id: product.id, image: product?.image, title: product?.name, text2: "100+ sold" }} />
                     ))
                 }
             </div>

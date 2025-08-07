@@ -1,5 +1,5 @@
 import PrimaryTitle from '@/components/shared/title/PrimaryTitle';
-import ModalNavigationCard from '../components/modal-navigation-card/ModalNavigationCard';
+import ItemCard from '../../../../item-card/ItemCard';
 
 export default function AccountSettingsModalContents({ isMobile, accountMenuItems }) {
 
@@ -10,11 +10,11 @@ export default function AccountSettingsModalContents({ isMobile, accountMenuItem
                     <PrimaryTitle className="text-xl font-bold text-gray-900 mb-4" title={category.category} />
                     <div className="space-y-4">
                         {category.items.map((item, itemIndex) => (
-                            <ModalNavigationCard item={item} />
+                            <ItemCard item={item} />
                         ))}
                         {
                             isMobile && category?.mobileMenuItems?.map((item, index) => (
-                                <ModalNavigationCard item={item} />
+                                <ItemCard item={item} />
                             ))
                         }
                     </div>

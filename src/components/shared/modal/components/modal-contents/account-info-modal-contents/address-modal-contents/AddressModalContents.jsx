@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import ModalNavigationCard from '../../components/modal-navigation-card/ModalNavigationCard';
+import ItemCard from '../../../../../item-card/ItemCard';
 import Button from '@/components/shared/button/Button';
 
 const AddressModalContents = () => {
@@ -52,7 +52,7 @@ const AddressModalContents = () => {
                             <p className="text-sm text-gray-500">{address.address}</p>
                         </div>
                     </div> */}
-                        <ModalNavigationCard item={{ title: address.label, icon: address.icon, subtitle: address.address, handleClick: () => { } }} />
+                        <ItemCard item={{ title: address.label, icon: address.icon, subtitle: address.address, handleClick: () => { } }} />
                         {address.isToggle && (
                             <div
                                 className={`w-12 h-6 flex items-center rounded-full p-1 cursor-pointer transition-colors duration-200 ${isWorkAddressEnabled ? 'bg-gray-300' : 'bg-red-500'}`}

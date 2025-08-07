@@ -1,6 +1,7 @@
+import { cn } from '@/utils/cn'
 import React from 'react'
 
-export default function ModalNavigationCard({ item }) {
+export default function ItemCard({ item, titleClassName, subtitleClassName }) {
     return (
         <div
             onClick={item.handleClick || null}
@@ -10,8 +11,8 @@ export default function ModalNavigationCard({ item }) {
                 {item.icon}
             </div>
             <div>
-                <h4 className="font-semibold text-gray-800">{item.title}</h4>
-                <p className="text-sm text-secondary">{item.subtitle}</p>
+                <h4 className={cn("font-semibold text-gray-800", titleClassName)}>{item.title}</h4>
+                <p className={cn("text-sm text-secondary", subtitleClassName)}>{item.subtitle}</p>
             </div>
         </div>
     )

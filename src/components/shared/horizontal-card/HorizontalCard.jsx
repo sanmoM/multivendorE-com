@@ -1,7 +1,7 @@
 import Image from 'next/image';
 import React from 'react'
 
-export default function ModalProductCard2({ item }) {
+export default function HorizontalCard({ item }) {
     return (
         <div className="flex items-center space-x-4">
             <Image
