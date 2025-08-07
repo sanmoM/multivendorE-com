@@ -14,6 +14,7 @@ import ProductsModalContents from '@/components/shared/modal/components/modal-co
 import { setUser } from '@/lib/redux/features/userSlice';
 import { cn } from '@/utils/cn';
 import Link from 'next/link';
+import { useRouter } from 'next/navigation';
 import { useState } from "react";
 import { BsShopWindow } from 'react-icons/bs';
 import { FaInbox } from 'react-icons/fa';
@@ -41,9 +42,24 @@ export default function ProfileDropDown({ isMobile }) {
     const [isBecomeASellerOpen, setIsBecomeASellerOpen] = useState(false);
     const [isMyAddressOpen, setIsMyAddressOpen] = useState(false);
     const [modalStack, setModalStack] = useState([]);
+    const router = useRouter();
 
     const handleLogout = () => {
         dispatch(setUser({ email: "" }))
+    }
+
+    const handleCloseAllModals = () => {
+        setIsAccountSettingsOpen(false)
+        setIsOrdersOpen(false)
+        setIsProductOpen(false)
+        setIsHelpOpen(false)
+        setIsAccountInformationOpen(false)
+        setIsPaymentOpen(false)
+        setIsMyOrdersOpen(false)
+        setIsBecomeASellerOpen(false)
+        setIsMyAddressOpen(false)
+        setIsDropdownOpen(false)
+        setModalStack([])
     }
 
     const handleDropdownClose = () => {
@@ -132,12 +148,19 @@ export default function ProfileDropDown({ isMobile }) {
                     ),
                 },
                 {
-                    title: 'Become a Seller',
+                    title: user?.accountType === "seller" ? 'View Seller Profile' : 'Become a Seller',
                     subtitle: 'Become a seller',
                     icon: (
                         <BsShopWindow className="h-6 w-6 text-gray-700" />
                     ),
-                    handleClick: () => handleOpenModal(setIsBecomeASellerOpen),
+                    handleClick: () => {
+                        if (user?.accountType === "seller") {
+                            router.push("/seller-profile")
+                            handleCloseAllModals();
+                        } else {
+                            handleOpenModal(setIsBecomeASellerOpen)
+                        }
+                    },
                 },
             ],
             mobileMenuItems: [
@@ -338,7 +361,7 @@ export default function ProfileDropDown({ isMobile }) {
                 <AccountInfoModalContents accountInfoItems={accountInfoItems} />
             </Modal>
             <Modal isLeft={false} isOpen={isBecomeASellerOpen} setIsOpen={() => handleCloseModal()} title={"Become a Seller"}>
-                <BecomeASellerModalContents />
+                <BecomeASellerModalContents handleCloseModal={handleCloseModal} />
             </Modal>
 
 
