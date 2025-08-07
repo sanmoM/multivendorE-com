@@ -40,13 +40,34 @@ export default function ProfileDropDown({ isMobile }) {
     const [isMyOrdersOpen, setIsMyOrdersOpen] = useState(false);
     const [isBecomeASellerOpen, setIsBecomeASellerOpen] = useState(false);
     const [isMyAddressOpen, setIsMyAddressOpen] = useState(false);
+    const [modalStack, setModalStack] = useState([]);
 
     const handleLogout = () => {
         dispatch(setUser({ email: "" }))
     }
 
-    const handleClose = () => {
+    const handleDropdownClose = () => {
         setIsDropdownOpen(!isDropdownOpen)
+    }
+
+    const handleCloseModal = () => {
+        modalStack[modalStack.length - 1](prev => !prev)
+        setTimeout(() => {
+            setModalStack(prev => prev.slice(0, -1));
+            modalStack[modalStack.length - 2](prev => !prev)
+        }, 300);
+    }
+
+    console.log("modalStack", modalStack)
+    const handleOpenModal = (setFun) => {
+        if (modalStack.length > 0) {
+            modalStack[modalStack.length - 1](prev => !prev)
+        }
+        setTimeout(() => {
+            setFun(prev => !prev)
+            // modalStack.push(setFun)
+            setModalStack(prev => [...prev, setFun])
+        }, 300);
     }
 
 
@@ -55,22 +76,34 @@ export default function ProfileDropDown({ isMobile }) {
         {
             name: 'Account settings',
             type: "button",
-            handleClick: () => setIsAccountSettingsOpen(true)
+            handleClick: () => {
+                handleDropdownClose()
+                handleOpenModal(setIsAccountSettingsOpen)
+            }
         },
         {
             name: 'Orders',
             type: "button",
-            handleClick: () => setIsOrdersOpen(true)
+            handleClick: () => {
+                handleDropdownClose()
+                handleOpenModal(setIsOrdersOpen)
+            }
         },
         {
             name: 'Products',
             type: "button",
-            handleClick: () => setIsProductOpen(true)
+            handleClick: () => {
+                handleDropdownClose()
+                handleOpenModal(setIsProductOpen)
+            }
         },
         {
             name: 'Help',
             type: "button",
-            handleClick: () => setIsHelpOpen(true)
+            handleClick: () => {
+                handleDropdownClose()
+                handleOpenModal(setIsHelpOpen)
+            }
         },
     ];
 
@@ -87,12 +120,7 @@ export default function ProfileDropDown({ isMobile }) {
                             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"></path>
                         </svg>
                     ),
-                    handleClick: () => {
-                        setIsAccountSettingsOpen(false)
-                        setTimeout(() => {
-                            setIsAccountInformationOpen(true)
-                        }, 300);
-                    },
+                    handleClick: () => handleOpenModal(setIsAccountInformationOpen),
                 },
                 {
                     title: 'Notifications',
@@ -109,24 +137,14 @@ export default function ProfileDropDown({ isMobile }) {
                     icon: (
                         <BsShopWindow className="h-6 w-6 text-gray-700" />
                     ),
-                    handleClick: () => {
-                        setIsAccountSettingsOpen(false)
-                        setTimeout(() => {
-                            setIsBecomeASellerOpen(true)
-                        }, 300);
-                    },
+                    handleClick: () => handleOpenModal(setIsBecomeASellerOpen),
                 },
             ],
             mobileMenuItems: [
                 {
                     title: 'Orders',
                     subtitle: 'Manage your orders',
-                    handleClick: () => {
-                        setIsAccountSettingsOpen(false)
-                        setTimeout(() => {
-                            setIsOrdersOpen(true)
-                        }, 300);
-                    },
+                    handleClick: () => handleOpenModal(setIsOrdersOpen),
                     icon: (
                         <TbSitemap className="h-6 w-6 text-gray-700" />
                     )
@@ -134,12 +152,7 @@ export default function ProfileDropDown({ isMobile }) {
                 {
                     title: 'Products',
                     subtitle: 'Manage your products',
-                    handleClick: () => {
-                        setIsAccountSettingsOpen(false)
-                        setTimeout(() => {
-                            setIsProductOpen(true)
-                        }, 300);
-                    },
+                    handleClick: () => handleOpenModal(setIsProductOpen),
                     icon: (
                         <FaInbox className="h-6 w-6 text-gray-700" />
                     )
@@ -147,12 +160,7 @@ export default function ProfileDropDown({ isMobile }) {
                 {
                     title: 'Help',
                     subtitle: 'Get help with your account',
-                    handleClick: () => {
-                        setIsAccountSettingsOpen(false)
-                        setTimeout(() => {
-                            setIsHelpOpen(true)
-                        }, 300);
-                    },
+                    handleClick: () => handleOpenModal(setIsHelpOpen),
                     icon: (
                         <FiHelpCircle className="h-6 w-6 text-gray-700" />
                     )
@@ -204,52 +212,28 @@ export default function ProfileDropDown({ isMobile }) {
             name: 'Personal Information',
             subtitle: 'Manage your personal information',
             type: "button",
-            handleClick: () => {
-
-                setIsAccountSettingsOpen(false)
-                setTimeout(() => {
-                    setIsPaymentOpen(true)
-                }, 300);
-            },
+            handleClick: () => handleOpenModal(setIsAccountInformationOpen),
             icon: <RiInformation2Line className="h-6 w-6 text-gray-700" />
         },
         {
             name: 'My Address',
             subtitle: 'Manage your address',
             type: "button",
-            handleClick: () => {
-
-                setIsAccountSettingsOpen(false)
-                setTimeout(() => {
-                    setIsMyAddressOpen(true)
-                }, 300);
-            },
+            handleClick: () => handleOpenModal(setIsMyAddressOpen),
             icon: <MdOutlineHomeWork className="h-6 w-6 text-gray-700" />
         },
         {
             name: 'My Orders',
             subtitle: 'View your orders',
             type: "button",
-            handleClick: () => {
-
-                setIsAccountInformationOpen(false)
-                setTimeout(() => {
-                    setIsMyOrdersOpen(true)
-                }, 300);
-            },
+            handleClick: () => handleOpenModal(setIsMyOrdersOpen),
             icon: <TbSitemap className="h-6 w-6 text-gray-700" />
         },
         {
             name: 'Payment Methods',
             subtitle: 'Manage your payment methods',
             type: "button",
-            handleClick: () => {
-
-                setIsAccountInformationOpen(false)
-                setTimeout(() => {
-                    setIsPaymentOpen(true)
-                }, 300);
-            },
+            handleClick: () => handleOpenModal(setIsPaymentOpen),
             icon: <IoIosCard className="h-6 w-6 text-gray-700" />
         },
     ];
@@ -260,12 +244,12 @@ export default function ProfileDropDown({ isMobile }) {
         <div className='inline'>
             {
                 isMobile ? (
-                    <button onClick={() => setIsAccountSettingsOpen(!isAccountSettingsOpen)} className='flex flex-col items-center'>
+                    <button onClick={() => handleOpenModal(setIsAccountSettingsOpen)} className='flex flex-col items-center'>
                         <LuUserRound className='w-6 h-6 text-secondary' />
                         <span className='text-xs '>Profile</span>
                     </button>
                 ) : (
-                    <button className="p-3 rounded-full bg-tertiary hover:bg-secondary/50 transition-colors duration-200 focus:outline-none focus:ring-1 focus:ring-gray-300" onClick={handleClose}>
+                    <button className="p-3 rounded-full bg-tertiary hover:bg-secondary/50 transition-colors duration-200 focus:outline-none focus:ring-1 focus:ring-gray-300" onClick={handleDropdownClose}>
                         <LuUserRound className='w-6 h-6 text-secondary' />
                     </button>
                 )
@@ -285,17 +269,12 @@ export default function ProfileDropDown({ isMobile }) {
                                 <>
                                     {
                                         item.type === "button" ? (
-                                            <button onClick={() => {
-                                                item.handleClick();
-                                                setIsDropdownOpen(false);
-                                            }} className="px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-secondary flex gap-2 items-center w-full" role="menuitem">
+                                            <button onClick={() => item.handleClick()} className="px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-secondary flex gap-2 items-center w-full" role="menuitem">
                                                 <span>{item.name}</span>
                                             </button>
                                         ) : (
                                             <Link
-                                                onClick={() => {
-                                                    setIsDropdownOpen(false);
-                                                }}
+                                                onClick={() => handleCloseModal()}
                                                 href={item.path || "#"} className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-secondary" role="menuitem">
                                                 <span>{item.name}</span>
                                             </Link>
@@ -311,8 +290,8 @@ export default function ProfileDropDown({ isMobile }) {
                     </>
                 ) : (
                     <>
-                        <Link onClick={handleClose} href="/login" className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-secondary" role="menuitem">Login</Link>
-                        <Link onClick={handleClose} href="/signup" className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-secondary" role="menuitem">Sign up</Link>
+                        <Link onClick={handleDropdownClose} href="/login" className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-secondary" role="menuitem">Login</Link>
+                        <Link onClick={handleDropdownClose} href="/signup" className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-secondary" role="menuitem">Sign up</Link>
                     </>
                 )
             }
@@ -327,35 +306,35 @@ export default function ProfileDropDown({ isMobile }) {
             <Dropdown containerClassName="inline" isDropdownOpen={isDropdownOpen} placeholder={placeholder} contents={contents} contentsClassName={cn(isMobile ? "!bottom-[calc(100%+0.5rem)] !top-auto !-right-2 !left-auto" : "")} />
 
             {/* all modal for profile  */}
-            <Modal isLeft={false} isOpen={isOrdersOpen} setIsOpen={setIsOrdersOpen} title={"Orders"}>
+            <Modal isLeft={false} isOpen={isOrdersOpen} setIsOpen={() => handleCloseModal()} title={"Orders"}>
                 <OrderModalContents />
             </Modal>
-            <Modal isLeft={false} isOpen={isAccountSettingsOpen} setIsOpen={setIsAccountSettingsOpen} title={"Account Settings"}>
+            <Modal isLeft={false} isOpen={isAccountSettingsOpen} setIsOpen={() => handleCloseModal()} title={"Account Settings"}>
                 <AccountSettingsModalContents isMobile={isMobile} accountMenuItems={accountMenuItems} />
             </Modal>
-            <Modal isLeft={false} isOpen={isProductOpen} setIsOpen={setIsProductOpen} title={"My Products"}>
+            <Modal isLeft={false} isOpen={isProductOpen} setIsOpen={() => handleCloseModal()} title={"My Products"}>
                 <ProductsModalContents />
             </Modal>
-            <Modal isLeft={false} isOpen={isHelpOpen} setIsOpen={setIsHelpOpen} title={"Help"}>
+            <Modal isLeft={false} isOpen={isHelpOpen} setIsOpen={() => handleCloseModal()} title={"Help"}>
                 <HelpModalContents />
             </Modal>
-            <Modal isLeft={false} isOpen={isAccountInformationOpen} setIsOpen={setIsAccountInformationOpen} title={"Account Information"}>
+            <Modal isLeft={false} isOpen={isAccountInformationOpen} setIsOpen={() => handleCloseModal()} title={"Account Information"}>
                 <AccountInfoModalContents accountInfoItems={accountInfoItems} />
             </Modal>
-            <Modal isLeft={false} isOpen={isBecomeASellerOpen} setIsOpen={setIsBecomeASellerOpen} title={"Become a Seller"}>
+            <Modal isLeft={false} isOpen={isBecomeASellerOpen} setIsOpen={() => handleCloseModal()} title={"Become a Seller"}>
                 <BecomeASellerModalContents />
             </Modal>
 
 
 
             {/* account information modals */}
-            <Modal isLeft={false} isOpen={isPaymentOpen} setIsOpen={setIsPaymentOpen} title={"Payment Methods"}>
+            <Modal isLeft={false} isOpen={isPaymentOpen} setIsOpen={() => handleCloseModal()} title={"Payment Methods"}>
                 <PaymentModalContents />
             </Modal>
-            <Modal isLeft={false} isOpen={isMyOrdersOpen} setIsOpen={setIsMyOrdersOpen} title={"My Orders"}>
+            <Modal isLeft={false} isOpen={isMyOrdersOpen} setIsOpen={() => handleCloseModal()} title={"My Orders"}>
                 <MyOrderModalContents />
             </Modal>
-            <Modal isLeft={false} isOpen={isMyAddressOpen} setIsOpen={setIsMyAddressOpen} title={"My Address"}>
+            <Modal isLeft={false} isOpen={isMyAddressOpen} setIsOpen={() => handleCloseModal()} title={"My Address"}>
                 <AddressModalContents />
             </Modal>
         </div>
