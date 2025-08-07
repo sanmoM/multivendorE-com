@@ -2,7 +2,6 @@ import Image from 'next/image';
 import React from 'react'
 
 export default function ModalProductCard({ item }) {
-    console.log(item)
     return (
         <div className="flex items-center space-x-4">
             <Image
