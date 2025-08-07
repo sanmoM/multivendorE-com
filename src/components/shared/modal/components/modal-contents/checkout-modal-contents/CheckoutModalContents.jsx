@@ -9,7 +9,7 @@ const CheckoutModalContents = () => {
     const [isPaymentOpen, setIsPaymentOpen] = useState(false);
 
     return (
-        <div className="min-w-sm w-full h-full flex flex-col">
+        <div className="w-full h-full flex flex-col">
 
             <div className='space-y-8 grow'>
                 {/* Delivery Address Dropdown */}

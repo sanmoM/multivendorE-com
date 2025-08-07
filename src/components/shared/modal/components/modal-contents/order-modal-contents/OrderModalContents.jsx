@@ -33,7 +33,7 @@ export default function OrderModalContents() {
         },
     };
     return (
-        <div className="min-w-sm w-full space-y-8">
+        <div className="w-full space-y-8">
 
             {/* Main Order Details Section */}
             <div className="space-y-4">

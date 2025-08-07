@@ -16,7 +16,7 @@ export default function Modal({ isLeft, children, isOpen, setIsOpen, title }) {
                             <PrimaryTitle title={title} className={"w-full text-center"} />
                         </div>
                     </div>
-                    <div className='grow overflow-y-scroll hide-scrollbar px-6'>
+                    <div className='grow overflow-y-scroll hide-scrollbar px-6 min-w-[100vw] lg:min-w-lg w-fit'>
                         {children}
                     </div>
                 </div>

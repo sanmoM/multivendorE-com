@@ -3,6 +3,7 @@
 import Dropdown from '@/components/shared/dropdown/Dropdown';
 import Modal from '@/components/shared/modal/Modal';
 import AccountSettingsModalContents from '@/components/shared/modal/components/modal-contents/account-settings-modal-contents/AccountSettingsModalContents';
+import HelpModalContents from '@/components/shared/modal/components/modal-contents/help-modal-contents/HelpModalContents';
 import OrderModalContents from '@/components/shared/modal/components/modal-contents/order-modal-contents/OrderModalContents';
 import ProductsModalContents from '@/components/shared/modal/components/modal-contents/products-modal-contents/ProductsModalContents';
 import { setUser } from '@/lib/redux/features/userSlice';
@@ -10,6 +11,7 @@ import { cn } from '@/utils/cn';
 import Link from 'next/link';
 import { useState } from 'react';
 import { FaInbox } from 'react-icons/fa';
+import { FiHelpCircle } from "react-icons/fi";
 import { LuUserRound } from "react-icons/lu";
 import { RxExit } from "react-icons/rx";
 import { TbSitemap } from "react-icons/tb";
@@ -23,6 +25,8 @@ export default function ProfileDropDown({ isMobile }) {
     const [isOrdersOpen, setIsOrdersOpen] = useState(false);
     const [isAccountSettingsOpen, setIsAccountSettingsOpen] = useState(false);
     const [isProductOpen, setIsProductOpen] = useState(false);
+    const [isHelpOpen, setIsHelpOpen] = useState(false);
+    const [isAccountInformationOpen, setIsAccountInformationOpen] = useState(false);
 
     const handleLogout = () => {
         dispatch(setUser({ email: "" }))
@@ -33,6 +37,7 @@ export default function ProfileDropDown({ isMobile }) {
     }
 
 
+    // dropdown menu items
     const profileMenuItems = [
         {
             name: 'Account settings',
@@ -49,8 +54,14 @@ export default function ProfileDropDown({ isMobile }) {
             type: "button",
             handleClick: () => setIsProductOpen(true)
         },
+        {
+            name: 'Help',
+            type: "button",
+            handleClick: () => setIsHelpOpen(true)
+        },
     ];
 
+    // account modal menu items
     const accountMenuItems = [
         {
             category: 'Account',
@@ -63,6 +74,12 @@ export default function ProfileDropDown({ isMobile }) {
                             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"></path>
                         </svg>
                     ),
+                    handleClick: () => {
+                        setIsAccountSettingsOpen(false)
+                        setTimeout(() => {
+                            setIsAccountInformationOpen(true)
+                        }, 300);
+                    },
                 },
                 {
                     title: 'Notifications',
@@ -99,6 +116,19 @@ export default function ProfileDropDown({ isMobile }) {
                     },
                     icon: (
                         <FaInbox className="h-6 w-6 text-gray-700" />
+                    )
+                },
+                {
+                    title: 'Help',
+                    subtitle: 'Get help with your account',
+                    handleClick: () => {
+                        setIsAccountSettingsOpen(false)
+                        setTimeout(() => {
+                            setIsHelpOpen(true)
+                        }, 300);
+                    },
+                    icon: (
+                        <FiHelpCircle className="h-6 w-6 text-gray-700" />
                     )
                 },
             ]
@@ -143,6 +173,7 @@ export default function ProfileDropDown({ isMobile }) {
     ];
 
 
+    // dropdown placeholder
     const placeholder = (
         <div className='inline'>
             {
@@ -161,6 +192,7 @@ export default function ProfileDropDown({ isMobile }) {
     )
 
 
+    // dropdown contents
     const contents = (
         <div className="" role="menu" aria-orientation="vertical" aria-labelledby="options-menu">
             {
@@ -207,7 +239,11 @@ export default function ProfileDropDown({ isMobile }) {
 
     return (
         <div className='inline'>
+            {/* all dropdown contents */}
             <Dropdown containerClassName="inline" isDropdownOpen={isDropdownOpen} placeholder={placeholder} contents={contents} contentsClassName={cn(isMobile ? "!bottom-[calc(100%+0.5rem)] !top-auto !-right-2 !left-auto" : "")} />
+
+            {/* modals */}
+
             <Modal isLeft={false} isOpen={isOrdersOpen} setIsOpen={setIsOrdersOpen} title={"Orders"}>
                 <OrderModalContents />
             </Modal>
@@ -216,6 +252,12 @@ export default function ProfileDropDown({ isMobile }) {
             </Modal>
             <Modal isLeft={false} isOpen={isProductOpen} setIsOpen={setIsProductOpen} title={"My Products"}>
                 <ProductsModalContents />
+            </Modal>
+            <Modal isLeft={false} isOpen={isHelpOpen} setIsOpen={setIsHelpOpen} title={"Help"}>
+                <HelpModalContents />
+            </Modal>
+            <Modal isLeft={false} isOpen={isAccountInformationOpen} setIsOpen={setIsAccountInformationOpen} title={"Account Information"}>
+                <HelpModalContents />
             </Modal>
         </div>
     )
