@@ -204,6 +204,22 @@ export default function ProfileDropDown({ isMobile }) {
                 },
             ],
         },
+        {
+            category: '',
+            items: [
+                {
+                    title: 'Logout',
+                    handleClick: () => {
+                        handleLogout()
+                        handleCloseModal()
+                    },
+                    // subtitle: 'Version 1.2.3',
+                    icon: (
+                        <RxExit className="h-6 w-6 text-gray-700" />
+                    ),
+                },
+            ],
+        },
     ];
 
     // account information items

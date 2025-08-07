@@ -1,5 +1,6 @@
 "use client";
 import AuthTextInput from '@/components/auth/auth-inputs/auth-text-input/AuthTextInput';
+import Button from '@/components/shared/button/Button';
 import Container from '@/components/shared/container/Container';
 import CheckBoxWithLabel from '@/components/shared/inputs/check-box-with-label/CheckBoxWithLabel';
 import SectionTitle from '@/components/shared/section-title/SectionTitle';
@@ -70,13 +71,12 @@ export default function page() {
                             <AuthTextInput label="Confirm password" placeholder="Confirm password" value={confirmPassword} setValue={setConfirmPassword} isRequired type="password" />
                         </div>
 
-                        <button
+                        <Button
                             // onClick={handleSubmit}
                             type="submit"
-                            class="w-full py-3 bg-black text-white font-bold rounded-md text-sm mt-4"
-                        >
-                            SIGN UP
-                        </button>
+                            className="w-full py-3 bg-red-500 text-white font-bold rounded-md text-sm mt-4"
+                            text={"SIGN UP"}
+                        />
                     </form>
                     <div class="mt-6 text-sm">
                         <CheckBoxWithLabel label="By signing up, you agree to <a class=text-blue-500 href=''>Teams of Service</a> and <a class=text-blue-500 href=''>Privacy Policy</a>" checked={checked} setChecked={setChecked} />

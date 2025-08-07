@@ -1,5 +1,6 @@
 "use client";
 import AuthTextInput from '@/components/auth/auth-inputs/auth-text-input/AuthTextInput';
+import Button from '@/components/shared/button/Button';
 import Container from '@/components/shared/container/Container';
 import CheckBoxWithLabel from '@/components/shared/inputs/check-box-with-label/CheckBoxWithLabel';
 import { setUser } from '@/lib/redux/features/userSlice';
@@ -59,13 +60,12 @@ export default function page() {
                     </div>
                     <CheckBoxWithLabel label="Remember me" checked={remember} setChecked={setRemember} />
 
-                    <button
+                    <Button
                         // onClick={handleSubmit}
                         type="submit"
-                        class="w-full py-3 bg-black text-white font-bold rounded-md text-sm"
-                    >
-                        SIGN IN
-                    </button>
+                        className="w-full py-3 bg-red-500 text-white font-bold rounded-md text-sm"
+                        text={"SIGN IN"}
+                    />
                 </form>
 
                 <div class="mt-6 text-sm">
