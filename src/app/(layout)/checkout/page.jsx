@@ -1,6 +1,6 @@
 "use client";
 
-import OrderSummary from '@/components/cart/oredr-summary/OrderSummary';
+// import OrderSummary from '@/components/cart/oredr-summary/OrderSummary';
 import CheckoutCard from '@/components/checkout/checkout-card/CheckoutCard';
 import CheckoutForm from '@/components/checkout/checkout-form/CheckoutForm';
 import { useSelector } from 'react-redux';
@@ -179,7 +179,7 @@ export default function page() {
                 <CheckoutForm />
             </div>
             {/* order summary */}
-            <OrderSummary items={cartItems} />
+            {/* <OrderSummary items={cartItems} /> */}
         </div>
     )
 }

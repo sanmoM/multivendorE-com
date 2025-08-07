@@ -5,6 +5,7 @@ import Modal from '@/components/shared/modal/Modal';
 import AccountInfoModalContents from '@/components/shared/modal/components/modal-contents/account-info-modal-contents/AccountInfoModalContents';
 import MyOrderModalContents from '@/components/shared/modal/components/modal-contents/account-info-modal-contents/account-info-inner-modal-contents/my-order-modal-contents/MyOrderModalContents';
 import PaymentModalContents from '@/components/shared/modal/components/modal-contents/account-info-modal-contents/account-info-inner-modal-contents/payment-modal-contents/PaymentModalContents';
+import AddressModalContents from '@/components/shared/modal/components/modal-contents/account-info-modal-contents/address-modal-contents/AddressModalContents';
 import AccountSettingsModalContents from '@/components/shared/modal/components/modal-contents/account-settings-modal-contents/AccountSettingsModalContents';
 import BecomeASellerModalContents from '@/components/shared/modal/components/modal-contents/become-a-seller-modal-contents/BecomeASellerModalContents';
 import HelpModalContents from '@/components/shared/modal/components/modal-contents/help-modal-contents/HelpModalContents';
@@ -19,6 +20,7 @@ import { FaInbox } from 'react-icons/fa';
 import { FiHelpCircle } from "react-icons/fi";
 import { IoIosCard } from "react-icons/io";
 import { LuUserRound } from "react-icons/lu";
+import { MdOutlineHomeWork } from "react-icons/md";
 import { RiInformation2Line } from "react-icons/ri";
 import { RxExit } from "react-icons/rx";
 import { TbSitemap } from "react-icons/tb";
@@ -37,6 +39,7 @@ export default function ProfileDropDown({ isMobile }) {
     const [isPaymentOpen, setIsPaymentOpen] = useState(false);
     const [isMyOrdersOpen, setIsMyOrdersOpen] = useState(false);
     const [isBecomeASellerOpen, setIsBecomeASellerOpen] = useState(false);
+    const [isMyAddressOpen, setIsMyAddressOpen] = useState(false);
 
     const handleLogout = () => {
         dispatch(setUser({ email: "" }))
@@ -195,6 +198,62 @@ export default function ProfileDropDown({ isMobile }) {
         },
     ];
 
+    // account information items
+    const accountInfoItems = [
+        {
+            name: 'Personal Information',
+            subtitle: 'Manage your personal information',
+            type: "button",
+            handleClick: () => {
+
+                setIsAccountSettingsOpen(false)
+                setTimeout(() => {
+                    setIsPaymentOpen(true)
+                }, 300);
+            },
+            icon: <RiInformation2Line className="h-6 w-6 text-gray-700" />
+        },
+        {
+            name: 'My Address',
+            subtitle: 'Manage your address',
+            type: "button",
+            handleClick: () => {
+
+                setIsAccountSettingsOpen(false)
+                setTimeout(() => {
+                    setIsMyAddressOpen(true)
+                }, 300);
+            },
+            icon: <MdOutlineHomeWork className="h-6 w-6 text-gray-700" />
+        },
+        {
+            name: 'My Orders',
+            subtitle: 'View your orders',
+            type: "button",
+            handleClick: () => {
+
+                setIsAccountInformationOpen(false)
+                setTimeout(() => {
+                    setIsMyOrdersOpen(true)
+                }, 300);
+            },
+            icon: <TbSitemap className="h-6 w-6 text-gray-700" />
+        },
+        {
+            name: 'Payment Methods',
+            subtitle: 'Manage your payment methods',
+            type: "button",
+            handleClick: () => {
+
+                setIsAccountInformationOpen(false)
+                setTimeout(() => {
+                    setIsPaymentOpen(true)
+                }, 300);
+            },
+            icon: <IoIosCard className="h-6 w-6 text-gray-700" />
+        },
+    ];
+
 
     // dropdown placeholder
     const placeholder = (
@@ -260,48 +319,7 @@ export default function ProfileDropDown({ isMobile }) {
         </div>
     )
 
-    // account information items
-    const accountInfoItems = [
-        {
-            name: 'Personal Information',
-            subtitle: 'Manage your personal information',
-            type: "button",
-            handleClick: () => {
-                console.log("clicked")
-                setIsAccountSettingsOpen(false)
-                setTimeout(() => {
-                    setIsPaymentOpen(true)
-                }, 300);
-            },
-            icon: <RiInformation2Line className="h-6 w-6 text-gray-700" />
-        },
-        {
-            name: 'My Orders',
-            subtitle: 'View your orders',
-            type: "button",
-            handleClick: () => {
-                console.log("clicked")
-                setIsAccountInformationOpen(false)
-                setTimeout(() => {
-                    setIsMyOrdersOpen(true)
-                }, 300);
-            },
-            icon: <TbSitemap className="h-6 w-6 text-gray-700" />
-        },
-        {
-            name: 'Payment Methods',
-            subtitle: 'Manage your payment methods',
-            type: "button",
-            handleClick: () => {
-                console.log("clicked")
-                setIsAccountInformationOpen(false)
-                setTimeout(() => {
-                    setIsPaymentOpen(true)
-                }, 300);
-            },
-            icon: <IoIosCard className="h-6 w-6 text-gray-700" />
-        },
-    ];
+
 
     return (
         <div className='inline'>
@@ -336,6 +354,9 @@ export default function ProfileDropDown({ isMobile }) {
             </Modal>
             <Modal isLeft={false} isOpen={isMyOrdersOpen} setIsOpen={setIsMyOrdersOpen} title={"My Orders"}>
                 <MyOrderModalContents />
+            </Modal>
+            <Modal isLeft={false} isOpen={isMyAddressOpen} setIsOpen={setIsMyAddressOpen} title={"My Address"}>
+                <AddressModalContents />
             </Modal>
         </div>
     )
