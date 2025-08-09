@@ -56,7 +56,7 @@ const SellerStatistics = () => {
     const pathData = getWavePath(salesData);
 
     return (
-        <div className=" space-y-6 lg:space-y-10 my-6 lg:my-12">
+        <div className=" space-y-6 lg:space-y-10">
 
             {/* Top Stats */}
             <div className="grid grid-cols-2 lg:grid-cols-3 gap-4">
@@ -85,17 +85,17 @@ const SellerStatistics = () => {
                     </div>
                 </div>
                 {/* Wave-shaped graph */}
-                <div className="h-40 relative mb-4 border !border-secondary rounded-xl">
+                <div className="h-40 lg:h-96 relative mb-4 border !border-secondary rounded-xl">
                     <svg viewBox="0 0 100 40" preserveAspectRatio="none" className="absolute top-0 left-0 w-full h-full">
                         <path
                             d={pathData}
                             fill="none"
                             stroke="#856161"
-                            strokeWidth="0.5"
+                            strokeWidth="0.2"
                         />
                     </svg>
                 </div>
-                <div className="flex justify-between text-xs text-gray-500">
+                <div className="flex justify-between text-xs lg:text-base text-secondary">
                     <span>1W</span>
                     <span>2W</span>
                     <span>3W</span>

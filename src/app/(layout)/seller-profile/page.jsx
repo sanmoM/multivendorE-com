@@ -15,7 +15,7 @@ import { TfiEmail } from 'react-icons/tfi';
 
 export default function page() {
     return (
-        <Container>
+        <Container className={"  space-y-6 lg:space-y-10"}>
             <div className="flex flex-col items-center text-center pb-6">
                 <div className="w-24 h-24 rounded-full overflow-hidden mb-3 shadow-md">
                     <Image
@@ -39,10 +39,10 @@ export default function page() {
                 </p>
             </div>
 
-            <div className='space-y-4 lg:space-y-6 my-6 lg:my-12 lg:w-fit'>
-                <ItemCard titleClassName={"text-xl lg:text-2xl"} subtitleClassName={"text-lg lg:text-xl"} item={{ title: "Address", icon: <IoLocationOutline className='w-6 h-6 lg:w-10 lg:h-10 text-primary' />, subtitle: "123 Main Street, Anytown", handleClick: () => { } }} />
-                <ItemCard titleClassName={"text-xl lg:text-2xl"} subtitleClassName={"text-lg lg:text-xl"} item={{ title: "Phone", icon: <BsTelephone className='w-6 h-6 lg:w-10 lg:h-7 text-primary' />, subtitle: "+1 (555) 123-4567", handleClick: () => { } }} />
-                <ItemCard titleClassName={"text-xl lg:text-2xl"} subtitleClassName={"text-lg lg:text-xl"} item={{ title: "Email", icon: <TfiEmail className='w-6 h-6 lg:w-10 lg:h-7 text-primary' />, subtitle: "sweetdelights@email.com", handleClick: () => { } }} />
+            <div className='space-y-4 lg:space-y-6 my-6 lg:my-12 lg:w-fit hover:bg-transparent'>   
+                <ItemCard titleClassName={"text-xl lg:text-2xl"} containerClassName={"hover:bg-transparent"} subtitleClassName={"text-lg lg:text-xl"} item={{ title: "Address", icon: <IoLocationOutline className='w-6 h-6 lg:w-10 lg:h-10 text-primary' />, subtitle: "123 Main Street, Anytown", handleClick: () => { } }} />
+                <ItemCard titleClassName={"text-xl lg:text-2xl"} containerClassName={"hover:bg-transparent"} subtitleClassName={"text-lg lg:text-xl"} item={{ title: "Phone", icon: <BsTelephone className='w-6 h-6 lg:w-10 lg:h-7 text-primary' />, subtitle: "+1 (555) 123-4567", handleClick: () => { } }} />
+                <ItemCard titleClassName={"text-xl lg:text-2xl"} containerClassName={"hover:bg-transparent"} subtitleClassName={"text-lg lg:text-xl"} item={{ title: "Email", icon: <TfiEmail className='w-6 h-6 lg:w-10 lg:h-7 text-primary' />, subtitle: "sweetdelights@email.com", handleClick: () => { } }} />
             </div>
 
             <Items title={"Products"} hasLoadMoreBtn>

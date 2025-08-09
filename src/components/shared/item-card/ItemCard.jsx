@@ -1,11 +1,11 @@
 import { cn } from '@/utils/cn'
 import React from 'react'
 
-export default function ItemCard({ item, titleClassName, subtitleClassName }) {
+export default function ItemCard({ item, titleClassName, subtitleClassName, containerClassName }) {
     return (
         <div
             onClick={item.handleClick || null}
-            className="flex items-center space-x-4 hover:bg-gray-50 rounded-lg cursor-pointer transition-colors duration-200"
+            className={cn("flex items-center space-x-4 hover:bg-gray-50 rounded-lg cursor-pointer transition-colors duration-200", containerClassName)}
         >
             <div className="p-3 bg-gray-100 rounded-lg">
                 {item.icon}

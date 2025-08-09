@@ -37,7 +37,7 @@ export default function Items({ title, desktopView, mobileView, hasLoadMoreBtn =
                 {children}
             </div>
             {
-                hasLoadMoreBtn && <LoadMoreBtn className='mt-6 lg:mt-10 hidden md:block' />
+                hasLoadMoreBtn && <LoadMoreBtn className='mt-6 lg:mt-10 block' />
             }
         </div>
     )
