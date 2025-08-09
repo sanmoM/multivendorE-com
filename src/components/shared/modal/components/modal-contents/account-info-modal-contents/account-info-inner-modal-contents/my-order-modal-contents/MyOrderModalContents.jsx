@@ -62,23 +62,6 @@ const MyOrderModalContents = () => {
             <div className="space-y-6">
                 {orders[activeTab]?.map((order, index) => (
                     <div key={index} className="flex items-center justify-between cursor-pointer">
-                        {/* <div className="flex items-center space-x-4">
-                            <Image
-                                src={order.image}
-                                alt={`Order ${order.orderNumber}`}
-                                className="w-16 h-16 rounded-md object-cover flex-shrink-0"
-                                onError={(e) => { e.target.onerror = null; e.target.src = "https://placehold.co/64x64/E0E0E0/808080?text=Item"; }}
-                                width={64}
-                                height={64}
-                            />
-                            <div>
-                                <p className="text-lg font-semibold text-gray-800">
-                                    Order number: {order.orderNumber}
-                                </p>
-                                <p className="text-sm text-gray-500">Order date: {order.orderDate}</p>
-                                <p className="text-sm font-semibold text-gray-800">Total: ${order.total}</p>
-                            </div>
-                        </div> */}
                         <ModalProductCard item={{ image: order.image, name: `Order ${order.orderNumber}`, price: order.total, quantity: order.orderNumber }} />
                         {arrowIcon}
                     </div>

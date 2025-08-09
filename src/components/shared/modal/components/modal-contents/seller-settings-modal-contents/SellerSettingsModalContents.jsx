@@ -1,12 +1,12 @@
 import ItemCard from '../../../../item-card/ItemCard';
 
 export default function SellerSettingsModalContents({ isMobile, sellerSettingsItems }) {
-    console.log(sellerSettingsItems)
+    // console.log(sellerSettingsItems)
     return (
         <div className="w-full space-y-6">
             <div className="space-y-4">
                 {sellerSettingsItems?.map((item, itemIndex) => (
-                    <ItemCard item={item} />
+                    <ItemCard item={item} key={itemIndex} />
                 ))}
             </div>
         </div >

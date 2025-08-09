@@ -49,8 +49,8 @@ export default function page() {
                 </div>
                 <CustomSlider desktopView={5} mobileView={2} paddingDesktop={70} paddingMobile={30} >
                     {
-                        products?.map((product) => (
-                            <Card key={product.id} item={{ image: product?.image, name: product?.name, subtitle: `$${product?.price}` }} containerClassName={"px-2"} />
+                        products?.map((product, index) => (
+                            <Card key={index} item={{ image: product?.image, name: product?.name, subtitle: `$${product?.price}` }} containerClassName={"px-2"} />
                         ))
                     }
                 </CustomSlider>

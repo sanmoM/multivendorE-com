@@ -7,7 +7,7 @@ export default function Logo({ className }) {
         <Image
             src="/images/logo.jpg"
             alt="Logo"
-            class={cn(className)}
+            className={cn(className)}
             width={150}
             height={150}
         />

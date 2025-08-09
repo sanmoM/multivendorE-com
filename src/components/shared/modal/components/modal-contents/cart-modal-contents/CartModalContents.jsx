@@ -64,8 +64,8 @@ const CartModalContents = ({ setIsCartOpen, setIsCheckoutOpen }) => {
 
             {/* Product Items */}
             <div className="grow space-y-4 lg:space-y-6">
-                {cartItems.map((item) => (
-                    <CartCard item={item} />
+                {cartItems.map((item, index) => (
+                    <CartCard item={item} key={index} />
                 ))}
             </div>
 

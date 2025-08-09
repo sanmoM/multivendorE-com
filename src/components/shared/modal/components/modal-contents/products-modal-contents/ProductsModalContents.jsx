@@ -8,8 +8,8 @@ export default function ProductsModalContents() {
             <PrimaryTitle title={"Products"} />
             <div className="w-full space-y-6">
                 {
-                    products?.map((product) => (
-                        <HorizontalCard key={product.id} item={{ id: product.id, image: product?.image, title: product?.name, text2: "100+ sold" }} />
+                    products?.map((product, index) => (
+                        <HorizontalCard key={index} item={{ id: product.id, image: product?.image, title: product?.name, text2: "100+ sold" }} />
                     ))
                 }
             </div>

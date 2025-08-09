@@ -109,7 +109,7 @@ const SellerStatistics = () => {
                 <SectionTitle title={"Top Selling Products"} className={"mb-4"} />
                 <div className="space-y-4">
                     {topSellingProducts.map((product, index) => (
-                        <HorizontalCard item={{ image: product.image, title: product.name, text2: product.category }} />
+                        <HorizontalCard item={{ image: product.image, title: product.name, text2: product.category }} key={index} />
                     ))}
                 </div>
             </section>

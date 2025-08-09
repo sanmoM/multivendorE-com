@@ -1,10 +1,10 @@
 import { Poppins } from "next/font/google";
-import "./globals.css";
 import "./custom.css";
+import "./globals.css";
 import "./main.css";
 // import "./output.css";
-import Script from 'next/script'
 import StoreProvider from "@/lib/redux/StoreProvider";
+import { Toaster } from "react-hot-toast";
 
 
 // ✅ Correct place to specify weights
@@ -41,6 +41,7 @@ export default function RootLayout({ children }) {
       <body className="bg-white">
         <StoreProvider>
           {children}
+          <Toaster />
         </StoreProvider>
       </body>
     </html>

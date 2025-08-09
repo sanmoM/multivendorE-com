@@ -46,7 +46,7 @@ export default function page() {
                     <div className="w-full">
                         {
                             cartItems.map((item, index) => (
-                                <CheckoutCard item={item} />
+                                <CheckoutCard item={item} key={index} />
                             ))
                         }
                     </div>

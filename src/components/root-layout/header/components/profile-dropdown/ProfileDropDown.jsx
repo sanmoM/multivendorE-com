@@ -79,7 +79,7 @@ export default function ProfileDropDown({ isMobile }) {
         }, 300);
     }
 
-    console.log("modalStack", modalStack)
+    // console.log("modalStack", modalStack)
     const handleOpenModal = (setFun) => {
         if (modalStack.length > 0) {
             modalStack[modalStack.length - 1](prev => !prev)
@@ -336,11 +336,15 @@ export default function ProfileDropDown({ isMobile }) {
                                 <>
                                     {
                                         item.type === "button" ? (
-                                            <button onClick={() => item.handleClick()} className="px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-secondary flex gap-2 items-center w-full" role="menuitem">
+                                            <button
+                                                key={index}
+                                                onClick={() => item.handleClick()} className="px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-secondary flex gap-2 items-center w-full" role="menuitem">
                                                 <span>{item.name}</span>
                                             </button>
                                         ) : (
                                             <Link
+                                                key={index}
+
                                                 onClick={() => handleCloseModal()}
                                                 href={item.path || "#"} className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-secondary" role="menuitem">
                                                 <span>{item.name}</span>

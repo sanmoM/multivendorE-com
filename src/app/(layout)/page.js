@@ -18,15 +18,15 @@ export default function Home() {
       <Container className={""}>
         <FeaturedItems title={"Featured Products"} desktopView={5} mobileView={3} >
           {
-            products?.map((product) => (
-              <Card2 key={product.id} item={{ image: product?.image, name: product?.name, subtitle: `$${product?.price}` }} containerClassName={"px-2"} />
+            products?.map((product, index) => (
+              <Card2 key={index} item={{ image: product?.image, name: product?.name, subtitle: `$${product?.price}` }} containerClassName={"px-2"} />
             ))
           }
         </FeaturedItems>
         <Items title={"More Featured Products"} desktopView={5} mobileView={3} hasLoadMoreBtn >
           {
-            products?.map((product) => (
-              <Card2 key={product.id} item={{ image: product?.image, name: product?.name, subtitle: `$${product?.price}` }} containerClassName={"px-2"} />
+            products?.map((product, index) => (
+              <Card2 key={index} item={{ image: product?.image, name: product?.name, subtitle: `$${product?.price}` }} containerClassName={"px-2"} />
             ))
           }
         </Items>

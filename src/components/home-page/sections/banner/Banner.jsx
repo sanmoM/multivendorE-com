@@ -9,7 +9,7 @@ export default function Banner() {
                 width={400}
                 className="w-full rounded-md aspect-[2/1] lg:aspect-[3/1] object-cover"
                 src={"/images/home/banner.svg"}
-                alt=""
+                alt="Banner"
             />
         </div>
     )

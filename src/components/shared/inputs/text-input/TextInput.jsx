@@ -1,12 +1,12 @@
 import { cn } from '@/utils/cn'
 import React from 'react'
 
-export default function TextInput({ label, placeholder, theme = "light", value, setValue, type = "text", variant, labelClass, inputClass, className, isRequired = false }) {
+export default function TextInput({ label, placeholder, theme = "light", value, setValue, type = "text", variant, labelClass, inputClass, className, isRequired = false, autoComplete="off" }) {
     return (
         <div className={cn("flex flex-col gap-2", className)}>
             {
                 label && (
-                    <label for="fname" className={cn("text-[16px] max-sm:text-[14px]", variant === "small" && "text-sm", labelClass)}
+                    <label htmlFor="fname" className={cn("text-[16px] max-sm:text-[14px]", variant === "small" && "text-sm", labelClass)}
                         dangerouslySetInnerHTML={{ __html: label }}
                     ></label>
                 )
@@ -16,7 +16,8 @@ export default function TextInput({ label, placeholder, theme = "light", value, 
                 value={value}
                 onChange={(e) => setValue(e.target.value)}
                 name="fname"
-                id="fname"
+                // id="fname"
+                autoComplete={autoComplete}
                 placeholder={placeholder}
                 required={isRequired}
                 className={cn(`w-full px-5 py-3 border rounded-lg shadow-sm max-sm:text-sm bg-tertiary placeholder:text-secondary focus:outline-1 outline-secondary`, variant === "small" && "text-sm py-2", variant === "medium" && "py-2.5", inputClass)}

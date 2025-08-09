@@ -15,7 +15,7 @@ export default function AddressTab() {
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        console.log(country, village, thana, district, division, postcode);
+        // console.log(country, village, thana, district, division, postcode);
     };
     return (
         <div class="w-full">

@@ -39,8 +39,8 @@ const BottomNavbar = ({ setIsCartOpen }) => {
                 <div className="grid grid-cols-4 place-items-center items-center text-secondary">
                     {navItems.map((item, index) => (
                         <button
-                            {...item.type === "button" && { onClick: item.handleClick }}
                             key={index}
+                            {...item.type === "button" && { onClick: item.handleClick }}
                             className={`flex flex-col items-center p-2 rounded-md transition-colors duration-200 ${item.active && 'text-primary font-semibold'}`}
                         >
                             <div className={`mb-1 ${item.active && 'text-primary font-semibold'}`}>{item.icon}</div>

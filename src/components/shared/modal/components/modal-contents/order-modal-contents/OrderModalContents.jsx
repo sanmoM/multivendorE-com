@@ -73,8 +73,8 @@ export default function OrderModalContents() {
 
             {/* Order Items Section */}
             <div className="space-y-6">
-                {orderDetails.orderItems.map(item => (
-                    <ModalProductCard item={{ image: item.image, name: item.product, price: item.price, quantity: item.product }} />
+                {orderDetails.orderItems.map((item, index) => (
+                    <ModalProductCard item={{ image: item.image, name: item.product, price: item.price, quantity: item.product }} key={index} />
                 ))}
             </div>
 
