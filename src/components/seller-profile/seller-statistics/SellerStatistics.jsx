@@ -1,6 +1,6 @@
-import Card from '@/components/shared/card/Card';
 import HorizontalCard from '@/components/shared/horizontal-card/HorizontalCard';
-import React from 'react';
+import RatingStars from '@/components/shared/rating-stars/RatingStars';
+import SectionTitle from '@/components/shared/section-title/SectionTitle';
 
 const SellerStatistics = () => {
     const stats = [
@@ -56,12 +56,12 @@ const SellerStatistics = () => {
     const pathData = getWavePath(salesData);
 
     return (
-        <div className=" space-y-6 my-6 lg:my-12">
+        <div className=" space-y-6 lg:space-y-10 my-6 lg:my-12">
 
             {/* Top Stats */}
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+            <div className="grid grid-cols-2 lg:grid-cols-3 gap-4">
                 {stats.map((stat, index) => (
-                    <div key={index} className="bg-white rounded-lg shadow-sm p-5 border border-gray-200">
+                    <div key={index} className="rounded-lg shadow-sm p-5 border !border-secondary">
                         <h3 className="text-sm font-medium text-gray-500 mb-1">{stat.label}</h3>
                         <p className="text-2xl font-bold text-gray-900">{stat.value}</p>
                         <p className={`text-xs mt-1 ${stat.trend.startsWith('+') ? 'text-green-600' : 'text-red-600'}`}>
@@ -72,28 +72,21 @@ const SellerStatistics = () => {
             </div>
 
             {/* Sales Trend */}
-            {/* Sales Trend */}
-            <section className="bg-white rounded-lg shadow-sm p-5 border border-gray-200">
-                <h2 className="text-xl font-semibold text-gray-900 mb-4">Sales Trend</h2>
+            <section className="">
+                <SectionTitle title={"Sales Trend"} className={"mb-4"} />
                 <div className="flex items-center justify-between mb-4">
                     <div>
-                        <p className="text-2xl font-bold text-gray-900">
+                        <p className="lg:text-lg font-medium text-gray-900">
                             $12,500
                         </p>
-                        <p className="text-sm text-gray-500">
+                        <p className="text-sm text-secondary">
                             Last 30 Days <span className="text-green-600">+12%</span>
                         </p>
                     </div>
                 </div>
                 {/* Wave-shaped graph */}
-                <div className="h-40 relative mb-4">
+                <div className="h-40 relative mb-4 border !border-secondary rounded-xl">
                     <svg viewBox="0 0 100 40" preserveAspectRatio="none" className="absolute top-0 left-0 w-full h-full">
-                        {/* This is the filled area under the curve */}
-                        {/* <path
-                                d={`${pathData} L 100,40 L 0,40 Z`}
-                                fill="#f3f4f6"
-                            /> */}
-                        {/* This is the line of the curve */}
                         <path
                             d={pathData}
                             fill="none"
@@ -111,38 +104,26 @@ const SellerStatistics = () => {
             </section>
 
             {/* Top Selling Products */}
-            <section className="bg-white rounded-lg shadow-sm p-5 border border-gray-200">
-                <h2 className="text-xl font-semibold text-gray-900 mb-4">Top Selling Products</h2>
+            <section className="">
+                {/* <h2 className="text-xl font-semibold text-gray-900 mb-4">Top Selling Products</h2> */}
+                <SectionTitle title={"Top Selling Products"} className={"mb-4"} />
                 <div className="space-y-4">
                     {topSellingProducts.map((product, index) => (
-                        // <div key={index} className="flex items-center space-x-4">
-                        //     <img
-                        //         src={product.image}
-                        //         alt={product.name}
-                        //         className="w-12 h-12 rounded-lg object-cover flex-shrink-0"
-                        //         onError={(e) => { e.target.onerror = null; e.target.src = "https://placehold.co/48x48/E0E0E0/808080?text=Product"; }}
-                        //     />
-                        //     <div className="flex-grow">
-                        //         <p className="text-base font-medium text-gray-900">{product.name}</p>
-                        //         <p className="text-sm text-gray-500">{product.category}</p>
-                        //     </div>
-                        // </div>
-                        // <Card item={{ image: product.image, name: product.name, subtitle: product.category }} />
                         <HorizontalCard item={{ image: product.image, title: product.name, text2: product.category }} />
                     ))}
                 </div>
             </section>
 
             {/* Customer Reviews */}
-            <section className="bg-white rounded-lg shadow-sm p-5 border border-gray-200">
-                <h2 className="text-xl font-semibold text-gray-900 mb-4">Customer Reviews</h2>
+            <section className="">
+                <SectionTitle title={"Customer Reviews"} className={"mb-4"} />
                 <div className="flex items-start space-x-6 mb-4">
-                    <div className="flex flex-col items-center flex-shrink-0">
+                    <div className="flex flex-col items-center flex-shrink-0 gap-2">
                         <p className="text-5xl font-bold text-gray-900">4.6</p>
                         <div className="flex text-yellow-400 text-sm">
-                            <span>★</span><span>★</span><span>★</span><span>★</span><span className="text-gray-300">★</span>
+                            <RatingStars />
                         </div>
-                        <p className="text-sm text-gray-500 mt-1">150 reviews</p>
+                        <p className="text-sm lg:text-lg text-primary font-semibold">150 reviews</p>
                     </div>
                     <div className="flex-grow space-y-2">
                         {reviewBreakdown.map((item, index) => (

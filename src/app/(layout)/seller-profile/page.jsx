@@ -7,10 +7,11 @@ import ItemCard from '@/components/shared/item-card/ItemCard';
 import Items from '@/components/shared/items/Items';
 import SectionTitle from '@/components/shared/section-title/SectionTitle';
 import PrimaryTitle from '@/components/shared/title/PrimaryTitle';
-import SecondaryTitle from '@/components/shared/title/SecondaryTitle';
 import { products } from '@/data';
 import Image from 'next/image';
+import { BsTelephone } from 'react-icons/bs';
 import { IoLocationOutline } from 'react-icons/io5';
+import { TfiEmail } from 'react-icons/tfi';
 
 export default function page() {
     return (
@@ -40,8 +41,8 @@ export default function page() {
 
             <div className='space-y-4 lg:space-y-6 my-6 lg:my-12 lg:w-fit'>
                 <ItemCard titleClassName={"text-xl lg:text-2xl"} subtitleClassName={"text-lg lg:text-xl"} item={{ title: "Address", icon: <IoLocationOutline className='w-6 h-6 lg:w-10 lg:h-10 text-primary' />, subtitle: "123 Main Street, Anytown", handleClick: () => { } }} />
-                <ItemCard titleClassName={"text-xl lg:text-2xl"} subtitleClassName={"text-lg lg:text-xl"} item={{ title: "Phone", icon: <IoLocationOutline className='w-6 h-6 lg:w-10 lg:h-10 text-primary' />, subtitle: "+1 (555) 123-4567", handleClick: () => { } }} />
-                <ItemCard titleClassName={"text-xl lg:text-2xl"} subtitleClassName={"text-lg lg:text-xl"} item={{ title: "Email", icon: <IoLocationOutline className='w-6 h-6 lg:w-10 lg:h-10 text-primary' />, subtitle: "sweetdelights@email.com", handleClick: () => { } }} />
+                <ItemCard titleClassName={"text-xl lg:text-2xl"} subtitleClassName={"text-lg lg:text-xl"} item={{ title: "Phone", icon: <BsTelephone className='w-6 h-6 lg:w-10 lg:h-7 text-primary' />, subtitle: "+1 (555) 123-4567", handleClick: () => { } }} />
+                <ItemCard titleClassName={"text-xl lg:text-2xl"} subtitleClassName={"text-lg lg:text-xl"} item={{ title: "Email", icon: <TfiEmail className='w-6 h-6 lg:w-10 lg:h-7 text-primary' />, subtitle: "sweetdelights@email.com", handleClick: () => { } }} />
             </div>
 
             <Items title={"Products"} hasLoadMoreBtn>
