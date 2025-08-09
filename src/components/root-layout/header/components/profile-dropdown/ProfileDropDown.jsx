@@ -397,7 +397,7 @@ export default function ProfileDropDown({ isMobile }) {
                 <SellerSettingsModalContents handleCloseModal={handleCloseModal} isMobile={isMobile} sellerSettingsItems={sellerSettingsItems} />
             </Modal>
             <Modal isLeft={false} isOpen={isPromotionOpen} setIsOpen={() => handleCloseModal()} title={"Create Promotion"}>
-                <PromotionModalContents />
+                <PromotionModalContents handleCloseModal={handleCloseAllModals} />
             </Modal>
 
 

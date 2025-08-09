@@ -5,6 +5,7 @@ import { IoMdNotificationsOutline } from "react-icons/io";
 import { IoCartOutline } from "react-icons/io5";
 import NavbarSearchbar from '../navbar-searchbar/NavbarSearchbar';
 import ProfileDropDown from '../profile-dropdown/ProfileDropDown';
+import Logo from '@/components/shared/logo/Logo';
 
 export default function DesktopNavbar({ setIsCartOpen }) {
     return (
@@ -13,16 +14,7 @@ export default function DesktopNavbar({ setIsCartOpen }) {
             <div className="flex items-center space-x-14">
                 {/* Logo */}
                 <Link href="/" className="flex items-center space-x-2 text-primary text-xl font-bold">
-                    {/* Star/Sparkle Icon */}
-                    <svg
-                        className="h-6 w-6 text-gray-800"
-                        fill="currentColor"
-                        viewBox="0 0 24 24"
-                        xmlns="http://www.w3.org/2000/svg"
-                    >
-                        <path d="M11.049 2.927c.3-.921 1.603-.921 1.902 0l1.519 4.674a1 1 0 00.95.691h4.915c.969 0 1.371 1.24.588 1.81l-3.976 2.888a1 1 0 00-.363 1.118l1.518 4.674c.3.921-.755 1.688-1.538 1.118l-3.976-2.888a1 1 0 00-1.176 0l-3.976 2.888c-.783.57-1.838-.197-1.538-1.118l1.518-4.674a1 1 0 00-.363-1.118L2.924 10.102c-.783-.57-.381-1.81.588-1.81h4.915a1 1 0 00.95-.691l1.519-4.674z"></path>
-                    </svg>
-                    <span>Sakhipur Bazar</span>
+                    <Logo className={" lg:w-14 lg:h-14 text-primary"} />
                 </Link>
                 {/* Navigation Links */}
                 <nav className="hidden md:flex space-x-8 text-gray-700 text-base">

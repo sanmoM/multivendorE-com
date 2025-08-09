@@ -3,7 +3,7 @@ import TextInput from '@/components/shared/inputs/text-input/TextInput';
 import PrimaryTitle from '@/components/shared/title/PrimaryTitle';
 import React, { useState } from 'react';
 
-const PromotionModalContents = () => {
+const PromotionModalContents = ({ handleCloseModal }) => {
     const [discountType, setDiscountType] = useState('Percentage');
     const [discountValue, setDiscountValue] = useState('');
     const [selectedProducts, setSelectedProducts] = useState('');
@@ -16,7 +16,6 @@ const PromotionModalContents = () => {
 
                 {/* Discount Type */}
                 <div>
-                    {/* <h2 className="text-xl font-semibold mb-4">Discount type</h2> */}
                     <PrimaryTitle title={"Discount type"} className={"mb-4"} />
                     <div className="flex space-x-2">
                         <button
@@ -65,7 +64,7 @@ const PromotionModalContents = () => {
                 </div>
 
             </div>
-            <Button text={"Create Promotion"} className={"bg-red-600 text-white w-full"} />
+            <Button text={"Create Promotion"} className={"bg-red-600 text-white w-full"} onClick={() => handleCloseModal()} />
         </div>
     );
 };
