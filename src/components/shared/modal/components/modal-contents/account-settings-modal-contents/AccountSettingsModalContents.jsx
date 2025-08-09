@@ -2,7 +2,6 @@ import PrimaryTitle from '@/components/shared/title/PrimaryTitle';
 import ItemCard from '../../../../item-card/ItemCard';
 
 export default function AccountSettingsModalContents({ isMobile, accountMenuItems }) {
-
     return (
         <div className="w-full space-y-6">
             {accountMenuItems.map((category, index) => (

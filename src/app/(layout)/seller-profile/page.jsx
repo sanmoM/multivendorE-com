@@ -5,7 +5,6 @@ import Card from '@/components/shared/card/Card';
 import Container from '@/components/shared/container/Container';
 import CustomSlider from '@/components/shared/custom-slider/CustomSlider';
 import ItemCard from '@/components/shared/item-card/ItemCard';
-import Items from '@/components/shared/items/Items';
 import SectionTitle from '@/components/shared/section-title/SectionTitle';
 import PrimaryTitle from '@/components/shared/title/PrimaryTitle';
 import { products } from '@/data';
@@ -45,14 +44,6 @@ export default function page() {
                 <ItemCard titleClassName={"text-xl lg:text-2xl"} containerClassName={"hover:bg-transparent"} subtitleClassName={"text-lg lg:text-xl"} item={{ title: "Phone", icon: <BsTelephone className='w-6 h-6 lg:w-10 lg:h-7 text-primary' />, subtitle: "+1 (555) 123-4567", handleClick: () => { } }} />
                 <ItemCard titleClassName={"text-xl lg:text-2xl"} containerClassName={"hover:bg-transparent"} subtitleClassName={"text-lg lg:text-xl"} item={{ title: "Email", icon: <TfiEmail className='w-6 h-6 lg:w-10 lg:h-7 text-primary' />, subtitle: "sweetdelights@email.com", handleClick: () => { } }} />
             </div>
-
-            {/* <Items title={"Products"} hasLoadMoreBtn>
-                {
-                    products?.map((product) => (
-                        <Card key={product.id} item={{ image: product?.image, name: product?.name, subtitle: `$${product?.price}` }} containerClassName={"px-2"} />
-                    ))
-                }
-            </Items> */}
             <CustomSlider desktopView={5} mobileView={2} paddingDesktop={70} paddingMobile={30} >
                 {
                     products?.map((product) => (

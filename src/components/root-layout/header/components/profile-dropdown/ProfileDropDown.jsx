@@ -11,6 +11,8 @@ import BecomeASellerModalContents from '@/components/shared/modal/components/mod
 import HelpModalContents from '@/components/shared/modal/components/modal-contents/help-modal-contents/HelpModalContents';
 import OrderModalContents from '@/components/shared/modal/components/modal-contents/order-modal-contents/OrderModalContents';
 import ProductsModalContents from '@/components/shared/modal/components/modal-contents/products-modal-contents/ProductsModalContents';
+import PromotionModalContents from '@/components/shared/modal/components/modal-contents/promotion-modal-contents/PromotionModalContents';
+import SellerSettingsModalContents from '@/components/shared/modal/components/modal-contents/seller-settings-modal-contents/SellerSettingsModalContents';
 import { setUser } from '@/lib/redux/features/userSlice';
 import { cn } from '@/utils/cn';
 import Link from 'next/link';
@@ -19,7 +21,7 @@ import { useState } from "react";
 import { BsShopWindow } from 'react-icons/bs';
 import { FaInbox } from 'react-icons/fa';
 import { FiHelpCircle } from "react-icons/fi";
-import { IoIosCard } from "react-icons/io";
+import { IoIosCard, IoMdGift } from "react-icons/io";
 import { LuUserRound } from "react-icons/lu";
 import { MdOutlineHomeWork } from "react-icons/md";
 import { RiInformation2Line } from "react-icons/ri";
@@ -41,6 +43,8 @@ export default function ProfileDropDown({ isMobile }) {
     const [isMyOrdersOpen, setIsMyOrdersOpen] = useState(false);
     const [isBecomeASellerOpen, setIsBecomeASellerOpen] = useState(false);
     const [isMyAddressOpen, setIsMyAddressOpen] = useState(false);
+    const [isSellerSettingsOpen, setIsSellerSettingsOpen] = useState(false);
+    const [isPromotionOpen, setIsPromotionOpen] = useState(false);
     const [modalStack, setModalStack] = useState([]);
     const router = useRouter();
 
@@ -59,6 +63,7 @@ export default function ProfileDropDown({ isMobile }) {
         setIsBecomeASellerOpen(false)
         setIsMyAddressOpen(false)
         setIsDropdownOpen(false)
+        setIsSellerSettingsOpen(false)
         setModalStack([])
     }
 
@@ -124,7 +129,7 @@ export default function ProfileDropDown({ isMobile }) {
     ];
 
     // account modal menu items
-    const accountMenuItems = [
+    const profileItems = [
         {
             category: 'Account',
             items: [
@@ -148,17 +153,16 @@ export default function ProfileDropDown({ isMobile }) {
                     ),
                 },
                 {
-                    title: user?.accountType === "seller" ? 'View Seller Profile' : 'Become a Seller',
-                    subtitle: 'Become a seller',
+                    title: user?.accountType === "seller" ? 'Seller Settings' : 'Become a Seller',
+                    subtitle: user?.accountType === "seller" ? 'View your seller settings' : 'Become a seller',
                     icon: (
                         <BsShopWindow className="h-6 w-6 text-gray-700" />
                     ),
                     handleClick: () => {
                         if (user?.accountType === "seller") {
-                            router.push("/seller-profile")
-                            handleCloseAllModals();
+                            handleOpenModal(setIsSellerSettingsOpen)
                         } else {
-                            handleOpenModal(setIsBecomeASellerOpen)
+
                         }
                     },
                 },
@@ -246,7 +250,7 @@ export default function ProfileDropDown({ isMobile }) {
     ];
 
     // account information items
-    const accountInfoItems = [
+    const accountItems = [
         {
             name: 'Personal Information',
             subtitle: 'Manage your personal information',
@@ -274,6 +278,30 @@ export default function ProfileDropDown({ isMobile }) {
             type: "button",
             handleClick: () => handleOpenModal(setIsPaymentOpen),
             icon: <IoIosCard className="h-6 w-6 text-gray-700" />
+        },
+    ];
+
+
+    // account information items
+    const sellerSettingsItems = [
+        {
+            title: 'View Seller Profile',
+            subtitle: 'View your seller profile',
+            type: "button",
+            handleClick: () => {
+                handleCloseAllModals();
+                router.push("/seller-profile")
+            },
+            icon: (<svg className="h-6 w-6 text-gray-700" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"></path>
+            </svg>)
+        },
+        {
+            title: 'Create Promotion',
+            subtitle: 'Create a promotion',
+            type: "button",
+            handleClick: () => handleOpenModal(setIsPromotionOpen),
+            icon: <IoMdGift className="h-6 w-6 text-gray-700" />
         },
     ];
 
@@ -349,7 +377,7 @@ export default function ProfileDropDown({ isMobile }) {
                 <OrderModalContents />
             </Modal>
             <Modal isLeft={false} isOpen={isAccountSettingsOpen} setIsOpen={() => handleCloseModal()} title={"Account Settings"}>
-                <AccountSettingsModalContents isMobile={isMobile} accountMenuItems={accountMenuItems} />
+                <AccountSettingsModalContents isMobile={isMobile} accountMenuItems={profileItems} />
             </Modal>
             <Modal isLeft={false} isOpen={isProductOpen} setIsOpen={() => handleCloseModal()} title={"My Products"}>
                 <ProductsModalContents />
@@ -358,10 +386,18 @@ export default function ProfileDropDown({ isMobile }) {
                 <HelpModalContents />
             </Modal>
             <Modal isLeft={false} isOpen={isAccountInformationOpen} setIsOpen={() => handleCloseModal()} title={"Account Information"}>
-                <AccountInfoModalContents accountInfoItems={accountInfoItems} />
+                <AccountInfoModalContents accountInfoItems={accountItems} />
             </Modal>
+
+            {/* seller modals */}
             <Modal isLeft={false} isOpen={isBecomeASellerOpen} setIsOpen={() => handleCloseModal()} title={"Become a Seller"}>
                 <BecomeASellerModalContents handleCloseModal={handleCloseModal} />
+            </Modal>
+            <Modal isLeft={false} isOpen={isSellerSettingsOpen} setIsOpen={() => handleCloseModal()} title={"Seller Settings"}>
+                <SellerSettingsModalContents handleCloseModal={handleCloseModal} isMobile={isMobile} sellerSettingsItems={sellerSettingsItems} />
+            </Modal>
+            <Modal isLeft={false} isOpen={isPromotionOpen} setIsOpen={() => handleCloseModal()} title={"Create Promotion"}>
+                <PromotionModalContents />
             </Modal>
 
 
