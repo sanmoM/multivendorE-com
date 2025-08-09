@@ -7,7 +7,7 @@ export default function MobileHeaderWithSearchbar({title}) {
         <div className='lg:hidden'>
             {/* <HeaderWithBackBtn /> */}
             <MobileHeader title={title} />
-            <Container className={"my-4"}>
+            <Container className={"my-4 py-0 lg:py-0"}>
                 <NavbarSearchbar />
             </Container>
         </div>
