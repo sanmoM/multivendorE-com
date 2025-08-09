@@ -8,6 +8,9 @@ export default function useAxios() {
         return {
             ...config,
             baseURL: process.env.NEXT_PUBLIC_BASE_URL,
+            // withCredentials: true,
+            withCredentials: true, 
+            withXSRFToken: true
         };
     }, function (error) {
         // Do something with request error

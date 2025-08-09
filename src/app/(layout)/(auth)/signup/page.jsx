@@ -5,11 +5,14 @@ import Container from '@/components/shared/container/Container';
 import CheckBoxWithLabel from '@/components/shared/inputs/check-box-with-label/CheckBoxWithLabel';
 import SectionTitle from '@/components/shared/section-title/SectionTitle';
 import useAxios from '@/hooks/useAxios';
+import useGetCSRF from '@/hooks/useGetCSRF';
 import { setUser } from '@/lib/redux/features/userSlice';
 import { useRouter } from 'next/navigation';
 import { useState } from 'react';
 import toast from 'react-hot-toast';
 import { useDispatch } from 'react-redux';
+import axios from "axios";
+import Cookies from "js-cookie";
 
 export default function page() {
     const [firstName, setFirstName] = useState('');
@@ -20,26 +23,54 @@ export default function page() {
     const [checked, setChecked] = useState(false);
     const dispatch = useDispatch();
     const router = useRouter()
-    const axios = useAxios();
-    const handleSubmit = (e) => {
+    // const axios = useAxios();
+    // const { data: csrfToken } = useGetCSRF();
+    const handleSubmit = async (e) => {
         e.preventDefault();
 
+        const api = axios.create({
+            baseURL: "https://multivendor.testorbis.com",
+            withCredentials: true, // Cookie পাঠানোর জন্য
+        });
+
+
         try {
-            if (mobile || password || confirmPassword || firstName || lastName) {
-                console.log({
-                    name: firstName + " " + lastName,
-                    password: password,
-                    email: mobile,
-                    confirm_password: confirmPassword
-                })
-                axios.post("/register", {
+            if (mobile || password || confirmPassword || firstName || lastName || checked) {
+                // axios.post("/register",
+                //     {
+                //         name: firstName + " " + lastName,
+                //         password: password,
+                //         mobile: mobile,
+                //         password_confirmation: confirmPassword
+                //     }
+                // {
+                //     name: "Tajul",
+                //     mobile: "01853991555",
+                //     password: "password123",
+                //     password_confirmation: "password123"
+                // }
+                //     // ,
+                //     // {
+                //     //     headers: {
+                //     //         "Content-Type": "application/json",
+                //     //         //  'csrf-token': csrfToken,
+                //     //     },
+                //     // }
+                // )
+                // // dispatch(setUser({ email }))
+                // // router.push("/")
+                // প্রথমে CSRF cookie নিতে হবে
+                await api.get("/sanctum/csrf-cookie", {withCredentials: true, withXSRFToken: true});
+                const csrfToken = Cookies.get("XSRF-TOKEN"); // raw value from cookie
+                console.log(csrfToken);
+                // তারপর Register API কল
+                const res = await api.post("/api/register", {
                     name: "Tajul",
-                    mobile: "01853991433",
+                    mobile: "01853991555",
                     password: "password123",
                     password_confirmation: "password123"
-                })
-                // dispatch(setUser({ email }))
-                // router.push("/")
+                });
+                setMessage("Registration successful!");
             } else {
                 toast.error("Please fill all the fields")
             }
