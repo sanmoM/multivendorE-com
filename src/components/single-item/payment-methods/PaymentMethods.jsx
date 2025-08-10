@@ -28,7 +28,6 @@ const paymentOptions = [{
 
 export default function PaymentOptions() {
     const [selectedPayment, setSelectedPayment] = useState('bkash');
-console.log(selectedPayment)
     return (
         <div className="mt-8 lg:w-[70%]">
             <PrimaryTitle title={"Payment Methods"} className={"mb-6"} />
@@ -38,7 +37,6 @@ console.log(selectedPayment)
                         key={option}
                         className={`flex gap-2 items-center rounded-lg cursor-pointer transition-colors duration-200 `}
                     >
-                        {console.log(selectedPayment === option.value)}
                         <RadioInput onChange={() => setSelectedPayment(option.value)} checked={selectedPayment === option.value} />
                         <p className="text-primary font-medium text-lg flex items-center gap-2">
                             {option.Icon}

@@ -77,7 +77,7 @@ export default function page() {
                     </p>
                     <p class="text-gray-600 mt-1">
                         Don’t have an Account?
-                        <a href="/signUp.html" class="text-black font-medium">Sign Up</a>
+                        <a href="/signup" class="text-black font-medium">Sign Up</a>
                     </p>
                 </div>
             </div>

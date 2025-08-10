@@ -65,7 +65,6 @@ export default function Filter() {
     };
 
     const handleOptionClick = (optionName, optionValue) => {
-        console.log(`Selected ${optionName}: ${optionValue}`);
         setOpenDropdown(null); // Close dropdown after selection
     };
     return (

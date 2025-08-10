@@ -1,27 +1,26 @@
 'use client';
 
 
-import { useState } from 'react';
-import DesktopNavbar from './components/desktop-navbar/DesktopNavbar';
-import MobileNavbar from './components/mobile-navbar/MobileNavbar';
 import Modal from '@/components/shared/modal/Modal';
 import CartModalContents from '@/components/shared/modal/components/modal-contents/cart-modal-contents/CartModalContents';
 import CheckoutModalContents from '@/components/shared/modal/components/modal-contents/checkout-modal-contents/CheckoutModalContents';
+import useModalAction from '@/hooks/useModalAction';
+import DesktopNavbar from './components/desktop-navbar/DesktopNavbar';
+import MobileNavbar from './components/mobile-navbar/MobileNavbar';
 
 export default function Header() {
-    const [isCartOpen, setIsCartOpen] = useState(false);
-    const [isCheckoutOpen, setIsCheckoutOpen] = useState(false);
+    const { currentModal, handleCloseModal, handleOpenModal } = useModalAction();
     return (
         <header className="w-full bg-white shadow-sm font-sans">
-            <DesktopNavbar setIsCartOpen={setIsCartOpen} />
-            <MobileNavbar setIsCartOpen={setIsCartOpen} />
+            <DesktopNavbar setIsCartOpen={() => handleOpenModal("cart-modal")} />
+            <MobileNavbar setIsCartOpen={() => handleOpenModal("cart-modal")} />
 
             {/* cart modal */}
-            <Modal isOpen={isCartOpen} setIsOpen={setIsCartOpen} title={"Shopping Bag"}>
-                <CartModalContents setIsCartOpen={setIsCartOpen} setIsCheckoutOpen={setIsCheckoutOpen} />
+            <Modal isOpen={currentModal === "cart-modal"} setIsOpen={() => handleCloseModal()} title={"Shopping Bag"}>
+                <CartModalContents setIsCartOpen={() => {}} setIsCheckoutOpen={() => handleOpenModal("checkout-modal")} />
             </Modal>
             {/* cart modal */}
-            <Modal isOpen={isCheckoutOpen} setIsOpen={setIsCheckoutOpen} title={"Checkout"}>
+            <Modal isOpen={currentModal === "checkout-modal"} setIsOpen={() => handleCloseModal()} title={"Checkout"}>
                 {/* <CartModalContents /> */}
                 <CheckoutModalContents />
             </Modal>

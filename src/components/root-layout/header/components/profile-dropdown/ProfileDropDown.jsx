@@ -31,9 +31,9 @@ import { TbSitemap } from "react-icons/tb";
 import { useDispatch, useSelector } from 'react-redux';
 
 
-export default function ProfileDropDown({ isMobile }) {
+export default function ProfileDropDown({ isMobile, isDropdownOpen, setIsDropdownOpen }) {
     const { currentModal, handleCloseAllModals, handleCloseModal, handleOpenModal } = useModalAction();
-    const [isDropdownOpen, setIsDropdownOpen] = useState(false);
+
     const user = useSelector(state => state.user);
     const dispatch = useDispatch();
     const router = useRouter();
@@ -279,7 +279,6 @@ export default function ProfileDropDown({ isMobile }) {
         </div >
     )
 
-    console.log(currentModal)
 
 
     // dropdown contents

@@ -10,6 +10,7 @@ import ProfileDropDown from '../profile-dropdown/ProfileDropDown';
 import Logo from '@/components/shared/logo/Logo';
 import { cn } from '@/utils/cn';
 import { usePathname } from 'next/navigation';
+import { useState } from 'react';
 
 const navItems = [
     { name: 'Home', href: '/' },
@@ -19,6 +20,7 @@ const navItems = [
 ];
 
 export default function DesktopNavbar({ setIsCartOpen }) {
+    const [isDropdownOpen, setIsDropdownOpen] = useState(false);
     const pathname = usePathname();
     return (
         <SecondaryContainer className="max-w-[1550px] mx-auto px-4 py-5 lg:flex items-center justify-between hidden">
@@ -31,7 +33,7 @@ export default function DesktopNavbar({ setIsCartOpen }) {
                 {/* Navigation Links */}
                 <nav className="hidden md:flex space-x-8 text-gray-700 text-base">
                     {navItems.map((item, index) => (
-                        <Link key={index} href={item.href} className={cn("text-primary hover:text-secondary font-medium", pathname === item.href && "text-secondary")}>
+                        <Link key={index} onClick={() => setIsDropdownOpen(false)} href={item.href} className={cn("text-primary hover:text-secondary font-medium", pathname === item.href && "text-secondary")}>
                             {item.name}
                         </Link>
                     ))}
@@ -44,15 +46,22 @@ export default function DesktopNavbar({ setIsCartOpen }) {
                 <NavbarSearchbar inputClassName={'w-48'} />
 
                 <div className='space-x-2'>
-                    <button className="p-3 rounded-full bg-tertiary hover:bg-secondary/50 transition-colors duration-200 focus:outline-none focus:ring-1 focus:ring-gray-300">
+                    <button
+                        onClick={() => {
+                            setIsDropdownOpen(false)
+                        }}
+                        className="p-3 rounded-full bg-tertiary hover:bg-secondary/50 transition-colors duration-200 focus:outline-none focus:ring-1 focus:ring-gray-300">
                         <IoMdNotificationsOutline className='w-6 h-6 text-secondary' />
                     </button>
 
                     {/* Cart Icon */}
-                    <button onClick={() => setIsCartOpen(true)} className="p-3 rounded-full bg-tertiary hover:bg-secondary/50 transition-colors duration-200 focus:outline-none focus:ring-1 focus:ring-gray-300">
+                    <button onClick={() => {
+                        setIsCartOpen()
+                        setIsDropdownOpen(false)
+                    }} className="p-3 rounded-full bg-tertiary hover:bg-secondary/50 transition-colors duration-200 focus:outline-none focus:ring-1 focus:ring-gray-300">
                         <IoCartOutline className='w-6 h-6 text-secondary' />
                     </button>
-                    <ProfileDropDown />
+                    <ProfileDropDown isDropdownOpen={isDropdownOpen} setIsDropdownOpen={setIsDropdownOpen} />
                 </div>
             </div>
         </SecondaryContainer>

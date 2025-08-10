@@ -9,6 +9,7 @@ const HelpModalContents = () => {
             items: [
                 {
                     label: 'FAQs',
+                    href: '/faqs',
                 },
                 {
                     label: 'Contact Us',

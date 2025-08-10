@@ -1,9 +1,9 @@
 "use client";
 
+import MobileHeader from '@/components/root-layout/header/components/mobile-header/MobileHeader';
 import Button from '@/components/shared/button/Button';
 import SecondaryContainer from '@/components/shared/container/SecondaryContainer';
 import CustomSlider from '@/components/shared/custom-slider/CustomSlider';
-import MobileHeader from '@/components/root-layout/header/components/mobile-header/MobileHeader';
 import Modal from '@/components/shared/modal/Modal';
 import SectionTitle from '@/components/shared/section-title/SectionTitle';
 import PrimaryTitle from '@/components/shared/title/PrimaryTitle';
@@ -16,9 +16,9 @@ import Reviews from '@/components/single-item/reviws/Reviews';
 import SellerInfo from '@/components/single-item/seller-info/SellerInfo';
 import SimilarProducts from '@/components/single-item/similar-products/SimilarProducts';
 import SingleItemTabs from '@/components/single-item/single-item-tabs/SingleItemTabs';
+import useModalAction from '@/hooks/useModalAction';
 import Image from 'next/image';
-import { useRef, useState } from 'react';
-import { useDispatch } from 'react-redux';
+import { useRef } from 'react';
 const sliderItems = [
     {
         id: 1,
@@ -46,12 +46,18 @@ const sliderItems = [
 ];
 
 const App = () => {
-    const [isCustomOrderModalOpen, setIsCustomOrderModalOpen] = useState(false);
-    const dispatch = useDispatch();
+    // const [isCustomOrderModalOpen, setIsCustomOrderModalOpen] = useState(false);
     const sliderRef = useRef(null);
-    const handleCloseCart = () => {
-        dispatch(handleCartOpen());
-    };
+
+    const { currentModal, handleCloseModal, handleOpenModal } = useModalAction();
+
+    const handleCustomOrderModal = () => {
+        handleOpenModal("custom-order-modal")
+    }
+
+    const handlePlaceOrder = () => {
+        handleOpenModal("checkout-modal")
+    }
     return (
         <div className='my-6 lg:my-10'>
             <MobileHeader title={"Single Item"} containerClassName={"mb-6"} />
@@ -122,7 +128,7 @@ const App = () => {
                     </div>
 
                     {/* Right Section - Seller Info and Custom Order */}
-                    <SellerInfo className="hidden lg:block" />
+                    <SellerInfo className="hidden lg:block" handleCustomOrderModal={handleCustomOrderModal} />
                 </div>
 
                 {/* product info */}
@@ -136,7 +142,7 @@ const App = () => {
                         <Button text="Buy Now" className={"bg-tertiary"} /> <br />
                         {/* <Button onClick={() => setIsCustomOrderModalOpen(true)} onC text="Custom Order" className={"bg-tertiary mt-6"} /> */}
                     </div>
-                    <SellerInfo className="lg:hidden" />
+                    <SellerInfo className="lg:hidden" handleCustomOrderModal={handleCustomOrderModal} />
                 </div>
 
                 {/* tabs */}
@@ -149,8 +155,8 @@ const App = () => {
                 <SimilarProducts />
             </SecondaryContainer>
 
-            <Modal isLef={false} isOpen={isCustomOrderModalOpen} setIsOpen={setIsCustomOrderModalOpen} title={"Custom Order"}>
-                <CustomOrderModalContents />
+            <Modal isLef={false} isOpen={currentModal === "custom-order-modal"} setIsOpen={() => handleCloseModal()} title={"Custom Order"}>
+                <CustomOrderModalContents handlePlaceOrder={handlePlaceOrder} />
             </Modal>
         </div >
     );

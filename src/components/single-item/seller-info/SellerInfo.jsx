@@ -4,7 +4,7 @@ import { cn } from '@/utils/cn';
 import Image from 'next/image';
 
 
-export default function SellerInfo({className}) {
+export default function SellerInfo({ className, handleCustomOrderModal }) {
     return (
         <div className={cn("lg:w-1/3 lg:pl-10 xl:pl-20 lg:pr-0 flex flex-col mt-6 lg:mt-0", className)}>
             <PrimaryTitle title="Seller" />
@@ -48,7 +48,7 @@ export default function SellerInfo({className}) {
                 <p className="text-gray-600 mb-4 font-medium">
                     Need a cake tailored to your specific requirements? Fill out our custom order form and we'll create the perfect cake for you.
                 </p>
-                <Button text="Custom Order Form" className={"bg-tertiary"} />
+                <Button text="Custom Order Form" className={"bg-tertiary"} onClick={handleCustomOrderModal} />
             </div>
         </div>
     )

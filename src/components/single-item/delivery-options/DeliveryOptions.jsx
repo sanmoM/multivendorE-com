@@ -26,7 +26,6 @@ const deliveryOptions = [{
 
 export default function DeliveryOptions() {
     const [selectedDelivery, setSelectedDelivery] = useState('order-with-10-payment');
-    console.log(selectedDelivery)
     return (
         <div className="mt-8 lg:w-[70%]">
             <PrimaryTitle title={"Delivery Options"} className={"mb-6"} />
@@ -36,7 +35,6 @@ export default function DeliveryOptions() {
                         key={option}
                         className={`flex gap-2 items-center rounded-lg cursor-pointer transition-colors duration-200 `}
                     >
-                        {console.log(selectedDelivery === option.value)}
                         <RadioInput onChange={() => setSelectedDelivery(option.value)} checked={selectedDelivery === option.value} />
                         <p className="text-primary font-medium text-lg flex items-center gap-2">
                             {option.Icon}

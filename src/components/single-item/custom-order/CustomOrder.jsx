@@ -1,14 +1,15 @@
 "use client";
 
 
+import ColorPicker from '@/components/shared/color-picker/ColorPicker';
 import IncreaseDecreaseButtons from '@/components/shared/increase-decrease-buttons/IncreaseDecreaseButtons';
+import OptionBox from '@/components/shared/option-box/OptionBox';
 import SecondaryTitle from '@/components/shared/title/SecondaryTitle';
+import useModalAction from '@/hooks/useModalAction';
 import { useState } from 'react';
 import DateAndTimeInput from './components/DateAndTimeInput';
-import OptionBox from '@/components/shared/option-box/OptionBox';
-import ColorPicker from '@/components/shared/color-picker/ColorPicker';
 
-const CustomOrderModalContents = () => {
+const CustomOrderModalContents = ({ handlePlaceOrder: handlePlaceOrderAction }) => {
     const [selectedSize, setSelectedSize] = useState(null);
     const [selectedFlavor, setSelectedFlavor] = useState(null);
     const [selectedColor, setSelectedColor] = useState(null);
@@ -17,6 +18,8 @@ const CustomOrderModalContents = () => {
     const [designNotes, setDesignNotes] = useState('');
     const [pickupDelivery, setPickupDelivery] = useState('');
     const [additionalNotes, setAdditionalNotes] = useState('');
+
+    const { handleOpenModal } = useModalAction();
 
     const cakeSizes = [
         { label: 'Small (6–8 servings)', value: 'small' },
@@ -33,14 +36,6 @@ const CustomOrderModalContents = () => {
         { name: 'Light Yellow', hex: '#FFFFE0' },
     ];
 
-    const handleQuantityChange = (type) => {
-        setQuantity(prev => type === 'increment' ? prev + 1 : Math.max(1, prev - 1));
-    };
-
-    const handleWeightChange = (type) => {
-        setWeight(prev => type === 'increment' ? prev + 1 : Math.max(1, prev - 1));
-    };
-
     const handlePlaceOrder = () => {
         // console.log({
         //     selectedSize,
@@ -53,7 +48,9 @@ const CustomOrderModalContents = () => {
         //     additionalNotes,
         // });
         // Add your order placement logic here
-        alert('Order Placed! Check console for details.');
+        // alert('Order Placed! Check console for details.');
+        // handleOpenModal("place-order-modal")
+        handlePlaceOrderAction()
     };
 
     return (
@@ -97,7 +94,7 @@ const CustomOrderModalContents = () => {
                     <SecondaryTitle title={"Quantity"} />
                     <div className='flex items-center gap-4'>
                         <p>Quantity</p>
-                        <IncreaseDecreaseButtons value={weight} setValue={setWeight} />
+                        <IncreaseDecreaseButtons value={quantity} setValue={setQuantity} />
                     </div>
                 </div>
 

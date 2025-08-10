@@ -56,7 +56,6 @@ export default function page() {
                 //     //     },
                 //     // }
                 // )
-                console.log("res")
                 dispatch(setUser({ mobile: mobile}))
                 router.push("/")
                 // প্রথমে CSRF cookie নিতে হবে
