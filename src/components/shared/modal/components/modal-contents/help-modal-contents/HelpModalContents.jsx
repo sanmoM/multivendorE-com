@@ -34,6 +34,7 @@ const HelpModalContents = () => {
                 },
                 {
                     label: 'Returns & Refunds',
+                    href: '/returns-and-refunds'
                 },
                 {
                     label: 'Payment Methods',
