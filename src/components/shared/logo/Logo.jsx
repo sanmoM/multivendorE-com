@@ -5,7 +5,7 @@ import React from 'react'
 export default function Logo({ className }) {
     return (
         <Image
-            src="/images/logo.jpg"
+            src="/images/logo.png"
             alt="Logo"
             className={cn(className)}
             width={150}

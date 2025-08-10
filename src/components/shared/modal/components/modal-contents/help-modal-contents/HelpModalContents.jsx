@@ -22,6 +22,7 @@ const HelpModalContents = () => {
                 },
                 {
                     label: 'Live Chat',
+                    href: '/live-chat',
                 },
             ],
         },
@@ -35,9 +36,6 @@ const HelpModalContents = () => {
                 {
                     label: 'Returns & Refunds',
                     href: '/returns-and-refunds'
-                },
-                {
-                    label: 'Payment Methods',
                 },
             ],
         },
