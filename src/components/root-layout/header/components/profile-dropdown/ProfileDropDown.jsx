@@ -13,6 +13,7 @@ import OrderModalContents from '@/components/shared/modal/components/modal-conte
 import ProductsModalContents from '@/components/shared/modal/components/modal-contents/products-modal-contents/ProductsModalContents';
 import PromotionModalContents from '@/components/shared/modal/components/modal-contents/promotion-modal-contents/PromotionModalContents';
 import SellerSettingsModalContents from '@/components/shared/modal/components/modal-contents/seller-settings-modal-contents/SellerSettingsModalContents';
+import useModalAction from '@/hooks/useModalAction';
 import { setUser } from '@/lib/redux/features/userSlice';
 import { cn } from '@/utils/cn';
 import Link from 'next/link';
@@ -31,64 +32,18 @@ import { useDispatch, useSelector } from 'react-redux';
 
 
 export default function ProfileDropDown({ isMobile }) {
+    const { currentModal, handleCloseAllModals, handleCloseModal, handleOpenModal } = useModalAction();
     const [isDropdownOpen, setIsDropdownOpen] = useState(false);
     const user = useSelector(state => state.user);
     const dispatch = useDispatch();
-    const [isOrdersOpen, setIsOrdersOpen] = useState(false);
-    const [isAccountSettingsOpen, setIsAccountSettingsOpen] = useState(false);
-    const [isProductOpen, setIsProductOpen] = useState(false);
-    const [isHelpOpen, setIsHelpOpen] = useState(false);
-    const [isAccountInformationOpen, setIsAccountInformationOpen] = useState(false);
-    const [isPaymentOpen, setIsPaymentOpen] = useState(false);
-    const [isMyOrdersOpen, setIsMyOrdersOpen] = useState(false);
-    const [isBecomeASellerOpen, setIsBecomeASellerOpen] = useState(false);
-    const [isMyAddressOpen, setIsMyAddressOpen] = useState(false);
-    const [isSellerSettingsOpen, setIsSellerSettingsOpen] = useState(false);
-    const [isPromotionOpen, setIsPromotionOpen] = useState(false);
-    const [modalStack, setModalStack] = useState([]);
     const router = useRouter();
 
     const handleLogout = () => {
         dispatch(setUser({ email: "" }))
     }
 
-    const handleCloseAllModals = () => {
-        setIsAccountSettingsOpen(false)
-        setIsOrdersOpen(false)
-        setIsProductOpen(false)
-        setIsHelpOpen(false)
-        setIsAccountInformationOpen(false)
-        setIsPaymentOpen(false)
-        setIsMyOrdersOpen(false)
-        setIsBecomeASellerOpen(false)
-        setIsMyAddressOpen(false)
-        setIsDropdownOpen(false)
-        setIsSellerSettingsOpen(false)
-        setModalStack([])
-    }
-
     const handleDropdownClose = () => {
         setIsDropdownOpen(!isDropdownOpen)
-    }
-
-    const handleCloseModal = () => {
-        modalStack[modalStack.length - 1](prev => !prev)
-        setTimeout(() => {
-            setModalStack(prev => prev.slice(0, -1));
-            modalStack[modalStack.length - 2](prev => !prev)
-        }, 300);
-    }
-
-    // console.log("modalStack", modalStack)
-    const handleOpenModal = (setFun) => {
-        if (modalStack.length > 0) {
-            modalStack[modalStack.length - 1](prev => !prev)
-        }
-        setTimeout(() => {
-            setFun(prev => !prev)
-            // modalStack.push(setFun)
-            setModalStack(prev => [...prev, setFun])
-        }, 300);
     }
 
 
@@ -99,7 +54,7 @@ export default function ProfileDropDown({ isMobile }) {
             type: "button",
             handleClick: () => {
                 handleDropdownClose()
-                handleOpenModal(setIsAccountSettingsOpen)
+                handleOpenModal("account-settings-modal")
             }
         },
         {
@@ -107,7 +62,7 @@ export default function ProfileDropDown({ isMobile }) {
             type: "button",
             handleClick: () => {
                 handleDropdownClose()
-                handleOpenModal(setIsOrdersOpen)
+                handleOpenModal("order-modal")
             }
         },
         {
@@ -115,7 +70,7 @@ export default function ProfileDropDown({ isMobile }) {
             type: "button",
             handleClick: () => {
                 handleDropdownClose()
-                handleOpenModal(setIsProductOpen)
+                handleOpenModal("product-modal")
             }
         },
         {
@@ -123,7 +78,7 @@ export default function ProfileDropDown({ isMobile }) {
             type: "button",
             handleClick: () => {
                 handleDropdownClose()
-                handleOpenModal(setIsHelpOpen)
+                handleOpenModal("help-modal")
             }
         },
     ];
@@ -141,7 +96,7 @@ export default function ProfileDropDown({ isMobile }) {
                             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"></path>
                         </svg>
                     ),
-                    handleClick: () => handleOpenModal(setIsAccountInformationOpen),
+                    handleClick: () => handleOpenModal("account-information-modal"),
                 },
                 {
                     title: 'Notifications',
@@ -160,7 +115,7 @@ export default function ProfileDropDown({ isMobile }) {
                     ),
                     handleClick: () => {
                         if (user?.accountType === "seller") {
-                            handleOpenModal(setIsSellerSettingsOpen)
+                            handleOpenModal("seller-settings-modal")
                         } else {
 
                         }
@@ -171,7 +126,7 @@ export default function ProfileDropDown({ isMobile }) {
                 {
                     title: 'Orders',
                     subtitle: 'Manage your orders',
-                    handleClick: () => handleOpenModal(setIsOrdersOpen),
+                    handleClick: () => handleOpenModal("order-modal"),
                     icon: (
                         <TbSitemap className="h-6 w-6 text-gray-700" />
                     )
@@ -179,7 +134,7 @@ export default function ProfileDropDown({ isMobile }) {
                 {
                     title: 'Products',
                     subtitle: 'Manage your products',
-                    handleClick: () => handleOpenModal(setIsProductOpen),
+                    handleClick: () => handleOpenModal("product-modal"),
                     icon: (
                         <FaInbox className="h-6 w-6 text-gray-700" />
                     )
@@ -187,7 +142,7 @@ export default function ProfileDropDown({ isMobile }) {
                 {
                     title: 'Help',
                     subtitle: 'Get help with your account',
-                    handleClick: () => handleOpenModal(setIsHelpOpen),
+                    handleClick: () => handleOpenModal("help-modal"),
                     icon: (
                         <FiHelpCircle className="h-6 w-6 text-gray-700" />
                     )
@@ -255,28 +210,28 @@ export default function ProfileDropDown({ isMobile }) {
             name: 'Personal Information',
             subtitle: 'Manage your personal information',
             type: "button",
-            handleClick: () => handleOpenModal(setIsAccountInformationOpen),
+            // handleClick: () => handleOpenModal(""),
             icon: <RiInformation2Line className="h-6 w-6 text-gray-700" />
         },
         {
             name: 'My Address',
             subtitle: 'Manage your address',
             type: "button",
-            handleClick: () => handleOpenModal(setIsMyAddressOpen),
+            handleClick: () => handleOpenModal("my-address-modal"),
             icon: <MdOutlineHomeWork className="h-6 w-6 text-gray-700" />
         },
         {
             name: 'My Orders',
             subtitle: 'View your orders',
             type: "button",
-            handleClick: () => handleOpenModal(setIsMyOrdersOpen),
+            handleClick: () => handleOpenModal("my-orders-modal"),
             icon: <TbSitemap className="h-6 w-6 text-gray-700" />
         },
         {
             name: 'Payment Methods',
             subtitle: 'Manage your payment methods',
             type: "button",
-            handleClick: () => handleOpenModal(setIsPaymentOpen),
+            handleClick: () => handleOpenModal("payment-modal"),
             icon: <IoIosCard className="h-6 w-6 text-gray-700" />
         },
     ];
@@ -300,7 +255,7 @@ export default function ProfileDropDown({ isMobile }) {
             title: 'Create Promotion',
             subtitle: 'Create a promotion',
             type: "button",
-            handleClick: () => handleOpenModal(setIsPromotionOpen),
+            handleClick: () => handleOpenModal("promotion-modal"),
             icon: <IoMdGift className="h-6 w-6 text-gray-700" />
         },
     ];
@@ -311,7 +266,7 @@ export default function ProfileDropDown({ isMobile }) {
         <div className='inline'>
             {
                 isMobile ? (
-                    <button onClick={() => handleOpenModal(setIsAccountSettingsOpen)} className='flex flex-col items-center'>
+                    <button onClick={() => handleOpenModal("account-settings-modal")} className='flex flex-col items-center'>
                         <LuUserRound className='w-6 h-6 text-secondary' />
                         <span className='text-xs '>Profile</span>
                     </button>
@@ -324,12 +279,14 @@ export default function ProfileDropDown({ isMobile }) {
         </div >
     )
 
+    console.log(currentModal)
+
 
     // dropdown contents
     const contents = (
         <div className="" role="menu" aria-orientation="vertical" aria-labelledby="options-menu">
             {
-                user?.email ? (
+                user?.mobile ? (
                     <>
                         {
                             profileMenuItems.map((item, index) => (
@@ -376,46 +333,50 @@ export default function ProfileDropDown({ isMobile }) {
             {/* all dropdown contents */}
             <Dropdown containerClassName="inline" isDropdownOpen={isDropdownOpen} placeholder={placeholder} contents={contents} contentsClassName={cn(isMobile ? "!bottom-[calc(100%+0.5rem)] !top-auto !-right-2 !left-auto" : "")} />
 
+
             {/* all modal for profile  */}
-            <Modal isLeft={false} isOpen={isOrdersOpen} setIsOpen={() => handleCloseModal()} title={"Orders"}>
-                <OrderModalContents />
-            </Modal>
-            <Modal isLeft={false} isOpen={isAccountSettingsOpen} setIsOpen={() => handleCloseModal()} title={"Account Settings"}>
-                <AccountSettingsModalContents isMobile={isMobile} accountMenuItems={profileItems} />
-            </Modal>
-            <Modal isLeft={false} isOpen={isProductOpen} setIsOpen={() => handleCloseModal()} title={"My Products"}>
-                <ProductsModalContents />
-            </Modal>
-            <Modal isLeft={false} isOpen={isHelpOpen} setIsOpen={() => handleCloseModal()} title={"Help"}>
-                <HelpModalContents />
-            </Modal>
-            <Modal isLeft={false} isOpen={isAccountInformationOpen} setIsOpen={() => handleCloseModal()} title={"Account Information"}>
-                <AccountInfoModalContents accountInfoItems={accountItems} />
-            </Modal>
+            <div>
+                {/* all modal for profile  */}
+                <Modal isLeft={false} isOpen={currentModal === "order-modal"} setIsOpen={() => handleCloseModal()} title={"Orders"}>
+                    <OrderModalContents />
+                </Modal>
+                <Modal isLeft={false} isOpen={currentModal === "account-settings-modal"} setIsOpen={() => handleCloseModal()} title={"Account Settings"}>
+                    <AccountSettingsModalContents isMobile={isMobile} accountMenuItems={profileItems} />
+                </Modal>
+                <Modal isLeft={false} isOpen={currentModal === "product-modal"} setIsOpen={() => handleCloseModal()} title={"My Products"}>
+                    <ProductsModalContents />
+                </Modal>
+                <Modal isLeft={false} isOpen={currentModal === "help-modal"} setIsOpen={() => handleCloseModal()} title={"Help"}>
+                    <HelpModalContents />
+                </Modal>
+                <Modal isLeft={false} isOpen={currentModal === "account-information-modal"} setIsOpen={() => handleCloseModal()} title={"Account Information"}>
+                    <AccountInfoModalContents accountInfoItems={accountItems} />
+                </Modal>
 
-            {/* seller modals */}
-            <Modal isLeft={false} isOpen={isBecomeASellerOpen} setIsOpen={() => handleCloseModal()} title={"Become a Seller"}>
-                <BecomeASellerModalContents handleCloseModal={handleCloseModal} />
-            </Modal>
-            <Modal isLeft={false} isOpen={isSellerSettingsOpen} setIsOpen={() => handleCloseModal()} title={"Seller Settings"}>
-                <SellerSettingsModalContents handleCloseModal={handleCloseModal} isMobile={isMobile} sellerSettingsItems={sellerSettingsItems} />
-            </Modal>
-            <Modal isLeft={false} isOpen={isPromotionOpen} setIsOpen={() => handleCloseModal()} title={"Create Promotion"}>
-                <PromotionModalContents handleCloseModal={handleCloseAllModals} />
-            </Modal>
+                {/* seller modals */}
+                <Modal isLeft={false} isOpen={currentModal === "become-a-seller-modal"} setIsOpen={() => handleCloseModal()} title={"Become a Seller"}>
+                    <BecomeASellerModalContents handleCloseModal={handleCloseModal} />
+                </Modal>
+                <Modal isLeft={false} isOpen={currentModal === "seller-settings-modal"} setIsOpen={() => handleCloseModal()} title={"Seller Settings"}>
+                    <SellerSettingsModalContents handleCloseModal={handleCloseModal} isMobile={isMobile} sellerSettingsItems={sellerSettingsItems} />
+                </Modal>
+                <Modal isLeft={false} isOpen={currentModal === "promotion-modal"} setIsOpen={() => handleCloseModal()} title={"Create Promotion"}>
+                    <PromotionModalContents handleCloseModal={handleCloseAllModals} />
+                </Modal>
 
 
 
-            {/* account information modals */}
-            <Modal isLeft={false} isOpen={isPaymentOpen} setIsOpen={() => handleCloseModal()} title={"Payment Methods"}>
-                <PaymentModalContents />
-            </Modal>
-            <Modal isLeft={false} isOpen={isMyOrdersOpen} setIsOpen={() => handleCloseModal()} title={"My Orders"}>
-                <MyOrderModalContents />
-            </Modal>
-            <Modal isLeft={false} isOpen={isMyAddressOpen} setIsOpen={() => handleCloseModal()} title={"My Address"}>
-                <AddressModalContents />
-            </Modal>
+                {/* account information modals */}
+                <Modal isLeft={false} isOpen={currentModal === "payment-modal"} setIsOpen={() => handleCloseModal()} title={"Payment Methods"}>
+                    <PaymentModalContents />
+                </Modal>
+                <Modal isLeft={false} isOpen={currentModal === "my-orders-modal"} setIsOpen={() => handleCloseModal()} title={"My Orders"}>
+                    <MyOrderModalContents />
+                </Modal>
+                <Modal isLeft={false} isOpen={currentModal === "my-address-modal"} setIsOpen={() => handleCloseModal()} title={"My Address"}>
+                    <AddressModalContents />
+                </Modal>
+            </div>
         </div>
     )
 }

@@ -2,7 +2,7 @@ import { userItems } from '@/data'
 import { createSlice } from '@reduxjs/toolkit'
 
 const initialState = {
-    email: "",
+    mobile: "",
     accountType: "customer",
 };
 
@@ -11,8 +11,8 @@ export const userSlice = createSlice({
     initialState,
     reducers: {
         setUser: (state, action) => {
-            const { email } = action.payload;
-            state.email = email;
+            const { mobile } = action.payload;
+            state.mobile = mobile;
         },
         setAccountType: (state, action) => {
             const { accountType } = action.payload;

@@ -10,25 +10,25 @@ import { RiBox2Line } from 'react-icons/ri';
 
 
 const paymentOptions = [{
-    label: 'Credit Card',
-    value: 'credit-card',
+    label: 'B-Kash',
+    value: 'bkash',
     Icon: <FaRegCreditCard className='w-6 h-6 text-secondary' />
 },
 {
-    label: 'Paypal',
-    value: 'paypal',
+    label: 'SSL',
+    value: 'ssl',
     Icon: <BiLogoPaypal className='w-6 h-6 text-secondary' />
 },
-{
-    label: 'Cash on Delivery',
-    value: 'cash-on-delivery',
-    Icon: <FaHandHoldingDollar className='w-6 h-6 text-secondary' />
-},
+// {
+//     label: 'Cash on Delivery',
+//     value: 'cash-on-delivery',
+//     Icon: <FaHandHoldingDollar className='w-6 h-6 text-secondary' />
+// },
 ];
 
 export default function PaymentOptions() {
-    const [selectedPayment, setSelectedPayment] = useState('Self-Collection');
-
+    const [selectedPayment, setSelectedPayment] = useState('bkash');
+console.log(selectedPayment)
     return (
         <div className="mt-8 lg:w-[70%]">
             <PrimaryTitle title={"Payment Methods"} className={"mb-6"} />
@@ -38,7 +38,8 @@ export default function PaymentOptions() {
                         key={option}
                         className={`flex gap-2 items-center rounded-lg cursor-pointer transition-colors duration-200 `}
                     >
-                        <RadioInput onChange={() => setSelectedPayment(option.value)} />
+                        {console.log(selectedPayment === option.value)}
+                        <RadioInput onChange={() => setSelectedPayment(option.value)} checked={selectedPayment === option.value} />
                         <p className="text-primary font-medium text-lg flex items-center gap-2">
                             {option.Icon}
                             <span>{option.label}</span>

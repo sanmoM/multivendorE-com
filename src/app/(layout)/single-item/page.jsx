@@ -134,7 +134,7 @@ const App = () => {
                     <div className='space-x-4'>
                         <Button text="Add to Cart" />
                         <Button text="Buy Now" className={"bg-tertiary"} /> <br />
-                        <Button onClick={() => setIsCustomOrderModalOpen(true)} onC text="Custom Order" className={"bg-tertiary mt-6"} />
+                        {/* <Button onClick={() => setIsCustomOrderModalOpen(true)} onC text="Custom Order" className={"bg-tertiary mt-6"} /> */}
                     </div>
                     <SellerInfo className="lg:hidden" />
                 </div>

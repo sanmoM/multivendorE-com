@@ -12,7 +12,6 @@ import { useState } from 'react';
 import toast from 'react-hot-toast';
 import { useDispatch } from 'react-redux';
 import axios from "axios";
-import Cookies from "js-cookie";
 
 export default function page() {
     const [firstName, setFirstName] = useState('');
@@ -28,10 +27,10 @@ export default function page() {
     const handleSubmit = async (e) => {
         e.preventDefault();
 
-        const api = axios.create({
-            baseURL: "https://multivendor.testorbis.com",
-            withCredentials: true, // Cookie পাঠানোর জন্য
-        });
+        // const api = axios.create({
+        //     baseURL: "https://multivendor.testorbis.com",
+        //     withCredentials: true, // Cookie পাঠানোর জন্য
+        // });
 
 
         try {
@@ -57,20 +56,19 @@ export default function page() {
                 //     //     },
                 //     // }
                 // )
-                // // dispatch(setUser({ email }))
-                // // router.push("/")
+                console.log("res")
+                dispatch(setUser({ mobile: mobile}))
+                router.push("/")
                 // প্রথমে CSRF cookie নিতে হবে
-                await api.get("/sanctum/csrf-cookie", {withCredentials: true, withXSRFToken: true});
-                const csrfToken = Cookies.get("XSRF-TOKEN"); // raw value from cookie
-                console.log(csrfToken);
-                // তারপর Register API কল
-                const res = await api.post("/api/register", {
-                    name: "Tajul",
-                    mobile: "01853991555",
-                    password: "password123",
-                    password_confirmation: "password123"
-                });
-                setMessage("Registration successful!");
+                // await api.get("/sanctum/csrf-cookie", { withCredentials: true, withXSRFToken: true });
+                // // তারপর Register API কল
+                // const res = await api.post("/api/register", {
+                //     name: "Tajul",
+                //     mobile: "01853991555",
+                //     password: "password123",
+                //     password_confirmation: "password123"
+                // });
+                // setMessage("Registration successful!");
             } else {
                 toast.error("Please fill all the fields")
             }
@@ -126,20 +124,20 @@ export default function page() {
                             <AuthTextInput label="Confirm password" placeholder="Confirm password" value={confirmPassword} setValue={setConfirmPassword} isRequired type="password" />
                         </div>
 
+                        <div className="mt-6 text-sm">
+                            <CheckBoxWithLabel label="By signing up, you agree to <a className=text-blue-500 href=''>Teams of Service</a> and <a className=text-blue-500 href=''>Privacy Policy</a>" checked={checked} setChecked={setChecked} />
+                        </div>
                         <Button
                             // onClick={handleSubmit}
                             type="submit"
-                            className="w-full py-3 bg-red-600 text-white font-bold rounded-md text-sm mt-4"
+                            className="w-full py-3 bg-red-600 text-white font-bold rounded-full text-sm mb-4"
                             text={"SIGN UP"}
                         />
-                    </form>
-                    <div className="mt-6 text-sm">
-                        <CheckBoxWithLabel label="By signing up, you agree to <a className=text-blue-500 href=''>Teams of Service</a> and <a className=text-blue-500 href=''>Privacy Policy</a>" checked={checked} setChecked={setChecked} />
                         <p className="text-gray-600 mt-1">
                             Already have an Account?
                             <a href="/login.html" className="text-black font-medium">Sign In</a>
                         </p>
-                    </div>
+                    </form>
                 </div>
             </div>
         </Container>

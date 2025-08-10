@@ -1,3 +1,5 @@
+"use client";
+
 
 import SecondaryContainer from '@/components/shared/container/SecondaryContainer';
 import Link from 'next/link';
@@ -6,8 +8,18 @@ import { IoCartOutline } from "react-icons/io5";
 import NavbarSearchbar from '../navbar-searchbar/NavbarSearchbar';
 import ProfileDropDown from '../profile-dropdown/ProfileDropDown';
 import Logo from '@/components/shared/logo/Logo';
+import { cn } from '@/utils/cn';
+import { usePathname } from 'next/navigation';
+
+const navItems = [
+    { name: 'Home', href: '/' },
+    { name: 'Category', href: '/category' },
+    { name: 'Shop', href: '/shop' },
+    { name: 'Reseller', href: '/reseller' },
+];
 
 export default function DesktopNavbar({ setIsCartOpen }) {
+    const pathname = usePathname();
     return (
         <SecondaryContainer className="max-w-[1550px] mx-auto px-4 py-5 lg:flex items-center justify-between hidden">
             {/* Left Section: Logo and Navigation */}
@@ -18,10 +30,11 @@ export default function DesktopNavbar({ setIsCartOpen }) {
                 </Link>
                 {/* Navigation Links */}
                 <nav className="hidden md:flex space-x-8 text-gray-700 text-base">
-                    <Link href="/" className="text-primary hover:text-secondary font-medium">Home</Link>
-                    <Link href="/category" className="text-primary hover:text-secondary font-medium">Category</Link>
-                    <Link href="/shop" className="text-primary hover:text-secondary font-medium">Shop</Link>
-                    <Link href="/reseller" className="text-primary hover:text-secondary font-medium">Reseller</Link>
+                    {navItems.map((item, index) => (
+                        <Link key={index} href={item.href} className={cn("text-primary hover:text-secondary font-medium", pathname === item.href && "text-secondary")}>
+                            {item.name}
+                        </Link>
+                    ))}
                 </nav>
             </div>
 
