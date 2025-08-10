@@ -70,21 +70,6 @@ const App = () => {
                             <h3 className="font-semibold mb-3 text-primary">Select Subject</h3>
                             <div className="flex flex-wrap gap-4">
                                 {['General Inquiry', 'Technical Support', 'Website Feedback'].map((option) => (
-                                    // <label key={option} className="flex items-center space-x-2 cursor-pointer">
-                                    //     <input
-                                    //         type="radio"
-                                    //         name="subject"
-                                    //         value={option}
-                                    //         checked={subject === option}
-                                    //         onChange={() => setSubject(option)}
-                                    //         className="form-radio h-5 w-5 text-purple-600"
-                                    //     />
-                                    //     <span className="text-sm text-gray-700">{option}</span>
-                                    // </label>
-                                    // <div>
-                                    //     <RadioInput />
-                                    //     <p className="text-sm text-gray-700">{option}</p>
-                                    // </div>
                                     <RadioInputWithLabel option={option} checked={subject === option} handleChange={() => setSubject(option)} />
                                 ))}
                             </div>
@@ -92,13 +77,6 @@ const App = () => {
 
                         {/* Submit Button */}
                         <div className="pt-4 ">
-                            {/* <button
-                                type="submit"
-                                className="w-full sm:w-auto px-8 py-3 bg-tertiary text-secondary font-semibold rounded-lg shadow-md hover:bg-purple-700 transition-colors duration-300 flex items-center justify-center space-x-2 ml-auto"
-                            >
-                                <span>Send Message</span>
-                                <FiSend className="w-5 h-5 text-secondary transform rotate-45" />
-                            </button> */}
                             <Button text={"Send Message"} className={"bg-tertiary text-secondary mx-auto block"} />
                         </div>
                     </form>
