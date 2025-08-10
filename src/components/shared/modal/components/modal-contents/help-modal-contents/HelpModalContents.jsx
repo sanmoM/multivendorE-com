@@ -1,8 +1,13 @@
+"use client";
+
 import PrimaryTitle from '@/components/shared/title/PrimaryTitle';
+import useModalAction from '@/hooks/useModalAction';
+import Link from 'next/link';
 import React from 'react';
 import { GoArrowRight } from 'react-icons/go';
 
 const HelpModalContents = () => {
+    const { handleCloseAllModals } = useModalAction();
     const menuSections = [
         {
             title: 'How can we help?',
@@ -13,6 +18,7 @@ const HelpModalContents = () => {
                 },
                 {
                     label: 'Contact Us',
+                    href: '/contact-us',
                 },
                 {
                     label: 'Live Chat',
@@ -24,6 +30,7 @@ const HelpModalContents = () => {
             items: [
                 {
                     label: 'Shipping & Delivery',
+                    href: '/shipping-and-delivery'
                 },
                 {
                     label: 'Returns & Refunds',
@@ -47,13 +54,14 @@ const HelpModalContents = () => {
                     <PrimaryTitle title={section.title} />
                     <div className="space-y-6 my-6 lg:my-10 lg:space-y-8">
                         {section.items.map((item, itemIndex) => (
-                            <div
-                                key={itemIndex}
-                                className="flex items-center justify-between cursor-pointer"
-                            >
-                                <p className="text-lg text-gray-800">{item.label}</p>
-                                {arrowIcon}
-                            </div>
+                            <Link key={itemIndex} href={item?.href || "#"} className='block' onClick={() => handleCloseAllModals()}>
+                                <div
+                                    className="flex items-center justify-between cursor-pointer"
+                                >
+                                    <p className="text-lg text-gray-800">{item.label}</p>
+                                    {arrowIcon}
+                                </div>
+                            </Link>
                         ))}
                     </div>
                 </div>

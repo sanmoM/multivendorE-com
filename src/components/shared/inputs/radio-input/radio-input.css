@@ -1,5 +1,5 @@
 input[type=radio] {
-    --s: 1.5em;
+    --s: 1.2em;
     /* control the size */
     --c: #856161;
     /* the active color */
