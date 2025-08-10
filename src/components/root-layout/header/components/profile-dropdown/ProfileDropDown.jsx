@@ -7,6 +7,7 @@ import MyOrderModalContents from '@/components/shared/modal/components/modal-con
 import PaymentModalContents from '@/components/shared/modal/components/modal-contents/account-info-modal-contents/account-info-inner-modal-contents/payment-modal-contents/PaymentModalContents';
 import AddressModalContents from '@/components/shared/modal/components/modal-contents/account-info-modal-contents/address-modal-contents/AddressModalContents';
 import AccountSettingsModalContents from '@/components/shared/modal/components/modal-contents/account-settings-modal-contents/AccountSettingsModalContents';
+import AddAddressModalContents from '@/components/shared/modal/components/modal-contents/add-address-modal-contents/AddAddressModalContents';
 import BecomeASellerModalContents from '@/components/shared/modal/components/modal-contents/become-a-seller-modal-contents/BecomeASellerModalContents';
 import HelpModalContents from '@/components/shared/modal/components/modal-contents/help-modal-contents/HelpModalContents';
 import OrderModalContents from '@/components/shared/modal/components/modal-contents/order-modal-contents/OrderModalContents';
@@ -373,7 +374,10 @@ export default function ProfileDropDown({ isMobile, isDropdownOpen, setIsDropdow
                     <MyOrderModalContents />
                 </Modal>
                 <Modal isLeft={false} isOpen={currentModal === "my-address-modal"} setIsOpen={() => handleCloseModal()} title={"My Address"}>
-                    <AddressModalContents />
+                    <AddressModalContents handleAddAddress={() => handleOpenModal("add-address-modal")} />
+                </Modal>
+                <Modal isLeft={false} isOpen={currentModal === "add-address-modal"} setIsOpen={() => handleCloseModal()} title={"Add New Address"}>
+                    <AddAddressModalContents handleAddAddress={() => handleCloseModal()} />
                 </Modal>
             </div>
         </div>

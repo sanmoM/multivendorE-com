@@ -14,24 +14,28 @@ const MyOrderModalContents = () => {
                 orderDate: '12/11/23',
                 total: 55,
                 image: '/images/product/product-1.svg',
+                paymentStatus: 'Paid',
             },
             {
                 orderNumber: '345678',
                 orderDate: '05/10/23',
                 total: 30,
                 image: '/images/product/product-2.svg',
+                paymentStatus: 'Paid',
             },
             {
                 orderNumber: '901234',
                 orderDate: '20/09/23',
                 total: 45,
                 image: '/images/product/product-3.svg',
+                paymentStatus: 'Paid',
             },
             {
                 orderNumber: '567890',
                 orderDate: '15/08/23',
                 total: 20,
                 image: '/images/product/product-4.svg',
+                paymentStatus: 'Unpaid',
             },
         ],
         cancelled: [
@@ -41,6 +45,7 @@ const MyOrderModalContents = () => {
                 orderDate: '01/01/23',
                 total: 15,
                 image: '/images/product/product-5.svg',
+                paymentStatus: 'Unpaid',
             },
         ],
     };
@@ -62,7 +67,9 @@ const MyOrderModalContents = () => {
             <div className="space-y-6">
                 {orders[activeTab]?.map((order, index) => (
                     <div key={index} className="flex items-center justify-between cursor-pointer">
-                        <ModalProductCard item={{ image: order.image, name: `Order ${order.orderNumber}`, price: order.total, quantity: order.orderNumber }} />
+                        <ModalProductCard item={{ image: order.image, name: `Order ${order.orderNumber}`, price: order.total, quantity: order.orderNumber, date: order.orderDate, paymentStatus: order.paymentStatus }}
+                            imageClassName={"h-40 w-40 rounded-md object-cover"}
+                        />
                         {arrowIcon}
                     </div>
                 ))}

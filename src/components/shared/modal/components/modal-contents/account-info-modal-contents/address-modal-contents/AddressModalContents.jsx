@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import ItemCard from '../../../../../item-card/ItemCard';
 import Button from '@/components/shared/button/Button';
 
-const AddressModalContents = () => {
+const AddressModalContents = ({ handleAddAddress }) => {
     const [isWorkAddressEnabled, setIsWorkAddressEnabled] = useState(false);
 
     const addresses = [
@@ -67,7 +67,7 @@ const AddressModalContents = () => {
                 ))}
             </div>
 
-            <Button text={"Add Address"} className={"bg-red-600 text-white w-full"} />
+            <Button text={"Add Address"} className={"bg-red-600 text-white w-full"} onClick={handleAddAddress} />
         </div>
     );
 };
