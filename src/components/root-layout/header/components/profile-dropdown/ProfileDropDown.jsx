@@ -11,6 +11,8 @@ import AddAddressModalContents from '@/components/shared/modal/components/modal-
 import BecomeASellerModalContents from '@/components/shared/modal/components/modal-contents/become-a-seller-modal-contents/BecomeASellerModalContents';
 import HelpModalContents from '@/components/shared/modal/components/modal-contents/help-modal-contents/HelpModalContents';
 import OrderModalContents from '@/components/shared/modal/components/modal-contents/order-modal-contents/OrderModalContents';
+import PasswordAndSecurityModalContents from '@/components/shared/modal/components/modal-contents/password-and-security-modal-contents/PasswordAndSecurityModalContents';
+import PersonalInfoModalContents from '@/components/shared/modal/components/modal-contents/personal-info-modal-contents/PersonalInfoModalContents';
 import ProductsModalContents from '@/components/shared/modal/components/modal-contents/products-modal-contents/ProductsModalContents';
 import PromotionModalContents from '@/components/shared/modal/components/modal-contents/promotion-modal-contents/PromotionModalContents';
 import SellerSettingsModalContents from '@/components/shared/modal/components/modal-contents/seller-settings-modal-contents/SellerSettingsModalContents';
@@ -25,7 +27,7 @@ import { FaInbox } from 'react-icons/fa';
 import { FiHelpCircle } from "react-icons/fi";
 import { IoIosCard, IoMdGift } from "react-icons/io";
 import { LuUserRound } from "react-icons/lu";
-import { MdOutlineHomeWork } from "react-icons/md";
+import { MdLockOutline, MdOutlineHomeWork } from "react-icons/md";
 import { RiInformation2Line } from "react-icons/ri";
 import { RxExit } from "react-icons/rx";
 import { TbSitemap } from "react-icons/tb";
@@ -211,8 +213,15 @@ export default function ProfileDropDown({ isMobile, isDropdownOpen, setIsDropdow
             name: 'Personal Information',
             subtitle: 'Manage your personal information',
             type: "button",
-            // handleClick: () => handleOpenModal(""),
+            handleClick: () => handleOpenModal("personal-information-modal"),
             icon: <RiInformation2Line className="h-6 w-6 text-gray-700" />
+        },
+        {
+            name: 'Password and Security',
+            subtitle: 'Manage your password and security',
+            type: "button",
+            handleClick: () => handleOpenModal("password-and-security-modal"),
+            icon: <MdLockOutline className="h-6 w-6 text-gray-700" />
         },
         {
             name: 'My Address',
@@ -351,6 +360,12 @@ export default function ProfileDropDown({ isMobile, isDropdownOpen, setIsDropdow
                 </Modal>
                 <Modal isLeft={false} isOpen={currentModal === "account-information-modal"} setIsOpen={() => handleCloseModal()} title={"Account Information"}>
                     <AccountInfoModalContents accountInfoItems={accountItems} />
+                </Modal>
+                <Modal isLeft={false} isOpen={currentModal === "personal-information-modal"} setIsOpen={() => handleCloseModal()} title={"Personal Information"}>
+                    <PersonalInfoModalContents handleCloseModal={handleCloseModal} />
+                </Modal>
+                <Modal isLeft={false} isOpen={currentModal === "password-and-security-modal"} setIsOpen={() => handleCloseModal()} title={"Password and Security"}>
+                    <PasswordAndSecurityModalContents handleCloseModal={handleCloseModal} />
                 </Modal>
 
                 {/* seller modals */}

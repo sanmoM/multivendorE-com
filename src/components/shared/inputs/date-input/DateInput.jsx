@@ -12,7 +12,7 @@ export default function DateInput({ label, placeholder, value, setValue }) {
                 name="dob"
                 id="dob"
                 placeholder={placeholder}
-                className="w-full px-5 py-3 border rounded-sm shadow-sm bg-white"
+                className="w-full px-5 py-3 border rounded-sm shadow-sm bg-tertiary placeholder:text-secondary focus:outline-1 outline-secondary"
             />
         </div>
     )

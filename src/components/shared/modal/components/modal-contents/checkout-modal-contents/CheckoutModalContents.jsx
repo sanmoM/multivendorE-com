@@ -1,12 +1,21 @@
 import Button from '@/components/shared/button/Button';
+import HorizontalCard from '@/components/shared/horizontal-card/HorizontalCard';
 import PrimaryTitle from '@/components/shared/title/PrimaryTitle';
-import SecondaryTitle from '@/components/shared/title/SecondaryTitle';
-import React, { useState } from 'react';
+import { useState } from 'react';
+import { useSelector } from 'react-redux';
 
 const CheckoutModalContents = () => {
+    const cartItems = useSelector((state) => state.cart.cartItems);
     const [isAddressOpen, setIsAddressOpen] = useState(false);
     const [isTimeOpen, setIsTimeOpen] = useState(false);
     const [isPaymentOpen, setIsPaymentOpen] = useState(false);
+    const subtotal = cartItems.reduce((acc, item) => acc + item.price * item.quantity, 0);
+    const [shipping, setShipping] = useState(5);
+    const [taxes, setTaxes] = useState(3);
+
+    const calculateTotal = () => {
+        return (subtotal + shipping + taxes).toFixed(2);
+    };
 
     return (
         <div className="w-full h-full flex flex-col">
@@ -78,13 +87,23 @@ const CheckoutModalContents = () => {
                     )}
                 </div>
 
+                <div>
+                    <PrimaryTitle title={"Shopping Bag"} />
+                    <div className="grow space-y-4 lg:space-y-6">
+                        {cartItems.map((item, index) => (
+                            // <CartCard item={item} key={index} />
+                            <HorizontalCard key={index} item={{ id: item.id, image: item?.image, title: item?.name, text2: `Quantity: ${item.quantity}`, text3: `Price: $${item.price * item.quantity}` }} />
+                        ))}
+                    </div>
+                </div>
+
                 {/* Order Summary */}
                 <div>
                     <PrimaryTitle title={"Order Summary"} />
                     <div className="space-y-2 text-gray-700">
                         <div className="flex justify-between items-center">
                             <p className='text-secondary'>Subtotal</p>
-                            <p className='text-primary'>$45.00</p>
+                            <p className='text-primary'>${subtotal.toFixed(2)}</p>
                         </div>
                         <div className="flex justify-between items-center">
                             <p className='text-secondary'>Delivery</p>
@@ -96,13 +115,13 @@ const CheckoutModalContents = () => {
                         </div>
                         <div className="flex justify-between items-center">
                             <p className='text-secondary'>Total</p>
-                            <p className='text-primary'>$53.75</p>
+                            <p className='text-primary'>${calculateTotal()}</p>
                         </div>
                     </div>
                 </div>
             </div>
 
-            <Button text={"Place Order"} className={"bg-red-600 text-white w-full"} onClick={() => { }} />
+            <Button text={"Place Order"} className={"bg-red-600 text-white w-full mt-4"} onClick={() => { }} />
         </div>
     );
 };

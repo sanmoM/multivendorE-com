@@ -1,40 +1,22 @@
 "use client";
 
 import Button from '@/components/shared/button/Button';
-import SectionTitle from '@/components/shared/section-title/SectionTitle';
-import React, { useState, useEffect } from 'react';
-import CartCard from './components/cart-card/CartCard';
-import { useSelector } from 'react-redux';
 import PrimaryTitle from '@/components/shared/title/PrimaryTitle';
+import useModalAction from '@/hooks/useModalAction';
+import { useRouter } from 'next/navigation';
+import { useState } from 'react';
+import { useSelector } from 'react-redux';
+import CartCard from './components/cart-card/CartCard';
 
 const CartModalContents = ({ setIsCartOpen, setIsCheckoutOpen }) => {
+    const router = useRouter();
     const cartItems = useSelector((state) => state.cart.cartItems);
+    const { handleCloseAllModals } = useModalAction();
 
     const [shipping, setShipping] = useState(5);
     const totalItems = cartItems.reduce((acc, item) => acc + item.quantity, 0);
     // const [subtotal, setSubtotal] = useState(0);
     const subtotal = cartItems.reduce((acc, item) => acc + item.price * item.quantity, 0);
-
-
-    useEffect(() => {
-        const newSubtotal = cartItems.reduce((acc, item) => acc + item.price * item.quantity, 0);
-        // setSubtotal(newSubtotal);
-    }, [cartItems]);
-
-    const handleQuantityChange = (id, type) => {
-        setItems(prevItems =>
-            prevItems.map(item => {
-                if (item.id === id) {
-                    if (type === 'increment') {
-                        return { ...item, quantity: item.quantity + 1 };
-                    } else {
-                        return { ...item, quantity: Math.max(1, item.quantity - 1) };
-                    }
-                }
-                return item;
-            })
-        );
-    };
 
     const calculateTotal = () => {
         return (subtotal + shipping).toFixed(2);
@@ -77,7 +59,10 @@ const CartModalContents = ({ setIsCartOpen, setIsCheckoutOpen }) => {
                         setIsCheckoutOpen(true);
                     }, 300);
                 }} />
-                <Button text={"Buy Now"} className={"bg-transparent text-primary border !border-primary w-full"} />
+                <Button text={"Buy Now"} className={"bg-transparent text-primary border !border-primary w-full"} onClick={() => {
+                    handleCloseAllModals();
+                    router.push("/shop");
+                }} />
             </div>
         </div>
     );

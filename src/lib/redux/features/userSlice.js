@@ -5,6 +5,14 @@ const initialState = {
     mobile: "",
     accountType: "customer",
     addresses: [],
+    personalInformation: {
+        firstName: "",
+        lastName: "",
+        email: "",
+        phoneNumber: "",
+        dateOfBirth: "",
+        bio: "",
+    },
 };
 
 export const userSlice = createSlice({
@@ -34,9 +42,12 @@ export const userSlice = createSlice({
             state.addresses.forEach(addr => {
                 addr.isPrimary = addr.id === selectedId;
             });
+        },
+        setPrimaryInformation: (state, action) => {
+            state.personalInformation = action.payload;
         }
     },
 })
 
-export const { setUser, setAccountType, addAddresses, setPrimaryAddress } = userSlice.actions
+export const { setUser, setAccountType, addAddresses, setPrimaryAddress, setPrimaryInformation } = userSlice.actions
 export default userSlice.reducer
