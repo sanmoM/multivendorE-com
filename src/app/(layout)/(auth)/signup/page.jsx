@@ -27,10 +27,10 @@ export default function page() {
     const handleSubmit = async (e) => {
         e.preventDefault();
 
-        // const api = axios.create({
-        //     baseURL: "https://multivendor.testorbis.com",
-        //     withCredentials: true, // Cookie পাঠানোর জন্য
-        // });
+        const api = axios.create({
+            baseURL: "https://multivendor.testorbis.com",
+            withCredentials: true, // Cookie পাঠানোর জন্য
+        });
 
 
         try {
@@ -56,18 +56,18 @@ export default function page() {
                 //     //     },
                 //     // }
                 // )
-                dispatch(setUser({ mobile: mobile}))
-                router.push("/")
+                // dispatch(setUser({ mobile: mobile}))
+                // router.push("/")
                 // প্রথমে CSRF cookie নিতে হবে
-                // await api.get("/sanctum/csrf-cookie", { withCredentials: true, withXSRFToken: true });
+                await api.get("/sanctum/csrf-cookie", { withCredentials: true, withXSRFToken: true });
                 // // তারপর Register API কল
-                // const res = await api.post("/api/register", {
-                //     name: "Tajul",
-                //     mobile: "01853991555",
-                //     password: "password123",
-                //     password_confirmation: "password123"
-                // });
-                // setMessage("Registration successful!");
+                const res = await api.post("/api/register", {
+                    name: "Tajul",
+                    mobile: "01853991555",
+                    password: "password123",
+                    password_confirmation: "password123"
+                },{ withCredentials: true, withXSRFToken: true });
+                setMessage("Registration successful!");
             } else {
                 toast.error("Please fill all the fields")
             }
