@@ -1,36 +1,24 @@
 import Button from '@/components/shared/button/Button';
+import CheckBox from '@/components/shared/inputs/check-box/CheckBox';
 import PrimaryTitle from '@/components/shared/title/PrimaryTitle';
-import React from 'react';
+import React, { useState } from 'react';
 import { FaRegCreditCard } from 'react-icons/fa';
+import { useSelector } from 'react-redux';
 
-const PaymentModalContents = () => {
-    const savedPaymentMethods = [
-        {
-            id: 'visa',
-            type: 'Visa',
-            lastFour: '4567',
-            expiry: '08/25',
-        },
-        {
-            id: 'mastercard',
-            type: 'Mastercard',
-            lastFour: '1234',
-            expiry: '05/24',
-        },
-    ];
+const PaymentModalContents = ({ handleAddPaymentMethod }) => {
+    const savedPaymentMethods = useSelector((state) => state.user.paymentMethods);
+    const [selectedMethod, setSelectedMethod] = useState("card");
+
+    console.log(selectedMethod, "selectedMethod");
 
     const otherPaymentMethods = [
         {
-            id: 'paypal',
-            type: 'PayPal',
+            name: 'B-Kash',
+            value: 'bkash',
         },
         {
-            id: 'applepay',
-            type: 'Apple Pay',
-        },
-        {
-            id: 'venmo',
-            type: 'Venmo',
+            name: 'SSL',
+            value: 'ssl',
         },
     ];
 
@@ -46,12 +34,12 @@ const PaymentModalContents = () => {
                             <div key={method.id} className="flex items-center justify-between">
                                 <div className="flex items-center space-x-4">
                                     {/* Checkbox Placeholder */}
-                                    <FaRegCreditCard className='w-10 h-10 text-gray-700' />
+                                    <FaRegCreditCard className='w-8 h-8 text-primary' />
                                     <div>
                                         <p className="text-lg text-gray-800 font-medium">
-                                            {method.type} ... {method.lastFour}
+                                            {method.type} ... {method.cardNumber.slice(method.cardNumber.length - 4)}
                                         </p>
-                                        <p className="text-base text-secondary">Expires {method.expiry}</p>
+                                        <p className="text-base text-secondary">Expires: {method.expiryDate}</p>
                                     </div>
                                 </div>
                                 <button className="bg-tertiary text-secondary text-sm font-semibold px-8 py-2 rounded-full">
@@ -70,9 +58,8 @@ const PaymentModalContents = () => {
                         {otherPaymentMethods.map((method) => (
                             <div key={method.id} className="flex items-center justify-between">
                                 <div className="flex items-center space-x-4">
-                                    {/* Checkbox Placeholder */}
-                                    <div className="w-6 h-6 border border-gray-300 rounded-md"></div>
-                                    <p className="text-lg text-gray-800 font-medium">{method.type}</p>
+                                    <CheckBox checked={selectedMethod === method.value} setChecked={() => setSelectedMethod(method?.value)} />
+                                    <p className="text-lg text-gray-800 font-medium">{method.name}</p>
                                 </div>
                                 {/* Right-side Checkbox Placeholder */}
                                 <div className="w-6 h-6 border border-gray-300 rounded-md"></div>
@@ -81,7 +68,7 @@ const PaymentModalContents = () => {
                     </div>
                 </div>
             </div>
-            <Button text={"Add Payment Method"} className={"bg-red-600 text-white w-full"} />
+            <Button text={"Add Payment Method"} className={"bg-red-600 text-white w-full"} onClick={handleAddPaymentMethod} />
         </div>
     );
 };

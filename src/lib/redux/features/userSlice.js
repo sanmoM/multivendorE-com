@@ -13,6 +13,7 @@ const initialState = {
         dateOfBirth: "",
         bio: "",
     },
+    paymentMethods: [],
 };
 
 export const userSlice = createSlice({
@@ -45,9 +46,12 @@ export const userSlice = createSlice({
         },
         setPrimaryInformation: (state, action) => {
             state.personalInformation = action.payload;
+        },
+        addPaymentMethod: (state, action) => {
+            state.paymentMethods.push(action.payload);
         }
     },
 })
 
-export const { setUser, setAccountType, addAddresses, setPrimaryAddress, setPrimaryInformation } = userSlice.actions
+export const { setUser, setAccountType, addAddresses, setPrimaryAddress, setPrimaryInformation, addPaymentMethod } = userSlice.actions
 export default userSlice.reducer

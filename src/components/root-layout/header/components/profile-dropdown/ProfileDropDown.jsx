@@ -8,6 +8,7 @@ import PaymentModalContents from '@/components/shared/modal/components/modal-con
 import AddressModalContents from '@/components/shared/modal/components/modal-contents/account-info-modal-contents/address-modal-contents/AddressModalContents';
 import AccountSettingsModalContents from '@/components/shared/modal/components/modal-contents/account-settings-modal-contents/AccountSettingsModalContents';
 import AddAddressModalContents from '@/components/shared/modal/components/modal-contents/add-address-modal-contents/AddAddressModalContents';
+import AddPaymentMethodModalContents from '@/components/shared/modal/components/modal-contents/add-payment-method-modal-contents/AddPaymentMethodModalContents';
 import BecomeASellerModalContents from '@/components/shared/modal/components/modal-contents/become-a-seller-modal-contents/BecomeASellerModalContents';
 import HelpModalContents from '@/components/shared/modal/components/modal-contents/help-modal-contents/HelpModalContents';
 import OrderModalContents from '@/components/shared/modal/components/modal-contents/order-modal-contents/OrderModalContents';
@@ -345,7 +346,7 @@ export default function ProfileDropDown({ isMobile, isDropdownOpen, setIsDropdow
 
             {/* all modal for profile  */}
             <div>
-                {/* all modal for profile  */}
+                {/* dropdown modals */}
                 <Modal isLeft={false} isOpen={currentModal === "order-modal"} setIsOpen={() => handleCloseModal()} title={"Orders"}>
                     <OrderModalContents />
                 </Modal>
@@ -358,15 +359,7 @@ export default function ProfileDropDown({ isMobile, isDropdownOpen, setIsDropdow
                 <Modal isLeft={false} isOpen={currentModal === "help-modal"} setIsOpen={() => handleCloseModal()} title={"Help"}>
                     <HelpModalContents />
                 </Modal>
-                <Modal isLeft={false} isOpen={currentModal === "account-information-modal"} setIsOpen={() => handleCloseModal()} title={"Account Information"}>
-                    <AccountInfoModalContents accountInfoItems={accountItems} />
-                </Modal>
-                <Modal isLeft={false} isOpen={currentModal === "personal-information-modal"} setIsOpen={() => handleCloseModal()} title={"Personal Information"}>
-                    <PersonalInfoModalContents handleCloseModal={handleCloseModal} />
-                </Modal>
-                <Modal isLeft={false} isOpen={currentModal === "password-and-security-modal"} setIsOpen={() => handleCloseModal()} title={"Password and Security"}>
-                    <PasswordAndSecurityModalContents handleCloseModal={handleCloseModal} />
-                </Modal>
+
 
                 {/* seller modals */}
                 <Modal isLeft={false} isOpen={currentModal === "become-a-seller-modal"} setIsOpen={() => handleCloseModal()} title={"Become a Seller"}>
@@ -379,11 +372,15 @@ export default function ProfileDropDown({ isMobile, isDropdownOpen, setIsDropdow
                     <PromotionModalContents handleCloseModal={handleCloseAllModals} />
                 </Modal>
 
+                {/* profile settings modals */}
+                <Modal isLeft={false} isOpen={currentModal === "account-information-modal"} setIsOpen={() => handleCloseModal()} title={"Account Information"}>
+                    <AccountInfoModalContents accountInfoItems={accountItems} />
+                </Modal>
 
 
                 {/* account information modals */}
                 <Modal isLeft={false} isOpen={currentModal === "payment-modal"} setIsOpen={() => handleCloseModal()} title={"Payment Methods"}>
-                    <PaymentModalContents />
+                    <PaymentModalContents handleAddPaymentMethod={() => handleOpenModal("add-payment-method-modal")} />
                 </Modal>
                 <Modal isLeft={false} isOpen={currentModal === "my-orders-modal"} setIsOpen={() => handleCloseModal()} title={"My Orders"}>
                     <MyOrderModalContents />
@@ -393,6 +390,15 @@ export default function ProfileDropDown({ isMobile, isDropdownOpen, setIsDropdow
                 </Modal>
                 <Modal isLeft={false} isOpen={currentModal === "add-address-modal"} setIsOpen={() => handleCloseModal()} title={"Add New Address"}>
                     <AddAddressModalContents handleAddAddress={() => handleCloseModal()} />
+                </Modal>
+                <Modal isLeft={false} isOpen={currentModal === "add-payment-method-modal"} setIsOpen={() => handleCloseModal()} title={"Payment Methods"}>
+                    <AddPaymentMethodModalContents handleCloseModal={handleCloseModal} />
+                </Modal>
+                <Modal isLeft={false} isOpen={currentModal === "password-and-security-modal"} setIsOpen={() => handleCloseModal()} title={"Password and Security"}>
+                    <PasswordAndSecurityModalContents handleCloseModal={handleCloseModal} />
+                </Modal>
+                <Modal isLeft={false} isOpen={currentModal === "personal-information-modal"} setIsOpen={() => handleCloseModal()} title={"Personal Information"}>
+                    <PersonalInfoModalContents handleCloseModal={handleCloseModal} />
                 </Modal>
             </div>
         </div>
