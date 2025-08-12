@@ -20,8 +20,8 @@ export default function Home() {
         <FeaturedItems title={"Featured Products"} desktopView={5} mobileView={3} >
           {
             products?.map((product, index) => (
-              <Link href={"/single-item"} className="block">
-                <Card2 key={index} item={{ image: product?.image, name: product?.name, subtitle: `$${product?.price}` }} containerClassName={"px-2"} />
+              <Link href={"/single-item"} className="block" key={index}>
+                <Card2 item={{ image: product?.image, name: product?.name, subtitle: `$${product?.price}` }} containerClassName={"px-2"} />
               </Link>
             ))
           }
@@ -29,8 +29,8 @@ export default function Home() {
         <Items title={"More Featured Products"} desktopView={5} mobileView={3} hasLoadMoreBtn >
           {
             products?.map((product, index) => (
-              <Link href={"/single-item"} className="block">
-                <Card2 key={index} item={{ image: product?.image, name: product?.name, subtitle: `$${product?.price}` }} containerClassName={"px-2"} />
+              <Link href={"/single-item"} className="block" key={index} >
+                <Card2 item={{ image: product?.image, name: product?.name, subtitle: `$${product?.price}` }} containerClassName={"px-2"} />
               </Link>
             ))
           }
