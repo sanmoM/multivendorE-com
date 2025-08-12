@@ -5,8 +5,8 @@ export default function useModalAction() {
     const currentModal = useSelector(state => state.modal?.currentModal);
     const modalStack = useSelector(state => state.modal?.modalStack);
 
-    console.log(currentModal, "currentModal")
-    console.log(modalStack, "modalStack")
+    // console.log(currentModal, "currentModal")
+    // console.log(modalStack, "modalStack")
     const dispatch = useDispatch();
 
     const handleCloseAllModals = () => {
