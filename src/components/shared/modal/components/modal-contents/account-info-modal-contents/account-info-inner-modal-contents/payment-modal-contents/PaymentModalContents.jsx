@@ -27,7 +27,6 @@ const PaymentModalContents = ({ handleAddPaymentMethod }) => {
             <div className='space-y-6'>
                 {/* Saved Payment Methods Section */}
                 <div>
-                    {/* <h3 className="text-2xl font-bold text-gray-900 mb-4">Saved Payment Methods</h3> */}
                     <PrimaryTitle title={"Saved Payment Methods"} />
                     <div className="space-y-4">
                         {savedPaymentMethods.map((method) => (
@@ -52,7 +51,6 @@ const PaymentModalContents = ({ handleAddPaymentMethod }) => {
 
                 {/* Other Payment Methods Section */}
                 <div>
-                    {/* <h3 className="text-2xl font-bold text-gray-900 mb-4">Other Payment Methods</h3> */}
                     <PrimaryTitle title={"Other Payment Methods"} />
                     <div className="space-y-4">
                         {otherPaymentMethods.map((method) => (
