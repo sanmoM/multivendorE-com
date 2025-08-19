@@ -9,7 +9,6 @@ const PaymentModalContents = ({ handleAddPaymentMethod }) => {
     const savedPaymentMethods = useSelector((state) => state.user.paymentMethods);
     const [selectedMethod, setSelectedMethod] = useState("card");
 
-    console.log(selectedMethod, "selectedMethod");
 
     const otherPaymentMethods = [
         {

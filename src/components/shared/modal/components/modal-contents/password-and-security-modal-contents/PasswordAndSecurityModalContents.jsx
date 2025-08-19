@@ -9,7 +9,6 @@ export default function PasswordAndSecurityModalContents({ handleCloseModal }) {
     const [confirmNewPassword, setConfirmNewPassword] = useState("");
 
     const handleSaveChanges = () => {
-        console.log(currentPassword, newPassword, confirmNewPassword);
         handleCloseModal();
     }
     return (

@@ -15,7 +15,6 @@ export default function InfoTab() {
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        // console.log(firstName, lastName, email, phone, date, description);
     };
     return (
         <div

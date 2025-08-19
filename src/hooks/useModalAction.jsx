@@ -4,9 +4,6 @@ import { useDispatch, useSelector } from 'react-redux';
 export default function useModalAction() {
     const currentModal = useSelector(state => state.modal?.currentModal);
     const modalStack = useSelector(state => state.modal?.modalStack);
-
-    // console.log(currentModal, "currentModal")
-    // console.log(modalStack, "modalStack")
     const dispatch = useDispatch();
 
     const handleCloseAllModals = () => {
@@ -23,7 +20,6 @@ export default function useModalAction() {
     const handleOpenModal = (modalName) => {
         dispatch(handleOpenModalAction(modalName));
         dispatch(setCurrentModalAction(null));
-        // console.log(modalStack, "modalStack inner")
         if (modalStack.length !== 0) {
             setTimeout(() => {
                 dispatch(setCurrentModalAction(modalName));

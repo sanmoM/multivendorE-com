@@ -17,7 +17,6 @@ const AddAddressModalContents = ({ handleAddAddress }) => {
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        // console.log(street, city, state, zipCode, country);
         dispatch(addAddresses({ street, city, state, zipCode, country }));
         handleAddAddress()
     };

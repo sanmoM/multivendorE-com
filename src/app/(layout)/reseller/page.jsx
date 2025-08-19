@@ -19,7 +19,6 @@ export default function page() {
                 <div className={"space-y-10 lg:space-y-16 mt-6 lg:mt-10 "}>
                     {/* <FeaturedShop /> */}
                     {/* <AllShops /> */}
-                    {console.log(resellers)}
                     <FeaturedItems title={"Featured Resellers"} desktopView={5} mobileView={3} >
                         {
                             resellers?.map((reseller) => (

@@ -10,7 +10,6 @@ export default function ChangePasswordTab() {
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        // console.log(currentPassword, newPassword, confirmPassword);
     };
     return (
         <div className="w-full rounded-sm">

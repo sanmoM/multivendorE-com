@@ -1,13 +1,13 @@
+import { BASE_URL } from "@/config";
 import axios from "axios";
 
 export default function useAxios() {
-    // console.log(process.env.NEXT_PUBLIC_BASE_URL)
     // Add a request interceptor
     axios.interceptors.request.use(function (config) {
         // Do something before request is sent
         return {
             ...config,
-            baseURL: process.env.NEXT_PUBLIC_BASE_URL,
+            baseURL: BASE_URL,
             // withCredentials: true,
             withCredentials: true, 
             withXSRFToken: true

@@ -37,19 +37,6 @@ const CustomOrderModalContents = ({ handlePlaceOrder: handlePlaceOrderAction }) 
     ];
 
     const handlePlaceOrder = () => {
-        // console.log({
-        //     selectedSize,
-        //     selectedFlavor,
-        //     selectedColor,
-        //     quantity,
-        //     weight,
-        //     designNotes,
-        //     pickupDelivery,
-        //     additionalNotes,
-        // });
-        // Add your order placement logic here
-        // alert('Order Placed! Check console for details.');
-        // handleOpenModal("place-order-modal")
         handlePlaceOrderAction()
     };
 

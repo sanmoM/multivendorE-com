@@ -1,3 +1,11 @@
 .slick-slide:focus {
   outline: none !important;
 }
+
+.slick-slide {
+  display: inline-block; /* ensures horizontal layout */
+}
+
+.slick-list {
+  overflow: hidden;
+}
