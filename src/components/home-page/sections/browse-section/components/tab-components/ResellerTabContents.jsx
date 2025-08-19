@@ -1,4 +1,4 @@
-import Card2 from '@/components/shared/card-2/Card2'
+import PrimaryCard from '@/components/shared/primary-card/PrimaryCard'
 import CustomSlider from '@/components/shared/custom-slider/CustomSlider'
 import Filter from '@/components/shared/filter/Filter'
 import React from 'react'
@@ -12,7 +12,7 @@ export default function ResellerTabContents({ resellers }) {
             <CustomSlider mobileView={3} desktopView={5}>
                 {
                     resellers?.map((shop) => (
-                        <Card2 key={shop.id} item={shop} containerClassName={"px-2"} />
+                        <PrimaryCard key={shop.id} item={shop} containerClassName={"px-2"} />
                     ))
                 }
             </CustomSlider>

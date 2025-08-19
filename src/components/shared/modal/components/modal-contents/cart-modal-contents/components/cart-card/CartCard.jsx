@@ -1,12 +1,9 @@
 import IncreaseDecreaseButtons from '@/components/shared/increase-decrease-buttons/IncreaseDecreaseButtons';
 import { handleQuantity } from '@/lib/redux/features/cartSlice';
-import Image from 'next/image';
-import React, { useState } from 'react'
 import { useDispatch } from 'react-redux';
 import ModalProductCard from '../../../../modal-product-card/ModalProductCard';
 
 export default function CartCard({ item }) {
-    const [quantity, setQuantity] = useState(1);
     const dispatch = useDispatch();
     const handleQuantityChange = (quantity) => {
         dispatch(handleQuantity({ id: item.id, quantity }));

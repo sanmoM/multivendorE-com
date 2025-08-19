@@ -1,6 +1,6 @@
 "use client";
 
-import Card2 from "@/components/shared/card-2/Card2";
+import PrimaryCard from "@/components/shared/primary-card/PrimaryCard";
 import SectionTitle from "@/components/shared/section-title/SectionTitle";
 import { shops } from "@/data";
 import { useEffect, useState } from "react";

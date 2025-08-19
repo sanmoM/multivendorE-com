@@ -1,4 +1,4 @@
-import Card2 from "@/components/shared/card-2/Card2";
+import PrimaryCard from "@/components/shared/primary-card/PrimaryCard";
 import Container from "@/components/shared/container/Container";
 import FeaturedItems from "@/components/shared/featured-items/FeaturedItems";
 import Filter from "@/components/shared/filter/Filter";
@@ -21,7 +21,7 @@ export default function page() {
                     <FeaturedItems title={"Featured Shops"} desktopView={5} mobileView={3} >
                         {
                             shops?.map((shop) => (
-                                <Card2 key={shop.id} item={shop} containerClassName={"px-2"} />
+                                <PrimaryCard key={shop.id} item={shop} containerClassName={"px-2"} />
                             ))
                         }
                     </FeaturedItems>
@@ -29,7 +29,7 @@ export default function page() {
 
                         {
                             shops?.map((shop) => (
-                                <Card2 key={shop.id} item={shop} containerClassName={"px-2"} />
+                                <PrimaryCard key={shop.id} item={shop} containerClassName={"px-2"} />
                             ))
                         }
                     </Items>
