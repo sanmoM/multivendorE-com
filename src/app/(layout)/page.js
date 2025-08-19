@@ -2,6 +2,7 @@
 
 import Banner from "@/components/home-page/sections/banner/Banner";
 import BrowseSection from "@/components/home-page/sections/browse-section/BrowseSection";
+import MoreFeaturedProducts from "@/components/home-page/sections/more-feature-products/MoreFeaturedProducts";
 import PromotionalSection from "@/components/home-page/sections/promotional-section/PromotionalSection";
 import MobileHeaderWithSearchbar from "@/components/root-layout/header/components/mobile-header-withSearchbar/MobileHeaderWithSearchbar";
 import Container from "@/components/shared/container/Container";
@@ -30,15 +31,18 @@ export default async function Home() {
             ))
           }
         </FeaturedItems>
-        <Items title={"More Featured Products"} desktopView={5} mobileView={3} hasLoadMoreBtn >
-          {
-            products?.map((product, index) => (
-              <Link href={"/single-item"} className="block" key={index} >
-                <PrimaryCard item={{ image: product?.image, title: product?.name, subtitle: `$${product?.price}` }} containerClassName={"px-2"} />
-              </Link>
-            ))
-          }
-        </Items>
+        {/* <div>
+          <Items title={"More Featured Products"} desktopView={5} mobileView={3} >
+            {
+              products?.map((product, index) => (
+                <Link href={"/single-item"} className="block" key={index} >
+                  <PrimaryCard item={{ image: product?.image, title: product?.name, subtitle: `$${product?.price}` }} containerClassName={"px-2"} />
+                </Link>
+              ))
+            }
+          </Items>
+        </div> */}
+        <MoreFeaturedProducts />
       </Container>
     </div>
 
