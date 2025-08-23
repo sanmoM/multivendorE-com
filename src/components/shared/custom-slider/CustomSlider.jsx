@@ -18,18 +18,19 @@ export default function CustomSlider({
         infinite: true,
         speed: 500,
         slidesToShow: desktopView,
-        slidesToScroll: 2,
         autoplaySpeed: 2000,
         arrows: false,
-        centerMode: true,
+        // centerMode: true, // this option will be uncommented when we have the slider in the center
         autoplay: autoplay,
         centerPadding: paddingDesktop ? `${paddingDesktop}px` : "0px",
         initialSlide: 1,
         adaptiveHeight: true,
+        //  slidesToScroll: 5, 
         responsive: [
             {
                 breakpoint: 1024,
                 settings: {
+                    // slidesToScroll: 5,
                     slidesToShow: desktopView,
                     centerMode: true,
                     centerPadding: paddingDesktop ? `${paddingDesktop}px` : "0px",
@@ -38,6 +39,7 @@ export default function CustomSlider({
             {
                 breakpoint: 480,
                 settings: {
+                    // slidesToScroll: 2,
                     slidesToShow: mobileView,
                     centerMode: true,
                     centerPadding: paddingMobile ? `${paddingMobile}px` : "0px",

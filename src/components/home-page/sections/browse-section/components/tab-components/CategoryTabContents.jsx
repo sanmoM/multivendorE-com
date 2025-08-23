@@ -7,12 +7,12 @@ export default function CategoryTabContents({ category }) {
             {
                 category?.map((category, index) => (
                     <Link
-                        href={category.path}
-                        key={index}
-                        className="flex items-center gap-4 px-4 py-5 border-2 border-gray-300 rounded-xl hover:bg-gray-200 transition-colors duration-200"
+                    href={"/category"}
+                    key={index}
+                    className="flex items-center gap-4 px-4 py-3  justify-center border-2 border-gray-300 rounded-xl hover:bg-gray-200 transition-colors duration-200"
                     >
                         {category.icon}
-                        <span className="text-primary font-bold">{category.name}</span>
+                        <span className="text-primary font-bold">{category.categoryName}</span>
                     </Link>
                 ))
             }

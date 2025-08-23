@@ -52,8 +52,8 @@ const PaymentModalContents = ({ handleAddPaymentMethod }) => {
                 <div>
                     <PrimaryTitle title={"Other Payment Methods"} />
                     <div className="space-y-4">
-                        {otherPaymentMethods.map((method) => (
-                            <div key={method.id} className="flex items-center justify-between">
+                        {otherPaymentMethods.map((method, index) => (
+                            <div key={index} className="flex items-center justify-between">
                                 <div className="flex items-center space-x-4">
                                     <CheckBox checked={selectedMethod === method.value} setChecked={() => setSelectedMethod(method?.value)} />
                                     <p className="text-lg text-gray-800 font-medium">{method.name}</p>

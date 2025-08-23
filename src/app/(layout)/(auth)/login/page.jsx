@@ -3,23 +3,50 @@ import AuthTextInput from '@/components/auth/auth-inputs/auth-text-input/AuthTex
 import Button from '@/components/shared/button/Button';
 import Container from '@/components/shared/container/Container';
 import CheckBoxWithLabel from '@/components/shared/inputs/check-box-with-label/CheckBoxWithLabel';
-import { setUser } from '@/lib/redux/features/userSlice';
+import useAxios from '@/hooks/useAxios';
 import { useRouter } from 'next/navigation';
 import { useState } from 'react';
 import { useDispatch } from 'react-redux';
 
 export default function page() {
-    const [email, setEmail] = useState('');
+    const [mobile, setMobile] = useState('');
     const [password, setPassword] = useState('');
     const [remember, setRemember] = useState(false);
     const dispatch = useDispatch();
     const router = useRouter()
+    const axios = useAxios();
 
-    const handleSubmit = (e) => {
+    const handleSubmit = async (e) => {
         e.preventDefault();
-        if (email) {
-            dispatch(setUser({ email }))
-            router.push("/")
+        try {
+            if (mobile || password || confirmPassword || firstName || lastName || checked) {
+                if (isValidBDNumber(mobile) === false) {
+                    toast.error("Please enter a valid mobile number")
+                    return
+                }
+                const res = await axios.post("/registeruser", {
+                    name: firstName + " " + lastName,
+                    mobile: mobile,
+                    password: password,
+                    password_confirmation: confirmPassword
+                });
+
+                router.push("/login")
+
+            } else {
+                toast.error("Please fill all the fields")
+            }
+        }
+        catch (error) {
+            toast.error(error.message)
+        }
+    };
+
+    const handleMobileNumberChange = (value) => {
+        // remove everything except numbers
+        const onlyNumbers = value.replace(/[^0-9]/g, "");
+        if (onlyNumbers.length <= 11) {
+            setMobile(onlyNumbers);
         }
     };
 
@@ -27,15 +54,15 @@ export default function page() {
         <Container
             className="lg:min-h-auto min-h-[calc(100svh-73.5px)] md:min-h-[calc(100svh-84px)] grid place-items-center"
         >
-            <div class="w-full max-w-md mx-auto">
+            <div className="w-full max-w-md mx-auto">
 
-                <h2 class="text-3xl font-bold mb-1 text-center">Sign In</h2>
-                <p class="text-sm text-gray-500 mb-6 text-center">
+                <h2 className="text-3xl font-bold mb-1 text-center">Sign In</h2>
+                <p className="text-sm text-gray-500 mb-6 text-center">
                     See your growth and get consulting support!
                 </p>
 
                 <button
-                    class="w-full flex items-center justify-center gap-2 border bg-white rounded-md py-3 text-sm font-medium mb-6"
+                    className="w-full flex items-center justify-center gap-2 border bg-white rounded-md py-3 text-sm font-medium mb-6"
                 >
                     <img
                         src="https://img.icons8.com/color/16/000000/google-logo.png"
@@ -44,18 +71,18 @@ export default function page() {
                     Sign In with Google
                 </button>
 
-                <div class="text-center text-gray-500 text-sm mb-6 relative">
-                    <span class="bg-[#f4f7f9] px-2 z-10 relative"
+                <div className="text-center text-gray-500 text-sm mb-6 relative">
+                    <span className="bg-[#f4f7f9] px-2 z-10 relative"
                     >Sign in with Phone</span
                     >
                     <div
-                        class="absolute left-0 top-1/2 w-full h-px bg-gray-300 -z-0"
+                        className="absolute left-0 top-1/2 w-full h-px bg-gray-300 -z-0"
                     ></div>
                 </div>
 
                 <form onSubmit={handleSubmit}>
-                    <div class="mb-4 space-y-4">
-                        <AuthTextInput label="Email" placeholder="Email" value={email} setValue={setEmail} isRequired type='email' />
+                    <div className="mb-4 space-y-4">
+                        <AuthTextInput label="Mobile" placeholder="Mobile" value={mobile} setValue={handleMobileNumberChange} isRequired type='email' />
                         <AuthTextInput label="Password" placeholder="Password" value={password} setValue={setPassword} isRequired type='password' />
                     </div>
                     <CheckBoxWithLabel label="Remember me" checked={remember} setChecked={setRemember} />
@@ -68,16 +95,16 @@ export default function page() {
                     />
                 </form>
 
-                <div class="mt-6 text-sm">
-                    <p class="text-gray-600">
+                <div className="mt-6 text-sm">
+                    <p className="text-gray-600">
                         Forgot Password?
-                        <a href="/resetPass.html" class="text-black font-medium"
+                        <a href="/resetPass.html" className="text-black font-medium"
                         >Click Here</a
                         >
                     </p>
-                    <p class="text-gray-600 mt-1">
+                    <p className="text-gray-600 mt-1">
                         Don’t have an Account?
-                        <a href="/signup" class="text-black font-medium">Sign Up</a>
+                        <a href="/signup" className="text-black font-medium">Sign Up</a>
                     </p>
                 </div>
             </div>

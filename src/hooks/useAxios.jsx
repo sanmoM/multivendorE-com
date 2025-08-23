@@ -8,9 +8,6 @@ export default function useAxios() {
         return {
             ...config,
             baseURL: BASE_URL,
-            // withCredentials: true,
-            withCredentials: true, 
-            withXSRFToken: true
         };
     }, function (error) {
         // Do something with request error

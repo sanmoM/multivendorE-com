@@ -15,7 +15,7 @@ export default function ProfileImage() {
             </div>
             <div className="mx-auto flex flex-col items-center gap-2">
                 <label
-                    for="file-upload"
+                    htmlFor="file-upload"
                     className="cursor-pointer px-4 py-2 bg-gray-500 text-white rounded hover:bg-gray-600 transition"
                 >
                     Browse Image

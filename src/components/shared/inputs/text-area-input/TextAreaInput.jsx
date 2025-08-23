@@ -5,7 +5,7 @@ export default function TextAreaInput({ label, value, setValue, variant, placeho
     return (
         <div className="flex flex-col gap-2">
             {label && <label
-                for="description"
+                htmlFor="description"
                 className={cn("text-[16px] max-sm:text-[14px]", variant === "small" && "text-sm")}
             >{label}</label>}
             <textarea

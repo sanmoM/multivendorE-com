@@ -2,17 +2,7 @@ import { userItems } from '@/data'
 import { createSlice } from '@reduxjs/toolkit'
 
 const initialState = {
-    mobile: "",
-    accountType: "customer",
-    addresses: [],
-    personalInformation: {
-        firstName: "",
-        lastName: "",
-        email: "",
-        phoneNumber: "",
-        dateOfBirth: "",
-        bio: "",
-    },
+    user: {},
     paymentMethods: [],
 };
 
@@ -21,12 +11,11 @@ export const userSlice = createSlice({
     initialState,
     reducers: {
         setUser: (state, action) => {
-            const { mobile } = action.payload;
-            state.mobile = mobile;
+            state.user = action.payload;
         },
         setAccountType: (state, action) => {
             const { accountType } = action.payload;
-            state.accountType = accountType;
+            state.user.accountType = accountType;
         },
         addAddresses: (state, action) => {
             if (state.addresses.length === 0) {

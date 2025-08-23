@@ -12,7 +12,10 @@ export default function ShopTabContents({ shops }) {
             <CustomSlider mobileView={3} desktopView={5}>
                 {
                     shops?.map((shop) => (
-                        <PrimaryCard key={shop.id} item={shop} containerClassName={"px-2"} />
+                        <>
+                            {console.log({ title: shop?.vendor?.shop_name, subTItle: shop?.vendor?.address })}
+                            <PrimaryCard key={shop.id} item={{ title: shop?.vendor?.shop_name, subtitle: shop?.vendor?.address, image: shop?.vendor?.image }} containerClassName={"px-2"} />
+                        </>
                     ))
                 }
             </CustomSlider>

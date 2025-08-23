@@ -1,14 +1,15 @@
 'use client';
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { CgCoffee } from "react-icons/cg";
 import { PiBowlFood } from "react-icons/pi";
 // import TabButton from "./components/TabButton";
+import TabButton from "@/components/shared/tab-button/TabButton";
 import { resellers, shops } from "@/data";
+import useAxios from "@/hooks/useAxios";
 import CategoryTabContents from "./components/tab-components/CategoryTabContents";
 import ResellerTabContents from "./components/tab-components/ResellerTabContents";
 import ShopTabContents from "./components/tab-components/ShopTabContents";
-import TabButton from "@/components/shared/tab-button/TabButton";
 
 const tabItems = {
     category: [
@@ -54,6 +55,18 @@ const tabs = [
 export default function BrowseSection() {
 
     const [activeTab, setActiveTab] = useState('category');
+    const [categories, setCategories] = useState([]);
+    const [shops, setShops] = useState([]);
+    const axios = useAxios();
+    console.log(shops)
+    useEffect(() => {
+        axios.get("/categories").then((res) => {
+            setCategories(res?.data?.categories);
+        });
+        axios.get("/vendor-show").then((res) => {
+            setShops(res?.data?.data);
+        });
+    }, [])
 
     return (
         <div className="mt-2 md:mt-8 max-w-[calc(1280px+2rem)] mx-auto">
@@ -73,7 +86,7 @@ export default function BrowseSection() {
 
 
             {
-                activeTab === 'category' && <CategoryTabContents category={tabItems[activeTab]} />
+                activeTab === 'category' && <CategoryTabContents category={categories} />
             }
 
             {

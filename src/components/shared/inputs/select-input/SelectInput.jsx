@@ -5,7 +5,7 @@ export default function SelectInput({ label, options, value, setValue, variant, 
     return (
         <div class="flex flex-col gap-2">
             {
-                label && <label for="country" class={cn("text-[16px] max-sm:text-[14px]", variant === "small" && "text-sm")}
+                label && <label htmlFor="country" class={cn("text-[16px] max-sm:text-[14px]", variant === "small" && "text-sm")}
                 >{label}</label>
             }
             <select
