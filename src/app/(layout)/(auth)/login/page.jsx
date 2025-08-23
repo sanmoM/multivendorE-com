@@ -6,6 +6,7 @@ import CheckBoxWithLabel from '@/components/shared/inputs/check-box-with-label/C
 import useAxios from '@/hooks/useAxios';
 import { useRouter } from 'next/navigation';
 import { useState } from 'react';
+import toast from 'react-hot-toast';
 import { useDispatch } from 'react-redux';
 
 export default function page() {
@@ -19,19 +20,17 @@ export default function page() {
     const handleSubmit = async (e) => {
         e.preventDefault();
         try {
-            if (mobile || password || confirmPassword || firstName || lastName || checked) {
+            if (mobile || password) {
                 if (isValidBDNumber(mobile) === false) {
                     toast.error("Please enter a valid mobile number")
                     return
                 }
-                const res = await axios.post("/registeruser", {
-                    name: firstName + " " + lastName,
+                await axios.post("/login", {
                     mobile: mobile,
                     password: password,
-                    password_confirmation: confirmPassword
                 });
 
-                router.push("/login")
+                router.push("/home")
 
             } else {
                 toast.error("Please fill all the fields")
