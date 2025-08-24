@@ -25,11 +25,11 @@ export default function page() {
                     toast.error("Please enter a valid mobile number")
                     return
                 }
-                await axios.post("/login", {
+                const res = await axios.post("/login", {
                     mobile: mobile,
                     password: password,
                 });
-
+                console.log(res)
                 router.push("/home")
 
             } else {
