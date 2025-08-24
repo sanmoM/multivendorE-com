@@ -4,6 +4,8 @@ import Button from '@/components/shared/button/Button';
 import Container from '@/components/shared/container/Container';
 import CheckBoxWithLabel from '@/components/shared/inputs/check-box-with-label/CheckBoxWithLabel';
 import useAxios from '@/hooks/useAxios';
+import { setUser } from '@/lib/redux/features/userSlice';
+import { isValidBDNumber } from '@/utils/number-validation';
 import { useRouter } from 'next/navigation';
 import { useState } from 'react';
 import toast from 'react-hot-toast';
@@ -30,7 +32,13 @@ export default function page() {
                     password: password,
                 });
                 console.log(res)
-                router.push("/home")
+                // router.push("/")
+                if (res.status === 200) {
+                    toast.success("Login successful")
+                    dispatch(setUser(res?.data?.user));
+                    localStorage.setItem("token", res?.data?.token)
+                    router.push("/")
+                }
 
             } else {
                 toast.error("Please fill all the fields")
@@ -81,7 +89,7 @@ export default function page() {
 
                 <form onSubmit={handleSubmit}>
                     <div className="mb-4 space-y-4">
-                        <AuthTextInput label="Mobile" placeholder="Mobile" value={mobile} setValue={handleMobileNumberChange} isRequired type='email' />
+                        <AuthTextInput label="Mobile" placeholder="Mobile" value={mobile} setValue={handleMobileNumberChange} isRequired isNumber />
                         <AuthTextInput label="Password" placeholder="Password" value={password} setValue={setPassword} isRequired type='password' />
                     </div>
                     <CheckBoxWithLabel label="Remember me" checked={remember} setChecked={setRemember} />

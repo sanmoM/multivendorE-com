@@ -7,11 +7,7 @@ import MoreFeaturedProducts from "@/components/home-page/sections/more-feature-p
 import PromotionalSection from "@/components/home-page/sections/promotional-section/PromotionalSection";
 import MobileHeaderWithSearchbar from "@/components/root-layout/header/components/mobile-header-withSearchbar/MobileHeaderWithSearchbar";
 import Container from "@/components/shared/container/Container";
-import FeaturedItems from "@/components/shared/featured-items/FeaturedItems";
-import PrimaryCard from "@/components/shared/primary-card/PrimaryCard";
-import { products } from "@/data";
 import { getData } from "@/utils/fetch";
-import Link from "next/link";
 
 export default async function Home() {
   const res = await getData("/home");

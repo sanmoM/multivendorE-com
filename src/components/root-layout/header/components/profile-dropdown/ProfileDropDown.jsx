@@ -295,8 +295,9 @@ export default function ProfileDropDown({ isMobile, isDropdownOpen, setIsDropdow
     // dropdown contents
     const contents = (
         <div className="" role="menu" aria-orientation="vertical" aria-labelledby="options-menu">
+            {console.log(user)}
             {
-                user?.mobile ? (
+                user?.user?.first_name ? (
                     <>
                         {
                             profileMenuItems.map((item, index) => (
