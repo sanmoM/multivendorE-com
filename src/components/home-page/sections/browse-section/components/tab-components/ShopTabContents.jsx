@@ -13,7 +13,6 @@ export default function ShopTabContents({ shops }) {
                 {
                     shops?.map((shop) => (
                         <>
-                            {console.log({ title: shop?.vendor?.shop_name, subTItle: shop?.vendor?.address })}
                             <PrimaryCard key={shop.id} item={{ title: shop?.vendor?.shop_name, subtitle: shop?.vendor?.address, image: shop?.vendor?.image }} containerClassName={"px-2"} />
                         </>
                     ))

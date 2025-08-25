@@ -11,6 +11,7 @@ import { getData } from "@/utils/fetch";
 
 export default async function Home() {
   const res = await getData("/home");
+
   return (
     <div>
       <MobileHeaderWithSearchbar title={"Home"} />
@@ -18,7 +19,7 @@ export default async function Home() {
       <PromotionalSection />
       <BrowseSection />
       <Container className={""}>
-        <FeaturedProducts products={res.featured_products} />
+        <FeaturedProducts data={res.featured_products} />
         <MoreFeaturedProducts />
       </Container>
     </div>

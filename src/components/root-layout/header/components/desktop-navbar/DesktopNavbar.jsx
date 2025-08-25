@@ -11,6 +11,7 @@ import Logo from '@/components/shared/logo/Logo';
 import { cn } from '@/utils/cn';
 import { usePathname } from 'next/navigation';
 import { useState } from 'react';
+import useAxios from '@/hooks/useAxios';
 
 const navItems = [
     { name: 'Home', href: '/' },
@@ -22,6 +23,7 @@ const navItems = [
 export default function DesktopNavbar({ setIsCartOpen }) {
     const [isDropdownOpen, setIsDropdownOpen] = useState(false);
     const pathname = usePathname();
+
     return (
         <SecondaryContainer className="max-w-[1550px] mx-auto px-4 py-5 lg:flex items-center justify-between hidden">
             {/* Left Section: Logo and Navigation */}

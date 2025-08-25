@@ -20,12 +20,12 @@ export default function CustomSlider({
         slidesToShow: desktopView,
         autoplaySpeed: 2000,
         arrows: false,
-        // centerMode: true, // this option will be uncommented when we have the slider in the center
+        centerMode: true, // this option will be uncommented when we have the slider in the center
         autoplay: autoplay,
         centerPadding: paddingDesktop ? `${paddingDesktop}px` : "0px",
         initialSlide: 1,
         adaptiveHeight: true,
-        //  slidesToScroll: 5, 
+         slidesToScroll: 5, 
         responsive: [
             {
                 breakpoint: 1024,

@@ -2,6 +2,7 @@ import { IMAGE_BASE_URL } from "@/config";
 import Image from "next/image";
 
 export default function PrimaryCard({ item, containerClassName }) {
+    // console.log(item, "imageUrl");
     return (
         <div className={containerClassName}>
             {/* {console.log(IMAGE_BASE_URL + item?.image, "imageUrl")} */}

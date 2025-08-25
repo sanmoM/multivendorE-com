@@ -1,8 +1,6 @@
 "use client";
 
-import PrimaryCard from "@/components/shared/primary-card/PrimaryCard";
 import SectionTitle from "@/components/shared/section-title/SectionTitle";
-import { shops } from "@/data";
 import { useEffect, useState } from "react";
 import CustomSlider from "../custom-slider/CustomSlider";
 

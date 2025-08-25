@@ -29,7 +29,6 @@ export default function FeaturedProducts() {
             (entries) => {
                 entries.forEach((entry) => {
                     if (entry.isIntersecting) {
-                        console.log("Wrapper div touched by scrollbar ✅");
                         handleShowAbleProducts(); // 👉 call your function here
                     }
                 });

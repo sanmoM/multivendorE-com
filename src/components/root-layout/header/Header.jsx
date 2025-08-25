@@ -11,7 +11,7 @@ import MobileNavbar from './components/mobile-navbar/MobileNavbar';
 export default function Header() {
     const { currentModal, handleCloseModal, handleOpenModal } = useModalAction();
     return (
-        <header className="w-full bg-white shadow-sm font-sans">
+        <header className="w-full bg-white shadow-sm font-sans sticky top-0 z-[100]">
             <DesktopNavbar setIsCartOpen={() => handleOpenModal("cart-modal")} />
             <MobileNavbar setIsCartOpen={() => handleOpenModal("cart-modal")} />
 

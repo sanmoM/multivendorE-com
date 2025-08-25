@@ -58,7 +58,6 @@ export default function BrowseSection() {
     const [categories, setCategories] = useState([]);
     const [shops, setShops] = useState([]);
     const axios = useAxios();
-    console.log(shops)
     useEffect(() => {
         axios.get("/categories").then((res) => {
             setCategories(res?.data?.categories);

@@ -295,7 +295,6 @@ export default function ProfileDropDown({ isMobile, isDropdownOpen, setIsDropdow
     // dropdown contents
     const contents = (
         <div className="" role="menu" aria-orientation="vertical" aria-labelledby="options-menu">
-            {console.log(user)}
             {
                 user?.user?.first_name ? (
                     <>
@@ -336,8 +335,6 @@ export default function ProfileDropDown({ isMobile, isDropdownOpen, setIsDropdow
             }
         </div>
     )
-
-
 
     return (
         <div className='inline'>
