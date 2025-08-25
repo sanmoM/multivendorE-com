@@ -1,6 +1,15 @@
 import SecondaryContainer from '@/components/shared/container/SecondaryContainer';
+import Link from 'next/link';
 import { CiFacebook } from "react-icons/ci";
 import { PiInstagramLogoLight, PiTwitterLogoThin } from 'react-icons/pi';
+
+const navigationItems = [
+    { label: "About", href: "/about" },
+    { label: "Contact", href: "/contact-us" },
+    { label: "FAQ", href: "/faqs" },
+    { label: "Privacy Policy", href: "/returns-and-refunds" },
+    { label: "Terms of Service", href: "/terms-of-service" },
+]
 
 const App = () => {
     return (
@@ -8,11 +17,13 @@ const App = () => {
             <SecondaryContainer>
                 {/* Navigation Links */}
                 <div className="flex flex-wrap justify-between gap-x-8 gap-y-4 mb-6  text-lg max-w-4xl mx-auto">
-                    <a href="#" className="hover: transition-colors duration-200">About</a>
-                    <a href="#" className="hover: transition-colors duration-200">Contact</a>
-                    <a href="#" className="hover: transition-colors duration-200">FAQ</a>
-                    <a href="#" className="hover: transition-colors duration-200">Privacy Policy</a>
-                    <a href="#" className="hover: transition-colors duration-200">Terms of Service</a>
+                    {
+                        navigationItems.map((item) => (
+                            <Link key={item.label} href={item.href} className="hover: transition-colors duration-200">
+                                {item.label}
+                            </Link>
+                        ))
+                    }
                 </div>
 
                 {/* Social Media Icons */}

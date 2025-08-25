@@ -13,7 +13,7 @@ const Reviews = () => {
     { stars: 1, percentage: 2 },
   ];
   return (
-    <div className=" max-w-2xl w-full mt-8">
+    <div className=" max-w-2xl w-full mt-8" id='reviews'>
       {/* <h2 className="text-xl font-semibold text-gray-800 mb-6">Reviews</h2> */}
       <PrimaryTitle title={"Reviews"} className={"mb-6"} />
 

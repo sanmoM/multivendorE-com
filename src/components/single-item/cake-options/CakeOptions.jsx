@@ -59,10 +59,10 @@ const ChooseCake = () => {
     };
 
     return (
-        <div className=" max-w-xl w-full mt-6">
+        <div className=" max-w-xl w-full mt-6" id='cake-options'>
             <PrimaryTitle title={"Cake Options"} />
             {/* Cake Slice Options */}
-            <div className="mb-6">
+            <div className="mb-6" id='variants'>
                 <SecondaryTitle title={"Cake Slice Options"} />
                 <div className="flex flex-wrap gap-3">
                     {sliceOptions.map((option) => (
@@ -72,7 +72,7 @@ const ChooseCake = () => {
             </div>
 
             {/* Cake Flavor */}
-            <div className="mb-6">
+            <div className="mb-6" id='cake-flavors'>
                 <SecondaryTitle title={"Cake Flavor"} />
                 <div className="flex flex-wrap gap-3">
                     {flavorOptions.map((flavor) => (

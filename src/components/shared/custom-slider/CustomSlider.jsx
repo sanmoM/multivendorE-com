@@ -25,7 +25,7 @@ export default function CustomSlider({
         centerPadding: paddingDesktop ? `${paddingDesktop}px` : "0px",
         initialSlide: 1,
         adaptiveHeight: true,
-         slidesToScroll: 5, 
+        //  slidesToScroll: 5, 
         responsive: [
             {
                 breakpoint: 1024,

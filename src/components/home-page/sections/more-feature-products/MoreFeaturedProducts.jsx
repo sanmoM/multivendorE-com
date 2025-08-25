@@ -4,8 +4,8 @@ import { useEffect, useRef, useState } from "react";
 
 import Items from "@/components/shared/items/Items";
 import PrimaryCard from "@/components/shared/primary-card/PrimaryCard";
-import { IMAGE_BASE_URL } from "@/config";
 import useAxios from "@/hooks/useAxios";
+import { getFormattedProduct } from "@/utils/getFormattedData";
 
 export default function FeaturedProducts() {
     const axios = useAxios();
@@ -59,11 +59,7 @@ export default function FeaturedProducts() {
                 {showAbleProducts?.map((product, index) => (
                     <Link href="/single-item" className="block" key={index}>
                         <PrimaryCard
-                            item={{
-                                image: product?.product_image,
-                                title: product?.cake_name,
-                                subtitle: `$${product?.regular_price}`,
-                            }}
+                            item={getFormattedProduct(product)}
                             containerClassName="px-2"
                         />
                     </Link>

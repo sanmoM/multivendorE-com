@@ -16,9 +16,10 @@ import Reviews from '@/components/single-item/reviws/Reviews';
 import SellerInfo from '@/components/single-item/seller-info/SellerInfo';
 import SimilarProducts from '@/components/single-item/similar-products/SimilarProducts';
 import SingleItemTabs from '@/components/single-item/single-item-tabs/SingleItemTabs';
+import useAxios from '@/hooks/useAxios';
 import useModalAction from '@/hooks/useModalAction';
 import Image from 'next/image';
-import { useRef } from 'react';
+import { useEffect, useRef, useState } from 'react';
 const sliderItems = [
     {
         id: 1,
@@ -46,11 +47,11 @@ const sliderItems = [
 ];
 
 const App = () => {
-    // const [isCustomOrderModalOpen, setIsCustomOrderModalOpen] = useState(false);
+    const [data, setData] = useState(null);
+    const axios = useAxios();
     const sliderRef = useRef(null);
 
     const { currentModal, handleCloseModal, handleOpenModal } = useModalAction();
-
     const handleCustomOrderModal = () => {
         handleOpenModal("custom-order-modal")
     }
@@ -58,6 +59,13 @@ const App = () => {
     const handlePlaceOrder = () => {
         handleOpenModal("checkout-modal")
     }
+
+    useEffect(() => {
+        axios.get("/single-item").then((res) => {
+            setData(res?.data);
+        });
+    }, [axios]);
+
     return (
         <div className='my-6 lg:my-10'>
             <MobileHeader title={"Single Item"} containerClassName={"mb-6"} />
@@ -100,7 +108,10 @@ const App = () => {
                             {sliderItems.map((item, index) => (
                                 <button
                                     key={index}
-                                    onClick={() => sliderRef.current?.slickGoTo(index)}
+                                    onClick={() => {
+                                        sliderRef.current?.slickGoTo(index)
+                                        console.log("first")
+                                    }}
                                     className="w-16 h-12 border rounded overflow-hidden"
                                 >
                                     {

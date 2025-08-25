@@ -28,7 +28,7 @@ const deliveryOptions = [{
 export default function DeliveryOptions() {
     const [selectedDelivery, setSelectedDelivery] = useState('order-with-10-payment');
     return (
-        <div className="mt-8 lg:w-[70%]">
+        <div className="mt-8 lg:w-[70%]" id='delivery'>
             <PrimaryTitle title={"Delivery Options"} className={"mb-6"} />
             <div className="space-y-4">
                 {deliveryOptions.map((option) => (
