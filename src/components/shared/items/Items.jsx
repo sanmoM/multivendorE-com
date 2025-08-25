@@ -20,6 +20,8 @@ export default function Items({ title, desktopView, mobileView, hasLoadMoreBtn =
             }
         };
 
+        handleResize();
+
         window.addEventListener("resize", handleResize);
 
         return () => {
