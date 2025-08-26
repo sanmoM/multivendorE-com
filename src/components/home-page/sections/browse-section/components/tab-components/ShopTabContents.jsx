@@ -17,9 +17,15 @@ export default function ShopTabContents({ categories, locations }) {
 
     // fetch shops data with filters
     useEffect(() => {
-        axios.get(`/categories/${category?.value}/vendors`).then((res) => {
-            setShops(res?.data?.vendors);
-        });
+        if (categories?.value) {
+            axios.get(`/categories/${category?.value}/vendors`).then((res) => {
+                setShops(res?.data?.vendors);
+            });
+        } else {
+            axios.get(`/categories/${category?.value}/vendors`).then((res) => {
+                setShops(res?.data?.vendors);
+            });
+        }
     }, [category, location]);
 
     return (
