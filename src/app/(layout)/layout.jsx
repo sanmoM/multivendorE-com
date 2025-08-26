@@ -4,8 +4,6 @@ import Header from '@/components/root-layout/header/Header';
 import { getData } from '@/utils/fetch';
 
 export default async function  layout({ children }) {
-    const res = await getData("/logo-footer")
-console.log(res)
     return (
         <div className='pb-[73.5px] lg:pb-0'>
             <Header />
