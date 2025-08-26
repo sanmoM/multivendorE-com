@@ -2,13 +2,13 @@
 
 import OTPValidation from "@/components/auth/otp-validation/OTPValidation";
 import useAxios from "@/hooks/useAxios";
-import { useRouter } from "next/navigation";
+import { useRouter, useSearchParams } from "next/navigation";
 import toast from "react-hot-toast";
 
 export default function page() {
     const axios = useAxios();
     const router = useRouter();
-    const searchParams = new URLSearchParams(window.location.search);
+    const searchParams = useSearchParams();
     const mobile = searchParams.get("mobile");
     const handleSubmit = async (enteredOtp) => {
         try {

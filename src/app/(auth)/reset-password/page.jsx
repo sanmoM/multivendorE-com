@@ -22,7 +22,7 @@ export default function page() {
 
             console.log(res)
             if (res.status === 200) {
-                router.replace("/otp-validation?mobile=01919173356")
+                router.replace(`/forget-password-otp-validation?mobile=${mobile}`)
                 toast.success("OTP sent to your mobile number")
                 return
             }
