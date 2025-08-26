@@ -17,16 +17,17 @@ export default function ShopTabContents({ categories, locations }) {
 
     // fetch shops data with filters
     useEffect(() => {
-        if (categories?.value) {
+        if (category?.value) {
             axios.get(`/categories/${category?.value}/vendors`).then((res) => {
                 setShops(res?.data?.vendors);
             });
         } else {
-            axios.get(`/categories/${category?.value}/vendors`).then((res) => {
-                setShops(res?.data?.vendors);
+            axios.get(`/vendor-show`).then((res) => {
+                setShops(res?.data?.data);
             });
         }
     }, [category, location]);
+
 
     return (
         <div>

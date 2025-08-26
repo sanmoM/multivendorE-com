@@ -2,12 +2,10 @@ import { Poppins } from "next/font/google";
 import "./custom.css";
 import "./globals.css";
 import "./main.css";
-// import "./output.css";
 import StoreProvider from "@/lib/redux/StoreProvider";
 import { Toaster } from "react-hot-toast";
 
 
-// ✅ Correct place to specify weights
 const poppinsFront = Poppins({
   variable: "--poppins-font",
   subsets: ["latin"],
@@ -21,24 +19,12 @@ export const metadata = {
 
 export default function RootLayout({ children }) {
   return (
-    <html lang="en" className={poppinsFront.variable}>
+    <html lang="en" >
       <head>
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <title>Home</title>
-        {/* <script src="https://cdn.tailwindcss.com" ></script> */}
-        <link
-          rel="stylesheet"
-          href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css"
-          integrity="sha512-Evv84Mr4kqVGRNSgIGL/F/aIDqQb7xQ2vcrdIwxfjThSH8CSR7PBEakCr51Ck+w+/U6swU2Im1vVX0SVk9ABhg=="
-          crossOrigin="anonymous"
-          referrerPolicy="no-referrer"
-        />
-        <link
-          href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap"
-          rel="stylesheet"
-        />
       </head>
-      <body className="bg-white">
+      <body className={`${poppinsFront.variable} bg-white`}>
         <StoreProvider>
           {children}
           <Toaster />
