@@ -5,7 +5,7 @@ import Container from '@/components/shared/container/Container';
 import CheckBoxWithLabel from '@/components/shared/inputs/check-box-with-label/CheckBoxWithLabel';
 import SectionTitle from '@/components/shared/section-title/SectionTitle';
 import useAxios from '@/hooks/useAxios';
-import { isValidBDNumber } from '@/utils/number-validation';
+import { handleMobileNumberChange, isValidBDNumber } from '@/utils/number-validation';
 import { useRouter } from 'next/navigation';
 import { useState } from 'react';
 import toast from 'react-hot-toast';
@@ -35,7 +35,7 @@ export default function page() {
                     password_confirmation: confirmPassword
                 });
 
-                router.push(`/otp-validation?mobile=${mobile}`)
+                router.replace(`/signup-otp-validation?mobile=${mobile}`)
 
             } else {
                 toast.error("Please fill all the fields")
@@ -87,7 +87,7 @@ export default function page() {
                             <AuthTextInput label="Last Name" placeholder="Last Name" value={lastName} setValue={setLastName} isRequired />
                         </div>
                         <div className='space-y-4 gap-4'>
-                            <AuthTextInput label="Mobile" placeholder="Mobile Number" value={mobile} setValue={setMobile} isRequired isNumber={true} />
+                            <AuthTextInput label="Mobile" placeholder="Mobile Number" value={mobile} setValue={(value) => setMobile(handleMobileNumberChange(value))} isRequired isNumber={true} />
                             <AuthTextInput label="Password" placeholder="Password" value={password} setValue={setPassword} isRequired type='password' />
                             <AuthTextInput label="Confirm password" placeholder="Confirm password" value={confirmPassword} setValue={setConfirmPassword} isRequired type="password" />
                         </div>
@@ -103,7 +103,7 @@ export default function page() {
                         />
                         <p className="text-gray-600 mt-1">
                             Already have an Account?
-                            <a href="/login" className="text-black font-medium">Sign In</a>
+                            <a href="/login" className="text-secondary font-medium"> Sign In</a>
                         </p>
                     </div>
                 </div>

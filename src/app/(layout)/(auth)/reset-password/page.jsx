@@ -1,60 +1,60 @@
 "use client"
 
 import AuthTextInput from '@/components/auth/auth-inputs/auth-text-input/AuthTextInput'
-import TextInput from '@/components/shared/inputs/text-input/TextInput'
-import React, { useState } from 'react'
+import Button from '@/components/shared/button/Button'
+import Container from '@/components/shared/container/Container'
+import useAxios from '@/hooks/useAxios'
+import { handleMobileNumberChange } from '@/utils/number-validation'
+import { useRouter } from 'next/navigation'
+import { useState } from 'react'
+import toast from 'react-hot-toast'
 
 export default function page() {
-    const [email, setEmail] = useState('')
+    const [mobile, setMobile] = useState('')
+    const axios = useAxios()
+    const router = useRouter()
+    const handleSubmit = async (e) => {
+        e.preventDefault();
+        try {
+            const res = await axios.post("/verify_mobile", {
+                mobile: mobile
+            })
+
+            console.log(res)
+            if (res.status === 200) {
+                router.replace("/otp-validation?mobile=01919173356")
+                toast.success("OTP sent to your mobile number")
+                return
+            }
+            toast.error("Something went wrong")
+        } catch (error) {
+            toast.error(error.message)
+        }
+    }
+
     return (
-        <div className='bg-[#f4f7f9]'>
-            <div
-                class="max-w-[1500px] mx-auto grid grid-cols-1 lg:grid-cols-5 min-h-screen justify-start p-6 lg:p-10"
-            >
-                <div class="lg:col-span-2 flex items-center">
-                    <div class="w-full max-w-md mx-auto">
-                        <img
-                            src="https://amazcart.ischooll.com/public/uploads/settings/65e061ef3822b.png"
-                            alt="Logo"
-                            class="mb-8"
-                        />
+        <Container
+            className="lg:min-h-[70vh] min-h-[calc(100svh-73.5px)] md:min-h-[calc(100svh-84px)] grid place-items-center"
+        >
+            <div className="w-full max-w-md mx-auto">
 
-                        <h2 class="text-3xl font-bold mb-1">Welcome Back!</h2>
-                        <p class="text-sm text-gray-500 mb-8">Please send password link.</p>
+                <h2 className="text-3xl font-bold mb-1 text-center">Forgot Password?</h2>
+                <p className="text-sm text-gray-500 mb-6 text-center">
+                    Enter your mobile number and we'll send you a OTP to reset your password.
+                </p>
 
-                        <form>
-                            <div class="mb-4">
-                                <AuthTextInput label="Email Address" placeholder="Email Address" type="text" value={email} setValue={setEmail} variant={'medium'} inputClass={"shadow-none"} isRequired />
-                            </div>
-
-                            <button
-                                type="submit"
-                                class="w-full py-3 bg-black text-white font-bold rounded-md text-sm"
-                            >
-                                SEND LINK
-                            </button>
-                        </form>
+                <form onSubmit={handleSubmit}>
+                    <div className="mb-4 space-y-4">
+                        <AuthTextInput label="Mobile" placeholder="Mobile" value={mobile} setValue={(value) => setMobile(handleMobileNumberChange(value))} isRequired isNumber />
                     </div>
-                </div>
 
-                <div
-                    class="hidden lg:col-span-3 lg:flex flex-col justify-center items-center text-center p-4"
-                >
-                    <img
-                        src="https://amazcart.ischooll.com/public/frontend/amazy/img/banner/login_img.png"
-                        alt="Login Banner"
-                        class="mb-8"
+                    <Button
+                        type="submit"
+                        className="w-full py-3 bg-red-600 text-white font-bold rounded-full text-sm"
+                        text={"GET OTP"}
                     />
-                    <div class="max-w-md">
-                        <h2 class="font-bold text-3xl lg:text-4xl mb-4">
-                            Turn your ideas into reality..
-                        </h2>
-                        <p class="text-sm font-medium text-gray-600">
-                            Consistent quality and experience across all platforms and devices.
-                        </p>
-                    </div>
-                </div>
+                </form>
             </div>
-        </div>
+        </Container>
     )
 }

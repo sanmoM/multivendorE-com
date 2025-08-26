@@ -5,7 +5,7 @@ import Container from '@/components/shared/container/Container';
 import CheckBoxWithLabel from '@/components/shared/inputs/check-box-with-label/CheckBoxWithLabel';
 import useAxios from '@/hooks/useAxios';
 import { setUser } from '@/lib/redux/features/userSlice';
-import { isValidBDNumber } from '@/utils/number-validation';
+import { handleMobileNumberChange, isValidBDNumber } from '@/utils/number-validation';
 import { useRouter } from 'next/navigation';
 import { useState } from 'react';
 import toast from 'react-hot-toast';
@@ -36,7 +36,7 @@ export default function page() {
                     toast.success("Login successful")
                     dispatch(setUser(res?.data?.user));
                     localStorage.setItem("token", res?.data?.token)
-                    router.push("/")
+                    router.replace("/")
                 }
 
             } else {
@@ -48,13 +48,7 @@ export default function page() {
         }
     };
 
-    const handleMobileNumberChange = (value) => {
-        // remove everything except numbers
-        const onlyNumbers = value.replace(/[^0-9]/g, "");
-        if (onlyNumbers.length <= 11) {
-            setMobile(onlyNumbers);
-        }
-    };
+
 
     return (
         <Container
@@ -88,7 +82,7 @@ export default function page() {
 
                 <form onSubmit={handleSubmit}>
                     <div className="mb-4 space-y-4">
-                        <AuthTextInput label="Mobile" placeholder="Mobile" value={mobile} setValue={handleMobileNumberChange} isRequired isNumber />
+                        <AuthTextInput label="Mobile" placeholder="Mobile" value={mobile} setValue={(value) => setMobile(handleMobileNumberChange(value))} isRequired isNumber />
                         <AuthTextInput label="Password" placeholder="Password" value={password} setValue={setPassword} isRequired type='password' />
                     </div>
                     <CheckBoxWithLabel label="Remember me" checked={remember} setChecked={setRemember} />
@@ -104,13 +98,11 @@ export default function page() {
                 <div className="mt-6 text-sm">
                     <p className="text-gray-600">
                         Forgot Password?
-                        <a href="/resetPass.html" className="text-black font-medium"
-                        >Click Here</a
-                        >
+                        <a href="/reset-password" className="text-secondary font-medium"> Click Here</a>
                     </p>
                     <p className="text-gray-600 mt-1">
                         Don’t have an Account?
-                        <a href="/signup" className="text-black font-medium">Sign Up</a>
+                        <a href="/signup" className="text-secondary font-medium"> Sign Up</a>
                     </p>
                 </div>
             </div>

@@ -2,3 +2,12 @@ export function isValidBDNumber(number) {
     const regex = /^01[3-9]\d{8}$/;
     return regex.test(number);
 }
+
+export const handleMobileNumberChange = (value) => {
+    console.log(value)
+    // remove everything except numbers
+    const onlyNumbers = value.replace(/[^0-9]/g, "");
+    if (onlyNumbers.length <= 11) {
+        return onlyNumbers;
+    }
+};
