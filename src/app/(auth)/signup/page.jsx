@@ -42,7 +42,7 @@ export default function page() {
             }
         }
         catch (error) {
-            toast.error(error.message)
+            toast.error("Registration failed")
         }
     };
 

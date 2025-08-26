@@ -44,7 +44,7 @@ export default function page() {
             }
         }
         catch (error) {
-            toast.error(error.message)
+            toast.error("Login failed")
         }
     };
 

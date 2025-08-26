@@ -31,7 +31,7 @@ export default function page() {
             }
             toast.error("Something went wrong")
         } catch (error) {
-            toast.error(error.message)
+            toast.error("Failed to update password")
         }
     }
 
