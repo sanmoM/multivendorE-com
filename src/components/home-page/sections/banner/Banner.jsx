@@ -8,7 +8,7 @@ export default function Banner({ data }) {
     // data = data.slice(0, 1)
     // console.log(data, "banner data")
     return (
-        <div className="rounded-md lg:mt-4 max-w-7xl mx-auto">
+        <div className="rounded-md lg:mt-4 max-w-[1550px] mx-auto">
             <CustomSlider desktopView={1} mobileView={1} className="w-full" autoplay>
                 {
                     data?.map((product, index) => (

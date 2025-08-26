@@ -9,7 +9,7 @@ export default function page() {
     const cartItems = useSelector(state => state.cart);
     return (
         <div
-            className="max-w-7xl grid grid-cols-1 lg:grid-cols-3 lg:gap-10 container lg:my-12 my-4 mx-auto md:px-4 px-2"
+            className="max-w-[1550px] grid grid-cols-1 lg:grid-cols-3 lg:gap-10 container lg:my-12 my-4 mx-auto md:px-4 px-2"
         >
             <div className="col-span-2">
                 <div

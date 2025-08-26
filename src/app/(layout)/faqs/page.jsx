@@ -22,7 +22,7 @@ const FaqAccordion = () => {
     return (
         <section className="">
             <MobileHeader title={"FAQs"} containerClassName={"mb-6"} />
-            <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 lg:my-12">
+            <div className="mx-auto max-w-[1550px] px-4 sm:px-6 lg:px-8 lg:my-12">
                 <div className="mb-6 lg:mb-10 text-center">
                     <h6 className="text-lg text-secondary font-medium mb-2">FAQs</h6>
                     <SectionTitle title={"Frequently Asked Questions"} className={"mb-4"} />
