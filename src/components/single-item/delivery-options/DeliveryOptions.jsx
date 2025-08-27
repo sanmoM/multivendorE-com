@@ -31,9 +31,9 @@ export default function DeliveryOptions() {
         <div className="mt-8 lg:w-[70%]" id='delivery'>
             <PrimaryTitle title={"Delivery Options"} className={"mb-6"} />
             <div className="space-y-4">
-                {deliveryOptions.map((option) => (
+                {deliveryOptions.map((option, index) => (
                     <label
-                        key={option}
+                        key={index}
                         className={`flex gap-2 items-center rounded-lg cursor-pointer transition-colors duration-200 `}
                     >
                         <RadioInput onChange={() => setSelectedDelivery(option.value)} checked={option?.alwaysChecked ? true : selectedDelivery === option.value} />

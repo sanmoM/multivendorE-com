@@ -11,7 +11,7 @@ const tabs = [
     { name: 'Reviews', value: 'reviews' },
 ];
 
-export default function SingleItemTabs() {
+export default function SingleItemTabs({ description }) {
     const [activeTab, setActiveTab] = useState('description');
 
     const handleTabClick = (value) => {
@@ -48,12 +48,8 @@ export default function SingleItemTabs() {
             <p
                 className="text-primary mt-4 lg:w-[95%]"
                 id="description"
-            >
-                Our chocolate cake is made with rich chocolate and fudge frosting. It's
-                a perfect combination of rich chocolate and fudge frosting. Made with
-                finely ground cocoa, rich chocolate, and fudge frosting, our chocolate
-                cake is a delicious treat that will satisfy your sweet tooth.
-            </p>
+                dangerouslySetInnerHTML={{ __html: description }}
+            />
         </div>
     );
 }

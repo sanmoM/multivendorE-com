@@ -4,7 +4,8 @@ import { cn } from '@/utils/cn';
 import Image from 'next/image';
 
 
-export default function SellerInfo({ className, handleCustomOrderModal }) {
+export default function SellerInfo({ className, handleCustomOrderModal, data }) {
+
     return (
         <div className={cn("lg:w-1/3 lg:pl-10 xl:pl-20 lg:pr-0 flex flex-col mt-6 lg:mt-0", className)}>
             <PrimaryTitle title="Seller" />
@@ -31,7 +32,8 @@ export default function SellerInfo({ className, handleCustomOrderModal }) {
                     <p className="text-sm text-secondary font-medium">Delivery rate</p>
                 </div>
                 <div className=" pl-4 py-6 border-2 !border-secondary/30 rounded-lg">
-                    <p className="text-2xl font-bold text-gray-900 mb-2">4.8</p>
+                    {console.log(data)}
+                    <p className="text-2xl font-bold text-gray-900 mb-2">{`${data?.rating || 0}`}</p>
                     <p className="text-sm text-secondary font-medium">Rating</p>
                 </div>
             </div>

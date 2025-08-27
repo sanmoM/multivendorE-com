@@ -8,13 +8,13 @@ import SecondaryTitle from '@/components/shared/title/SecondaryTitle';
 import IncreaseDecreaseButtons from '@/components/shared/increase-decrease-buttons/IncreaseDecreaseButtons';
 import ColorPicker from '@/components/shared/color-picker/ColorPicker';
 
-const ChooseCake = () => {
-    const [selectedSlices, setSelectedSlices] = useState(null);
-    const [selectedFlavor, setSelectedFlavor] = useState(null);
+const ChooseCake = ({ data }) => {
+    const [selectedSlices, setSelectedSlices] = useState("4 Slices");
+    const [selectedFlavor, setSelectedFlavor] = useState("Chocolate");
     const [cakeQuantity, setCakeQuantity] = useState(1);
     const [cakeWeight, setCakeWeight] = useState(1);
     const [selectedDeliveryOption, setSelectedDeliveryOption] = useState(null);
-    const [selectedColor, setSelectedColor] = useState(null);
+    const [selectedColor, setSelectedColor] = useState("Pink");
 
     const cakeColors = [
         { name: 'Pink', hex: '#FFC0CB' },
@@ -65,8 +65,8 @@ const ChooseCake = () => {
             <div className="mb-6" id='variants'>
                 <SecondaryTitle title={"Cake Slice Options"} />
                 <div className="flex flex-wrap gap-3">
-                    {sliceOptions.map((option) => (
-                        <OptionBox value={option} setValue={setSelectedSlices} currentValue={selectedSlices} label={option} />
+                    {sliceOptions.map((option, index) => (
+                        <OptionBox value={option} setValue={setSelectedSlices} currentValue={selectedSlices} label={option} key={index} />
                     ))}
                 </div>
             </div>
@@ -75,8 +75,8 @@ const ChooseCake = () => {
             <div className="mb-6" id='cake-flavors'>
                 <SecondaryTitle title={"Cake Flavor"} />
                 <div className="flex flex-wrap gap-3">
-                    {flavorOptions.map((flavor) => (
-                        <OptionBox value={flavor} setValue={setSelectedFlavor} currentValue={selectedFlavor} label={flavor} />
+                    {flavorOptions.map((flavor, index) => (
+                        <OptionBox value={flavor} setValue={setSelectedFlavor} currentValue={selectedFlavor} label={flavor} key={index} />
                     ))}
                 </div>
             </div>
@@ -85,30 +85,30 @@ const ChooseCake = () => {
             <div className="mb-6">
                 <SecondaryTitle title={"Color"} />
                 <div className="flex flex-wrap gap-3">
-                    {cakeColors.map((color) => (
-                        <ColorPicker setColor={setSelectedColor} color={color} selectedColor={selectedColor} />
+                    {cakeColors.map((color, index) => (
+                        <ColorPicker setColor={setSelectedColor} color={color} selectedColor={selectedColor} key={index} />
                     ))}
                 </div>
             </div>
 
             {/* Cake Color */}
-            <div className="mb-6">
+            {/* <div className="mb-6">
                 <SecondaryTitle title={"Color"} />
                 <div className="flex flex-wrap gap-3">
-                    {flavorOptions.map((flavor) => (
-                        <OptionBox value={flavor} setValue={setSelectedFlavor} currentValue={selectedFlavor} label={flavor} />
+                    {flavorOptions.map((flavor, index) => (
+                        <OptionBox value={flavor} setValue={setSelectedFlavor} currentValue={selectedFlavor} label={flavor} key={index} />
                     ))}
                 </div>
-            </div>
+            </div> */}
 
             {/* Cake Quantity */}
-            <div className="mb-6">
+            {/* <div className="mb-6">
                 <SecondaryTitle title={"Cake Quantity"} />
                 <div className='flex items-center gap-4'>
                     <p>Quantity</p>
                     <IncreaseDecreaseButtons value={cakeQuantity} setValue={setCakeQuantity} />
                 </div>
-            </div>
+            </div> */}
 
             {/* Cake Weight (lbs) */}
             <div className="mb-6">
@@ -122,7 +122,7 @@ const ChooseCake = () => {
 
             {/* Total Price */}
             <div className="mb-8 border-gray-200">
-                <p className=" text-gray-800">Total Price: $35.00</p>
+                <p className=" text-gray-800">Total Price: ${data?.price * cakeWeight}</p>
             </div>
         </div>
     );

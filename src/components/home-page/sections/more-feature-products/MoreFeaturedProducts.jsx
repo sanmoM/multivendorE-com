@@ -6,6 +6,7 @@ import Items from "@/components/shared/items/Items";
 import PrimaryCard from "@/components/shared/primary-card/PrimaryCard";
 import useAxios from "@/hooks/useAxios";
 import { getFormattedProduct } from "@/utils/getFormattedData";
+import ProductCard from "@/components/shared/product-card/ProductCard";
 
 export default function FeaturedProducts() {
     const axios = useAxios();
@@ -55,14 +56,9 @@ export default function FeaturedProducts() {
 
     return (
         <div ref={wrapperRef}>
-            <Items title={"More Featured Products"} desktopView={5} mobileView={3}>
+            <Items title={"More Featured Products"} desktopView={6} mobileView={3}>
                 {showAbleProducts?.map((product, index) => (
-                    <Link href="/single-item" className="block" key={index}>
-                        <PrimaryCard
-                            item={getFormattedProduct(product)}
-                            containerClassName="px-2"
-                        />
-                    </Link>
+                    <ProductCard item={product} key={index} />
                 ))}
             </Items>
         </div>

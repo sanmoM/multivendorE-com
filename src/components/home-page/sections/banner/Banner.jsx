@@ -1,6 +1,5 @@
 import CustomSlider from '@/components/shared/custom-slider/CustomSlider'
 import { IMAGE_BASE_URL } from '@/config'
-import { products } from '@/data'
 import Image from 'next/image'
 import React from 'react'
 
@@ -10,7 +9,7 @@ export default function Banner({ data }) {
             <CustomSlider desktopView={1} mobileView={1} className="w-full" autoplay>
                 {
                     data?.map((product, index) => (
-                        <>
+                        <React.Fragment key={index}>
                             <Image
                                 height={400}
                                 width={400}
@@ -18,7 +17,7 @@ export default function Banner({ data }) {
                                 src={IMAGE_BASE_URL + product?.image}
                                 alt="Banner"
                             />
-                        </>
+                        </React.Fragment>
                     ))
                 }
             </CustomSlider>

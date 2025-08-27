@@ -16,9 +16,11 @@ import Reviews from '@/components/single-item/reviws/Reviews';
 import SellerInfo from '@/components/single-item/seller-info/SellerInfo';
 import SimilarProducts from '@/components/single-item/similar-products/SimilarProducts';
 import SingleItemTabs from '@/components/single-item/single-item-tabs/SingleItemTabs';
+import { IMAGE_BASE_URL } from '@/config';
 import useAxios from '@/hooks/useAxios';
 import useModalAction from '@/hooks/useModalAction';
 import Image from 'next/image';
+import { useSearchParams } from 'next/navigation';
 import { useEffect, useRef, useState } from 'react';
 const sliderItems = [
     {
@@ -47,6 +49,11 @@ const sliderItems = [
 ];
 
 const App = () => {
+    const searchParams = useSearchParams();
+    const type = searchParams.get('type');
+    const id = searchParams.get('id');
+
+
     const [data, setData] = useState(null);
     const axios = useAxios();
     const sliderRef = useRef(null);
@@ -61,11 +68,12 @@ const App = () => {
     }
 
     useEffect(() => {
-        axios.get("/single-item").then((res) => {
-            setData(res?.data);
+        axios.get(`/item-details/${type}/${id}`).then((res) => {
+            setData(res?.data?.data);
         });
     }, [axios]);
 
+    console.log(data)
     return (
         <div className='my-6 lg:my-10'>
             <MobileHeader title={"Single Item"} containerClassName={"mb-6"} />
@@ -79,9 +87,20 @@ const App = () => {
                         </div>
                         <hr className="border-t border-gray-200" />
                         <CustomSlider ref={sliderRef} desktopView={1} mobileView={1} paddingDesktop={0} paddingMobile={0}>
-                            {sliderItems.map((item, index) => (
+                            {data?.image_gallery?.map((url, index) => (
                                 <div key={index} className="px-2 outline-0">
-                                    {item.type === "image" && (
+
+                                    {/* {console.log(IMAGE_BASE_URL + url)} */}
+                                    <Image
+                                        src={url}
+                                        alt={`Slide ${index}`}
+                                        height={400}
+                                        width={400}
+                                        className="w-full h-auto object-cover aspect-[7/4] rounded-xl"
+                                    />
+
+                                    {/* this section will uncomment if user want to upload video */}
+                                    {/* {item.type === "image" && (
                                         <Image
                                             src={item.src}
                                             alt={`Slide ${index}`}
@@ -99,13 +118,13 @@ const App = () => {
                                             muted
                                             className="w-full h-auto object-cover aspect-[7/4] rounded-xl"
                                         />
-                                    )}
+                                    )} */}
                                 </div>
                             ))}
                         </CustomSlider>
 
                         <div className="flex gap-2 mt-4 justify-center">
-                            {sliderItems.map((item, index) => (
+                            {data?.image_gallery?.map((url, index) => (
                                 <button
                                     key={index}
                                     onClick={() => {
@@ -113,7 +132,16 @@ const App = () => {
                                     }}
                                     className="w-16 h-12 border rounded overflow-hidden"
                                 >
-                                    {
+
+                                    <Image
+                                        src={url}
+                                        alt={`Thumb ${index}`}
+                                        width={64}
+                                        height={48}
+                                        className="object-cover w-full h-full"
+                                    />
+                                    {/* this section will uncomment if user want to upload video */}
+                                    {/* {
                                         item.type === 'image' && <Image
                                             src={item.src}
                                             alt={`Thumb ${index}`}
@@ -131,7 +159,7 @@ const App = () => {
                                             width={400}
                                             className="h-auto object-cover aspect-[7/4] rounded-xl cursor-pointer"
                                         />
-                                    }
+                                    } */}
                                 </button>
                             ))}
                         </div>
@@ -144,20 +172,19 @@ const App = () => {
                 {/* product info */}
                 <div>
                     <PrimaryTitle title={"Sweet Delights"} className={"my-6"} />
-                    <SectionTitle title={"Chocolate Fudge Cake"} className={"mb-4"} />
-                    <p className='text-primary'>Rich decandent chocolate cake with a fudge frosting. A perfect combination of rich chocolate and fudge frosting.</p>
-                    <p className='text-sm text-secondary mt-4 mb-6'>$1,500</p>
+                    <SectionTitle title={data?.cake_name} className={"mb-4"} />
+                    <p className='text-primary'>{data?.short_description}</p>
+                    <p className='text-sm text-secondary mt-4 mb-6'>${data?.regular_price}</p>
                     <div className='space-x-4'>
                         <Button text="Add to Cart" />
                         <Button text="Buy Now" className={"bg-tertiary"} /> <br />
-                        {/* <Button onClick={() => setIsCustomOrderModalOpen(true)} onC text="Custom Order" className={"bg-tertiary mt-6"} /> */}
                     </div>
-                    <SellerInfo className="lg:hidden" handleCustomOrderModal={handleCustomOrderModal} />
+                    <SellerInfo className="lg:hidden" handleCustomOrderModal={handleCustomOrderModal} data={{ rating: data?.average_rating }} />
                 </div>
 
                 {/* tabs */}
-                <SingleItemTabs />
-                <ChooseCake />
+                <SingleItemTabs description={data?.description} />
+                <ChooseCake data={{ price: data?.regular_price || 0 }} />
                 <DeliveryOptions />
                 <PaymentMethods />
                 <Reviews />

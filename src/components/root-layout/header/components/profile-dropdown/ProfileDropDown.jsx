@@ -22,7 +22,7 @@ import { setUser } from '@/lib/redux/features/userSlice';
 import { cn } from '@/utils/cn';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
-import { useState } from "react";
+import React from "react";
 import { BsShopWindow } from 'react-icons/bs';
 import { FaInbox } from 'react-icons/fa';
 import { FiHelpCircle } from "react-icons/fi";
@@ -300,18 +300,15 @@ export default function ProfileDropDown({ isMobile, isDropdownOpen, setIsDropdow
                     <>
                         {
                             profileMenuItems.map((item, index) => (
-                                <>
+                                <React.Fragment key={index}>
                                     {
                                         item.type === "button" ? (
                                             <button
-                                                key={index}
                                                 onClick={() => item.handleClick()} className="px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-secondary flex gap-2 items-center w-full" role="menuitem">
                                                 <span>{item.name}</span>
                                             </button>
                                         ) : (
                                             <Link
-                                                key={index}
-
                                                 onClick={() => handleCloseModal()}
                                                 href={item.path || "#"} className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-secondary" role="menuitem">
                                                 <span>{item.name}</span>
@@ -319,7 +316,7 @@ export default function ProfileDropDown({ isMobile, isDropdownOpen, setIsDropdow
                                         )
                                     }
 
-                                </>
+                                </React.Fragment>
                             ))
                         }
                         <button onClick={handleLogout} className="px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-secondary flex gap-2 items-center w-full" role="menuitem">
