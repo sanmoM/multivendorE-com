@@ -4,6 +4,7 @@ import MobileHeader from '@/components/root-layout/header/components/mobile-head
 import Button from '@/components/shared/button/Button';
 import SecondaryContainer from '@/components/shared/container/SecondaryContainer';
 import Modal from '@/components/shared/modal/Modal';
+import AddReview from '@/components/single-item/add-review/AddReview';
 import CakeOptions from '@/components/single-item/cake-options/CakeOptions';
 import CustomOrderModalContents from '@/components/single-item/custom-order/CustomOrder';
 import CustomerReviews from '@/components/single-item/customer-reviews/CustomerReviews';
@@ -21,31 +22,6 @@ import { addToCart } from '@/lib/redux/features/cartSlice';
 import { useSearchParams } from 'next/navigation';
 import { useEffect, useState } from 'react';
 import { useDispatch } from 'react-redux';
-const sliderItems = [
-    {
-        id: 1,
-        src: '/images/product/product-1.svg',
-        type: 'image',
-    },
-    {
-        id: 1,
-        src: '/images/product/product-2.svg',
-        type: 'image',
-    }, {
-        id: 1,
-        src: '/images/product/product-3.svg',
-        type: 'image',
-    }, {
-        id: 1,
-        src: '/images/product/product-4.svg',
-        type: 'image',
-    },
-    {
-        id: 2,
-        image: '/video/single-item/cake-video.mp4',
-        type: 'video',
-    },
-];
 
 const App = () => {
     const searchParams = useSearchParams();
@@ -122,8 +98,9 @@ const App = () => {
                 }
                 <DeliveryOptions cartItem={cartItem} setCartItem={setCartItem} />
                 <PaymentMethods cartItem={cartItem} setCartItem={setCartItem} />
-                <Reviews id={id}  />
+                <Reviews id={id} />
                 <CustomerReviews id={id} />
+                <AddReview id={id} />
                 <SimilarProducts />
             </SecondaryContainer>
 
