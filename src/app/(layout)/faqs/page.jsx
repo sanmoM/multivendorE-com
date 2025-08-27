@@ -18,7 +18,6 @@ const FaqAccordion = () => {
         });
     }, [axios])
 
-    console.log(faq)
     return (
         <section className="">
             <MobileHeader title={"FAQs"} containerClassName={"mb-6"} />

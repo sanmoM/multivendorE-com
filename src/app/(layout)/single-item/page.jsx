@@ -110,7 +110,6 @@ const App = () => {
                                     key={index}
                                     onClick={() => {
                                         sliderRef.current?.slickGoTo(index)
-                                        console.log("first")
                                     }}
                                     className="w-16 h-12 border rounded overflow-hidden"
                                 >

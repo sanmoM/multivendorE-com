@@ -58,7 +58,6 @@ export default function OTPValidation({ handleSubmit, handleResend: handleResend
     // Function to handle the verification
     const handleVerify = () => {
         const enteredOtp = otp.join('');
-        console.log(enteredOtp)
         handleSubmit(enteredOtp)
     };
 

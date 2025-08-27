@@ -5,8 +5,6 @@ import Image from 'next/image'
 import React from 'react'
 
 export default function Banner({ data }) {
-    // data = data.slice(0, 1)
-    // console.log(data, "banner data")
     return (
         <div className="rounded-md lg:mt-4 max-w-[1550px] mx-auto">
             <CustomSlider desktopView={1} mobileView={1} className="w-full" autoplay>
@@ -20,7 +18,6 @@ export default function Banner({ data }) {
                                 src={IMAGE_BASE_URL + product?.image}
                                 alt="Banner"
                             />
-                            {/* {console.log(product, "slider")} */}
                         </>
                     ))
                 }

@@ -16,7 +16,6 @@ export default function Logo({ className }) {
         fetchLogo();
     }, [axios]);
 
-    console.log(logoUrl);
     return (
         <Image
             src={IMAGE_BASE_URL + logoUrl || "/images/logo.png"}

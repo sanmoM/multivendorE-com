@@ -4,7 +4,6 @@ export function isValidBDNumber(number) {
 }
 
 export const handleMobileNumberChange = (value) => {
-    console.log(value)
     // remove everything except numbers
     const onlyNumbers = value.replace(/[^0-9]/g, "");
     if (onlyNumbers.length <= 11) {

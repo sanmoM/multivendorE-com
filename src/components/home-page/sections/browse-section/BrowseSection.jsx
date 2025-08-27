@@ -43,7 +43,6 @@ export default function BrowseSection() {
     }, [])
 
 
-    console.log(categories, "categories")
     return (
         <div className="mt-2 md:mt-8 max-w-[calc(1280px+2rem)] mx-auto">
             {/* Tabs Section */}

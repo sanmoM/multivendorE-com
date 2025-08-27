@@ -4,7 +4,6 @@ import PrimaryCard from '@/components/shared/primary-card/PrimaryCard'
 import { IMAGE_BASE_URL } from '@/config'
 
 export default function ResellerTabContents({ resellers }) {
-    console.log(resellers)
     return (
         <div>
             <div className='mb-6 px-2 lg:px-0'>
@@ -14,7 +13,6 @@ export default function ResellerTabContents({ resellers }) {
                 {
                     resellers?.map((shop) => (
                         <>
-                        {console.log(IMAGE_BASE_URL +shop?.image)}
                             <PrimaryCard key={shop.id} item={shop} containerClassName={"px-2"} />
                         </>
                     ))
