@@ -76,6 +76,7 @@ const App = () => {
     }, [axios]);
 
     const handleAddToCart = () => {
+        // make item for cart based on product type
         const item = data?.type === "product" ?
             {
                 ...cartItem,
@@ -121,8 +122,8 @@ const App = () => {
                 }
                 <DeliveryOptions cartItem={cartItem} setCartItem={setCartItem} />
                 <PaymentMethods cartItem={cartItem} setCartItem={setCartItem} />
-                <Reviews />
-                <CustomerReviews />
+                <Reviews id={id}  />
+                <CustomerReviews id={id} />
                 <SimilarProducts />
             </SecondaryContainer>
 
