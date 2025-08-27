@@ -9,7 +9,7 @@ export default function CartCard({ item }) {
         dispatch(handleQuantity({ id: item.id, quantity }));
     };
     return (
-        <div key={item.id} className="flex items-center justify-between gap-8">
+        <div className="flex items-center justify-between gap-8">
             <ModalProductCard item={item} />
 
             {/* Quantity Selector */}

@@ -15,7 +15,7 @@ const AddressModalContents = ({ handleAddAddress }) => {
     return (
         <div className=" w-full flex flex-col h-full justify-between">
             <div className='space-y-6'>
-                {addresses.map((address, index) => (
+                {addresses?.map((address, index) => (
                     <div key={index} className="flex items-center justify-between space-x-4  rounded-lg">
                         <ItemCard item={{
                             title: `${address?.isPrimary ? 'Primary Address' : 'Additional Address'}`,

@@ -25,8 +25,9 @@ const deliveryOptions = [{
 }
 ];
 
-export default function DeliveryOptions() {
-    const [selectedDelivery, setSelectedDelivery] = useState('order-with-10-payment');
+export default function DeliveryOptions({ cartItem, setCartItem }) {
+    // const [selectedDelivery, setSelectedDelivery] = useState('order-with-10-payment');
+    const selectedDelivery = cartItem?.deliveryOption || 'cash-on-delivery';
     return (
         <div className="mt-8 lg:w-[70%]" id='delivery'>
             <PrimaryTitle title={"Delivery Options"} className={"mb-6"} />
@@ -36,7 +37,7 @@ export default function DeliveryOptions() {
                         key={index}
                         className={`flex gap-2 items-center rounded-lg cursor-pointer transition-colors duration-200 `}
                     >
-                        <RadioInput onChange={() => setSelectedDelivery(option.value)} checked={option?.alwaysChecked ? true : selectedDelivery === option.value} />
+                        <RadioInput onChange={() => setCartItem({ ...cartItem, deliveryOption: option.value })} checked={option?.alwaysChecked ? true : selectedDelivery === option.value} />
                         <p className="text-primary font-medium text-lg flex items-center gap-2">
                             {option.Icon}
                             <span>{option.label}</span>

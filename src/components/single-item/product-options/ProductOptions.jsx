@@ -7,11 +7,12 @@ import IncreaseDecreaseButtons from '@/components/shared/increase-decrease-butto
 import Image from 'next/image';
 import { IMAGE_BASE_URL } from '@/config';
 
-export default function ProductOptions({ data }) {
-  const [selectedVariant, setSelectedVariant] = useState(null);
-  const [quantity, setQuantity] = useState(1);
+export default function ProductOptions({ data, cartItem, setCartItem }) {
+  // const [selectedVariant, setSelectedVariant] = useState(null);
+  // const [quantity, setQuantity] = useState(1);
+  const selectedVariant = cartItem?.variant || null;
+  const quantity = cartItem?.quantity || 1;
 
-  console.log(data?.variants)
   return (
     <div className=" max-w-xl w-full mt-6" id='cake-options'>
       <PrimaryTitle title={"Product Options"} />
@@ -27,18 +28,18 @@ export default function ProductOptions({ data }) {
               alt={variant}
               width={60}
               height={60}
-              className={`rounded-sm border-2 ${selectedVariant === index ? '!border-secondary' : 'border-transparent'} cursor-pointer object-contain`}
-              onClick={() => setSelectedVariant(index)}
+              className={`rounded-sm border-2 ${selectedVariant === variant ? '!border-secondary' : 'border-transparent'} cursor-pointer object-contain`}
+              onClick={() => setCartItem({ ...cartItem, variant: variant })}
             />
           ))
         }
       </div>
 
       <div className="mb-6">
-        <SecondaryTitle title={"Weight (in pounds)"} />
+        <SecondaryTitle title={"Quantity"} />
         <div className='flex items-center gap-4'>
           <p>Quantity</p>
-          <IncreaseDecreaseButtons value={quantity} setValue={setQuantity} />
+          <IncreaseDecreaseButtons value={quantity} setValue={(value) => setCartItem({ ...cartItem, quantity: value })} />
         </div>
       </div>
 

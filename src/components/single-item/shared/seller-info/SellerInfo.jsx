@@ -32,7 +32,6 @@ export default function SellerInfo({ className, handleCustomOrderModal, data }) 
                     <p className="text-sm text-secondary font-medium">Delivery rate</p>
                 </div>
                 <div className=" pl-4 py-6 border-2 !border-secondary/30 rounded-lg">
-                    {console.log(data)}
                     <p className="text-2xl font-bold text-gray-900 mb-2">{`${data?.rating || 0}`}</p>
                     <p className="text-sm text-secondary font-medium">Rating</p>
                 </div>

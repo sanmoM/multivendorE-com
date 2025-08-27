@@ -1,17 +1,30 @@
+import { IMAGE_BASE_URL } from '@/config';
 import { cn } from '@/utils/cn';
 import Image from 'next/image';
 import React from 'react'
 
 export default function ModalProductCard({ item, imageClassName }) {
+
+    let imagePath;
+    if (item?.image?.startsWith("http")) {
+        imagePath = item?.image;
+    }
+    else if (item?.image?.startsWith("/")) {
+        imagePath = IMAGE_BASE_URL + item?.image?.slice(1);
+    } else {
+        imagePath = IMAGE_BASE_URL + item?.image;
+    }
+
+    // console.log(imagePath, "imagePath");
     return (
         <div className="flex items-center space-x-4">
             <Image
-                src={item.image}
+                src={imagePath}
                 alt={item.name}
                 className={cn('rounded-md object-cover', imageClassName)}
                 onError={(e) => { e.target.onerror = null; e.target.src = "https://placehold.co/80x80/E0E0E0/808080?text=Item"; }}
-                height={40}
-                width={40}
+                height={70}
+                width={70}
             />
             <div>
                 <h4 className="font-semibold text-primary">{item.name}</h4>

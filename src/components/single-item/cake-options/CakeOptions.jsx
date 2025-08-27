@@ -1,19 +1,26 @@
 "use client";
 
-import PrimaryTitle from '@/components/shared/title/PrimaryTitle';
-import { useState } from 'react';
-import OptionBox from '@/components/shared/option-box/OptionBox';
-import SecondaryTitle from '@/components/shared/title/SecondaryTitle';
-import IncreaseDecreaseButtons from '@/components/shared/increase-decrease-buttons/IncreaseDecreaseButtons';
 import ColorPicker from '@/components/shared/color-picker/ColorPicker';
+import IncreaseDecreaseButtons from '@/components/shared/increase-decrease-buttons/IncreaseDecreaseButtons';
+import OptionBox from '@/components/shared/option-box/OptionBox';
+import PrimaryTitle from '@/components/shared/title/PrimaryTitle';
+import SecondaryTitle from '@/components/shared/title/SecondaryTitle';
+import { useState } from 'react';
 
-const CakeOptions = ({ data }) => {
-    const [selectedSlices, setSelectedSlices] = useState("4 Slices");
-    const [selectedFlavor, setSelectedFlavor] = useState("Chocolate");
-    const [cakeQuantity, setCakeQuantity] = useState(1);
-    const [cakeWeight, setCakeWeight] = useState(1);
-    const [selectedDeliveryOption, setSelectedDeliveryOption] = useState(null);
-    const [selectedColor, setSelectedColor] = useState("Pink");
+const CakeOptions = ({ data, cartItem, setCartItem }) => {
+    // const [selectedSlices, setSelectedSlices] = useState("4 Slices");
+    // const [selectedFlavor, setSelectedFlavor] = useState("Chocolate");
+    // const [cakeQuantity, setCakeQuantity] = useState(1);
+    // const [cakeWeight, setCakeWeight] = useState(1);
+    // const [selectedDeliveryOption, setSelectedDeliveryOption] = useState(null);
+    // const [selectedColor, setSelectedColor] = useState("Pink");
+
+    const selectedSlices = cartItem?.slices || "4 Slices";
+    const selectedFlavor = cartItem?.flavor || "Chocolate";
+    const cakeQuantity = cartItem?.quantity || 1;
+    const cakeWeight = cartItem?.weight || 1;
+    const selectedDeliveryOption = cartItem?.deliveryOption || null;
+    const selectedColor = cartItem?.color || "Pink";
 
     const cakeColors = [
         { name: 'Pink', hex: '#FFC0CB' },
@@ -65,7 +72,7 @@ const CakeOptions = ({ data }) => {
                 <SecondaryTitle title={"Cake Slice Options"} />
                 <div className="flex flex-wrap gap-3">
                     {sliceOptions.map((option, index) => (
-                        <OptionBox value={option} setValue={setSelectedSlices} currentValue={selectedSlices} label={option} key={index} />
+                        <OptionBox value={option} setValue={(value) => setCartItem({ ...cartItem, slices: value })} currentValue={selectedSlices} label={option} key={index} />
                     ))}
                 </div>
             </div>
@@ -75,7 +82,7 @@ const CakeOptions = ({ data }) => {
                 <SecondaryTitle title={"Cake Flavor"} />
                 <div className="flex flex-wrap gap-3">
                     {flavorOptions.map((flavor, index) => (
-                        <OptionBox value={flavor} setValue={setSelectedFlavor} currentValue={selectedFlavor} label={flavor} key={index} />
+                        <OptionBox value={flavor} setValue={(value) => setCartItem({ ...cartItem, flavor: value })} currentValue={selectedFlavor} label={flavor} key={index} />
                     ))}
                 </div>
             </div>
@@ -85,7 +92,7 @@ const CakeOptions = ({ data }) => {
                 <SecondaryTitle title={"Color"} />
                 <div className="flex flex-wrap gap-3">
                     {cakeColors.map((color, index) => (
-                        <ColorPicker setColor={setSelectedColor} color={color} selectedColor={selectedColor} key={index} />
+                        <ColorPicker setColor={(value) => setCartItem({ ...cartItem, color: value })} color={color} selectedColor={selectedColor} key={index} />
                     ))}
                 </div>
             </div>
@@ -114,7 +121,7 @@ const CakeOptions = ({ data }) => {
                 <SecondaryTitle title={"Weight (in pounds)"} />
                 <div className='flex items-center gap-4'>
                     <p>Weight</p>
-                    <IncreaseDecreaseButtons value={cakeWeight} setValue={setCakeWeight} />
+                    <IncreaseDecreaseButtons value={cakeWeight} setValue={(value) => setCartItem({ ...cartItem, weight: value })} />
                 </div>
             </div>
 

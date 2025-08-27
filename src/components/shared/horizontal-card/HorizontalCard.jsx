@@ -1,11 +1,11 @@
+import { IMAGE_BASE_URL } from '@/config';
 import Image from 'next/image';
-import React from 'react'
 
 export default function HorizontalCard({ item }) {
     return (
         <div className="flex items-center space-x-4">
             <Image
-                src={item.image}
+                src={IMAGE_BASE_URL + (item?.image?.startsWith("/") ? item?.image?.slice(1) : item?.image)}
                 alt={"image"}
                 className="w-20 h-20 rounded-md object-cover"
                 onError={(e) => { e.target.onerror = null; e.target.src = "https://placehold.co/80x80/E0E0E0/808080?text=Item"; }}
