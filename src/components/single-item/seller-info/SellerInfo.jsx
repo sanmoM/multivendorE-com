@@ -43,13 +43,13 @@ export default function SellerInfo({ className, handleCustomOrderModal }) {
             </div>
 
             {/* Custom Cake Order Section */}
-            <div className="mt-6 border-gray-200">
+            {/* <div className="mt-6 border-gray-200">
                 <PrimaryTitle title="Custom Cake Order" />
                 <p className="text-gray-600 mb-4 font-medium">
                     Need a cake tailored to your specific requirements? Fill out our custom order form and we'll create the perfect cake for you.
                 </p>
                 <Button text="Custom Order Form" className={"bg-tertiary"} onClick={handleCustomOrderModal} />
-            </div>
+            </div> */}
         </div>
     )
 }

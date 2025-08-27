@@ -2,10 +2,10 @@
 
 import MobileHeader from '@/components/root-layout/header/components/mobile-header/MobileHeader';
 import SellerStatistics from '@/components/seller-profile/seller-statistics/SellerStatistics';
-import Card from '@/components/shared/card/Card';
 import Container from '@/components/shared/container/Container';
 import CustomSlider from '@/components/shared/custom-slider/CustomSlider';
 import ItemCard from '@/components/shared/item-card/ItemCard';
+import PrimaryCard from '@/components/shared/primary-card/PrimaryCard';
 import SectionTitle from '@/components/shared/section-title/SectionTitle';
 import PrimaryTitle from '@/components/shared/title/PrimaryTitle';
 import { products } from '@/data';
@@ -27,10 +27,8 @@ export default function page() {
                             src="/images/seller-image.png"
                             alt="Bakery logo"
                             className="w-full h-full object-cover rounded-full"
-                        // onError={(e) => { e.target.onerror = null; e.target.src = "https://placehold.co/96x96/E8D5C8/4A4A4A?text=Logo"; }}
                         />
                     </div>
-                    {/* <h1 className="text-2xl font-semibold text-gray-900">Sweet Delights Bakery</h1> */}
                     <PrimaryTitle title={"Sweet Delights Bakery"} className={"mb-0"} />
                     <p className="text-secondary text-sm">4.8 • 1200+ ratings</p>
                     <p className="text-secondary mt-1 text-xs max-w-xs">Specializing in custom cakes and pastries</p>
@@ -50,7 +48,7 @@ export default function page() {
                 <CustomSlider desktopView={5} mobileView={2} paddingDesktop={70} paddingMobile={30} >
                     {
                         products?.map((product, index) => (
-                            <Card key={index} item={{ image: product?.image, name: product?.name, subtitle: `$${product?.price}` }} containerClassName={"px-2"} />
+                            <PrimaryCard key={index} item={{ image: product?.image, title: product?.name, subtitle: `$${product?.price}` }} containerClassName={"px-2"} />
                         ))
                     }
                 </CustomSlider>

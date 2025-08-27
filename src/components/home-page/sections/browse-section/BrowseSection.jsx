@@ -32,8 +32,6 @@ export default function BrowseSection() {
     const axios = useAxios();
     useEffect(() => {
         const fetchData = async () => {
-            // const res = await axios.get("/categories");
-            // setCategories(res?.data?.categories);
             const [category, location] = await Promise.all([
                 axios.get("/categories"),
                 // axios.get("/api/locations"),
