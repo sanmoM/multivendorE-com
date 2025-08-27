@@ -2,13 +2,12 @@
 
 import PrimaryTitle from '@/components/shared/title/PrimaryTitle';
 import { useState } from 'react';
-import CakeOptionSelect from './components/cake-option-select/CakeOptionSelect';
 import OptionBox from '@/components/shared/option-box/OptionBox';
 import SecondaryTitle from '@/components/shared/title/SecondaryTitle';
 import IncreaseDecreaseButtons from '@/components/shared/increase-decrease-buttons/IncreaseDecreaseButtons';
 import ColorPicker from '@/components/shared/color-picker/ColorPicker';
 
-const ChooseCake = ({ data }) => {
+const CakeOptions = ({ data }) => {
     const [selectedSlices, setSelectedSlices] = useState("4 Slices");
     const [selectedFlavor, setSelectedFlavor] = useState("Chocolate");
     const [cakeQuantity, setCakeQuantity] = useState(1);
@@ -128,5 +127,5 @@ const ChooseCake = ({ data }) => {
     );
 };
 
-export default ChooseCake;
+export default CakeOptions;
 

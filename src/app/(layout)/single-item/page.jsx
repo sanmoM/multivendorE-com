@@ -7,11 +7,12 @@ import CustomSlider from '@/components/shared/custom-slider/CustomSlider';
 import Modal from '@/components/shared/modal/Modal';
 import SectionTitle from '@/components/shared/section-title/SectionTitle';
 import PrimaryTitle from '@/components/shared/title/PrimaryTitle';
-import ChooseCake from '@/components/single-item/cake-options/CakeOptions';
+import CakeOptions from '@/components/single-item/cake-options/CakeOptions';
 import CustomOrderModalContents from '@/components/single-item/custom-order/CustomOrder';
 import CustomerReviews from '@/components/single-item/customer-reviews/CustomerReviews';
 import DeliveryOptions from '@/components/single-item/delivery-options/DeliveryOptions';
 import PaymentMethods from '@/components/single-item/payment-methods/PaymentMethods';
+import ProductOptions from '@/components/single-item/product-options/ProductOptions';
 import Reviews from '@/components/single-item/reviws/Reviews';
 import SellerInfo from '@/components/single-item/seller-info/SellerInfo';
 import SimilarProducts from '@/components/single-item/similar-products/SimilarProducts';
@@ -96,7 +97,7 @@ const App = () => {
                                         alt={`Slide ${index}`}
                                         height={400}
                                         width={400}
-                                        className="w-full h-auto object-cover aspect-[7/4] rounded-xl"
+                                        className="w-full h-auto object-contain aspect-[7/4] rounded-xl"
                                     />
 
                                     {/* this section will uncomment if user want to upload video */}
@@ -138,7 +139,7 @@ const App = () => {
                                         alt={`Thumb ${index}`}
                                         width={64}
                                         height={48}
-                                        className="object-cover w-full h-full"
+                                        className="object-contain w-full h-full"
                                     />
                                     {/* this section will uncomment if user want to upload video */}
                                     {/* {
@@ -183,8 +184,10 @@ const App = () => {
                 </div>
 
                 {/* tabs */}
-                <SingleItemTabs description={data?.description} />
-                <ChooseCake data={{ price: data?.regular_price || 0 }} />
+                <SingleItemTabs description={data?.description || data?.full_description} />
+                {
+                    data?.type === "product" ? <CakeOptions data={{ price: data?.regular_price || 0 }} /> : <ProductOptions data={{ price: data?.regular_price || 0, variants: data?.image_gallery }} />
+                }
                 <DeliveryOptions />
                 <PaymentMethods />
                 <Reviews />
