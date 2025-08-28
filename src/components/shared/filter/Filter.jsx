@@ -20,22 +20,6 @@ export default function Filter({ category, setCategory, location, setLocation, c
                     />
                 </div>
             </div>
-
-            {/* desktop filter */}
-            {/* <div className="flex-wrap gap-4 w-full hidden lg:grid grid-cols-2">
-                <SelectInput
-                    placeholder="Category"
-                    options={categoryOptions}
-                    value={category}
-                    setValue={(value) => setCategory(value)}
-                />
-                <SelectInput
-                    placeholder="Location"
-                    options={locationOptions}
-                    value={location}
-                    setValue={(value) => setLocation(value)}
-                />
-            </div> */}
         </div>
     )
 }

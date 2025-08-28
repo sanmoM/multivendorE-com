@@ -2,6 +2,7 @@ import CustomSlider from '@/components/shared/custom-slider/CustomSlider';
 import Filter from '@/components/shared/filter/Filter';
 import PrimaryCard from '@/components/shared/primary-card/PrimaryCard';
 import useAxios from '@/hooks/useAxios';
+import { getFormattedShop } from '@/utils/getFormattedData';
 import { useEffect, useState } from 'react';
 
 export default function ShopTabContents({ categories, locations }) {
@@ -39,7 +40,7 @@ export default function ShopTabContents({ categories, locations }) {
                     {
                         shops.map((shop) => (
                             <>
-                                <PrimaryCard key={shop.id} item={{ title: shop?.vendor?.shop_name, subtitle: shop?.vendor?.address, image: shop?.vendor?.image }} containerClassName={"px-2"} />
+                                <PrimaryCard key={shop.id} item={getFormattedShop(shop)} containerClassName={"px-2"} />
                             </>
                         ))
                     }

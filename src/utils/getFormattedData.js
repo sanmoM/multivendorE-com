@@ -11,3 +11,11 @@ export const getFormattedProduct = (data) => {
 
     return formattedData;
 };
+
+export const getFormattedShop = (data) => {
+    if (!data) return null;
+
+    const formattedData = { title: data?.vendor?.shop_name, subtitle: data?.vendor?.address, image: data?.vendor?.image };
+
+    return formattedData;
+};
