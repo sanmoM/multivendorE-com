@@ -7,8 +7,8 @@ import { useEffect, useState } from 'react';
 
 export default function ShopTabContents({ categories, locations }) {
     // options for select input
-    const categoryOptions = categories?.map((category) => ({ label: category.categoryName, value: category.id }))
-    const locationOptions = locations?.map((location) => ({ label: location.name, value: location.id }))
+    const categoryOptions = [{ label: "All Categories", value: "" }, ...categories?.map((category) => ({ label: category.categoryName, value: category.id }))];
+    const locationOptions = [{ label: "All Locations", value: "" }, ...locations?.map((location) => ({ label: location.name, value: location.id }))];
 
     // state for filters
     const [category, setCategory] = useState({});

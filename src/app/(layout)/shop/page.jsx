@@ -17,14 +17,13 @@ export default function Page() {
     const [locations, setLocations] = useState([]);
 
     // options for select input
-    const categoryOptions = categories?.map((category) => ({ label: category.categoryName, value: category.id }))
-    const locationOptions = locations?.map((location) => ({ label: location.name, value: location.id }))
+    const categoryOptions = [{ label: "All Categories", value: "" }, ...categories?.map((category) => ({ label: category.categoryName, value: category.id }))];
+    const locationOptions = [{ label: "All Locations", value: "" }, ...locations?.map((location) => ({ label: location.name, value: location.id }))];
 
-    console.log(categories);
 
     // state for filters
-    const [category, setCategory] = useState({});
-    const [location, setLocation] = useState({});
+    const [category, setCategory] = useState(categoryOptions[0]);
+    const [location, setLocation] = useState(locationOptions[0]);
     const [shops, setShops] = useState([]);
     const axios = useAxios();
 
@@ -71,14 +70,14 @@ export default function Page() {
                     />
                 </div>
                 <div className={"space-y-10 lg:space-y-16 mt-6 lg:mt-10 "}>
-                    <FeaturedItems title={"Featured Shops"} desktopView={5} mobileView={3} >
+                    <FeaturedItems title={"Featured Shops"} desktopView={6} mobileView={3} >
                         {
                             shops?.map((shop) => (
                                 <PrimaryCard key={shop.id} item={getFormattedShop(shop)} containerClassName={"px-2"} />
                             ))
                         }
                     </FeaturedItems>
-                    <Items title={"All Shops"} desktopView={5} mobileView={3} >
+                    <Items title={"All Shops"} desktopView={6} mobileView={3} >
 
                         {
                             shops?.map((shop) => (
