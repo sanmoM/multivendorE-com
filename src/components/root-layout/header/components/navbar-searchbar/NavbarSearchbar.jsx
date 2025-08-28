@@ -20,13 +20,15 @@ export default function NavbarSearchbar({ inputClassName }) {
         debounce(async (query) => {
             const res = await axios.get(`/top-search?keyword=${query}`);
             setSearchItems(res?.data?.data);
-        }, 500),
+        }, 200),
         []
     );
 
     useEffect(() => {
         if (query) {
             handleSearch(query);
+        }else{
+            setSearchItems([]);
         }
     }, [query, handleSearch]);
 
