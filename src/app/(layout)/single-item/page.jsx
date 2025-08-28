@@ -57,7 +57,7 @@ const App = () => {
             {
                 ...cartItem,
                 id,
-                name: data?.name,
+                name: data?.cake_name,
                 price: data?.regular_price,
                 image: data?.product_image,
                 type: data?.type,
@@ -65,8 +65,8 @@ const App = () => {
             :
             {
                 ...cartItem,
+                name: data?.name,
                 id,
-                name: data?.cake_name,
                 price: data?.regular_price,
                 image: data?.image,
                 type: data?.type,
