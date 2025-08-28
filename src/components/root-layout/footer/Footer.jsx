@@ -1,4 +1,4 @@
-import SecondaryContainer from '@/components/shared/container/SecondaryContainer';
+import Container from '@/components/shared/container/Container';
 import Link from 'next/link';
 import { CiFacebook } from "react-icons/ci";
 import { PiInstagramLogoLight, PiTwitterLogoThin } from 'react-icons/pi';
@@ -14,7 +14,7 @@ const navigationItems = [
 const App = () => {
     return (
         <footer className="w-full font-sans pt-28 pb-8 text-secondary hidden lg:block bg-tertiary">
-            <SecondaryContainer>
+            <Container>
                 {/* Navigation Links */}
                 <div className="flex flex-wrap justify-between gap-x-8 gap-y-4 mb-6  text-lg max-w-4xl mx-auto">
                     {
@@ -46,7 +46,7 @@ const App = () => {
                 <p className=" text-sm text-center">
                     ©2024 Fresh Foods. All rights reserved.
                 </p>
-            </SecondaryContainer>
+            </Container>
         </footer>
     );
 };

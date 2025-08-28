@@ -2,8 +2,8 @@ import { useState } from "react";
 import { AiFillStar, AiOutlineStar } from "react-icons/ai";
 
 export default function StarRating({ max = 5, onChange, rating, setRating }) {
-//   const [rating, setRating] = useState(0);
   const [hover, setHover] = useState(0);
+
 
   const handleClick = (value) => {
     setRating(value);

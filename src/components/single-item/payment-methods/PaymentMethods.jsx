@@ -27,7 +27,7 @@ export default function PaymentOptions({ cartItem, setCartItem }) {
     const selectedPayment = cartItem?.paymentMethod || 'bkash';
 
     return (
-        <div className="mt-8 lg:w-[70%]">
+        <div className="lg:w-[70%]">
             <PrimaryTitle title={"Payment Methods"} className={"mb-6"} />
             <div className="space-y-4">
                 {paymentOptions.map((option) => (

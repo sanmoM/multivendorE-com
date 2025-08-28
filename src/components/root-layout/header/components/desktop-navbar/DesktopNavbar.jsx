@@ -1,17 +1,16 @@
 "use client";
 
 
-import SecondaryContainer from '@/components/shared/container/SecondaryContainer';
+import Container from '@/components/shared/container/Container';
+import Logo from '@/components/shared/logo/Logo';
+import { cn } from '@/utils/cn';
 import Link from 'next/link';
+import { usePathname } from 'next/navigation';
+import { useState } from 'react';
 import { IoMdNotificationsOutline } from "react-icons/io";
 import { IoCartOutline } from "react-icons/io5";
 import NavbarSearchbar from '../navbar-searchbar/NavbarSearchbar';
 import ProfileDropDown from '../profile-dropdown/ProfileDropDown';
-import Logo from '@/components/shared/logo/Logo';
-import { cn } from '@/utils/cn';
-import { usePathname } from 'next/navigation';
-import { useState } from 'react';
-import useAxios from '@/hooks/useAxios';
 
 const navItems = [
     { name: 'Home', href: '/' },
@@ -25,7 +24,7 @@ export default function DesktopNavbar({ setIsCartOpen }) {
     const pathname = usePathname();
 
     return (
-        <SecondaryContainer className="max-w-[1550px] mx-auto px-4 py-5 lg:flex items-center justify-between hidden">
+        <Container className="lg:flex items-center justify-between hidden">
             {/* Left Section: Logo and Navigation */}
             <div className="flex items-center space-x-14">
                 {/* Logo */}
@@ -66,6 +65,6 @@ export default function DesktopNavbar({ setIsCartOpen }) {
                     <ProfileDropDown isDropdownOpen={isDropdownOpen} setIsDropdownOpen={setIsDropdownOpen} />
                 </div>
             </div>
-        </SecondaryContainer>
+        </Container>
     )
 }

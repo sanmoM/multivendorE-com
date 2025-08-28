@@ -28,7 +28,7 @@ export default function SingleItemTabs({ description }) {
     };
 
     return (
-        <div className="mt-10 lg:w-[70%]">
+        <div className="mt-10 w-fit">
             <div className="border-b border-gray-200">
                 <div className="flex justify-between lg:justify-start lg:space-x-8">
                     {tabs.map((tab, index) => (

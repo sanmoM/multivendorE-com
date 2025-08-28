@@ -29,7 +29,7 @@ export default function DeliveryOptions({ cartItem, setCartItem }) {
     // const [selectedDelivery, setSelectedDelivery] = useState('order-with-10-payment');
     const selectedDelivery = cartItem?.deliveryOption || 'cash-on-delivery';
     return (
-        <div className="mt-8 lg:w-[70%]" id='delivery'>
+        <div className="lg:w-[70%]" id='delivery'>
             <PrimaryTitle title={"Delivery Options"} className={"mb-6"} />
             <div className="space-y-4">
                 {deliveryOptions.map((option, index) => (

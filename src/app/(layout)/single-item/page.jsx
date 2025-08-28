@@ -2,7 +2,7 @@
 
 import MobileHeader from '@/components/root-layout/header/components/mobile-header/MobileHeader';
 import Button from '@/components/shared/button/Button';
-import SecondaryContainer from '@/components/shared/container/SecondaryContainer';
+import Container from '@/components/shared/container/Container';
 import Modal from '@/components/shared/modal/Modal';
 import AddReview from '@/components/single-item/add-review/AddReview';
 import CakeOptions from '@/components/single-item/cake-options/CakeOptions';
@@ -80,29 +80,26 @@ const App = () => {
     return (
         <div className='my-6 lg:my-10'>
             <MobileHeader title={"Single Item"} containerClassName={"mb-6"} />
-            <SecondaryContainer className={"overflow-hidden"}>
-
+            <Container className={"overflow-hidden"}>
                 <ProductInfo data={data} />
-
-                {/* Add to Cart and Buy Now buttons */}
                 <div className='space-x-4'>
                     <Button text="Add to Cart" onClick={handleAddToCart} />
                     <Button text="Buy Now" className={"bg-tertiary"} /> <br />
                 </div>
                 <SellerInfo className="lg:hidden" handleCustomOrderModal={handleCustomOrderModal} data={{ rating: data?.average_rating }} />
-
-                {/* tabs */}
                 <SingleItemTabs description={data?.description || data?.full_description} />
-                {
-                    data?.type === "product" ? <CakeOptions data={{ price: data?.regular_price || 0 }} cartItem={cartItem} setCartItem={setCartItem} /> : <ProductOptions data={{ price: data?.regular_price || 0, variants: data?.image_gallery }} cartItem={cartItem} setCartItem={setCartItem} />
-                }
-                <DeliveryOptions cartItem={cartItem} setCartItem={setCartItem} />
-                <PaymentMethods cartItem={cartItem} setCartItem={setCartItem} />
-                <Reviews id={id} />
-                <CustomerReviews id={id} />
-                <AddReview id={id} />
+                <div className=' max-w-2xl w-full mt-8 space-y-8'>
+                    {
+                        data?.type === "product" ? <CakeOptions data={{ price: data?.regular_price || 0 }} cartItem={cartItem} setCartItem={setCartItem} /> : <ProductOptions data={{ price: data?.regular_price || 0, variants: data?.image_gallery }} cartItem={cartItem} setCartItem={setCartItem} />
+                    }
+                    <DeliveryOptions cartItem={cartItem} setCartItem={setCartItem} />
+                    <PaymentMethods cartItem={cartItem} setCartItem={setCartItem} />
+                    <Reviews id={id} />
+                    <CustomerReviews id={id} />
+                    <AddReview id={id} />
+                </div>
                 <SimilarProducts />
-            </SecondaryContainer>
+            </Container>
 
             <Modal isLef={false} isOpen={currentModal === "custom-order-modal"} setIsOpen={() => handleCloseModal()} title={"Custom Order"}>
                 <CustomOrderModalContents handlePlaceOrder={handlePlaceOrder} />
