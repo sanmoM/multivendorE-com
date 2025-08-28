@@ -1,3 +1,5 @@
+"use client"
+
 import { IMAGE_BASE_URL } from '@/config';
 import useAxios from '@/hooks/useAxios';
 import { cn } from '@/utils/cn';
