@@ -8,15 +8,15 @@ import React, { useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 
 export default function PersonalInfoModalContents({handleCloseModal}) {
-    const personalInformation = useSelector(state => state.user.personalInformation);
+    const personalInformation = useSelector(state => state?.user?.personalInformation);
     const dispatch = useDispatch();
 
-    const [firstName, setFirstName] = useState(personalInformation.firstName);
-    const [lastName, setLastName] = useState(personalInformation.lastName);
-    const [email, setEmail] = useState(personalInformation.email);
-    const [phoneNumber, setPhoneNumber] = useState(personalInformation.phoneNumber);
-    const [dateOfBirth, setDateOfBirth] = useState(personalInformation.dateOfBirth);
-    const [bio, setBio] = useState(personalInformation.bio);
+    const [firstName, setFirstName] = useState(personalInformation?.firstName);
+    const [lastName, setLastName] = useState(personalInformation?.lastName);
+    const [email, setEmail] = useState(personalInformation?.email);
+    const [phoneNumber, setPhoneNumber] = useState(personalInformation?.phoneNumber);
+    const [dateOfBirth, setDateOfBirth] = useState(personalInformation?.dateOfBirth);
+    const [bio, setBio] = useState(personalInformation?.bio);
 
     const handleSaveChanges = () => {
         dispatch(setPrimaryInformation({ firstName, lastName, email, phoneNumber, dateOfBirth, bio }));

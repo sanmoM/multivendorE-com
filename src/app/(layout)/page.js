@@ -17,8 +17,8 @@ export default async function Home() {
       <MobileHeaderWithSearchbar title={"Home"} />
       <Banner data={res.sliders} />
       <PromotionalSection />
-      <BrowseSection />
-      <Container className={""}>
+      <Container className={"space-y-6 lg:space-y-8"}>
+        <BrowseSection />
         <FeaturedProducts data={res.featured_products} />
         <MoreFeaturedProducts />
       </Container>

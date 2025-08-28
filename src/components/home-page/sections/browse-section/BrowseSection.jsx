@@ -44,7 +44,7 @@ export default function BrowseSection() {
 
 
     return (
-        <div className="mt-2 md:mt-8 max-w-[calc(1280px+2rem)] mx-auto">
+        <div className="mt-2 md:mt-8">
             {/* Tabs Section */}
             <div className="flex justify-around border-b !border-secondary mb-6">
                 {tabs.map((tab) => (
