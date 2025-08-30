@@ -6,23 +6,6 @@ import CustomSlider from "../custom-slider/CustomSlider";
 
 
 export default function FeaturedItems({ title, desktopView, mobileView, children }) {
-    const [isMobile, setIsMobile] = useState(false);
-
-    useEffect(() => {
-        const handleResize = () => {
-            if (window.innerWidth < 768) {
-                setIsMobile(true);
-            } else {
-                setIsMobile(false);
-            }
-        };
-
-        window.addEventListener("resize", handleResize);
-
-        return () => {
-            window.removeEventListener("resize", handleResize);
-        };
-    }, []);
     return (
         <div className="mt-6">
             <SectionTitle title={title} />

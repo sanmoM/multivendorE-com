@@ -19,7 +19,6 @@ export const cartSlice = createSlice({
         addToCart: (state, action) => {
             const { id, type } = action.payload;
             const item = state.cartItems.find(item => item.id === id && item.type === type);
-            console.log(action.payload)
             if (item) {
                 // ✅ directly update the proxy object (Immer takes care of immutability)
                 item.quantity += action.payload.quantity || 1;

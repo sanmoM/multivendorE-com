@@ -9,11 +9,12 @@ import React, { useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 
 export default function PersonalInfoModalContents({ handleCloseModal }) {
-    const personalInformation = useSelector(state => state?.user?.personalInformation);
+    const personalInformation = useSelector(state => state?.user?.user);
+
     const dispatch = useDispatch();
 
-    const [firstName, setFirstName] = useState(personalInformation?.firstName);
-    const [lastName, setLastName] = useState(personalInformation?.lastName);
+    const [firstName, setFirstName] = useState(personalInformation?.first_name);
+    const [lastName, setLastName] = useState(personalInformation?.last_name);
     const [email, setEmail] = useState(personalInformation?.email);
     const [phoneNumber, setPhoneNumber] = useState(personalInformation?.phoneNumber);
     const [dateOfBirth, setDateOfBirth] = useState(personalInformation?.dateOfBirth);

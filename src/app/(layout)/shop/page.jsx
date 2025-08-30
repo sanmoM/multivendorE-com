@@ -4,10 +4,9 @@ import MobileHeaderWithSearchbar from "@/components/root-layout/header/component
 import Container from "@/components/shared/container/Container";
 import FeaturedItems from "@/components/shared/featured-items/FeaturedItems";
 import Filter from "@/components/shared/filter/Filter";
-import Items from "@/components/shared/items/Items";
 import PrimaryCard from "@/components/shared/primary-card/PrimaryCard";
+import SectionTitle from "@/components/shared/section-title/SectionTitle";
 import useAxios from "@/hooks/useAxios";
-import { getData } from "@/utils/fetch";
 import { getFormattedShop } from "@/utils/getFormattedData";
 import { useEffect, useState } from "react";
 
@@ -24,6 +23,7 @@ export default function Page() {
     // state for filters
     const [category, setCategory] = useState(categoryOptions[0]);
     const [location, setLocation] = useState(locationOptions[0]);
+    const [shopProducts, setShopProducts] = useState([]);
     const [shops, setShops] = useState([]);
     const axios = useAxios();
 
@@ -44,22 +44,18 @@ export default function Page() {
     useEffect(() => {
         const fetchData = async () => {
             const categoriesRes = await axios.get("/categories");
-            // console.log(categoriesRes, "categories")
-            // const locationsData = await getData("/locations");
 
             setCategories(categoriesRes?.data?.categories);
-            // setLocations(locationsData);
         };
         fetchData();
     }, []);
 
     return (
         <div>
-            {/* <ShopHeader /> */}
             <MobileHeaderWithSearchbar title={"Shops"} />
             <Container>
                 <div>
-                    <h1 className="hidden lg:block text-3xl text-primary font-semibold mb-7">Shops</h1>
+                    <SectionTitle title={"Featured Shops"} />
                     <Filter
                         categoryOptions={categoryOptions}
                         locationOptions={locationOptions}
@@ -68,24 +64,20 @@ export default function Page() {
                         category={category}
                         location={location}
                     />
-                </div>
-                <div className={"space-y-10 lg:space-y-16 mt-6 lg:mt-10 "}>
-                    <FeaturedItems title={"Featured Shops"} desktopView={6} mobileView={3} >
+                    <FeaturedItems desktopView={6} mobileView={3} >
                         {
                             shops?.map((shop) => (
                                 <PrimaryCard key={shop.id} item={getFormattedShop(shop)} containerClassName={"px-2"} />
                             ))
                         }
                     </FeaturedItems>
-                    <Items title={"All Shops"} desktopView={6} mobileView={3} >
-
-                        {
-                            shops?.map((shop) => (
-                                <PrimaryCard key={shop.id} item={getFormattedShop(shop)} containerClassName={"px-2"} />
-                            ))
-                        }
-                    </Items>
                 </div>
+
+                {
+                    shopProducts.length > 0 && (
+                        <shopProducts products={shopProducts} />
+                    )
+                }
             </Container>
         </div>
     )

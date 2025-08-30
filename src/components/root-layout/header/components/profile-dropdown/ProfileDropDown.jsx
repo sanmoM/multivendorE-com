@@ -208,7 +208,6 @@ export default function ProfileDropDown({ isMobile, isDropdownOpen, setIsDropdow
         },
     ];
 
-    console.log(currentModal, "currentModal")
     // account information items
     const accountItems = [
         {

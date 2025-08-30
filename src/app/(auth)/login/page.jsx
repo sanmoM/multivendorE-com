@@ -31,8 +31,6 @@ export default function page() {
                     mobile: mobile,
                     password: password,
                 });
-                console.log(res)
-                // router.push("/")
                 if (res.status === 200) {
                     toast.success("Login successful")
                     dispatch(setUser({ ...res?.data?.user, token: res?.data?.token }))

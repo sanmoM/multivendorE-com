@@ -74,7 +74,6 @@ const App = () => {
                 quantity: cartItem?.quantity,
             }
 
-        console.log(cartItem)
 
         dispatch(addToCart(item));
         setCartItem(null);
