@@ -1,15 +1,29 @@
 import Button from '@/components/shared/button/Button';
 import TextInput from '@/components/shared/inputs/text-input/TextInput';
 import PrimaryTitle from '@/components/shared/title/PrimaryTitle';
+import useAuthAxios from '@/hooks/useAuthAxios';
 import { useState } from 'react';
+import toast from 'react-hot-toast';
 
 export default function PasswordAndSecurityModalContents({ handleCloseModal }) {
     const [currentPassword, setCurrentPassword] = useState("");
     const [newPassword, setNewPassword] = useState("");
     const [confirmNewPassword, setConfirmNewPassword] = useState("");
-
+    const axios = useAuthAxios();
     const handleSaveChanges = () => {
-        handleCloseModal();
+        if (newPassword !== confirmNewPassword) {
+            toast.error("Passwords do not match");
+            return;
+        };
+        axios.patch("/password-update-customer", {
+            current_password: currentPassword,
+            new_password: newPassword
+        }).then(() => {
+            handleCloseModal();
+            toast.success("Password changed successfully");
+        }).catch((error) => {
+            toast.error("Failed to change password");
+        });
     }
     return (
         <div className=" w-full flex flex-col h-full justify-between">

@@ -3,9 +3,9 @@
 import Button from '@/components/shared/button/Button';
 import TextInput from '@/components/shared/inputs/text-input/TextInput';
 import PrimaryTitle from '@/components/shared/title/PrimaryTitle';
-import { addAddresses } from '@/lib/redux/features/userSlice';
+import useAuthAxios from '@/hooks/useAuthAxios';
 import { useState } from 'react';
-import { useDispatch } from 'react-redux';
+import toast from 'react-hot-toast';
 
 const AddAddressModalContents = ({ handleAddAddress }) => {
     const [street, setStreet] = useState("");
@@ -13,12 +13,24 @@ const AddAddressModalContents = ({ handleAddAddress }) => {
     const [state, setState] = useState("");
     const [zipCode, setZipCode] = useState("");
     const [country, setCountry] = useState("");
-    const dispatch = useDispatch();
+
+    const axios = useAuthAxios();
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        dispatch(addAddresses({ street, city, state, zipCode, country }));
-        handleAddAddress()
+        // dispatch(addAddresses({ street, city, state, zipCode, country }));
+        axios.post("/address/store", {
+            street,
+            city,
+            state,
+            zip_code: zipCode,
+            country
+        }).then((response) => {
+            handleAddAddress();
+            toast.success("Address added successfully");
+        }).catch((error) => {
+            toast.error("Failed to add address");
+        });
     };
     return (
         <div className=" w-full flex flex-col h-full justify-between">

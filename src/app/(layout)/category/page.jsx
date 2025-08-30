@@ -40,6 +40,8 @@ export default function Page() {
         router.push(`?${params.toString()}`)
     }
 
+    console.log(categoryProducts)
+
     return (
         <div className={`${categories.length === 0 ? 'min-h-screen' : ''}`}>
             <MobileHeader title={"Categories"} />
@@ -49,9 +51,9 @@ export default function Page() {
                     <div className='grid grid-cols-3 lg:grid-cols-6 gap-4 lg:gap-x-4 lg:gap-y-8 mt-6'>
                         {
                             categories?.map((category) => (
-                                <div 
-                                    key={category.id} 
-                                    onClick={() => handleCategoryClick(category?.id)} 
+                                <div
+                                    key={category.id}
+                                    onClick={() => handleCategoryClick(category?.id)}
                                     className='cursor-pointer'
                                 >
                                     <PrimaryCard item={{ image: category?.image, title: category?.categoryName, subtitle: category?.categoryDescription }} />

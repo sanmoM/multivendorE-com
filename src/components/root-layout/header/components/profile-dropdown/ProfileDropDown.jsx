@@ -228,7 +228,7 @@ export default function ProfileDropDown({ isMobile, isDropdownOpen, setIsDropdow
             name: 'My Address',
             subtitle: 'Manage your address',
             type: "button",
-            handleClick: () => handleOpenModal("my-address-modal"),
+            handleClick: () => handleOpenModal("add-address-modal"),
             icon: <MdOutlineHomeWork className="h-6 w-6 text-gray-700" />
         },
         {
@@ -383,9 +383,9 @@ export default function ProfileDropDown({ isMobile, isDropdownOpen, setIsDropdow
                 <Modal isLeft={false} isOpen={currentModal === "my-orders-modal"} setIsOpen={() => handleCloseModal()} title={"My Orders"}>
                     <MyOrderModalContents />
                 </Modal>
-                <Modal isLeft={false} isOpen={currentModal === "my-address-modal"} setIsOpen={() => handleCloseModal()} title={"My Address"}>
+                {/* <Modal isLeft={false} isOpen={currentModal === "my-address-modal"} setIsOpen={() => handleCloseModal()} title={"My Address"}>
                     <AddressModalContents handleAddAddress={() => handleOpenModal("add-address-modal")} />
-                </Modal>
+                </Modal> */}
                 <Modal isLeft={false} isOpen={currentModal === "add-address-modal"} setIsOpen={() => handleCloseModal()} title={"Add New Address"}>
                     <AddAddressModalContents handleAddAddress={() => handleCloseModal()} />
                 </Modal>
@@ -393,7 +393,7 @@ export default function ProfileDropDown({ isMobile, isDropdownOpen, setIsDropdow
                     <AddPaymentMethodModalContents handleCloseModal={handleCloseModal} />
                 </Modal>
                 <Modal isLeft={false} isOpen={currentModal === "password-and-security-modal"} setIsOpen={() => handleCloseModal()} title={"Password and Security"}>
-                    <PasswordAndSecurityModalContents handleCloseModal={handleCloseModal} />
+                    <PasswordAndSecurityModalContents handleCloseModal={handleCloseAllModals} />
                 </Modal>
 
             </div>

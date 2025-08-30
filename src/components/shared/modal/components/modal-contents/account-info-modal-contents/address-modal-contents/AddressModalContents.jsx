@@ -1,12 +1,10 @@
-import React, { useState } from 'react';
-import ItemCard from '../../../../../item-card/ItemCard';
 import Button from '@/components/shared/button/Button';
-import { useDispatch, useSelector } from 'react-redux';
 import { setPrimaryAddress } from '@/lib/redux/features/userSlice';
+import { useState } from 'react';
+import ItemCard from '../../../../../item-card/ItemCard';
 
 const AddressModalContents = ({ handleAddAddress }) => {
-    const addresses = useSelector((state) => state.user.addresses);
-    const dispatch = useDispatch();
+    const [addresses, setAddresses] = useState([]);
     const handleToggle = (address) => {
         dispatch(setPrimaryAddress(address));
     }

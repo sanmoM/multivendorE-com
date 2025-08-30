@@ -9,7 +9,7 @@ export default function Modal({ isLeft, children, isOpen, setIsOpen, title }) {
             <div className='bg-white pb-10 overflow-y-auto hide-scrollbar h-[100svh]' onClick={(e) => {
                 e.stopPropagation();
             }}>
-                <div className='flex flex-col justify-between items-center h-full'>
+                <div className='flex flex-col justify-between items-center h-[100%]'>
                     <div className='px-4 py-6 sticky top-0 bg-white w-full'>
                         <div className='relative flex justify-between items-center' >
                             <BackBtn className={"absolute z-[100] top-1"} handleBack={() => setIsOpen(false)} />
