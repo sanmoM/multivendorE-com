@@ -5,7 +5,7 @@ import IncreaseDecreaseButtons from '@/components/shared/increase-decrease-butto
 import Image from 'next/image';
 
 export default function ProductOptions({ data, cartItem, setCartItem }) {
-  const selectedVariant = cartItem?.variant || null;
+  const selectedVariant = cartItem?.variant || data?.variants?.[0];
   const quantity = cartItem?.quantity || 1;
 
   return (
