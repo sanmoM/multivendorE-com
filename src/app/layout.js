@@ -2,8 +2,8 @@ import { Poppins } from "next/font/google";
 import "./custom.css";
 import "./globals.css";
 import "./main.css";
-import StoreProvider from "@/Providers/StoreProvider";
 import { Toaster } from "react-hot-toast";
+import StoreProvider from "@/Providers/StoreProvider";
 import ReactQueryProvider from "@/Providers/ReactQueryProvider";
 import InitProvider from "@/Providers/InitProvider";
 
