@@ -19,6 +19,7 @@ import SingleItemTabs from '@/components/single-item/single-item-tabs/SingleItem
 import useAxios from '@/hooks/useAxios';
 import useModalAction from '@/hooks/useModalAction';
 import { addToCart } from '@/lib/redux/features/cartSlice';
+import { setCheckoutItems } from '@/lib/redux/features/checkoutSlice';
 import { useSearchParams } from 'next/navigation';
 import { useEffect, useState } from 'react';
 import { useDispatch } from 'react-redux';
@@ -80,6 +81,11 @@ const App = () => {
         handleOpenModal("cart-modal");
     }
 
+    const handleBuyNow = () => {
+        dispatch(setCheckoutItems([{ image: data?.product_image || data?.image, name: data?.cake_name || data?.name, price: data?.regular_price, quantity: cartItem?.quantity || 1 }]));
+        handleOpenModal("checkout-modal");
+    }
+
     return (
         <div className='my-6 lg:my-10'>
             <MobileHeader title={"Single Item"} containerClassName={"mb-6"} />
@@ -87,7 +93,7 @@ const App = () => {
                 <ProductInfo data={data} />
                 <div className='space-x-4'>
                     <Button text="Add to Cart" onClick={handleAddToCart} />
-                    <Button text="Buy Now" className={"bg-tertiary"} /> <br />
+                    <Button text="Buy Now" className={"bg-tertiary"} onClick={() => handleBuyNow()} />
                 </div>
                 <SellerInfo className="lg:hidden" handleCustomOrderModal={handleCustomOrderModal} data={{ rating: data?.average_rating }} />
                 <SingleItemTabs description={data?.description || data?.full_description} />

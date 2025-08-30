@@ -68,7 +68,7 @@ const CakeOptions = ({ data, cartItem, setCartItem }) => {
 
             {/* Total Price */}
             <div className="mb-8 border-gray-200">
-                <p className=" text-gray-800">Total Price: ${data?.price * cakeWeight}</p>
+                <p className=" text-gray-800 text-lg lg:text-xl">Total Price: <span className='font-bold'>${data?.price * cakeWeight}</span></p>
             </div>
         </div>
     );

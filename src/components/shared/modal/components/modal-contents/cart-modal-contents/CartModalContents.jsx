@@ -3,15 +3,17 @@
 import Button from '@/components/shared/button/Button';
 import PrimaryTitle from '@/components/shared/title/PrimaryTitle';
 import useModalAction from '@/hooks/useModalAction';
+import { setCheckoutItems } from '@/lib/redux/features/checkoutSlice';
 import { useRouter } from 'next/navigation';
 import { useState } from 'react';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import CartCard from './components/cart-card/CartCard';
 
 const CartModalContents = ({ setIsCartOpen, setIsCheckoutOpen }) => {
     const router = useRouter();
     const cartItems = useSelector((state) => state.cart.cartItems);
     const { handleCloseAllModals } = useModalAction();
+    const dispatch = useDispatch();
 
     const [shipping, setShipping] = useState(5);
     const totalItems = cartItems.reduce((acc, item) => acc + item.quantity, 0);
@@ -54,6 +56,7 @@ const CartModalContents = ({ setIsCartOpen, setIsCheckoutOpen }) => {
             {/* Action Buttons */}
             <div className="grid grid-cols-2 gap-4">
                 <Button text={"Checkout"} className={"bg-red-600 text-white w-full"} onClick={() => {
+                    dispatch(setCheckoutItems(cartItems));
                     setIsCartOpen(false);
                     setTimeout(() => {
                         setIsCheckoutOpen(true);

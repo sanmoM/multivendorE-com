@@ -5,11 +5,12 @@ import { useState } from 'react';
 import { useSelector } from 'react-redux';
 
 const CheckoutModalContents = () => {
-    const cartItems = useSelector((state) => state.cart.cartItems);
+    const checkoutItems = useSelector((state) => state?.checkout?.checkoutItems || []);
+    console.log(checkoutItems);
     const [isAddressOpen, setIsAddressOpen] = useState(false);
     const [isTimeOpen, setIsTimeOpen] = useState(false);
     const [isPaymentOpen, setIsPaymentOpen] = useState(false);
-    const subtotal = cartItems.reduce((acc, item) => acc + item.price * item.quantity, 0);
+    const subtotal = checkoutItems.reduce((acc, item) => acc + item.price * item.quantity, 0);
     const [shipping, setShipping] = useState(5);
     const [taxes, setTaxes] = useState(3);
 
@@ -90,7 +91,7 @@ const CheckoutModalContents = () => {
                 <div>
                     <PrimaryTitle title={"Shopping Bag"} />
                     <div className="grow space-y-4 lg:space-y-6">
-                        {cartItems.map((item, index) => (
+                        {checkoutItems.map((item, index) => (
                             // <CartCard item={item} key={index} />
                             <HorizontalCard key={index} item={{ id: item.id, image: item?.image, title: item?.name, text2: `Quantity: ${item.quantity}`, text3: `Price: $${item.price * item.quantity}` }} />
                         ))}

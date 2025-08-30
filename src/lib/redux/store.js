@@ -6,7 +6,7 @@ import storage from "redux-persist/lib/storage";
 import cartSlice from './features/cartSlice';
 import userSlice from './features/userSlice';
 import modalSlice from './features/modalSlice';
-
+import checkoutSlice from './features/checkoutSlice';
 const cartConfig = {
     key: 'cart',
     storage,
@@ -23,6 +23,7 @@ export const store = configureStore({
         cart: cartPersistReducer,
         user: userPersistReducer,
         modal: modalSlice,
+        checkout: checkoutSlice,
     },
     middleware: (getDefaultMiddleware) =>
         getDefaultMiddleware({

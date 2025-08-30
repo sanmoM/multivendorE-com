@@ -108,6 +108,6 @@ export default function ProductInfo({ data }) {
             <PrimaryTitle title={"Sweet Delights"} className={"my-6"} />
             <SectionTitle title={data?.cake_name || data?.name} className={"mb-4"} />
             <p className='text-primary'>{data?.short_description}</p>
-            <p className='text-sm text-secondary mt-4 mb-6'>${data?.regular_price}</p></div>
+            <p className='text-lg lg:text-xl font-bold text-secondary mt-4 mb-6'>${data?.regular_price}</p></div>
     )
 }
