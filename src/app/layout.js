@@ -4,7 +4,7 @@ import "./globals.css";
 import "./main.css";
 import StoreProvider from "@/Providers/StoreProvider";
 import { Toaster } from "react-hot-toast";
-import ReactQueryProvider from "@/Providers/ReactQueryPRovider";
+import ReactQueryProvider from "@/Providers/ReactQueryProvider";
 import InitProvider from "@/Providers/InitProvider";
 
 
