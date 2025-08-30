@@ -4,27 +4,64 @@ import TextAreaInput from '@/components/shared/inputs/text-area-input/TextAreaIn
 import TextInput from '@/components/shared/inputs/text-input/TextInput'
 import SingleImageInput from '@/components/shared/single-image-input/SingleImageInput'
 import PrimaryTitle from '@/components/shared/title/PrimaryTitle'
+import useAuthAxios from '@/hooks/useAuthAxios'
+import useAxios from '@/hooks/useAxios'
 import { setPrimaryInformation } from '@/lib/redux/features/userSlice'
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
+import toast from 'react-hot-toast'
 import { useDispatch, useSelector } from 'react-redux'
 
 export default function PersonalInfoModalContents({ handleCloseModal }) {
-    const personalInformation = useSelector(state => state?.user?.user);
+    // const personalInformation = useSelector(state => state?.user?.user);
+    const [personalInformation, setPersonalInformation] = useState({});
+    const axios = useAxios();
+    const authAxios = useAuthAxios();
 
     const dispatch = useDispatch();
 
-    const [firstName, setFirstName] = useState(personalInformation?.first_name);
-    const [lastName, setLastName] = useState(personalInformation?.last_name);
+    const [firstName, setFirstName] = useState("");
+    const [lastName, setLastName] = useState("");
     const [email, setEmail] = useState(personalInformation?.email);
-    const [phoneNumber, setPhoneNumber] = useState(personalInformation?.phoneNumber);
-    const [dateOfBirth, setDateOfBirth] = useState(personalInformation?.dateOfBirth);
-    const [bio, setBio] = useState(personalInformation?.bio);
-    const [image, setImage] = useState(personalInformation?.image);
+    const [phoneNumber, setPhoneNumber] = useState("");
+    const [dateOfBirth, setDateOfBirth] = useState("");
+    const [bio, setBio] = useState("");
+    const [image, setImage] = useState("");
 
-    const handleSaveChanges = () => {
-        dispatch(setPrimaryInformation({ firstName, lastName, email, phoneNumber, dateOfBirth, bio }));
-        handleCloseModal();
-    }
+    useEffect(() => {
+        axios.get("/my-personal-info").then((res) => {
+            console.log(res.data?.info)
+            setFirstName(res.data?.info?.first_name || "");
+            setLastName(res.data?.info?.last_name || "");
+            setEmail(res.data?.info?.email || "");
+            setPhoneNumber(res.data?.info?.mobile || "");
+            setDateOfBirth(res.data?.info?.dateOfBirth || "");
+            setBio(res.data?.info?.bio || "");
+            setImage(res.data?.info?.image || "");
+        });
+    }, []);
+
+    const handleSubmit = () => {
+        const updatedInfo = {
+            first_name: firstName,
+            last_name: lastName,
+            email,
+            mobile: phoneNumber,
+            dateOfBirth,
+            bio,
+            image
+        };
+        authAxios.post("/new-info/store", updatedInfo).then((res) => {
+            console.log(res.data);
+            toast.success("Personal information updated successfully!");
+            handleCloseModal();
+        }).catch((error) => {
+            console.error(error);
+            toast.error("Failed to update personal information.");
+        });
+
+
+    };
+
     return (
         <div className=" w-full flex flex-col h-full justify-between">
             <div>
@@ -39,7 +76,7 @@ export default function PersonalInfoModalContents({ handleCloseModal }) {
                     <SingleImageInput image={image} setImage={setImage} />
                 </div>
             </div>
-            <Button text={"Save Changes"} className={"bg-red-600 text-white w-full"} onClick={handleSaveChanges} />
+            <Button text={"Save Changes"} className={"bg-red-600 text-white w-full"} onClick={handleSubmit} />
         </div>
     )
 }

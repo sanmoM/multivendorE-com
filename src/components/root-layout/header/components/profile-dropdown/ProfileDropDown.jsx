@@ -375,7 +375,7 @@ export default function ProfileDropDown({ isMobile, isDropdownOpen, setIsDropdow
 
                 {/* account information modals */}
                 <Modal isLeft={false} isOpen={currentModal === "personal-information-modal"} setIsOpen={() => handleCloseModal()} title={"Personal Information"}>
-                    <PersonalInfoModalContents handleCloseModal={handleCloseModal} />
+                    <PersonalInfoModalContents handleCloseModal={handleCloseAllModals} />
                 </Modal>
                 <Modal isLeft={false} isOpen={currentModal === "payment-modal"} setIsOpen={() => handleCloseModal()} title={"Payment Methods"}>
                     <PaymentModalContents handleAddPaymentMethod={() => handleOpenModal("add-payment-method-modal")} />
