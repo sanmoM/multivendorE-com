@@ -1,15 +1,10 @@
-import ColorPicker from '@/components/shared/color-picker/ColorPicker';
 import PrimaryTitle from '@/components/shared/title/PrimaryTitle';
 import SecondaryTitle from '@/components/shared/title/SecondaryTitle';
-import { useState } from 'react';
 
 import IncreaseDecreaseButtons from '@/components/shared/increase-decrease-buttons/IncreaseDecreaseButtons';
 import Image from 'next/image';
-import { IMAGE_BASE_URL } from '@/config';
 
 export default function ProductOptions({ data, cartItem, setCartItem }) {
-  // const [selectedVariant, setSelectedVariant] = useState(null);
-  // const [quantity, setQuantity] = useState(1);
   const selectedVariant = cartItem?.variant || null;
   const quantity = cartItem?.quantity || 1;
 

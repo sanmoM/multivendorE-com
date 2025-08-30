@@ -5,21 +5,12 @@ import IncreaseDecreaseButtons from '@/components/shared/increase-decrease-butto
 import OptionBox from '@/components/shared/option-box/OptionBox';
 import PrimaryTitle from '@/components/shared/title/PrimaryTitle';
 import SecondaryTitle from '@/components/shared/title/SecondaryTitle';
-import { useState } from 'react';
 
 const CakeOptions = ({ data, cartItem, setCartItem }) => {
-    // const [selectedSlices, setSelectedSlices] = useState("4 Slices");
-    // const [selectedFlavor, setSelectedFlavor] = useState("Chocolate");
-    // const [cakeQuantity, setCakeQuantity] = useState(1);
-    // const [cakeWeight, setCakeWeight] = useState(1);
-    // const [selectedDeliveryOption, setSelectedDeliveryOption] = useState(null);
-    // const [selectedColor, setSelectedColor] = useState("Pink");
 
     const selectedSlices = cartItem?.slices || "4 Slices";
     const selectedFlavor = cartItem?.flavor || "Chocolate";
-    const cakeQuantity = cartItem?.quantity || 1;
-    const cakeWeight = cartItem?.weight || 1;
-    const selectedDeliveryOption = cartItem?.deliveryOption || null;
+    const cakeWeight = cartItem?.quantity || 1;
     const selectedColor = cartItem?.color || "Pink";
 
     const cakeColors = [
@@ -31,38 +22,6 @@ const CakeOptions = ({ data, cartItem, setCartItem }) => {
 
     const sliceOptions = ['4 Slices', '6 Slices', '8 Slices', '10 Slices'];
     const flavorOptions = ['Chocolate', 'Vanilla', 'Red Velvet'];
-    const colorOptions = ['Chocolate', 'Vanilla', 'Red Velvet'];
-    const deliveryOptions = [
-        {
-            label: 'Self-Collection', icon: (
-                <svg className="h-6 w-6 text-gray-700" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M20 7l-8-4-8 4m16 0l-8 4m8-4v10l-8 4m-8-4v10l8 4m0-10v10"></path>
-                </svg>
-            )
-        },
-        {
-            label: 'Book with Cash on Delivery', icon: (
-                <svg className="h-6 w-6 text-gray-700" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M17 9V7a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2m2 4h10a2 2 0 002-2v-6a2 2 0 00-2-2H9.828a2 2 0 00-1.414.586L6 11.414V17a2 2 0 002 2z"></path>
-                </svg>
-            )
-        },
-        {
-            label: 'Order with 10% Payment', icon: (
-                <svg className="h-6 w-6 text-gray-700" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M3 10h18M7 15h10m-9 4h8m-10 4H5a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v12a2 2 0 01-2 2h-2.5"></path>
-                </svg>
-            )
-        },
-    ];
-
-    const handleQuantityChange = (type) => {
-        setCakeQuantity(prev => type === 'increment' ? prev + 1 : Math.max(1, prev - 1));
-    };
-
-    const handleWeightChange = (type) => {
-        setCakeWeight(prev => type === 'increment' ? prev + 1 : Math.max(1, prev - 1));
-    };
 
     return (
         <div className=" max-w-xl w-full mt-6" id='cake-options'>
@@ -97,31 +56,12 @@ const CakeOptions = ({ data, cartItem, setCartItem }) => {
                 </div>
             </div>
 
-            {/* Cake Color */}
-            {/* <div className="mb-6">
-                <SecondaryTitle title={"Color"} />
-                <div className="flex flex-wrap gap-3">
-                    {flavorOptions.map((flavor, index) => (
-                        <OptionBox value={flavor} setValue={setSelectedFlavor} currentValue={selectedFlavor} label={flavor} key={index} />
-                    ))}
-                </div>
-            </div> */}
-
-            {/* Cake Quantity */}
-            {/* <div className="mb-6">
-                <SecondaryTitle title={"Cake Quantity"} />
-                <div className='flex items-center gap-4'>
-                    <p>Quantity</p>
-                    <IncreaseDecreaseButtons value={cakeQuantity} setValue={setCakeQuantity} />
-                </div>
-            </div> */}
-
             {/* Cake Weight (lbs) */}
             <div className="mb-6">
                 <SecondaryTitle title={"Weight (in pounds)"} />
                 <div className='flex items-center gap-4'>
                     <p>Weight</p>
-                    <IncreaseDecreaseButtons value={cakeWeight} setValue={(value) => setCartItem({ ...cartItem, weight: value })} />
+                    <IncreaseDecreaseButtons value={cakeWeight} setValue={(value) => setCartItem({ ...cartItem, quantity: value })} />
                 </div>
             </div>
 

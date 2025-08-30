@@ -121,7 +121,7 @@ export default function ProfileDropDown({ isMobile, isDropdownOpen, setIsDropdow
                         if (user?.accountType === "seller") {
                             handleOpenModal("seller-settings-modal")
                         } else {
-
+                            handleOpenModal("become-a-seller-modal")
                         }
                     },
                 },
@@ -208,7 +208,7 @@ export default function ProfileDropDown({ isMobile, isDropdownOpen, setIsDropdow
         },
     ];
 
-    console.log(user?.user)
+    console.log(currentModal, "currentModal")
     // account information items
     const accountItems = [
         {

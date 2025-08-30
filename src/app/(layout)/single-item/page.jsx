@@ -61,6 +61,7 @@ const App = () => {
                 price: data?.regular_price,
                 image: data?.product_image,
                 type: data?.type,
+                quantity: cartItem?.quantity,
             }
             :
             {
@@ -70,7 +71,10 @@ const App = () => {
                 price: data?.regular_price,
                 image: data?.image,
                 type: data?.type,
+                quantity: cartItem?.quantity,
             }
+
+        console.log(cartItem)
 
         dispatch(addToCart(item));
         setCartItem(null);

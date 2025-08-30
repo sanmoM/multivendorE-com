@@ -17,7 +17,7 @@ export default function ModalProductCard({ item, imageClassName }) {
 
     // console.log(imagePath, "imagePath");
     return (
-        <div className="flex items-center space-x-4">
+        <div className="flex space-x-4">
             <Image
                 src={imagePath}
                 alt={item.name}
