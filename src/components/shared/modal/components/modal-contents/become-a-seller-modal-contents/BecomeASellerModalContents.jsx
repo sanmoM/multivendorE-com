@@ -33,7 +33,7 @@ export default function BecomeASellerModalContents({ handleCloseModal }) {
         });
     };
     return (
-        <form className='flex flex-col h-full' onSubmit={handleSubmit}>
+        <form className='flex flex-col h-full pt-2' onSubmit={handleSubmit}>
             <div className='grow space-y-4'>
                 <TextInput placeholder={"Business Name"} value={businessName} setValue={setBusinessName} />
                 <TextInput placeholder={"Contact Number"} value={contactNumber} setValue={(value) => setContactNumber(handleMobileNumberChange(value))} isNumber />

@@ -6,12 +6,20 @@ import FeaturedItems from "@/components/shared/featured-items/FeaturedItems";
 import Filter from "@/components/shared/filter/Filter";
 import PrimaryCard from "@/components/shared/primary-card/PrimaryCard";
 import SectionTitle from "@/components/shared/section-title/SectionTitle";
+import ShopProducts from "@/components/shop/shop-products/ShopProducts";
 import useAxios from "@/hooks/useAxios";
 import { getFormattedShop } from "@/utils/getFormattedData";
+import { useSearchParams } from "next/navigation";
 import { useEffect, useState } from "react";
 
 
 export default function Page() {
+
+    const searchParams = useSearchParams();
+    const id = searchParams.get('id');
+
+
+    const [categoryId, setCategoryId] = useState(id);
     const [categories, setCategories] = useState([]);
     const [locations, setLocations] = useState([]);
 
@@ -50,6 +58,15 @@ export default function Page() {
         fetchData();
     }, []);
 
+    useEffect(() => {
+        const fetchData = async () => {
+            const res = await axios.get(`/vendor-product/${categoryId}`);
+            setShopProducts(res?.data?.products || []);
+        };
+        fetchData();
+    }, [categoryId]);
+    console.log(shopProducts);
+
     return (
         <div>
             <MobileHeaderWithSearchbar title={"Shops"} />
@@ -75,7 +92,7 @@ export default function Page() {
 
                 {
                     shopProducts.length > 0 && (
-                        <shopProducts products={shopProducts} />
+                        <ShopProducts products={shopProducts} />
                     )
                 }
             </Container>

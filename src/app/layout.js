@@ -2,8 +2,10 @@ import { Poppins } from "next/font/google";
 import "./custom.css";
 import "./globals.css";
 import "./main.css";
-import StoreProvider from "@/lib/redux/StoreProvider";
+import StoreProvider from "@/Providers/StoreProvider";
 import { Toaster } from "react-hot-toast";
+import ReactQueryProvider from "@/Providers/ReactQueryPRovider";
+import InitProvider from "@/Providers/InitProvider";
 
 
 const poppinsFront = Poppins({
@@ -26,8 +28,12 @@ export default function RootLayout({ children }) {
       </head>
       <body className={`${poppinsFront.variable} bg-white`}>
         <StoreProvider>
-          {children}
-          <Toaster />
+          <ReactQueryProvider>
+            <InitProvider>
+              {children}
+              <Toaster />
+            </InitProvider>
+          </ReactQueryProvider>
         </StoreProvider>
       </body>
     </html>

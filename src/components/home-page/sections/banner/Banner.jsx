@@ -5,7 +5,7 @@ import React from 'react'
 
 export default function Banner({ data }) {
     return (
-        <div className="rounded-md lg:mt-4 max-w-[1550px] mx-auto">
+        <div className="rounded-md lg:mt-4">
             <CustomSlider desktopView={1} mobileView={1} className="w-full" autoplay>
                 {
                     data?.map((product, index) => (

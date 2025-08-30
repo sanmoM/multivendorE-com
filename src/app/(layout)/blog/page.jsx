@@ -4,7 +4,7 @@ import React from 'react'
 export default function page() {
     return (
         <Container>
-            <div class="container max-w-[1550px] rounded mx-auto px-3 my-12">
+            <div class="container max-w-[1550px] lg:w-[90%] rounded mx-auto px-3 my-12">
                 <div>
                     <div class="w-72 shadow-2xl">
                         <div>

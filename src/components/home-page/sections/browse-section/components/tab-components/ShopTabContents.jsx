@@ -3,6 +3,7 @@ import Filter from '@/components/shared/filter/Filter';
 import PrimaryCard from '@/components/shared/primary-card/PrimaryCard';
 import useAxios from '@/hooks/useAxios';
 import { getFormattedShop } from '@/utils/getFormattedData';
+import Link from 'next/link';
 import { useEffect, useState } from 'react';
 
 export default function ShopTabContents({ categories, locations }) {
@@ -36,12 +37,12 @@ export default function ShopTabContents({ categories, locations }) {
                 <Filter category={category} setCategory={setCategory} location={location} setLocation={setLocation} categoryOptions={categoryOptions} locationOptions={locationOptions} />
             </div>
             {
-                shops?.length > 0 && <CustomSlider mobileView={3} desktopView={5}>
+                shops?.length > 0 && <CustomSlider mobileView={3} desktopView={6}>
                     {
                         shops.map((shop) => (
-                            <>
+                            <Link href={`/shop?id=${shop.id}`} className='block'>
                                 <PrimaryCard key={shop.id} item={getFormattedShop(shop)} containerClassName={"px-2"} />
-                            </>
+                            </Link>
                         ))
                     }
                 </CustomSlider>

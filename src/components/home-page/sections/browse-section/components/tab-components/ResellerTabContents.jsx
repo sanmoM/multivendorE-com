@@ -9,7 +9,7 @@ export default function ResellerTabContents({ resellers }) {
             <div className='mb-6 px-2 lg:px-0'>
                 <Filter />
             </div>
-            <CustomSlider mobileView={3} desktopView={5}>
+            <CustomSlider mobileView={3} desktopView={6}>
                 {
                     resellers?.map((shop) => (
                         <>
