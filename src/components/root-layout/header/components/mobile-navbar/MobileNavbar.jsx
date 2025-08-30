@@ -47,8 +47,6 @@ const BottomNavbar = ({ setIsCartOpen }) => {
                             <span className={`text-xs ${item.active && 'text-primary font-semibold'}`}>{item.name}</span>
                         </button>
                     ))}
-                    {/* <Dropdown /> */}
-                    {/* <MobileProfileDropdown /> */}
                     <ProfileDropDown isMobile />
                 </div>
             </nav>

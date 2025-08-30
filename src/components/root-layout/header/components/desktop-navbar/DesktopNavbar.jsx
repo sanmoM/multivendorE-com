@@ -19,7 +19,7 @@ const navItems = [
     { name: 'Reseller', href: '/reseller' },
 ];
 
-export default function DesktopNavbar({ setIsCartOpen }) {
+export default function DesktopNavbar({ setIsCartOpen, setNotificationOpen }) {
     const [isDropdownOpen, setIsDropdownOpen] = useState(false);
     const pathname = usePathname();
 
@@ -49,6 +49,7 @@ export default function DesktopNavbar({ setIsCartOpen }) {
                 <div className='space-x-2'>
                     <button
                         onClick={() => {
+                            setNotificationOpen()
                             setIsDropdownOpen(false)
                         }}
                         className="p-3 rounded-full bg-tertiary hover:bg-secondary/50 transition-colors duration-200 focus:outline-none focus:ring-1 focus:ring-gray-300">

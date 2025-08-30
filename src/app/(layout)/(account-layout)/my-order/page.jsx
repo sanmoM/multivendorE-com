@@ -5,26 +5,10 @@ import MobileAccountSideBar from '@/components/shared/AccountSideBar/MobileAccou
 import SelectInput from '@/components/shared/inputs/select-input/SelectInput';
 import Pagination from '@/components/shared/pagination/Pagination';
 import TabButton from '@/components/shared/tab-button/TabButton';
+import Tabs from '@/components/shared/Tabs/Tabs';
 import { orders } from '@/data';
 import React, { useState } from 'react'
-const tabs = [
-    {
-        name: 'all',
-        label: 'All',
-    },
-    {
-        name: 'to_pay',
-        label: 'To Pay',
-    },
-    {
-        name: 'to_ship',
-        label: 'To Ship',
-    },
-    {
-        name: 'to_receive',
-        label: 'To Receive',
-    },
-];
+
 
 const selectOptions = [
     { label: 'Select Orders', value: 'all' },
@@ -42,15 +26,34 @@ export default function page() {
     const handleTabClick = (tab) => {
         setActiveTab(tab);
     };
+
+    const tabs = [
+        {
+            name: 'all',
+            label: 'All',
+            onClick: handleTabClick
+        },
+        {
+            name: 'to_pay',
+            label: 'To Pay',
+            onClick: handleTabClick
+        },
+        {
+            name: 'to_ship',
+            label: 'To Ship',
+            onClick: handleTabClick
+        },
+        {
+            name: 'to_receive',
+            label: 'To Receive',
+            onClick: handleTabClick
+        },
+    ];
     return (
         <div className="w-full">
             <div className="flex justify-between max-sm:flex-col m-4">
                 <div className="flex items-center gap-2 flex-wrap">
-                    {
-                        tabs.map((tab) => (
-                            <TabButton value={tab.name} label={tab.label} handleTabClick={handleTabClick} activeTab={activeTab} />
-                        ))
-                    }
+                    <Tabs tabs={tabs} activeTab={activeTab} />
                     <div className='lg:hidden inline'>
                         <SelectInput inputClass={"shadow-none"} options={selectOptions} value={lastOrders} setValue={setLastOrders} />
                     </div>

@@ -7,22 +7,7 @@ import useAxios from "@/hooks/useAxios";
 import CategoryTabContents from "./components/tab-components/CategoryTabContents";
 import ResellerTabContents from "./components/tab-components/ResellerTabContents";
 import ShopTabContents from "./components/tab-components/ShopTabContents";
-
-
-const tabs = [
-    {
-        text: 'Category',
-        value: 'category'
-    },
-    {
-        text: 'Shop',
-        value: 'shop'
-    },
-    {
-        text: 'Reseller',
-        value: 'reseller'
-    }
-]
+import Tabs from "@/components/shared/Tabs/Tabs";
 
 export default function BrowseSection() {
 
@@ -34,28 +19,37 @@ export default function BrowseSection() {
         const fetchData = async () => {
             const [category, location] = await Promise.all([
                 axios.get("/categories"),
-                // axios.get("/api/locations"),
             ]);
             setCategories(category?.data?.categories);
-            // setLocations(location.data);
         };
         fetchData();
     }, [])
 
 
+    const tabs = [
+        {
+            label: 'Category',
+            value: 'category',
+            onClick: () => setActiveTab('category')
+        },
+        {
+            label: 'Shop',
+            value: 'shop',
+            onClick: () => setActiveTab('shop')
+        },
+        {
+            label: 'Reseller',
+            value: 'reseller',
+            onClick: () => setActiveTab('reseller')
+        }
+    ]
+
+
     return (
         <div className="mt-2 md:mt-8">
             {/* Tabs Section */}
-            <div className="flex justify-around border-b !border-secondary mb-6">
-                {tabs.map((tab) => (
-                    <TabButton
-                        key={tab.value}
-                        text={tab.text}
-                        activeTab={activeTab}
-                        setActiveTab={setActiveTab}
-                        value={tab.value}
-                    />
-                ))}
+            <div className="">
+                <Tabs tabs={tabs} activeTab={activeTab} className={"justify-around"} />
             </div>
 
 

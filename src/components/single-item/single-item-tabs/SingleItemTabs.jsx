@@ -1,15 +1,9 @@
 "use client";
 
-import TabButton from '@/components/shared/tab-button/TabButton';
+import Tabs from '@/components/shared/Tabs/Tabs';
 import { useState } from 'react';
 
-const tabs = [
-    { name: 'Description', value: 'description' },
-    { name: 'Variants', value: 'variants' },
-    { name: 'Cake Flavors', value: 'cake-flavors' },
-    { name: 'Delivery', value: 'delivery' },
-    { name: 'Reviews', value: 'reviews' },
-];
+
 
 export default function SingleItemTabs({ description }) {
     const [activeTab, setActiveTab] = useState('description');
@@ -27,24 +21,20 @@ export default function SingleItemTabs({ description }) {
         }
     };
 
-    return (
-        <div className="mt-10 w-fit">
-            <div className="border-b border-gray-200">
-                <div className="flex justify-between lg:justify-start lg:space-x-8">
-                    {tabs.map((tab, index) => (
-                        <div key={index}>
-                            <TabButton
-                                activeTab={activeTab}
-                                setActiveTab={handleTabClick} // 🔑 pass custom handler
-                                text={tab.name}
-                                value={tab.value}
-                            />
-                        </div>
-                    ))}
-                </div>
-            </div>
 
-            {/* Sections */}
+    const tabs = [
+        { label: 'Description', value: 'description', onClick: handleTabClick },
+        { label: 'Variants', value: 'variants', onClick: handleTabClick },
+        { label: 'Cake Flavors', value: 'cake-flavors', onClick: handleTabClick },
+        { label: 'Delivery', value: 'delivery', onClick: handleTabClick },
+        { label: 'Reviews', value: 'reviews', onClick: handleTabClick },
+    ];
+
+
+    return (
+        <div className="mt-10 hide-scrollbar lg:w-fit">
+            <Tabs tabs={tabs} activeTab={activeTab} className={"gap-4 lg:gap-10"} />
+
             <p
                 className="text-primary mt-4 lg:w-[95%]"
                 id="description"

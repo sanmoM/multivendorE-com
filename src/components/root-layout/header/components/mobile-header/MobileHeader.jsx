@@ -2,11 +2,13 @@
 
 import HeaderTitle from "@/components/root-layout/header/components/header-title/HeaderTitle";
 import BackBtn from "@/components/shared/back-btn/BackBtn";
+import useModalAction from "@/hooks/useModalAction";
 import { cn } from "@/utils/cn";
 import { usePathname, useRouter } from "next/navigation";
 import { IoMdNotificationsOutline } from "react-icons/io";
 
 export default function MobileHeader({ title, containerClassName }) {
+  const { handleOpenModal } = useModalAction();
   const router = useRouter();
   const pathName = usePathname();
 
@@ -23,7 +25,7 @@ export default function MobileHeader({ title, containerClassName }) {
           ) : <></>
         }
         <HeaderTitle title={title} />
-        <button className="p-2 rounded-full hover:bg-gray-100 transition-colors duration-200 focus:outline-none focus:ring-1 focus:ring-gray-300 border !border-secondary">
+        <button className="p-2 rounded-full hover:bg-gray-100 transition-colors duration-200 focus:outline-none focus:ring-1 focus:ring-gray-300 border !border-secondary" onClick={() => handleOpenModal("notification-modal")}>
           <IoMdNotificationsOutline className="w-6 h-6 text-primary" />
         </button>
       </div>

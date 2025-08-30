@@ -12,12 +12,15 @@ export default function Header() {
     const { currentModal, handleCloseModal, handleOpenModal } = useModalAction();
     return (
         <header className="w-full bg-white shadow-sm font-sans sticky top-0 z-[100]">
-            <DesktopNavbar setIsCartOpen={() => handleOpenModal("cart-modal")} />
+            <DesktopNavbar setIsCartOpen={() => handleOpenModal("cart-modal")} setNotificationOpen={() => {
+                console.log("first")
+                handleOpenModal("notification-modal")
+            }} />
             <MobileNavbar setIsCartOpen={() => handleOpenModal("cart-modal")} />
 
             {/* cart modal */}
             <Modal isOpen={currentModal === "cart-modal"} setIsOpen={() => handleCloseModal()} title={"Shopping Bag"}>
-                <CartModalContents setIsCartOpen={() => {}} setIsCheckoutOpen={() => handleOpenModal("checkout-modal")} />
+                <CartModalContents setIsCartOpen={() => { }} setIsCheckoutOpen={() => handleOpenModal("checkout-modal")} />
             </Modal>
             {/* cart modal */}
             <Modal isOpen={currentModal === "checkout-modal"} setIsOpen={() => handleCloseModal()} title={"Checkout"}>
