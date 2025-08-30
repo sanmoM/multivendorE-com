@@ -14,10 +14,10 @@ export default async function Home() {
 
   return (
     <div>
-      <MobileHeaderWithSearchbar title={"Home"} />
-      <Banner data={res.sliders} />
-      <PromotionalSection />
-      <Container className={"space-y-6 lg:space-y-8"}>
+      <MobileHeaderWithSearchbar title={"Shop Hub"} />
+      <Container className={"space-y-6 lg:space-y-8 !pt-0"}>
+        <Banner data={res.sliders} />
+        <PromotionalSection />
         <BrowseSection />
         <FeaturedProducts data={res.featured_products} />
         <MoreFeaturedProducts />

@@ -20,7 +20,7 @@ export default function MobileHeader({ title, containerClassName }) {
         {
           pathName !== "/" ? (
             <BackBtn handleBack={handleBack} />
-          ) : <div></div>
+          ) : <></>
         }
         <HeaderTitle title={title} />
         <button className="p-2 rounded-full hover:bg-gray-100 transition-colors duration-200 focus:outline-none focus:ring-1 focus:ring-gray-300">

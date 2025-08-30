@@ -12,7 +12,7 @@ export default function CategoryTabContents({ category }) {
                     className="flex items-center gap-4 px-4 py-3  justify-center border-2 border-gray-300 rounded-xl hover:bg-gray-200 transition-colors duration-200"
                     >
                         {category.icon}
-                        <span className="text-primary font-bold">{category.categoryName}</span>
+                        <span className="text-xs lg:text-base text-primary font-bold">{category.categoryName}</span>
                     </Link>
                 ))
             }
