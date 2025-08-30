@@ -4,8 +4,8 @@ import "./globals.css";
 import "./main.css";
 import { Toaster } from "react-hot-toast";
 import StoreProvider from "@/Providers/StoreProvider";
-import ReactQueryProvider from "@/Providers/ReactQueryProvider";
 import InitProvider from "@/Providers/InitProvider";
+import ReactQueryProvider from "@/Providers/ReactQueryProvider";
 
 
 const poppinsFront = Poppins({
