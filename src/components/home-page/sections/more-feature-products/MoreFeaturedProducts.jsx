@@ -51,7 +51,7 @@ export default function FeaturedProducts() {
     const handleShowAbleProducts = () => {
         setStart(prev => prev + 10);
         setEnd(prev => prev + 10);
-        setShowAbleProducts(setShowAbleProducts?.concat(products?.slice(start, end)));
+        setShowAbleProducts(showAbleProducts?.concat(allProducts?.slice(start, end)));
     };
 
     return (
