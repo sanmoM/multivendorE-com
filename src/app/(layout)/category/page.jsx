@@ -40,7 +40,6 @@ export default function Page() {
         router.push(`?${params.toString()}`)
     }
 
-    console.log(categoryProducts)
 
     return (
         <div className={`${categories.length === 0 ? 'min-h-screen' : ''}`}>

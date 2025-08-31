@@ -65,7 +65,6 @@ export default function Page() {
         };
         fetchData();
     }, [categoryId]);
-    console.log(shopProducts);
 
     return (
         <div>

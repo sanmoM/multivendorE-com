@@ -1,15 +1,23 @@
 "use client"
 
 import Button from '@/components/shared/button/Button';
+import useAxios from '@/hooks/useAxios';
+import { useSearchParams } from 'next/navigation';
 import { useEffect, useRef, useState } from 'react';
+import toast from 'react-hot-toast';
 
 // Main OTP validation component
 export default function OTPValidation({ handleSubmit, handleResend: handleResendProp }) {
+    const searchParams = useSearchParams();
+
+    const mobile = searchParams.get("mobile");
 
     const [otp, setOtp] = useState(['', '', '', '', '', '']); // State to hold the 6-digit OTP
     const inputRefs = useRef([]); // Ref to store a reference to each input field
     const [timer, setTimer] = useState(300); // ⏳ 5 minutes = 300 seconds
     const [isCounting, setIsCounting] = useState(true);
+
+    const axios = useAxios()
 
 
     // Function to handle changes in the input fields
@@ -62,11 +70,20 @@ export default function OTPValidation({ handleSubmit, handleResend: handleResend
     };
 
     // Function to resend OTP
-    const handleResend = () => {
+    const handleResend = async () => {
         setOtp(['', '', '', '', '', '']); // clear inputs
         setTimer(300); // reset timer ⏳ 5 minutes
         setIsCounting(true);
-        handleResendProp();
+        // handleResendProp();
+        const res = await axios.post("/resend-otp", {
+            mobile: mobile
+        });
+        if (res.status === 200) {
+            toast.success("OTP resent successfully");
+        } else {
+            toast.error("Failed to resend OTP");
+        }
+
     };
 
     // Helper: format seconds → mm:ss

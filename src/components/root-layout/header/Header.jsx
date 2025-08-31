@@ -13,7 +13,6 @@ export default function Header() {
     return (
         <header className="w-full bg-white shadow-sm font-sans sticky top-0 z-[100]">
             <DesktopNavbar setIsCartOpen={() => handleOpenModal("cart-modal")} setNotificationOpen={() => {
-                console.log("first")
                 handleOpenModal("notification-modal")
             }} />
             <MobileNavbar setIsCartOpen={() => handleOpenModal("cart-modal")} />

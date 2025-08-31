@@ -6,7 +6,6 @@ import { useSelector } from 'react-redux';
 
 const CheckoutModalContents = () => {
     const checkoutItems = useSelector((state) => state?.checkout?.checkoutItems || []);
-    console.log(checkoutItems);
     const [isAddressOpen, setIsAddressOpen] = useState(false);
     const [isTimeOpen, setIsTimeOpen] = useState(false);
     const [isPaymentOpen, setIsPaymentOpen] = useState(false);

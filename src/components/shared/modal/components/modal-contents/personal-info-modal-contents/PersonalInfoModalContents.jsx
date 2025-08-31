@@ -6,22 +6,17 @@ import SingleImageInput from '@/components/shared/single-image-input/SingleImage
 import PrimaryTitle from '@/components/shared/title/PrimaryTitle'
 import useAuthAxios from '@/hooks/useAuthAxios'
 import useAxios from '@/hooks/useAxios'
-import { setPrimaryInformation } from '@/lib/redux/features/userSlice'
-import React, { useEffect, useState } from 'react'
+import { useEffect, useState } from 'react'
 import toast from 'react-hot-toast'
-import { useDispatch, useSelector } from 'react-redux'
 
 export default function PersonalInfoModalContents({ handleCloseModal }) {
-    // const personalInformation = useSelector(state => state?.user?.user);
-    const [personalInformation, setPersonalInformation] = useState({});
     const axios = useAxios();
     const authAxios = useAuthAxios();
 
-    const dispatch = useDispatch();
 
     const [firstName, setFirstName] = useState("");
     const [lastName, setLastName] = useState("");
-    const [email, setEmail] = useState(personalInformation?.email);
+    const [email, setEmail] = useState("");
     const [phoneNumber, setPhoneNumber] = useState("");
     const [dateOfBirth, setDateOfBirth] = useState("");
     const [bio, setBio] = useState("");
@@ -29,7 +24,6 @@ export default function PersonalInfoModalContents({ handleCloseModal }) {
 
     useEffect(() => {
         axios.get("/my-personal-info").then((res) => {
-            console.log(res.data?.info)
             setFirstName(res.data?.info?.first_name || "");
             setLastName(res.data?.info?.last_name || "");
             setEmail(res.data?.info?.email || "");
@@ -51,7 +45,6 @@ export default function PersonalInfoModalContents({ handleCloseModal }) {
             image
         };
         authAxios.post("/new-info/store", updatedInfo).then((res) => {
-            console.log(res.data);
             toast.success("Personal information updated successfully!");
             handleCloseModal();
         }).catch((error) => {

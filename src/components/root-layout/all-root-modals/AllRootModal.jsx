@@ -7,7 +7,6 @@ import useModalAction from '@/hooks/useModalAction'
 
 export default function AllRootModal() {
     const { currentModal, handleCloseModal } = useModalAction()
-    console.log(currentModal, "currentModal")
     return (
         <div>
 
