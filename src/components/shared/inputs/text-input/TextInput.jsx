@@ -2,7 +2,7 @@ import { cn } from '@/utils/cn';
 import { useState } from 'react';
 import { IoIosEye, IoIosEyeOff } from "react-icons/io";
 
-export default function TextInput({ label, placeholder, value, setValue, type = "text", variant, labelClass, inputClass, className, isRequired = false, autoComplete = "off" }) {
+export default function TextInput({ readonly = false, label, placeholder, value, setValue, type = "text", variant, labelClass, inputClass, className, isRequired = false, autoComplete = "off" }) {
     const [showPassword, setShowPassword] = useState(false);
     const [localType, setLocalType] = useState(type);
     return (
@@ -16,6 +16,7 @@ export default function TextInput({ label, placeholder, value, setValue, type = 
             }
             <div className='relative'>
                 <input
+                    readOnly={readonly}
                     type={localType}
                     value={value}
                     onChange={(e) => setValue(e.target.value)}
