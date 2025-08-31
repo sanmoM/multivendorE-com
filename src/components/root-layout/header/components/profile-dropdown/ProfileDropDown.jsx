@@ -43,7 +43,8 @@ export default function ProfileDropDown({ isMobile, isDropdownOpen, setIsDropdow
     const router = useRouter();
 
     const handleLogout = () => {
-        dispatch(setUser({ email: "" }))
+        dispatch(setUser({}))
+        localStorage.removeItem("token");
     }
 
     const handleDropdownClose = () => {

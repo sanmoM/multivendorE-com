@@ -3,7 +3,7 @@ import axios from "axios";
 import { useSelector } from "react-redux";
 
 export default function useAuthAxios() {
-    const token = useSelector((state) => state?.user?.user?.token);
+    // const token = useSelector((state) => state?.user?.user?.token);
     // Add a request interceptor
     axios.interceptors.request.use(function (config) {
         // Do something before request is sent
@@ -11,7 +11,7 @@ export default function useAuthAxios() {
             ...config,
             baseURL: BASE_URL,
             headers: {
-                Authorization: `Bearer ${token}`
+                Authorization: `Bearer ${localStorage.getItem("token") || ""}`,
             }
         };
     }, function (error) {

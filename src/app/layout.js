@@ -4,7 +4,7 @@ import "./globals.css";
 import "./main.css";
 import { Toaster } from "react-hot-toast";
 import StoreProvider from "@/Providers/StoreProvider";
-import InitProvider from "@/Providers/InitProvider";
+import AuthProvider from "@/Providers/AuthProvider";
 import ReactQueryProvider from "@/Providers/ReactQueryProdiver";
 
 
@@ -29,10 +29,10 @@ export default function RootLayout({ children }) {
       <body className={`${poppinsFront.variable} bg-white`}>
         <StoreProvider>
           <ReactQueryProvider>
-            <InitProvider>
-              {children}
-              <Toaster />
-            </InitProvider>
+            {/* <InitProvider> */}
+            {children}
+            <Toaster />
+            {/* </InitProvider> */}
           </ReactQueryProvider>
         </StoreProvider>
       </body>
