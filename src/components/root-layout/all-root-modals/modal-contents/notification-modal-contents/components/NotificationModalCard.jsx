@@ -4,7 +4,7 @@ import React from 'react'
 
 export default function NotificationModalCard({ data }) {
     return (
-        <div className={cn('flex items-center gap-4 border-b p-4 lg:p-6 rounded-lg cursor-pointer', data.unread && 'bg-tertiary')}>
+        <div className={cn('flex items-center gap-4 border p-2 lg:p-3 rounded-lg cursor-pointer border-secondary', data.unread && 'bg-tertiary')}>
             <Image
                 src={data.image}
                 alt={"Profile Image"}

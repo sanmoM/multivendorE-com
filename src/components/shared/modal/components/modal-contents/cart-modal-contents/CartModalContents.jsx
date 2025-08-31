@@ -28,7 +28,7 @@ const CartModalContents = ({ setIsCartOpen, setIsCheckoutOpen }) => {
         <div className=" w-full flex flex-col h-full ">
             {/* Header */}
             {/* <h1 className="text-2xl font-bold text-gray-800">Shopping Bag ({totalItems})</h1> */}
-            <PrimaryTitle title={"Shopping Bag(3)"} />
+            <PrimaryTitle title={`Shopping Bag(${cartItems.length})`} />
 
             {/* Totals Section */}
             <div className="space-y-2 text-gray-700 my-6">
