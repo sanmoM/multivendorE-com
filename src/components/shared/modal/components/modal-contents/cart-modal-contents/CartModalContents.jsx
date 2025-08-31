@@ -5,17 +5,19 @@ import PrimaryTitle from '@/components/shared/title/PrimaryTitle';
 import useModalAction from '@/hooks/useModalAction';
 import { setCheckoutItems } from '@/lib/redux/features/checkoutSlice';
 import { useRouter } from 'next/navigation';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import CartCard from './components/cart-card/CartCard';
+import useAxios from '@/hooks/useAxios';
 
 const CartModalContents = ({ setIsCartOpen, setIsCheckoutOpen }) => {
+    const axios = useAxios();
     const router = useRouter();
     const cartItems = useSelector((state) => state.cart.cartItems);
     const { handleCloseAllModals } = useModalAction();
     const dispatch = useDispatch();
 
-    const [shipping, setShipping] = useState(5);
+    const [shipping, setShipping] = useState(0);
     const totalItems = cartItems.reduce((acc, item) => acc + item.quantity, 0);
     // const [subtotal, setSubtotal] = useState(0);
     const subtotal = cartItems.reduce((acc, item) => acc + item.price * item.quantity, 0);
@@ -23,6 +25,12 @@ const CartModalContents = ({ setIsCartOpen, setIsCheckoutOpen }) => {
     const calculateTotal = () => {
         return (subtotal + shipping).toFixed(2);
     };
+
+    useEffect(() => {
+        axios.get('/deleviry/charge-show').then((res) => {
+            setShipping(parseInt(res?.data?.charge[0]?.deleviry_charge));
+        });
+    }, [cartItems]);
 
     return (
         <div className=" w-full flex flex-col h-full ">

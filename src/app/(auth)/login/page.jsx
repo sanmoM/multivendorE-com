@@ -33,8 +33,6 @@ export default function page() {
                 });
                 if (res.status === 200) {
                     toast.success("Login successful")
-                    console.log(res)
-                    // dispatch(setUser({ ...res?.data?.user, token: res?.data?.token }))
                     localStorage.setItem("token", res?.data?.token)
                     router.replace("/")
                 }

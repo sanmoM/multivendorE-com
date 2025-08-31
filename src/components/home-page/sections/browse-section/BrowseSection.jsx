@@ -22,7 +22,6 @@ export default function BrowseSection() {
                 axios.get("/show-vendor-address")
             ]);
 
-            console.log(location?.data?.address)
             setCategories(category?.data?.categories);
             setLocations(location?.data?.address);
         };

@@ -4,13 +4,12 @@ import Button from '@/components/shared/button/Button';
 import TextInput from '@/components/shared/inputs/text-input/TextInput';
 import PrimaryTitle from '@/components/shared/title/PrimaryTitle';
 import useAuthAxios from '@/hooks/useAuthAxios';
-import { use, useState } from 'react';
+import { useState } from 'react';
 import toast from 'react-hot-toast';
 import { useSelector } from 'react-redux';
 
 const AddAddressModalContents = ({ handleCloseAllModal }) => {
     const user = useSelector(state => state.user?.user);
-    console.log(user)
     const [street, setStreet] = useState(user?.street);
     const [city, setCity] = useState(user?.city);
     const [state, setState] = useState(user?.state);

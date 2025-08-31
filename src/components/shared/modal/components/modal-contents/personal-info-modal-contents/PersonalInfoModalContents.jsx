@@ -23,7 +23,6 @@ export default function PersonalInfoModalContents({ handleCloseModal }) {
     const [bio, setBio] = useState("");
     const [image, setImage] = useState("");
 
-    console.log(image)
 
     useEffect(() => {
         axios.get("/my-personal-info").then((res) => {

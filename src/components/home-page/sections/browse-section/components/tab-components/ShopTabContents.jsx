@@ -31,7 +31,6 @@ export default function ShopTabContents({ categories, locations }) {
     }, [category, location]);
 
 
-    console.log(location)
 
     return (
         <div>
