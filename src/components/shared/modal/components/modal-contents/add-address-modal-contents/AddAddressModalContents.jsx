@@ -4,21 +4,23 @@ import Button from '@/components/shared/button/Button';
 import TextInput from '@/components/shared/inputs/text-input/TextInput';
 import PrimaryTitle from '@/components/shared/title/PrimaryTitle';
 import useAuthAxios from '@/hooks/useAuthAxios';
-import { useState } from 'react';
+import { use, useState } from 'react';
 import toast from 'react-hot-toast';
+import { useSelector } from 'react-redux';
 
-const AddAddressModalContents = ({ handleAddAddress }) => {
-    const [street, setStreet] = useState("");
-    const [city, setCity] = useState("");
-    const [state, setState] = useState("");
-    const [zipCode, setZipCode] = useState("");
-    const [country, setCountry] = useState("");
+const AddAddressModalContents = ({ handleCloseAllModal }) => {
+    const user = useSelector(state => state.user?.user);
+    console.log(user)
+    const [street, setStreet] = useState(user?.street);
+    const [city, setCity] = useState(user?.city);
+    const [state, setState] = useState(user?.state);
+    const [zipCode, setZipCode] = useState(user?.zip_code);
+    const [country, setCountry] = useState(user?.country);
 
     const axios = useAuthAxios();
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        // dispatch(addAddresses({ street, city, state, zipCode, country }));
         axios.post("/address/store", {
             street,
             city,
@@ -26,12 +28,13 @@ const AddAddressModalContents = ({ handleAddAddress }) => {
             zip_code: zipCode,
             country
         }).then((response) => {
-            handleAddAddress();
+            handleCloseAllModal();
             toast.success("Address added successfully");
         }).catch((error) => {
             toast.error("Failed to add address");
         });
     };
+
     return (
         <div className=" w-full flex flex-col h-full justify-between">
             <div>

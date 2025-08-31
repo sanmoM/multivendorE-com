@@ -19,8 +19,12 @@ export default function BrowseSection() {
         const fetchData = async () => {
             const [category, location] = await Promise.all([
                 axios.get("/categories"),
+                axios.get("/show-vendor-address")
             ]);
+
+            console.log(location?.data?.address)
             setCategories(category?.data?.categories);
+            setLocations(location?.data?.address);
         };
         fetchData();
     }, [])

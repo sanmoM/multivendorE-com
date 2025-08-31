@@ -387,7 +387,7 @@ export default function ProfileDropDown({ isMobile, isDropdownOpen, setIsDropdow
                     <AddressModalContents handleAddAddress={() => handleOpenModal("add-address-modal")} />
                 </Modal> */}
                 <Modal isLeft={false} isOpen={currentModal === "add-address-modal"} setIsOpen={() => handleCloseModal()} title={"Add New Address"}>
-                    <AddAddressModalContents handleAddAddress={() => handleCloseModal()} />
+                    <AddAddressModalContents handleCloseAllModal={handleCloseAllModals} />
                 </Modal>
                 <Modal isLeft={false} isOpen={currentModal === "add-payment-method-modal"} setIsOpen={() => handleCloseModal()} title={"Payment Methods"}>
                     <AddPaymentMethodModalContents handleCloseModal={handleCloseModal} />

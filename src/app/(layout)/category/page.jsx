@@ -19,6 +19,8 @@ export default function Page() {
     const [categories, setCategories] = useState([])
     const [categoryProducts, setCategoryProducts] = useState([])
 
+    console.log(categories)
+
     useEffect(() => {
         axios.get(`/categories`).then((res) => {
             setCategories(res?.data?.categories)
