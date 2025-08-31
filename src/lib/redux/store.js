@@ -4,24 +4,24 @@ import persistReducer from 'redux-persist/es/persistReducer';
 import persistStore from 'redux-persist/es/persistStore';
 import storage from "redux-persist/lib/storage";
 import cartSlice from './features/cartSlice';
-import userSlice from './features/userSlice';
-import modalSlice from './features/modalSlice';
 import checkoutSlice from './features/checkoutSlice';
+import modalSlice from './features/modalSlice';
+import userSlice from './features/userSlice';
 const cartConfig = {
     key: 'cart',
     storage,
 }
-const userConfig = {
-    key: 'user',
-    storage,
-}
+// const userConfig = {
+//     key: 'user',
+//     storage,
+// }
 
 const cartPersistReducer = persistReducer(cartConfig, cartSlice);
-const userPersistReducer = persistReducer(userConfig, userSlice);
+// const userPersistReducer = persistReducer(userConfig, userSlice);
 export const store = configureStore({
     reducer: {
         cart: cartPersistReducer,
-        user: userPersistReducer,
+        user: userSlice,
         modal: modalSlice,
         checkout: checkoutSlice,
     },
