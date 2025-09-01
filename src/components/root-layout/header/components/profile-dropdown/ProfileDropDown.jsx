@@ -119,6 +119,7 @@ export default function ProfileDropDown({ isMobile, isDropdownOpen, setIsDropdow
                         <BsShopWindow className="h-6 w-6 text-gray-700" />
                     ),
                     handleClick: () => {
+                        console.log(user);
                         if (user?.is_reseller === "2") {
                             handleOpenModal("seller-settings-modal")
                         } else if (user?.is_reseller === "0") {
