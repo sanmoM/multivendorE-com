@@ -16,9 +16,7 @@ export default function AuthProvider({ children }) {
     } = useQuery({
         queryKey: ["personal-info"],
         queryFn: async () => {
-            console.log("Running queryFn...");
             const res = await axios.get("/my-personal-info");
-            console.log("Response from server:", res.data);
             return res.data?.info;
         },
         enabled: !!axios,
@@ -30,6 +28,7 @@ export default function AuthProvider({ children }) {
         retry: false,
     });
 
+    // 🧠 Optional: useEffect is still safe to keep if you want redundancy
     useEffect(() => {
         if (data) {
             dispatch(setUser(data));
