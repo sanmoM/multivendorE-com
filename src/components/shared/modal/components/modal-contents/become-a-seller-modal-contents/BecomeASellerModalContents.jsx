@@ -5,8 +5,10 @@ import useAuthAxios from '@/hooks/useAuthAxios';
 import { handleMobileNumberChange } from '@/utils/number-validation';
 import { useState } from 'react';
 import toast from 'react-hot-toast';
+import { useSelector } from 'react-redux';
 
 export default function BecomeASellerModalContents({ handleCloseModal }) {
+    const user = useSelector(state => state.user?.user);
     // const dispatch = useDispatch();
     const [businessName, setBusinessName] = useState("");
     const [contactNumber, setContactNumber] = useState("");

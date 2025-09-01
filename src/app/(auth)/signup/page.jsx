@@ -87,7 +87,7 @@ export default function page() {
                             <AuthTextInput label="Last Name" placeholder="Last Name" value={lastName} setValue={setLastName} isRequired />
                         </div>
                         <div className='space-y-4 gap-4'>
-                            <AuthTextInput label="Mobile" placeholder="Mobile Number" value={mobile} setValue={(value) => setMobile(handleMobileNumberChange(value))} isRequired isNumber={true} />
+                            <AuthTextInput label="Mobile" placeholder="Mobile Number" value={mobile} setValue={(value) => setMobile(handleMobileNumberChange(value))} isRequired isNumber />
                             <AuthTextInput label="Password" placeholder="Password" value={password} setValue={setPassword} isRequired type='password' />
                             <AuthTextInput label="Confirm password" placeholder="Confirm password" value={confirmPassword} setValue={setConfirmPassword} isRequired type="password" />
                         </div>

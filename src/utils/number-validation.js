@@ -8,5 +8,7 @@ export const handleMobileNumberChange = (value) => {
     const onlyNumbers = value.replace(/[^0-9]/g, "");
     if (onlyNumbers.length <= 11) {
         return onlyNumbers;
+    } else {
+        return onlyNumbers.slice(0, 11);
     }
 };

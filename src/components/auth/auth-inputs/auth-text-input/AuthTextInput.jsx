@@ -10,6 +10,6 @@ export default function AuthTextInput({ value, setValue, label, placeholder, isR
     };
 
     return (
-        <TextInput labelClass={"text-sm"} inputClass={"text-sm shadow-none"} label={`${label} ${isRequired && "<span style=color:red>*</span>"}`} placeholder={placeholder} value={value} setValue={isNumber ? handleNumberChange : setValue} isRequired={isRequired} type={type} />
+        <TextInput labelClass={"text-sm"} inputClass={"text-sm shadow-none"} label={`${label} ${isRequired && "<span style=color:red>*</span>"}`} placeholder={placeholder} value={value} setValue={isNumber ? handleNumberChange : setValue} isRequired={isRequired} type={type} isNumber={isNumber} />
     )
 }

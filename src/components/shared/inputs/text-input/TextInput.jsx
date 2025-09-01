@@ -2,7 +2,7 @@ import { cn } from '@/utils/cn';
 import { useState } from 'react';
 import { IoIosEye, IoIosEyeOff } from "react-icons/io";
 
-export default function TextInput({ readonly = false, label, placeholder, value, setValue, type = "text", variant, labelClass, inputClass, className, isRequired = false, autoComplete = "off" }) {
+export default function TextInput({ readonly = false, label, placeholder, value, setValue, type = "text", variant, labelClass, inputClass, className, isRequired = false, autoComplete = "off", isNumber }) {
     const [showPassword, setShowPassword] = useState(false);
     const [localType, setLocalType] = useState(type);
     return (
@@ -19,7 +19,14 @@ export default function TextInput({ readonly = false, label, placeholder, value,
                     readOnly={readonly}
                     type={localType}
                     value={value}
-                    onChange={(e) => setValue(e.target.value)}
+                    onChange={(e) => {
+                        if (isNumber) {
+                            const onlyNumbers = e.target.value.replace(/[^0-9]/g, "");
+                            setValue(onlyNumbers);
+                            return;
+                        }
+                        setValue(e.target.value)
+                    }}
                     name="fname"
                     // id="fname"
                     autoComplete={autoComplete}

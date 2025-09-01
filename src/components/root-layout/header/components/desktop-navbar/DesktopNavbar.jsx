@@ -46,7 +46,7 @@ export default function DesktopNavbar({ setIsCartOpen, setNotificationOpen }) {
 
                 <NavbarSearchbar inputClassName={'w-48'} />
 
-                <div className='space-x-2'>
+                <div className='space-x-2 flex'>
                     <button
                         onClick={() => {
                             setNotificationOpen()

@@ -37,7 +37,8 @@ import { useDispatch, useSelector } from 'react-redux';
 export default function ProfileDropDown({ isMobile, isDropdownOpen, setIsDropdownOpen }) {
     const { currentModal, handleCloseAllModals, handleCloseModal, handleOpenModal } = useModalAction();
 
-    const user = useSelector(state => state.user);
+    const user = useSelector(state => state.user?.user);
+    const token = localStorage.getItem("token");
     const dispatch = useDispatch();
     const router = useRouter();
 
@@ -112,15 +113,15 @@ export default function ProfileDropDown({ isMobile, isDropdownOpen, setIsDropdow
                     ),
                 },
                 {
-                    title: user?.accountType === "seller" ? 'Seller Settings' : 'Become a Seller',
-                    subtitle: user?.accountType === "seller" ? 'View your seller settings' : 'Become a seller',
+                    title: user?.is_reseller === "0" ? 'Become a Seller' : user?.is_reseller === "1" ? 'Your Request is Pending' : 'Become a Seller',
+                    subtitle: user?.accountType === "0" ? 'Become a seller' : user?.accountType === "1" ? 'Your Request is Pending' : 'View your seller settings',
                     icon: (
                         <BsShopWindow className="h-6 w-6 text-gray-700" />
                     ),
                     handleClick: () => {
-                        if (user?.accountType === "seller") {
+                        if (user?.is_reseller === "2") {
                             handleOpenModal("seller-settings-modal")
-                        } else {
+                        } else if (user?.is_reseller === "0") {
                             handleOpenModal("become-a-seller-modal")
                         }
                     },
@@ -296,11 +297,11 @@ export default function ProfileDropDown({ isMobile, isDropdownOpen, setIsDropdow
     const contents = (
         <div className="" role="menu" aria-orientation="vertical" aria-labelledby="options-menu">
             {
-                user?.user?.first_name ? (
+                token ? (
                     <>
                         {
                             profileMenuItems.map((item, index) => (
-                                <React.Fragment key={index}>
+                                <div key={index}>
                                     {
                                         item.type === "button" ? (
                                             <button
@@ -316,7 +317,7 @@ export default function ProfileDropDown({ isMobile, isDropdownOpen, setIsDropdow
                                         )
                                     }
 
-                                </React.Fragment>
+                                </div>
                             ))
                         }
                         <button onClick={handleLogout} className="px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-secondary flex gap-2 items-center w-full" role="menuitem">
