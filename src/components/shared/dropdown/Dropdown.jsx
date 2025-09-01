@@ -35,8 +35,8 @@ export default function Dropdown({ placeholder, containerClassName, contents, co
     }, [])
 
     return (
-        <div ref={dropdownRef} className={cn('relative inline', containerClassName)}>
-            <div onClick={() => setIsDropdownOpen((prev) => !prev)}>{placeholder}</div>
+        <div ref={dropdownRef} className={cn('relative', containerClassName)}>
+            <div onClick={() => setIsDropdownOpen((prev) => !prev)} >{placeholder}</div>
 
             <div
                 className={cn(

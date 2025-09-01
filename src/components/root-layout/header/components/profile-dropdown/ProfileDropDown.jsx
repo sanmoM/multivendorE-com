@@ -16,9 +16,11 @@ import PersonalInfoModalContents from '@/components/shared/modal/components/moda
 import ProductsModalContents from '@/components/shared/modal/components/modal-contents/products-modal-contents/ProductsModalContents';
 import PromotionModalContents from '@/components/shared/modal/components/modal-contents/promotion-modal-contents/PromotionModalContents';
 import SellerSettingsModalContents from '@/components/shared/modal/components/modal-contents/seller-settings-modal-contents/SellerSettingsModalContents';
+import { IMAGE_BASE_URL } from '@/config';
 import useModalAction from '@/hooks/useModalAction';
 import { setUser } from '@/lib/redux/features/userSlice';
 import { cn } from '@/utils/cn';
+import Image from 'next/image';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 import React from "react";
@@ -276,16 +278,28 @@ export default function ProfileDropDown({ isMobile, isDropdownOpen, setIsDropdow
 
     // dropdown placeholder
     const placeholder = (
-        <div className='inline'>
+        <div>
             {
                 isMobile ? (
                     <button onClick={() => handleOpenModal("account-settings-modal")} className='flex flex-col items-center'>
-                        <LuUserRound className='w-6 h-6 text-secondary' />
+                        {
+                            user?.image ? (
+                                <Image src={IMAGE_BASE_URL + user.image} alt="Profile Picture" className="w-8 h-8 rounded-full object-cover" width={24} height={24} />
+                            ) : (
+                                <LuUserRound className='w-6 h-6 text-secondary' />
+                            )
+                        }
                         <span className='text-xs '>Profile</span>
                     </button>
                 ) : (
-                    <button className="p-3 rounded-full bg-tertiary hover:bg-secondary/50 transition-colors duration-200 focus:outline-none focus:ring-1 focus:ring-gray-300" onClick={handleDropdownClose}>
-                        <LuUserRound className='w-6 h-6 text-secondary' />
+                    <button className={cn(" rounded-full bg-tertiary hover:bg-secondary/50 transition-colors duration-200 focus:outline-none focus:ring-1 focus:ring-gray-300 flex flex-col justify-center items-center", !user?.image && "p-3")} onClick={handleDropdownClose}>
+                        {
+                            user?.image ? (
+                                <Image src={IMAGE_BASE_URL + user.image} alt="Profile Picture" className="w-12 h-12 rounded-full object-cover" width={36} height={36} />
+                            ) : (
+                                <LuUserRound className='w-6 h-6 text-secondary' />
+                            )
+                        }
                     </button>
                 )
             }
@@ -336,9 +350,9 @@ export default function ProfileDropDown({ isMobile, isDropdownOpen, setIsDropdow
     )
 
     return (
-        <div className='inline'>
+        <div >
             {/* all dropdown contents */}
-            <Dropdown containerClassName="inline" isDropdownOpen={isDropdownOpen} placeholder={placeholder} contents={contents} contentsClassName={cn(isMobile ? "!bottom-[calc(100%+0.5rem)] !top-auto !-right-2 !left-auto" : "")} />
+            <Dropdown isDropdownOpen={isDropdownOpen} placeholder={placeholder} contents={contents} contentsClassName={cn(isMobile ? "!bottom-[calc(100%+0.5rem)] !top-auto !-right-2 !left-auto" : "")} />
 
 
             {/* all modal for profile  */}
@@ -388,7 +402,7 @@ export default function ProfileDropDown({ isMobile, isDropdownOpen, setIsDropdow
                 {/* <Modal isLeft={false} isOpen={currentModal === "my-address-modal"} setIsOpen={() => handleCloseModal()} title={"My Address"}>
                     <AddressModalContents handleAddAddress={() => handleOpenModal("add-address-modal")} />
                 </Modal> */}
-                <Modal isLeft={false} isOpen={currentModal === "add-address-modal"} setIsOpen={() => handleCloseModal()} title={"Add New Address"}>
+                <Modal isLeft={false} isOpen={currentModal === "add-address-modal"} setIsOpen={() => handleCloseModal()} title={"My Address"}>
                     <AddAddressModalContents handleCloseAllModal={handleCloseAllModals} />
                 </Modal>
                 <Modal isLeft={false} isOpen={currentModal === "add-payment-method-modal"} setIsOpen={() => handleCloseModal()} title={"Payment Methods"}>
