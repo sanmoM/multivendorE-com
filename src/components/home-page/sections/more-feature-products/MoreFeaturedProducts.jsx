@@ -11,16 +11,17 @@ import ProductCard from "@/components/shared/product-card/ProductCard";
 export default function FeaturedProducts() {
     const axios = useAxios();
     const wrapperRef = useRef(null);
-    const [start, setStart] = useState(0);
     const [end, setEnd] = useState(10);
     const [allProducts, setAllProducts] = useState([]);
     const [showAbleProducts, setShowAbleProducts] = useState([]);
+
 
     // get all products
     useEffect(() => {
         axios.get("/all-products").then((res) => {
             setAllProducts(res?.data?.products);
-            setShowAbleProducts(res?.data?.products?.slice(start, end));
+            setShowAbleProducts(res?.data?.products?.slice(0, end));
+            setEnd(end + 10);
         });
     }, []);
 
@@ -49,10 +50,12 @@ export default function FeaturedProducts() {
     }, []);
 
     const handleShowAbleProducts = () => {
-        setStart(prev => prev + 10);
+        if (showAbleProducts.length === allProducts.length) return;
+        const newEnd = Math.min(end, allProducts.length);
+        setShowAbleProducts(allProducts.slice(0, newEnd));
         setEnd(prev => prev + 10);
-        setShowAbleProducts(showAbleProducts?.concat(allProducts?.slice(start, end)));
     };
+
 
     return (
         <div ref={wrapperRef}>
