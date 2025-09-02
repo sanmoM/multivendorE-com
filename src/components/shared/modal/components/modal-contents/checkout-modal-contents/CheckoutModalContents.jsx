@@ -1,11 +1,13 @@
 import Button from '@/components/shared/button/Button';
 import HorizontalCard from '@/components/shared/horizontal-card/HorizontalCard';
 import PrimaryTitle from '@/components/shared/title/PrimaryTitle';
+import useAuthAxios from '@/hooks/useAuthAxios';
 import { useState } from 'react';
 import { useSelector } from 'react-redux';
 
 const CheckoutModalContents = () => {
     const checkoutItems = useSelector((state) => state?.checkout?.checkoutItems || []);
+    console.log(checkoutItems, "checkoutItems1")
     const [isAddressOpen, setIsAddressOpen] = useState(false);
     const [isTimeOpen, setIsTimeOpen] = useState(false);
     const [isPaymentOpen, setIsPaymentOpen] = useState(false);
@@ -13,9 +15,40 @@ const CheckoutModalContents = () => {
     const [shipping, setShipping] = useState(5);
     const [taxes, setTaxes] = useState(3);
 
+    const axios = useAuthAxios()
+
     const calculateTotal = () => {
         return (subtotal + shipping + taxes).toFixed(2);
     };
+
+    const handleCheckout = () => {
+        if (checkoutItems[0]?.type === "product") {
+            handleCakeCheckout()
+        }
+    }
+
+    const handleCakeCheckout = async () => {
+        const res = await axios.post("/pay", {
+            shipping_address: "Dhaka, Bangladesh",
+            payment_percentage: 100,
+            items: [
+                {
+                    product_id: 2,
+                    quantity: 2,
+                    slice: "large-10",
+                    flavor: "Chocolate",
+                    color: "Brown",
+                    weight: "1kg",
+                    design: "Birthday",
+                    delivery_date: "2025-08-28",
+                    notes: "No nuts"
+
+                }
+            ]
+        })
+
+        console.log(res)
+    }
 
     return (
         <div className="w-full h-full flex flex-col">
@@ -92,7 +125,7 @@ const CheckoutModalContents = () => {
                     <div className="grow space-y-4 lg:space-y-6">
                         {checkoutItems.map((item, index) => (
                             // <CartCard item={item} key={index} />
-                            <HorizontalCard key={index} item={{ id: item.id, image: item?.image, title: item?.name, text2: `Quantity: ${item.quantity}`, text3: `Price: $${item.price * item.quantity}` }} />
+                            <HorizontalCard key={index} item={{ id: item.id, image: item?.image || item?.product_image, title: item?.name, text2: `Quantity: ${item.quantity}`, text3: `Price: $${item.price * item.quantity}` }} />
                         ))}
                     </div>
                 </div>
@@ -121,7 +154,7 @@ const CheckoutModalContents = () => {
                 </div>
             </div>
 
-            <Button text={"Place Order"} className={"bg-red-600 text-white w-full mt-4"} onClick={() => { }} />
+            <Button text={"Place Order"} className={"bg-red-600 text-white w-full mt-4"} onClick={handleCheckout} />
         </div>
     );
 };

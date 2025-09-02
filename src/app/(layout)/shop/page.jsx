@@ -83,7 +83,7 @@ export default function Page() {
                     <FeaturedItems desktopView={6} mobileView={3} >
                         {
                             shops?.map((shop) => (
-                                <PrimaryCard key={shop.id} item={getFormattedShop(shop)} containerClassName={"px-2"} />
+                                <PrimaryCard key={shop.id} item={getFormattedShop(shop?.vendor)} containerClassName={"px-2"} />
                             ))
                         }
                     </FeaturedItems>

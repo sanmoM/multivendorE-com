@@ -1,12 +1,9 @@
 "use client";
-import Link from "next/link";
 import { useEffect, useRef, useState } from "react";
 
 import Items from "@/components/shared/items/Items";
-import PrimaryCard from "@/components/shared/primary-card/PrimaryCard";
-import useAxios from "@/hooks/useAxios";
-import { getFormattedProduct } from "@/utils/getFormattedData";
 import ProductCard from "@/components/shared/product-card/ProductCard";
+import useAxios from "@/hooks/useAxios";
 
 export default function FeaturedProducts() {
     const axios = useAxios();
@@ -55,6 +52,7 @@ export default function FeaturedProducts() {
         setShowAbleProducts(allProducts.slice(0, newEnd));
         setEnd(prev => prev + 10);
     };
+
 
 
     return (

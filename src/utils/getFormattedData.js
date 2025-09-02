@@ -15,7 +15,7 @@ export const getFormattedProduct = (data) => {
 export const getFormattedShop = (data) => {
     if (!data) return null;
 
-    const formattedData = { title: data?.vendor?.shop_name, subtitle: data?.vendor?.address, image: data?.vendor?.image };
+    const formattedData = { title: data?.shop_name, subtitle: data?.address, image: data?.image };
 
     return formattedData;
 };

@@ -83,7 +83,25 @@ const App = () => {
     }
 
     const handleBuyNow = () => {
-        dispatch(setCheckoutItems([{ image: data?.product_image || data?.image, name: data?.cake_name || data?.name, price: data?.regular_price, quantity: cartItem?.quantity || 1 }]));
+        let productData;
+        if (data?.type === "product") {
+            productData = {
+                image: data?.product_image,
+                name: data?.cake_name || data?.name,
+                price: data?.regular_price,
+                quantity: cartItem?.quantity || 1,
+                ...data
+            }
+        }else{
+            productData = {
+                image: data?.image,
+                name: data?.name,
+                price: data?.regular_price,
+                quantity: cartItem?.quantity || 1,
+                ...data
+            }
+        }
+        dispatch(setCheckoutItems([productData]));
         handleOpenModal("checkout-modal");
     }
 

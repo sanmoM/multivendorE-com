@@ -1,6 +1,7 @@
 import CustomSlider from '@/components/shared/custom-slider/CustomSlider';
 import Filter from '@/components/shared/filter/Filter';
 import PrimaryCard from '@/components/shared/primary-card/PrimaryCard';
+import { IMAGE_BASE_URL } from '@/config';
 import useAxios from '@/hooks/useAxios';
 import { getFormattedShop } from '@/utils/getFormattedData';
 import Link from 'next/link';
@@ -19,8 +20,8 @@ export default function ShopTabContents({ categories, locations }) {
 
     // fetch shops data with filters
     useEffect(() => {
-        if (category?.value) {
-            axios.get(`/categories/${category?.value}/vendors`).then((res) => {
+        if (category?.value || location?.value) {
+            axios.get(`/vendors/filter/${category?.value || null}/${location?.value || null}`).then((res) => {
                 setShops(res?.data?.vendors);
             });
         } else {
@@ -29,7 +30,6 @@ export default function ShopTabContents({ categories, locations }) {
             });
         }
     }, [category, location]);
-
 
 
     return (
@@ -42,7 +42,7 @@ export default function ShopTabContents({ categories, locations }) {
                     {
                         shops.map((shop) => (
                             <Link href={`/shop?id=${shop.id}`} className='block'>
-                                <PrimaryCard key={shop.id} item={getFormattedShop(shop)} containerClassName={"px-2"} />
+                                <PrimaryCard key={shop.id} item={getFormattedShop(shop?.vendor)} containerClassName={"px-2"} />
                             </Link>
                         ))
                     }
