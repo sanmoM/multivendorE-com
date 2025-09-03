@@ -7,7 +7,6 @@ import { useRef } from 'react';
 import SellerInfo from '../shared/seller-info/SellerInfo';
 
 export default function ProductInfo({ data }) {
-    console.log(data)
     const sliderRef = useRef(null);
 
 

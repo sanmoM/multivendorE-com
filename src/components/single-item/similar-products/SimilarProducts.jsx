@@ -4,7 +4,6 @@ import PrimaryTitle from '@/components/shared/title/PrimaryTitle';
 
 
 export default function SimilarProducts({ products }) {
-    console.log(products, "products")
     return (
         <div className='mt-8'>
             <PrimaryTitle title={"Similar Products"} className={"mb-6"} />

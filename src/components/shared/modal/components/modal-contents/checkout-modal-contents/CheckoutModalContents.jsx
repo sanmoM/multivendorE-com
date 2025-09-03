@@ -2,6 +2,7 @@ import Button from '@/components/shared/button/Button';
 import HorizontalCard from '@/components/shared/horizontal-card/HorizontalCard';
 import PrimaryTitle from '@/components/shared/title/PrimaryTitle';
 import useAuthAxios from '@/hooks/useAuthAxios';
+import { useRouter } from 'next/navigation';
 import { useState } from 'react';
 import { useSelector } from 'react-redux';
 
@@ -13,6 +14,7 @@ const CheckoutModalContents = () => {
     const subtotal = checkoutItems.reduce((acc, item) => acc + item.price * item.quantity, 0);
     const [shipping, setShipping] = useState(5);
     const [taxes, setTaxes] = useState(3);
+    const router = useRouter();
 
     const axios = useAuthAxios()
 
@@ -32,7 +34,7 @@ const CheckoutModalContents = () => {
             payment_percentage: 100,
             items: [
                 {
-                    product_id: 2,
+                    product_id: 3,
                     quantity: 2,
                     slice: "large-10",
                     flavor: "Chocolate",
@@ -45,7 +47,8 @@ const CheckoutModalContents = () => {
                 }
             ]
         })
-
+        const redirectUrl = res?.data?.url ;
+        window.location.href = redirectUrl;
     }
 
     return (

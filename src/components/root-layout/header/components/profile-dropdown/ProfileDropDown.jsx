@@ -115,7 +115,8 @@ export default function ProfileDropDown({ isMobile, isDropdownOpen, setIsDropdow
                     ),
                 },
                 {
-                    title: user?.is_reseller === "0" ? 'Become a Seller' : user?.is_reseller === "1" ? 'Your Request is Pending' : 'Become a Seller',
+                    title: user?.is_reseller === "0" ? 
+                    'Become a Seller' : user?.is_reseller === "1" ? 'Your Request is Pending' : 'Seller Settings',
                     subtitle: user?.accountType === "0" ? 'Become a seller' : user?.accountType === "1" ? 'Your Request is Pending' : 'View your seller settings',
                     icon: (
                         <BsShopWindow className="h-6 w-6 text-gray-700" />
