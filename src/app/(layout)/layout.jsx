@@ -11,7 +11,9 @@ export default async function layout({ children }) {
             <AuthProvider>
 
                 <Header />
-                {children}
+                <div className='min-h-screen'>
+                    {children}
+                </div>
                 <Footer />
                 {/* <AllModals /> */}
                 <AllRootModal />

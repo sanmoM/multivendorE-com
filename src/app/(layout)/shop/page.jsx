@@ -18,46 +18,47 @@ export default function Page() {
     const searchParams = useSearchParams();
     const id = searchParams.get('id');
 
-
     const [categoryId, setCategoryId] = useState(id);
+
+
     const [categories, setCategories] = useState([]);
     const [locations, setLocations] = useState([]);
 
     // options for select input
-    const categoryOptions = [{ label: "All Categories", value: "" }, ...categories?.map((category) => ({ label: category.categoryName, value: category.id }))];
-    const locationOptions = [{ label: "All Locations", value: "" }, ...locations?.map((location) => ({ label: location.name, value: location.id }))];
+    const categoryOptions = [{ label: "All Categories", value: "all" }, ...categories?.map((category) => ({ label: category.categoryName, value: category.id }))];
+    const locationOptions = [{ label: "All Locations", value: "all" }, ...locations?.map((location) => ({ label: location.upazila_name, value: location.id }))];
 
 
     // state for filters
     const [category, setCategory] = useState(categoryOptions[0]);
     const [location, setLocation] = useState(locationOptions[0]);
+
     const [shopProducts, setShopProducts] = useState([]);
     const [shops, setShops] = useState([]);
     const axios = useAxios();
 
     // fetch shops data with filters
     useEffect(() => {
-        if (category?.value) {
-            axios.get(`/categories/${category?.value}/vendors`).then((res) => {
-                setShops(res?.data?.vendors);
-            });
-        } else {
-            axios.get(`/vendor-show`).then((res) => {
-                setShops(res?.data?.data);
-            });
-        }
+        axios.get(`/vendors/filter/${category?.value}/${location?.value}`).then((res) => {
+            setShops(res?.data?.vendors);
+        });
     }, [category, location]);
 
     // fetch categories and locations
     useEffect(() => {
         const fetchData = async () => {
-            const categoriesRes = await axios.get("/categories");
+            const [category, location] = await Promise.all([
+                axios.get("/categories"),
+                axios.get("/show-vendor-address")
+            ]);
 
-            setCategories(categoriesRes?.data?.categories);
+            setCategories(category?.data?.categories);
+            setLocations(location?.data?.address);
         };
         fetchData();
-    }, []);
+    }, [])
 
+    // get products by category id
     useEffect(() => {
         const fetchData = async () => {
             const res = await axios.get(`/vendor-product/${categoryId}`);
@@ -65,6 +66,7 @@ export default function Page() {
         };
         fetchData();
     }, [categoryId]);
+
 
     return (
         <div>
@@ -83,7 +85,9 @@ export default function Page() {
                     <FeaturedItems desktopView={6} mobileView={3} >
                         {
                             shops?.map((shop) => (
-                                <PrimaryCard key={shop.id} item={getFormattedShop(shop?.vendor)} containerClassName={"px-2"} />
+                                <div key={shop.id} onClick={() => setCategoryId(shop.id)} className="w-full cursor-pointer">
+                                    <PrimaryCard key={shop.id} item={{ image: shop?.image, title: shop?.shop_name, subtitle: shop?.address }} containerClassName={"px-2 w-full"} />
+                                </div>
                             ))
                         }
                     </FeaturedItems>
