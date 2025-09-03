@@ -1,67 +1,19 @@
-import CustomSlider from '@/components/shared/custom-slider/CustomSlider'
-import PrimaryTitle from '@/components/shared/title/PrimaryTitle'
-import Image from 'next/image';
-import React from 'react'
+import CustomSlider from '@/components/shared/custom-slider/CustomSlider';
+import PrimaryCard from '@/components/shared/primary-card/PrimaryCard';
+import PrimaryTitle from '@/components/shared/title/PrimaryTitle';
 
 
-const sliderItems = [
-    {
-        id: 1,
-        title: 'Chocolate Fudge Cake',
-        price: 30,
-        image: '/images/product/product-1.svg',
-    },
-    {
-        id: 2,
-        title: 'Chocolate Fudge Cake',
-        price: 30,
-        image: '/images/product/product-2.svg',
-    },
-    {
-        id: 3,
-        title: 'Chocolate Fudge Cake',
-        price: 30,
-        image: '/images/product/product-3.svg',
-    },
-    {
-        id: 1,
-        title: 'Pink Cake',
-        price: 30,
-        image: '/images/product/product-4.svg',
-    },
-    {
-        id: 2,
-        title: 'Pink Cake',
-        price: 30,
-        image: '/images/product/product-5.svg',
-    },
-    {
-        id: 3,
-        title: 'Pink Cake',
-        price: 30,
-        image: '/images/product/product-6.svg',
-    },
-];
-
-
-export default function SimilarProducts() {
+export default function SimilarProducts({ products }) {
+    console.log(products, "products")
     return (
         <div className='mt-8'>
             <PrimaryTitle title={"Similar Products"} className={"mb-6"} />
             <CustomSlider desktopView={6} mobileView={2} paddingDesktop={60} paddingMobile={30} autoplay>
                 {
-                    sliderItems.map((item, index) => (
-                        <div key={index} className="px-2 outline-0">
-                            <Image
-                                src={item.image}
-                                alt={`Discount ${item}`}
-                                height={400}
-                                width={400}
-                                className="w-full h-auto rounded-lg aspect-square object-cover"
-                            />
-                            <p className="text-primary font-medium mt-2">{item.title}</p>
-                            <p className="text-secondary font-medium">${item.price}</p>
-                        </div>
+                    products.map((item, index) => (
+                        <>
+                            <PrimaryCard item={{ image: item?.product_image || item?.image, title: item?.cake_name || item?.name, subtitle: `$${item?.regular_price}` }} containerClassName={"px-2"} />
+                        </>
                     ))
                 }
             </CustomSlider>

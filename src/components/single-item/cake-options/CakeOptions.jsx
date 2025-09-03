@@ -7,7 +7,6 @@ import PrimaryTitle from '@/components/shared/title/PrimaryTitle';
 import SecondaryTitle from '@/components/shared/title/SecondaryTitle';
 
 const CakeOptions = ({ data, cartItem, setCartItem }) => {
-
     const selectedSlices = cartItem?.slices || "4 Slices";
     const selectedFlavor = cartItem?.flavor || "Chocolate";
     const cakeWeight = cartItem?.quantity || 1;
@@ -61,7 +60,7 @@ const CakeOptions = ({ data, cartItem, setCartItem }) => {
                 <SecondaryTitle title={"Weight (in pounds)"} />
                 <div className='flex items-center gap-4'>
                     <p>Weight</p>
-                    <IncreaseDecreaseButtons value={cakeWeight} setValue={(value) => setCartItem({ ...cartItem, quantity: value })} />
+                    <IncreaseDecreaseButtons value={cakeWeight} setValue={(value) => setCartItem({ ...cartItem, quantity: value })} maxQuantity={data?.stock} />
                 </div>
             </div>
 

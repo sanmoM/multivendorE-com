@@ -2,6 +2,7 @@ import { IMAGE_BASE_URL } from "@/config";
 import Image from "next/image";
 
 export default function PrimaryCard({ item, containerClassName }) {
+    console.log(item?.title?.slice(0, 20), "title")
     return (
         <div className={containerClassName}>
             <Image src={IMAGE_BASE_URL + item?.image} alt="product-1" width={300} height={400} className="w-full aspect-square object-cover rounded-lg" />

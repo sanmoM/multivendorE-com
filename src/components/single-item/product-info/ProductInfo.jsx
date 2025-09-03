@@ -7,6 +7,7 @@ import { useRef } from 'react';
 import SellerInfo from '../shared/seller-info/SellerInfo';
 
 export default function ProductInfo({ data }) {
+    console.log(data)
     const sliderRef = useRef(null);
 
 
@@ -105,7 +106,7 @@ export default function ProductInfo({ data }) {
                 <SellerInfo className="hidden lg:block" handleCustomOrderModal={handleCustomOrderModal} />
             </div>
 
-            <PrimaryTitle title={"Sweet Delights"} className={"my-6"} />
+            <PrimaryTitle title={data?.category?.categoryName} className={"my-6"} />
             <SectionTitle title={data?.cake_name || data?.name} className={"mb-4"} />
             <p className='text-primary'>{data?.short_description}</p>
             <p className='text-lg lg:text-xl font-bold text-secondary mt-4 mb-6'>${data?.regular_price}</p></div>

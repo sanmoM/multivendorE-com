@@ -1,6 +1,6 @@
 import React from 'react'
 
-export default function IncreaseDecreaseButtons({ value, setValue }) {
+export default function IncreaseDecreaseButtons({ value, setValue, maxQuantity }) {
     return (
         <div className="flex items-center gap-4">
             <button
@@ -18,7 +18,9 @@ export default function IncreaseDecreaseButtons({ value, setValue }) {
             }
             <button
                 onClick={() => {
-                    setValue(value + 1)
+                    if(value < maxQuantity){
+                        setValue(value + 1)
+                    }
                 }}
                 className="h-10 w-10 bg-tertiary rounded-full aspect-square hover:bg-gray-200 transition-colors duration-200 text-gray-700 font-semibold"
             >

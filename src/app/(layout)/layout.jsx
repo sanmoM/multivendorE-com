@@ -15,7 +15,6 @@ export default async function layout({ children }) {
                     {children}
                 </div>
                 <Footer />
-                {/* <AllModals /> */}
                 <AllRootModal />
             </AuthProvider>
         </>

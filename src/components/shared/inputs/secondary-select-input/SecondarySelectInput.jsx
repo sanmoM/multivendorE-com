@@ -12,10 +12,11 @@ export default function SecondarySelectInput({
     options = [],
     containerClassName,
     selectedOption,
+    hasLabel = true,
 }) {
     return (
         <div className={cn("lg:max-w-xs", containerClassName)}>
-            {label && (
+            {hasLabel && (
                 <label
                     htmlFor="secondary-select"
                     className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"

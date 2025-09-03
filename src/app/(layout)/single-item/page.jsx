@@ -34,6 +34,8 @@ const App = () => {
     const [cartItem, setCartItem] = useState(null);
 
     const [data, setData] = useState(null);
+    const [relatedProducts, setRelatedProducts] = useState([]);
+
     const axios = useAxios();
 
 
@@ -46,11 +48,20 @@ const App = () => {
         handleOpenModal("checkout-modal")
     }
 
+    // single item data fetching
     useEffect(() => {
         axios.get(`/item-details/${type}/${id}`).then((res) => {
             setData(res?.data?.data);
         });
-    }, [axios]);
+    }, []);
+
+    // related products fetching
+    useEffect(() => {
+        axios.get(`/related-product/${type}/${data?.category?.id}`).then((res) => {
+            setRelatedProducts(res?.data?.data);
+        });
+    }, [data]);
+
 
     const handleAddToCart = () => {
         // make item for cart based on product type
@@ -92,7 +103,7 @@ const App = () => {
                 quantity: cartItem?.quantity || 1,
                 ...data
             }
-        }else{
+        } else {
             productData = {
                 image: data?.image,
                 name: data?.name,
@@ -105,10 +116,13 @@ const App = () => {
         handleOpenModal("checkout-modal");
     }
 
+
+
+
     return (
         <div className='my-6 lg:my-10'>
             <MobileHeader title={"Single Item"} containerClassName={"mb-6"} />
-            <Container className={"overflow-hidden"}>
+            <Container className={"overflow-hidden !pt-0"}>
                 <ProductInfo data={data} />
                 <div className='space-x-4'>
                     <Button text="Add to Cart" onClick={handleAddToCart} />
@@ -118,7 +132,11 @@ const App = () => {
                 <SingleItemTabs description={data?.description || data?.full_description} />
                 <div className=' max-w-2xl w-full mt-8 space-y-8'>
                     {
-                        data?.type === "product" ? <CakeOptions data={{ price: data?.regular_price || 0 }} cartItem={cartItem} setCartItem={setCartItem} /> : <ProductOptions data={{ price: data?.regular_price || 0, variants: data?.image_gallery }} cartItem={cartItem} setCartItem={setCartItem} />
+                        data?.type === "product" ? <CakeOptions data={{
+                            price: data?.regular_price || 0, stock: data?.stock
+                        }} cartItem={cartItem} setCartItem={setCartItem} /> : <ProductOptions data={{
+                            price: data?.regular_price || 0, variants: data?.image_gallery, stock: data?.stock
+                        }} cartItem={cartItem} setCartItem={setCartItem} />
                     }
                     <DeliveryOptions cartItem={cartItem} setCartItem={setCartItem} />
                     <PaymentMethods cartItem={cartItem} setCartItem={setCartItem} />
@@ -126,7 +144,7 @@ const App = () => {
                     <CustomerReviews id={id} />
                     <AddReview id={id} />
                 </div>
-                <SimilarProducts />
+                <SimilarProducts products={relatedProducts} />
             </Container>
 
             <Modal isLef={false} isOpen={currentModal === "custom-order-modal"} setIsOpen={() => handleCloseModal()} title={"Custom Order"}>

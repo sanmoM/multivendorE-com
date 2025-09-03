@@ -69,7 +69,7 @@ import "swiper/css";
 
 import "./custom-slider.css";
 
-export default function App({ children, mobileView = 3, desktopView = 4, }) {
+export default function App({ children = [], mobileView = 3, desktopView = 4, }) {
     return (
         <>
             <Swiper className="mySwiper"
@@ -83,7 +83,7 @@ export default function App({ children, mobileView = 3, desktopView = 4, }) {
                 }}
             >
                 {
-                    Array.from(children).map((child, index) => {
+                    Array?.from(children)?.map((child, index) => {
                         return <SwiperSlide key={index}>{child}</SwiperSlide>
                     })
                 }

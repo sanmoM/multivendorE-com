@@ -34,7 +34,7 @@ export default function ProductOptions({ data, cartItem, setCartItem }) {
         <SecondaryTitle title={"Quantity"} />
         <div className='flex items-center gap-4'>
           <p>Quantity</p>
-          <IncreaseDecreaseButtons value={quantity} setValue={(value) => setCartItem({ ...cartItem, quantity: value })} />
+          <IncreaseDecreaseButtons value={quantity} setValue={(value) => setCartItem({ ...cartItem, quantity: value })} maxQuantity={data?.stock} />
         </div>
       </div>
 

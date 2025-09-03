@@ -2,6 +2,7 @@
 
 import MobileHeader from '@/components/root-layout/header/components/mobile-header/MobileHeader';
 import Button from '@/components/shared/button/Button';
+import Container from '@/components/shared/container/Container';
 import RadioInputWithLabel from '@/components/shared/inputs/radio-input-with-label/RadioInputWithLabel';
 import SecondarySelectInput from '@/components/shared/inputs/secondary-select-input/SecondarySelectInput';
 import TextAreaInput from '@/components/shared/inputs/text-area-input/TextAreaInput';
@@ -14,10 +15,9 @@ const App = () => {
     const [subject, setSubject] = useState('General Inquiry');
 
     return (
-        <div>
+        <Container>
             <MobileHeader title={"Contact Us"} containerClassName={"mb-6"} />
-            <div className=" p-4 font-sans my-6 lg:my-12 max-w-4xl mx-auto">
-                <SecondarySelectInput placeholder={"Select Type"} selectedOption={{ label: "Select Type", value: "US" }} options={[{ label: "Customer", value: "US" }, { label: "Seller", value: "CA" },]} containerClassName={"ml-auto"} />
+            <div className=" p-4 font-sans my-6  max-w-4xl mx-auto">
                 <div className="flex flex-col lg:flex-row  w-full bg-white rounded-xl custom-shadow overflow-hidden mt-4 lg:mt-6">
 
                     {/* Left Section: Contact Information */}
@@ -59,7 +59,8 @@ const App = () => {
                     </div>
 
                     {/* Right Section: Form */}
-                    <div className="lg:w-2/3 w-full p-8 sm:p-12">
+                    <div className="lg:w-2/3 w-full p-8 sm:p-12 border-y-2 border-secondary border-r-2 rounded-r-xl">
+                        <SecondarySelectInput placeholder={"Select Type"} selectedOption={{ label: "Select Type", value: "US" }} options={[{ label: "Customer", value: "US" }, { label: "Seller", value: "CA" },]} containerClassName={"ml-auto mb-6"} hasLabel={false} />
                         <form className="space-y-6">
                             <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
 
@@ -73,7 +74,7 @@ const App = () => {
                             {/* Subject Radios */}
                             <div>
                                 <h3 className="font-semibold mb-3 text-primary">Select Subject</h3>
-                                <div className="flex flex-wrap gap-4">
+                                <div className="grid grid-cols-3 gap-4">
                                     {['General Inquiry', 'Technical Support', 'Website Feedback'].map((option) => (
                                         <RadioInputWithLabel option={option} checked={subject === option} handleChange={() => setSubject(option)} />
                                     ))}
@@ -89,7 +90,7 @@ const App = () => {
 
                 </div>
             </div>
-        </div>
+        </Container>
     );
 };
 
