@@ -2,6 +2,7 @@ import Button from '@/components/shared/button/Button';
 import PrimaryTitle from '@/components/shared/title/PrimaryTitle';
 import { cn } from '@/utils/cn';
 import Image from 'next/image';
+import Link from 'next/link';
 
 
 export default function SellerInfo({ className, handleCustomOrderModal, data }) {
@@ -11,19 +12,21 @@ export default function SellerInfo({ className, handleCustomOrderModal, data }) 
             <PrimaryTitle title="Seller" />
 
             {/* Seller Info Card */}
-            <div className="flex items-center rounded-lg mb-6">
-                <Image
-                    src="/images/seller-image.png"
-                    alt="Sweet Delights Bakery"
-                    className="w-16 h-16 rounded-full mr-4 object-cover"
-                    width={40}
-                    height={40}
-                />
-                <div>
-                    <p className="font-semibold text-primary">Sweet Delights Bakery</p>
-                    <p className="text-sm text-secondary">Average response time: 2 hours</p>
+            <Link href={`/seller-profile`} className="block">
+                <div className="flex items-center rounded-lg mb-6">
+                    <Image
+                        src="/images/seller-image.png"
+                        alt="Sweet Delights Bakery"
+                        className="w-16 h-16 rounded-full mr-4 object-cover"
+                        width={40}
+                        height={40}
+                    />
+                    <div>
+                        <p className="font-semibold text-primary">Sweet Delights Bakery</p>
+                        <p className="text-sm text-secondary">Average response time: 2 hours</p>
+                    </div>
                 </div>
-            </div>
+            </Link>
 
             {/* Delivery Rate and Rating */}
             <div className="grid grid-cols-[4fr_3fr] gap-3 justify-around items-center mb-6">

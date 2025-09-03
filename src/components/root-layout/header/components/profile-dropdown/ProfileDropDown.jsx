@@ -8,7 +8,7 @@ import PaymentModalContents from '@/components/shared/modal/components/modal-con
 import AccountSettingsModalContents from '@/components/shared/modal/components/modal-contents/account-settings-modal-contents/AccountSettingsModalContents';
 import AddAddressModalContents from '@/components/shared/modal/components/modal-contents/add-address-modal-contents/AddAddressModalContents';
 import AddPaymentMethodModalContents from '@/components/shared/modal/components/modal-contents/add-payment-method-modal-contents/AddPaymentMethodModalContents';
-import BecomeASellerModalContents from '@/components/shared/modal/components/modal-contents/become-a-seller-modal-contents/BecomeASellerModalContents';
+import SellerInfoModalContents from '@/components/shared/modal/components/modal-contents/seller-info-modal-contents/SellerInfoModalContents';
 import HelpModalContents from '@/components/shared/modal/components/modal-contents/help-modal-contents/HelpModalContents';
 import OrderModalContents from '@/components/shared/modal/components/modal-contents/order-modal-contents/OrderModalContents';
 import PasswordAndSecurityModalContents from '@/components/shared/modal/components/modal-contents/password-and-security-modal-contents/PasswordAndSecurityModalContents';
@@ -126,7 +126,7 @@ export default function ProfileDropDown({ isMobile, isDropdownOpen, setIsDropdow
                         if (user?.is_reseller === "2") {
                             handleOpenModal("seller-settings-modal")
                         } else if (user?.is_reseller === "0") {
-                            handleOpenModal("become-a-seller-modal")
+                            handleOpenModal("seller-info-modal")
                         }
                     },
                 },
@@ -260,8 +260,7 @@ export default function ProfileDropDown({ isMobile, isDropdownOpen, setIsDropdow
             subtitle: 'View your seller profile',
             type: "button",
             handleClick: () => {
-                handleCloseAllModals();
-                router.push("/seller-profile")
+                handleOpenModal("seller-info-modal")
             },
             icon: (<svg className="h-6 w-6 text-gray-700" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"></path>
@@ -374,8 +373,8 @@ export default function ProfileDropDown({ isMobile, isDropdownOpen, setIsDropdow
 
 
                 {/* seller modals */}
-                <Modal isLeft={false} isOpen={currentModal === "become-a-seller-modal"} setIsOpen={() => handleCloseModal()} title={"Become a Seller"}>
-                    <BecomeASellerModalContents handleCloseModal={handleCloseModal} />
+                <Modal isLeft={false} isOpen={currentModal === "seller-info-modal"} setIsOpen={() => handleCloseModal()} title={"Seller Info"}>
+                    <SellerInfoModalContents handleCloseModal={handleCloseModal} />
                 </Modal>
                 <Modal isLeft={false} isOpen={currentModal === "seller-settings-modal"} setIsOpen={() => handleCloseModal()} title={"Seller Settings"}>
                     <SellerSettingsModalContents handleCloseModal={handleCloseModal} isMobile={isMobile} sellerSettingsItems={sellerSettingsItems} />

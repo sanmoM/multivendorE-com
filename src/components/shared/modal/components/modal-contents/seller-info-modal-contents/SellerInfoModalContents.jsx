@@ -9,8 +9,9 @@ import toast from 'react-hot-toast';
 import { useSelector } from 'react-redux';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 
-export default function BecomeASellerModalContents({ handleCloseModal }) {
+export default function SellerInfoModalContents({ handleCloseModal }) {
     const user = useSelector((state) => state.user?.user);
+    console.log(user)
     const [businessName, setBusinessName] = useState('');
     const [contactNumber, setContactNumber] = useState('');
     const [emailAddress, setEmailAddress] = useState('');
