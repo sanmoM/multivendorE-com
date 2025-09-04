@@ -34,6 +34,8 @@ import { RiInformation2Line } from "react-icons/ri";
 import { RxExit } from "react-icons/rx";
 import { TbSitemap } from "react-icons/tb";
 import { useDispatch, useSelector } from 'react-redux';
+import { IoAddCircleSharp } from 'react-icons/io5';
+import CreateProductModalContents from '@/components/shared/modal/components/modal-contents/create-product-modal-contents/CreateProductModalContents';
 
 
 export default function ProfileDropDown({ isMobile, isDropdownOpen, setIsDropdownOpen }) {
@@ -72,14 +74,14 @@ export default function ProfileDropDown({ isMobile, isDropdownOpen, setIsDropdow
                 handleOpenModal("order-modal")
             }
         },
-        {
-            name: 'Products',
-            type: "button",
-            handleClick: () => {
-                handleDropdownClose()
-                handleOpenModal("product-modal")
-            }
-        },
+        // {
+        //     name: 'Products',
+        //     type: "button",
+        //     handleClick: () => {
+        //         handleDropdownClose()
+        //         handleOpenModal("product-modal")
+        //     }
+        // },
         {
             name: 'Help',
             type: "button",
@@ -115,9 +117,9 @@ export default function ProfileDropDown({ isMobile, isDropdownOpen, setIsDropdow
                     ),
                 },
                 {
-                    title: user?.is_reseller === "0" ? 
-                    'Become a Seller' : user?.is_reseller === "1" ? 'Your Request is Pending' : 'Seller Settings',
-                    subtitle: user?.accountType === "0" ? 'Become a seller' : user?.accountType === "1" ? 'Your Request is Pending' : 'View your seller settings',
+                    title: user?.is_reseller === "0" ?
+                        'Become a Seller' : user?.is_reseller === "1" ? 'Your Request is Pending' : 'Seller Settings',
+                    subtitle: user?.is_reseller === "0" ? 'Become a seller' : user?.is_reseller === "1" ? 'Your Request is Pending' : 'View your seller settings',
                     icon: (
                         <BsShopWindow className="h-6 w-6 text-gray-700" />
                     ),
@@ -267,12 +269,30 @@ export default function ProfileDropDown({ isMobile, isDropdownOpen, setIsDropdow
             </svg>)
         },
         {
-            title: 'Create Promotion',
-            subtitle: 'Create a promotion',
+            title: 'Create Product',
+            subtitle: 'Create a product',
             type: "button",
-            handleClick: () => handleOpenModal("promotion-modal"),
-            icon: <IoMdGift className="h-6 w-6 text-gray-700" />
+            handleClick: () => {
+                handleOpenModal("create-product-modal")
+            },
+            icon: (<IoAddCircleSharp className="h-6 w-6 text-gray-700" />)
         },
+        {
+            title: 'Seller Product',
+            subtitle: 'View your selling products',
+            type: "button",
+            handleClick: () => {
+                handleOpenModal("seller-product-modal")
+            },
+            icon: (<FaInbox className="h-6 w-6 text-gray-700" />)
+        },
+        // {
+        //     title: 'Create Promotion',
+        //     subtitle: 'Create a promotion',
+        //     type: "button",
+        //     handleClick: () => handleOpenModal("promotion-modal"),
+        //     icon: <IoMdGift className="h-6 w-6 text-gray-700" />
+        // },
     ];
 
 
@@ -364,9 +384,7 @@ export default function ProfileDropDown({ isMobile, isDropdownOpen, setIsDropdow
                 <Modal isLeft={false} isOpen={currentModal === "account-settings-modal"} setIsOpen={() => handleCloseModal()} title={"Account Settings"}>
                     <AccountSettingsModalContents isMobile={isMobile} accountMenuItems={profileItems} />
                 </Modal>
-                <Modal isLeft={false} isOpen={currentModal === "product-modal"} setIsOpen={() => handleCloseModal()} title={"My Products"}>
-                    <ProductsModalContents />
-                </Modal>
+
                 <Modal isLeft={false} isOpen={currentModal === "help-modal"} setIsOpen={() => handleCloseModal()} title={"Help"}>
                     <HelpModalContents />
                 </Modal>
@@ -375,6 +393,12 @@ export default function ProfileDropDown({ isMobile, isDropdownOpen, setIsDropdow
                 {/* seller modals */}
                 <Modal isLeft={false} isOpen={currentModal === "seller-info-modal"} setIsOpen={() => handleCloseModal()} title={"Seller Info"}>
                     <SellerInfoModalContents handleCloseModal={handleCloseModal} />
+                </Modal>
+                <Modal isLeft={false} isOpen={currentModal === "create-product-modal"} setIsOpen={() => handleCloseModal()} title={"Create Product"}>
+                    <CreateProductModalContents handleCloseModal={handleCloseModal} />
+                </Modal>
+                <Modal isLeft={false} isOpen={currentModal === "seller-product-modal"} setIsOpen={() => handleCloseModal()} title={"My Products"}>
+                    <ProductsModalContents />
                 </Modal>
                 <Modal isLeft={false} isOpen={currentModal === "seller-settings-modal"} setIsOpen={() => handleCloseModal()} title={"Seller Settings"}>
                     <SellerSettingsModalContents handleCloseModal={handleCloseModal} isMobile={isMobile} sellerSettingsItems={sellerSettingsItems} />

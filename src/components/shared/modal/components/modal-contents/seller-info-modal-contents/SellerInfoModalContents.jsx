@@ -4,20 +4,19 @@ import TextAreaInput from '@/components/shared/inputs/text-area-input/TextAreaIn
 import TextInput from '@/components/shared/inputs/text-input/TextInput';
 import useAuthAxios from '@/hooks/useAuthAxios';
 import { handleMobileNumberChange } from '@/utils/number-validation';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import toast from 'react-hot-toast';
 import { useSelector } from 'react-redux';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 
 export default function SellerInfoModalContents({ handleCloseModal }) {
     const user = useSelector((state) => state.user?.user);
-    console.log(user)
-    const [businessName, setBusinessName] = useState('');
-    const [contactNumber, setContactNumber] = useState('');
-    const [emailAddress, setEmailAddress] = useState('');
-    const [businessAddress, setBusinessAddress] = useState('');
+    const [businessName, setBusinessName] = useState("");
+    const [contactNumber, setContactNumber] = useState("");
+    const [emailAddress, setEmailAddress] = useState("");
+    const [businessAddress, setBusinessAddress] = useState("");
     const [termsAndConditions, setTermsAndConditions] = useState(false);
-    const [description, setDescription] = useState('');
+    const [description, setDescription] = useState("");
 
     const axios = useAuthAxios();
     const queryClient = useQueryClient();
@@ -63,6 +62,17 @@ export default function SellerInfoModalContents({ handleCloseModal }) {
         });
     };
 
+
+    useEffect(() => {
+        setBusinessName(user?.reseller?.business_name || "");
+        setContactNumber(user?.reseller?.mobile_number || "");
+        setEmailAddress(user?.reseller?.email || "");
+        setBusinessAddress(user?.reseller?.bussiness_address || "");
+        setTermsAndConditions(user?.reseller?.terms_and_conditions || false);
+        setDescription(user?.reseller?.product_description || "");
+        setTermsAndConditions(user?.reseller ? true : false);
+    }, [user]);
+
     return (
         <form className="flex flex-col h-full pt-2" onSubmit={handleSubmit}>
             <div className="grow space-y-4">
@@ -83,9 +93,9 @@ export default function SellerInfoModalContents({ handleCloseModal }) {
                 />
                 <div className="flex items-center gap-2">
                     <CheckBox
-                        checked={termsAndConditions}
+                        checked={user?.reseller ? true : false}
                         label="I agree to the terms and conditions"
-                        setChecked={setTermsAndConditions}
+                        setChecked={user?.reseller ? () => { } : setTermsAndConditions}
                     />
                     <p className="text-primary text-sm lg:text-base">I agree to the terms and conditions</p>
                 </div>

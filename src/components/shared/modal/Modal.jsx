@@ -5,7 +5,7 @@ import PrimaryTitle from '../title/PrimaryTitle';
 export default function Modal({ isLeft, children, isOpen, setIsOpen, title }) {
     const { handleCloseAllModals } = useModalAction();
     return (
-        <div onClick={() => handleCloseAllModals()} className={` fixed h-[100vh] w-[100vw] top-0 transform right-0 rounded-lg duration-300 shadow-md bg-black/50 flex justify-center items-center z-[5000] ${isLeft ? "justify-start -translate-x-full" : "justify-end translate-x-full"} ${isOpen && "!translate-x-0"}`}>
+        <div onClick={() => handleCloseAllModals()} className={` fixed min-h-[100vh] w-[100vw] top-0 transform right-0 rounded-lg duration-300 shadow-md bg-black/50 flex justify-center items-center z-[5000] ${isLeft ? "justify-start -translate-x-full" : "justify-end translate-x-full"} ${isOpen && "!translate-x-0"}`}>
             <div className='bg-white pb-10 overflow-y-auto hide-scrollbar h-[100svh]' onClick={(e) => {
                 e.stopPropagation();
             }}>
