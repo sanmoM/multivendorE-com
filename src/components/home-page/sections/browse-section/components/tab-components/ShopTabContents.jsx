@@ -6,6 +6,7 @@ import Link from 'next/link';
 import { useEffect, useState } from 'react';
 
 export default function ShopTabContents({ categories, locations }) {
+    const [isLoading, setIsLoading] = useState(true);
     // options for select input
     const categoryOptions = [{ label: "All Categories", value: "all" }, ...categories?.map((category) => ({ label: category.categoryName, value: category.id }))];
     const locationOptions = [{ label: "All Locations", value: "all" }, ...locations?.map((location) => ({ label: location.upazila_name, value: location.id }))];
@@ -13,12 +14,13 @@ export default function ShopTabContents({ categories, locations }) {
     // state for filters
     const [category, setCategory] = useState(categoryOptions[0]);
     const [location, setLocation] = useState(locationOptions[0]);
-    const [shops, setShops] = useState([]);
+    const [shops, setShops] = useState(Array(6).fill(null));
     const axios = useAxios();
 
     // fetch shops data with filters
     useEffect(() => {
         axios.get(`/vendors/filter/${category?.value}/${location?.value}`).then((res) => {
+            setIsLoading(false);
             setShops(res?.data?.vendors);
         });
     }, [category, location]);
@@ -32,9 +34,9 @@ export default function ShopTabContents({ categories, locations }) {
             {
                 shops?.length > 0 ? <CustomSlider mobileView={3} desktopView={6}>
                     {
-                        shops.map((shop) => (
-                            <Link href={`/shop?id=${shop.id}`} className='block w-full'>
-                                <PrimaryCard key={shop.id} item={{ image: shop?.image, title: shop?.shop_name, subtitle: shop?.address }} containerClassName={"px-2"} />
+                        shops.map((shop, index) => (
+                            <Link href={`/shop?id=${shop?.id}`} className='block w-full'>
+                                <PrimaryCard key={index} item={{ image: shop?.image, title: shop?.shop_name, subtitle: shop?.address }} containerClassName={"px-2"} isLoading={isLoading} />
                             </Link>
                         ))
                     }

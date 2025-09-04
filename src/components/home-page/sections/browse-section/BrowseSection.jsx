@@ -10,9 +10,9 @@ import ShopTabContents from "./components/tab-components/ShopTabContents";
 import Tabs from "@/components/shared/Tabs/Tabs";
 
 export default function BrowseSection() {
-
+    const [isLoading, setIsLoading] = useState(true);
     const [activeTab, setActiveTab] = useState('category');
-    const [categories, setCategories] = useState([]);
+    const [categories, setCategories] = useState(Array(6).fill(null));
     const [locations, setLocations] = useState([]);
     const axios = useAxios();
     useEffect(() => {
@@ -24,6 +24,7 @@ export default function BrowseSection() {
 
             setCategories(category?.data?.categories);
             setLocations(location?.data?.address);
+            setIsLoading(false);
         };
         fetchData();
     }, [])
@@ -58,7 +59,7 @@ export default function BrowseSection() {
 
 
             {
-                activeTab === 'category' && <CategoryTabContents category={categories} />
+                activeTab === 'category' && <CategoryTabContents category={categories} isLoading={isLoading} />
             }
 
             {

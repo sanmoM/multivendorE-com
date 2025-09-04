@@ -69,12 +69,12 @@ import "swiper/css";
 
 import "./custom-slider.css";
 
-export default function App({ children = [], mobileView = 3, desktopView = 4, }) {
+export default function App({ children = [], mobileView = 3, desktopView = 6, }) {
     return (
         <>
             <Swiper className="mySwiper"
                 breakpoints={{
-                    640: { // >= 640px (sm)
+                    375: { // >= 640px (sm)
                         slidesPerView: mobileView,
                     },
                     1024: { // >= 1024px (lg)

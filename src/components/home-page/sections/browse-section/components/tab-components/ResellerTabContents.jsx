@@ -1,9 +1,9 @@
 import CustomSlider from '@/components/shared/custom-slider/CustomSlider'
 import Filter from '@/components/shared/filter/Filter'
 import PrimaryCard from '@/components/shared/primary-card/PrimaryCard'
-import { IMAGE_BASE_URL } from '@/config'
 
 export default function ResellerTabContents({ resellers }) {
+    const [isLoading, setIsLoading] = useState(true);
     return (
         <div>
             <div className='mb-6 px-2 lg:px-0'>
