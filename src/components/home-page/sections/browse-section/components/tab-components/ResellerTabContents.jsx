@@ -1,5 +1,4 @@
 import CustomSlider from '@/components/shared/custom-slider/CustomSlider';
-import Filter from '@/components/shared/filter/Filter';
 import PrimaryCard from '@/components/shared/primary-card/PrimaryCard';
 import useAxios from '@/hooks/useAxios';
 import Link from 'next/link';
