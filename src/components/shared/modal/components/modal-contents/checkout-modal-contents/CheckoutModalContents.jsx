@@ -306,6 +306,7 @@ const CheckoutModalContents = ({ handleClose }) => {
             queryClient.invalidateQueries({ queryKey: ['related-products'] });
             dispatch(setCheckoutItems([]));
             dispatch(removeAllFromCart());
+            toast.success('Order Placed Successfully!');
         } catch (error) {
             toast.error('Something went wrong, please try again later');
         } finally {

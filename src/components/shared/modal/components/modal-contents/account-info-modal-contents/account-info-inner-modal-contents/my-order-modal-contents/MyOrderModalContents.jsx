@@ -7,50 +7,7 @@ import { GoArrowRight } from 'react-icons/go';
 
 const MyOrderModalContents = () => {
     const {  handleOpenModal, setNextModalData } = useModalAction();
-    const [activeTab, setActiveTab] = useState('delivered');
-
-    // const orders = {
-    //     delivered: [
-    //         {
-    //             orderNumber: '789012',
-    //             orderDate: '12/11/23',
-    //             total: 55,
-    //             image: '/images/product/product-1.svg',
-    //             paymentStatus: 'Paid',
-    //         },
-    //         {
-    //             orderNumber: '345678',
-    //             orderDate: '05/10/23',
-    //             total: 30,
-    //             image: '/images/product/product-2.svg',
-    //             paymentStatus: 'Paid',
-    //         },
-    //         {
-    //             orderNumber: '901234',
-    //             orderDate: '20/09/23',
-    //             total: 45,
-    //             image: '/images/product/product-3.svg',
-    //             paymentStatus: 'Paid',
-    //         },
-    //         {
-    //             orderNumber: '567890',
-    //             orderDate: '15/08/23',
-    //             total: 20,
-    //             image: '/images/product/product-4.svg',
-    //             paymentStatus: 'Unpaid',
-    //         },
-    //     ],
-    //     cancelled: [
-    //         // Placeholder data for cancelled orders
-    //         {
-    //             orderNumber: '112233',
-    //             orderDate: '01/01/23',
-    //             total: 15,
-    //             image: '/images/product/product-5.svg',
-    //             paymentStatus: 'Unpaid',
-    //         },
-    //     ],
-    // };
+    const [activeTab, setActiveTab] = useState('pending');
 
     const axios = useAuthAxios();
 

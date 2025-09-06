@@ -24,7 +24,7 @@ export default function SellerInfo({ className, handleCustomOrderModal, data }) 
             } catch (error) {
                 console.log(error);
             } finally {
-                setIsLoading(false);
+                // setIsLoading(false);
             }
         }
         fetchData();
