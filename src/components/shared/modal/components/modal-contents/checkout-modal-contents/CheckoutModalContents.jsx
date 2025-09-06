@@ -8,6 +8,8 @@ import toast from 'react-hot-toast';
 import { useSelector } from 'react-redux';
 
 const CheckoutModalContents = ({ handleClose }) => {
+    const user = useSelector((state) => state?.user);
+    console.log(user, "user")
     const checkoutItems = useSelector((state) => state?.checkout?.checkoutItems || []);
     const [isAddressOpen, setIsAddressOpen] = useState(false);
     const [isTimeOpen, setIsTimeOpen] = useState(false);
@@ -29,47 +31,55 @@ const CheckoutModalContents = ({ handleClose }) => {
     const handleCheckout = () => {
         if (checkoutItems[0]?.type === "product") {
             handleCakeCheckout()
+        } else {
+            handleGeneralProductCheckout()
         }
     }
 
     const handleCakeCheckout = async () => {
-        let items = [];
-        if (checkoutItems[0]?.type === "product") {
-            items = [
-                {
-                    product_id: checkoutItems[0]?.id,
-                    quantity: checkoutItems[0]?.quantity || 1,
-                    slice: checkoutItems[0]?.slices,
-                    flavor: checkoutItems[0]?.flavor,
-                    color: checkoutItems[0]?.color,
-                    weight: `${checkoutItems[0]?.weight}kg`,
-                    // design: checkoutItems[0]?.design,
-                    // delivery_date: checkoutItems[0]?.delivery_date,
-                    notes: checkoutItems[0]?.notes,
-                    type: "product"
-                }
-            ]
-        } else {
-            items = checkoutItems.map((item) => ({
-                product_id: item.id,
-                quantity: item.quantity,
-                slice: item.slices,
-                flavor: item.flavor,
-                color: item.color,
-                weight: item.quantity,
-                design: item.design,
-                delivery_date: item.delivery_date,
-                notes: item.notes,
-            }))
-        }
+
+        const items = [
+            {
+                product_id: checkoutItems[0]?.id,
+                quantity: checkoutItems[0]?.quantity || 1,
+                slice: checkoutItems[0]?.slices,
+                flavor: checkoutItems[0]?.flavor,
+                color: checkoutItems[0]?.color,
+                weight: `${checkoutItems[0]?.weight}kg`,
+                notes: checkoutItems[0]?.notes,
+                type: "product"
+            }
+        ]
         try {
             const res = await axios.post("/pay", {
-                shipping_address: "Dhaka, Bangladesh",
+                shipping_address: `${user?.street}, ${user?.city}, ${user?.state}, ${user?.country}`,
                 payment_percentage: items[0]?.type === "product" ? items[0]?.deliveryOption === "full-payment" ? 100 : 10 : 100,
                 items: items
             })
             const redirectUrl = res?.data?.url;
             window.location.href = redirectUrl;
+        } catch (error) {
+            toast.error("Something went wrong, please try again later");
+        } finally {
+            handleClose()
+        }
+    }
+
+    const handleGeneralProductCheckout = async () => {
+        let items = checkoutItems?.map((item) => {
+            return {
+                product_id: parseInt(item?.id),
+                quantity: item?.quantity || 1,
+            }
+        })
+        try {
+            const res = await axios.post("/place-order-generalproduct", {
+                shipping_address: `${user?.street}, ${user?.city}, ${user?.state}, ${user?.country}`,
+                payment_percentage: 100,
+                items: items
+            })
+            // const redirectUrl = res?.data?.url;
+            // window.location.href = redirectUrl;
         } catch (error) {
             toast.error("Something went wrong, please try again later");
         } finally {

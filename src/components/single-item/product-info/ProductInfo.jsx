@@ -5,7 +5,7 @@ import useModalAction from '@/hooks/useModalAction';
 import Image from 'next/image';
 import { useRef } from 'react';
 import SellerInfo from '../shared/seller-info/SellerInfo';
-import FallbackImage from '@/components/shared/image/Image';
+import FallbackImage from '@/components/shared/fallback-image/FallbackImage';
 
 export default function ProductInfo({ data }) {
     const sliderRef = useRef(null);
@@ -26,7 +26,7 @@ export default function ProductInfo({ data }) {
                     <hr className="border-t border-gray-200" />
                     <CustomSlider ref={sliderRef} desktopView={1} mobileView={1} paddingDesktop={0} paddingMobile={0}>
                         {data?.image_gallery?.map((url, index) => (
-                            <div key={index} className="px-2 outline-0">
+                            <div key={index} className="px-2 outline-0 w-full">
                                 <FallbackImage
                                     src={url}
                                     alt={`Slide ${index}`}
@@ -68,13 +68,12 @@ export default function ProductInfo({ data }) {
                                 }}
                                 className="w-16 h-12 border rounded overflow-hidden"
                             >
-
-                                <Image
+                                <FallbackImage
                                     src={url}
                                     alt={`Thumb ${index}`}
-                                    width={64}
-                                    height={48}
-                                    className="object-contain w-full h-full"
+                                    height={400}
+                                    width={400}
+                                    className="w-full object-contain aspect-[7/4] rounded-xl"
                                 />
                                 {/* this section will uncomment if user want to upload video */}
                                 {/* {

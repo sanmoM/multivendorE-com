@@ -1,5 +1,5 @@
 import CustomSlider from '@/components/shared/custom-slider/CustomSlider'
-import FallbackImage from '@/components/shared/image/Image'
+import FallbackImage from '@/components/shared/fallback-image/FallbackImage'
 import { IMAGE_BASE_URL } from '@/config'
 import Image from 'next/image'
 import React from 'react'

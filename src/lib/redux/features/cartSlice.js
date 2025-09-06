@@ -1,5 +1,5 @@
 // import { cartItems } from '@/data'
-import { createSlice } from '@reduxjs/toolkit';
+import { createSlice, current } from '@reduxjs/toolkit';
 
 const initialState = {
     cartItems: [],
@@ -20,8 +20,11 @@ export const cartSlice = createSlice({
             const { id, type } = action.payload;
             const item = state.cartItems.find(item => item.id === id && item.type === type);
             if (item) {
-                // ✅ directly update the proxy object (Immer takes care of immutability)
-                item.quantity += action.payload.quantity || 1;
+                if (item?.stock > item?.quantity + action.payload.quantity) {
+                    item.quantity += action.payload.quantity;
+                } else {
+                    item.quantity = item?.stock;
+                }
             } else {
                 state.cartItems.push({ ...action.payload });
             }
@@ -39,5 +42,5 @@ export const cartSlice = createSlice({
     },
 })
 
-export const { handleQuantity, addToCart, removeAllFromCart } = cartSlice.actions
+export const { handleQuantity, addToCart, removeAllFromCart, removeFromCart } = cartSlice.actions
 export default cartSlice.reducer

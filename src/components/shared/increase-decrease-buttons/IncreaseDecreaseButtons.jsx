@@ -1,6 +1,7 @@
 import React from 'react'
 
 export default function IncreaseDecreaseButtons({ value, setValue, maxQuantity }) {
+    // console.log(maxQuantity, "maxQuantity")
     return (
         <div className="flex items-center gap-4">
             <button
@@ -18,8 +19,11 @@ export default function IncreaseDecreaseButtons({ value, setValue, maxQuantity }
             }
             <button
                 onClick={() => {
-                    if (maxQuantity && value < maxQuantity) {
-                        setValue(value + 1)
+                    console.log(maxQuantity, value < maxQuantity)
+                    if (maxQuantity) {
+                        if (value < maxQuantity) {
+                            setValue(value + 1)
+                        }
                     } else {
                         setValue(value + 1)
                     }

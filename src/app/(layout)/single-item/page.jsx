@@ -32,7 +32,6 @@ const App = () => {
 
     // this is cart item
     const [cartItem, setCartItem] = useState(null);
-    console.log(cartItem)
 
     const [data, setData] = useState(null);
     const [relatedProducts, setRelatedProducts] = useState([]);
@@ -75,6 +74,7 @@ const App = () => {
                 image: data?.product_image,
                 type: data?.type,
                 quantity: cartItem?.quantity || 1,
+                stock: data?.stock
             }
             :
             {
@@ -86,6 +86,7 @@ const App = () => {
                 image: data?.image,
                 type: data?.type,
                 quantity: cartItem?.quantity || 1,
+                stock: data?.stock
             }
 
 
@@ -121,9 +122,6 @@ const App = () => {
         handleOpenModal("checkout-modal");
     }
 
-
-
-
     return (
         <div className='my-6 lg:my-10'>
             <MobileHeader title={"Single Item"} containerClassName={"mb-6"} />
@@ -145,7 +143,9 @@ const App = () => {
                             price: data?.regular_price || 0, variants: data?.image_gallery, stock: data?.stock
                         }} cartItem={cartItem} setCartItem={setCartItem} />
                     }
-                    <DeliveryOptions cartItem={cartItem} setCartItem={setCartItem} />
+                    {
+                        data?.type === "product" && <DeliveryOptions cartItem={cartItem} setCartItem={setCartItem} />
+                    }
                     {/* <PaymentMethods cartItem={cartItem} setCartItem={setCartItem} /> */}
                     <Reviews id={id} />
                     <CustomerReviews id={id} />
