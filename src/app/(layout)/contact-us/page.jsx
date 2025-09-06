@@ -8,11 +8,44 @@ import SecondarySelectInput from '@/components/shared/inputs/secondary-select-in
 import TextAreaInput from '@/components/shared/inputs/text-area-input/TextAreaInput';
 import TextInput from '@/components/shared/inputs/text-input/TextInput';
 import PrimaryTitle from '@/components/shared/title/PrimaryTitle';
+import useAuthAxios from '@/hooks/useAuthAxios';
 import { useState } from 'react';
+import toast from 'react-hot-toast';
 import { FiMail, FiMapPin, FiPhone, FiPlus } from 'react-icons/fi';
 
 const App = () => {
     const [subject, setSubject] = useState('General Inquiry');
+    const [firstName, setFirstName] = useState('');
+    const [lastName, setLastName] = useState('');
+    const [phoneNo, setPhoneNo] = useState('');
+    const [email, setEmail] = useState('');
+    const [message, setMessage] = useState('');
+
+    const axios = useAuthAxios()
+
+
+    const handleSubmit = async (e) => {
+        e.preventDefault();
+        if (firstName && lastName && phoneNo && email && message && subject) {
+            const res = await axios.post('/customer-message/store', {
+                firstName,
+                lastName,
+                phoneNo,
+                email,
+                message,
+                type: subject
+            })
+            toast.success("Message Sent Successfully")
+            setFirstName("");
+            setLastName("");
+            setPhoneNo("");
+            setEmail("");
+            setMessage("");
+            setSubject("General Inquiry");
+        } else {
+            toast.error("Please fill all the fields")
+        }
+    }
 
     return (
         <Container>
@@ -60,16 +93,16 @@ const App = () => {
 
                     {/* Right Section: Form */}
                     <div className="lg:w-2/3 w-full p-8 sm:p-12 border-y-2 border-secondary border-r-2 rounded-r-xl">
-                        <SecondarySelectInput placeholder={"Select Type"} selectedOption={{ label: "Select Type", value: "US" }} options={[{ label: "Customer", value: "US" }, { label: "Seller", value: "CA" },]} containerClassName={"ml-auto mb-6"} hasLabel={false} />
+                        {/* <SecondarySelectInput placeholder={"Select Type"} selectedOption={{ label: "Select Type", value: "US" }} options={[{ label: "Customer", value: "US" }, { label: "Seller", value: "CA" },]} containerClassName={"ml-auto mb-6"} hasLabel={false} /> */}
                         <form className="space-y-6">
                             <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
 
-                                <TextInput placeholder="First Name" />
-                                <TextInput placeholder="First Name" />
-                                <TextInput placeholder="Phone No." />
-                                <TextInput placeholder="email" type='email' />
+                                <TextInput placeholder="First Name" value={firstName} setValue={setFirstName} />
+                                <TextInput placeholder="First Name" value={lastName} setValue={setLastName} />
+                                <TextInput placeholder="Phone No." value={phoneNo} setValue={setPhoneNo} />
+                                <TextInput placeholder="email" type='email' value={email} setValue={setEmail} />
                             </div>
-                            <TextAreaInput placeholder='Write Message' inputClassName={"resize-none"} />
+                            <TextAreaInput placeholder='Write Message' inputClassName={"resize-none"} value={message} setValue={setMessage} />
 
                             {/* Subject Radios */}
                             <div>
@@ -83,7 +116,7 @@ const App = () => {
 
                             {/* Submit Button */}
                             <div className="pt-4 ">
-                                <Button text={"Send Message"} className={"bg-tertiary text-secondary mx-auto block"} />
+                                <Button text={"Send Message"} className={"bg-tertiary text-secondary mx-auto block"} onClick={handleSubmit} />
                             </div>
                         </form>
                     </div>
