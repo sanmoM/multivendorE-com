@@ -66,14 +66,13 @@ export default function ProfileDropDown({ isMobile, isDropdownOpen, setIsDropdow
                 handleOpenModal("account-settings-modal")
             }
         },
-        {
-            name: 'Orders',
-            type: "button",
-            handleClick: () => {
-                handleDropdownClose()
-                handleOpenModal("order-modal")
-            }
-        },
+        // {
+        //     name: 'Orders',
+        //     type: "button",
+        //     handleClick: () => {
+        //         router.push("/order")
+        //     }
+        // },
         // {
         //     name: 'Products',
         //     type: "button",
@@ -137,7 +136,7 @@ export default function ProfileDropDown({ isMobile, isDropdownOpen, setIsDropdow
                 {
                     title: 'Orders',
                     subtitle: 'Manage your orders',
-                    handleClick: () => handleOpenModal("order-modal"),
+                    handleClick: () => handleOpenModal("my-orders-modal"),
                     icon: (
                         <TbSitemap className="h-6 w-6 text-gray-700" />
                     )

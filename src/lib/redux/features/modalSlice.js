@@ -3,6 +3,7 @@ import { createSlice } from '@reduxjs/toolkit';
 const initialState = {
     modalStack: [],
     currentModal: null,
+    modalData: null,
 };
 
 export const modalSlice = createSlice({
@@ -22,9 +23,11 @@ export const modalSlice = createSlice({
             state.modalStack = [];
             state.currentModal = null;
         },
-
+        setNextModalData: (state, action) => {
+            state.modalData = action.payload;
+        },
     },
 })
 
-export const { handleModalOpen, handleModalClose, handleCloseAllModals, setCurrentModal } = modalSlice.actions
+export const { handleModalOpen, handleModalClose, handleCloseAllModals, setCurrentModal, setNextModalData } = modalSlice.actions
 export default modalSlice.reducer

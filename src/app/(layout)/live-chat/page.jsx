@@ -208,6 +208,7 @@ import { useRef, useState } from "react";
 import { useSearchParams } from "next/navigation";
 import { IoSendSharp } from "react-icons/io5";
 import { GrAttachment } from "react-icons/gr";
+import { formatDate } from "@/utils/date";
 
 export default function ChatInterface() {
     const searchParams = useSearchParams();
@@ -228,8 +229,9 @@ export default function ChatInterface() {
             const res = await axios.get(`/ticket/replay/create/1`);
             return res?.data?.messages || [];
         },
-        staleTime: 1000 * 60,
+        staleTime: 1000 * 60, // 1 minute caching
         refetchOnWindowFocus: false,
+        refetchInterval: 10000, // refetch every 10 seconds
     });
 
     const sendMessageMutation = useMutation({
@@ -268,24 +270,24 @@ export default function ChatInterface() {
         sendMessageMutation.mutate({ message, file });
     };
 
-    function formatDate(dateString) {
-        const date = new Date(dateString);
-        const options = {
-            month: "2-digit",
-            day: "2-digit",
-            year: "2-digit",
-            hour: "2-digit",
-            minute: "2-digit",
-            hour12: true,
-        };
-        return date.toLocaleString("en-US", options);
-    }
+    // function formatDate(dateString) {
+    //     const date = new Date(dateString);
+    //     const options = {
+    //         month: "2-digit",
+    //         day: "2-digit",
+    //         year: "2-digit",
+    //         hour: "2-digit",
+    //         minute: "2-digit",
+    //         hour12: true,
+    //     };
+    //     return date.toLocaleString("en-US", options);
+    // }
 
     if (isLoading) return <p className="text-center mt-20">Loading chat...</p>;
     if (isError) return <p className="text-center mt-20 text-red-500">Failed to load chat.</p>;
 
     return (
-        <div>
+        <div className="max-w-4xl mx-auto">
             <MobileHeader title="Live Chat" containerClassName="mb-6" />
             <Container className="flex flex-col py-0">
                 {/* Chat Header */}

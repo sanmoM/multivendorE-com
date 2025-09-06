@@ -1,8 +1,9 @@
-import { handleCloseAllModals as handleCloseAllModalsAction, handleModalClose as handleCloseModalAction, handleModalOpen as handleOpenModalAction, setCurrentModal as setCurrentModalAction } from "@/lib/redux/features/modalSlice";
+import { handleCloseAllModals as handleCloseAllModalsAction, handleModalClose as handleCloseModalAction, handleModalOpen as handleOpenModalAction, setCurrentModal as setCurrentModalAction, setNextModalData as setNextModalDataAction } from "@/lib/redux/features/modalSlice";
 import { useDispatch, useSelector } from 'react-redux';
 
 export default function useModalAction() {
     const currentModal = useSelector(state => state.modal?.currentModal);
+    const modalData = useSelector(state => state.modal?.modalData);
     const modalStack = useSelector(state => state.modal?.modalStack);
     const dispatch = useDispatch();
 
@@ -28,5 +29,11 @@ export default function useModalAction() {
             dispatch(setCurrentModalAction(modalName));
         }
     }
-    return { currentModal, handleCloseAllModals, handleCloseModal, handleOpenModal };
+
+    const setNextModalData = (data) => {
+        dispatch(setNextModalDataAction(data));
+    }
+
+
+    return { currentModal, modalData, handleCloseAllModals, handleCloseModal, handleOpenModal, setNextModalData };
 }
