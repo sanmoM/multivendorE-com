@@ -2,32 +2,31 @@
 
 import RadioInput from '@/components/shared/inputs/radio-input/RadioInput';
 import PrimaryTitle from '@/components/shared/title/PrimaryTitle';
-import { useState } from 'react';
-import { FaRegCreditCard, FaRegMoneyBillAlt } from 'react-icons/fa';
+import { FaRegCreditCard } from 'react-icons/fa';
 import { RiBox2Line } from 'react-icons/ri';
 
 
 const deliveryOptions = [{
-    label: 'Self-Collection',
-    value: 'self-collection',
+    label: 'Full Payment',
+    value: 'full-payment',
     Icon: <RiBox2Line className='w-6 h-6 text-secondary' />,
 },
-{
-    label: 'Cash on Delivery',
-    value: 'cash-on-delivery',
-    Icon: <FaRegMoneyBillAlt className='w-6 h-6 text-secondary' />
-},
+// {
+//     label: 'Cash on Delivery',
+//     value: 'cash-on-delivery',
+//     Icon: <FaRegMoneyBillAlt className='w-6 h-6 text-secondary' />
+// },
 {
     label: 'Order with 10% Payment',
     value: 'order-with-10-payment',
     Icon: <FaRegCreditCard className='w-6 h-6 text-secondary' />,
-    alwaysChecked: true,
+    // alwaysChecked: true,
 }
 ];
 
 export default function DeliveryOptions({ cartItem, setCartItem }) {
     // const [selectedDelivery, setSelectedDelivery] = useState('order-with-10-payment');
-    const selectedDelivery = cartItem?.deliveryOption || 'cash-on-delivery';
+    const selectedDelivery = cartItem?.deliveryOption || 'full-payment';
     return (
         <div className="lg:w-[70%]" id='delivery'>
             <PrimaryTitle title={"Delivery Options"} className={"mb-6"} />

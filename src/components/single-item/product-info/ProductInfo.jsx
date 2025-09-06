@@ -5,12 +5,13 @@ import useModalAction from '@/hooks/useModalAction';
 import Image from 'next/image';
 import { useRef } from 'react';
 import SellerInfo from '../shared/seller-info/SellerInfo';
+import FallbackImage from '@/components/shared/image/Image';
 
 export default function ProductInfo({ data }) {
     const sliderRef = useRef(null);
 
 
-    const {handleOpenModal } = useModalAction();
+    const { handleOpenModal } = useModalAction();
     const handleCustomOrderModal = () => {
         handleOpenModal("custom-order-modal")
     }
@@ -26,8 +27,7 @@ export default function ProductInfo({ data }) {
                     <CustomSlider ref={sliderRef} desktopView={1} mobileView={1} paddingDesktop={0} paddingMobile={0}>
                         {data?.image_gallery?.map((url, index) => (
                             <div key={index} className="px-2 outline-0">
-
-                                <Image
+                                <FallbackImage
                                     src={url}
                                     alt={`Slide ${index}`}
                                     height={400}

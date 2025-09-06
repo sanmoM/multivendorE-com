@@ -16,6 +16,7 @@ export default function HorizontalCard({ item }) {
                 {item?.title && <h4 className="font-semibold text-primary">{item?.title}</h4>}
                 {item?.text2 && <p className="text-secondary">{item?.text2}</p>}
                 {item?.text3 && <p className=" text-secondary">{item?.text3}</p>}
+                {item?.text3 && <p className=" text-secondary">{item?.text4}</p>}
             </div>
         </div>
     )

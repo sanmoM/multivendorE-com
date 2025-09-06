@@ -12,10 +12,13 @@ const CheckoutModalContents = ({ handleClose }) => {
     const [isAddressOpen, setIsAddressOpen] = useState(false);
     const [isTimeOpen, setIsTimeOpen] = useState(false);
     const [isPaymentOpen, setIsPaymentOpen] = useState(false);
-    const subtotal = checkoutItems.reduce((acc, item) => acc + item.price * item.quantity, 0);
+    const subtotal = checkoutItems.reduce((acc, item) => acc + item.price * item.quantity * (item.weight || 1), 0);
     const [shipping, setShipping] = useState(5);
     const [taxes, setTaxes] = useState(3);
     const router = useRouter();
+
+
+    console.log(checkoutItems, "checkoutItems")
 
     const axios = useAuthAxios()
 
@@ -30,24 +33,40 @@ const CheckoutModalContents = ({ handleClose }) => {
     }
 
     const handleCakeCheckout = async () => {
+        let items = [];
+        if (checkoutItems[0]?.type === "product") {
+            items = [
+                {
+                    product_id: checkoutItems[0]?.id,
+                    quantity: checkoutItems[0]?.quantity || 1,
+                    slice: checkoutItems[0]?.slices,
+                    flavor: checkoutItems[0]?.flavor,
+                    color: checkoutItems[0]?.color,
+                    weight: `${checkoutItems[0]?.weight}kg`,
+                    // design: checkoutItems[0]?.design,
+                    // delivery_date: checkoutItems[0]?.delivery_date,
+                    notes: checkoutItems[0]?.notes,
+                    type: "product"
+                }
+            ]
+        } else {
+            items = checkoutItems.map((item) => ({
+                product_id: item.id,
+                quantity: item.quantity,
+                slice: item.slices,
+                flavor: item.flavor,
+                color: item.color,
+                weight: item.quantity,
+                design: item.design,
+                delivery_date: item.delivery_date,
+                notes: item.notes,
+            }))
+        }
         try {
             const res = await axios.post("/pay", {
                 shipping_address: "Dhaka, Bangladesh",
-                payment_percentage: 100,
-                items: [
-                    {
-                        product_id: 3,
-                        quantity: 2,
-                        slice: "large-10",
-                        flavor: "Chocolate",
-                        color: "Brown",
-                        weight: "1kg",
-                        design: "Birthday",
-                        delivery_date: "2025-08-28",
-                        notes: "No nuts"
-
-                    }
-                ]
+                payment_percentage: items[0]?.type === "product" ? items[0]?.deliveryOption === "full-payment" ? 100 : 10 : 100,
+                items: items
             })
             const redirectUrl = res?.data?.url;
             window.location.href = redirectUrl;
@@ -132,8 +151,14 @@ const CheckoutModalContents = ({ handleClose }) => {
                     <PrimaryTitle title={"Shopping Bag"} />
                     <div className="grow space-y-4 lg:space-y-6">
                         {checkoutItems.map((item, index) => (
-                            // <CartCard item={item} key={index} />
-                            <HorizontalCard key={index} item={{ id: item.id, image: item?.image || item?.product_image, title: item?.name, text2: `Quantity: ${item.quantity}`, text3: `Price: $${item.price * item.quantity}` }} />
+                            <>
+                                {
+                                    item?.type === "product" ?
+                                        <HorizontalCard key={index} item={{ id: item.id, image: item?.image || item?.product_image, title: item?.name, text2: `Quantity: ${item.quantity}`, text3: `weight: ${item.weight} (kg)`, text4: `Total: $${item.price * item.quantity * (item.weight || 1)}` }} />
+                                        :
+                                        <HorizontalCard key={index} item={{ id: item.id, image: item?.image || item?.product_image, title: item?.name, text2: `Quantity: ${item.quantity}`, text3: `Total: $${item.price * item.quantity}` }} />
+                                }
+                            </>
                         ))}
                     </div>
                 </div>

@@ -9,8 +9,11 @@ import SecondaryTitle from '@/components/shared/title/SecondaryTitle';
 const CakeOptions = ({ data, cartItem, setCartItem }) => {
     const selectedSlices = cartItem?.slices || "4 Slices";
     const selectedFlavor = cartItem?.flavor || "Chocolate";
-    const cakeWeight = cartItem?.quantity || 1;
+    const cakeWeight = cartItem?.weight || 1;
+    const cakeQuantity = cartItem?.quantity || 1;
     const selectedColor = cartItem?.color || "Pink";
+
+    console.log(cakeWeight, cakeQuantity, "cakeWeight, cakeQuantity")
 
     const cakeColors = [
         { name: 'Pink', hex: '#FFC0CB' },
@@ -55,19 +58,28 @@ const CakeOptions = ({ data, cartItem, setCartItem }) => {
                 </div>
             </div>
 
+            {/* Cake Quantity (lbs) */}
+            <div className="mb-6">
+                <SecondaryTitle title={"Quantity"} />
+                <div className='flex items-center gap-4'>
+                    <p>Quantity</p>
+                    <IncreaseDecreaseButtons value={cakeQuantity} setValue={(value) => setCartItem({ ...cartItem, quantity: value })} />
+                </div>
+            </div>
+
             {/* Cake Weight (lbs) */}
             <div className="mb-6">
                 <SecondaryTitle title={"Weight (in pounds)"} />
                 <div className='flex items-center gap-4'>
                     <p>Weight</p>
-                    <IncreaseDecreaseButtons value={cakeWeight} setValue={(value) => setCartItem({ ...cartItem, quantity: value })} maxQuantity={data?.stock} />
+                    <IncreaseDecreaseButtons value={cakeWeight} setValue={(value) => setCartItem({ ...cartItem, weight: value })} />
                 </div>
             </div>
 
 
             {/* Total Price */}
             <div className="mb-8 border-gray-200">
-                <p className=" text-gray-800 text-lg lg:text-xl">Total Price: <span className='font-bold'>${data?.price * cakeWeight}</span></p>
+                <p className=" text-gray-800 text-lg lg:text-xl">Total Price: <span className='font-bold'>${data?.price * (cakeWeight || 1) * (cakeQuantity || 1)}</span></p>
             </div>
         </div>
     );

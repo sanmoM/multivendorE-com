@@ -32,6 +32,7 @@ const App = () => {
 
     // this is cart item
     const [cartItem, setCartItem] = useState(null);
+    console.log(cartItem)
 
     const [data, setData] = useState(null);
     const [relatedProducts, setRelatedProducts] = useState([]);
@@ -97,19 +98,23 @@ const App = () => {
         let productData;
         if (data?.type === "product") {
             productData = {
+                ...data,
                 image: data?.product_image,
                 name: data?.cake_name || data?.name,
                 price: data?.regular_price,
+                slices: cartItem?.slices || "4 Slices",
                 quantity: cartItem?.quantity || 1,
-                ...data
+                weight: cartItem?.weight || 1,
+                deliveryOption: cartItem?.deliveryOption || "full-payment",
             }
         } else {
             productData = {
+                ...data,
                 image: data?.image,
                 name: data?.name,
                 price: data?.regular_price,
                 quantity: cartItem?.quantity || 1,
-                ...data
+                deliveryOption: cartItem?.deliveryOption || "full-payment",
             }
         }
         dispatch(setCheckoutItems([productData]));
@@ -125,7 +130,9 @@ const App = () => {
             <Container className={"overflow-hidden !pt-0"}>
                 <ProductInfo data={data} />
                 <div className='space-x-4'>
-                    <Button text="Add to Cart" onClick={handleAddToCart} />
+                    {
+                        data && data?.type !== "product" && <Button text="Add to Cart" onClick={handleAddToCart} />
+                    }
                     <Button text="Buy Now" className={"bg-tertiary"} onClick={() => handleBuyNow()} />
                 </div>
                 <SellerInfo className="lg:hidden" handleCustomOrderModal={handleCustomOrderModal} data={{ rating: data?.average_rating }} />
@@ -139,7 +146,7 @@ const App = () => {
                         }} cartItem={cartItem} setCartItem={setCartItem} />
                     }
                     <DeliveryOptions cartItem={cartItem} setCartItem={setCartItem} />
-                    <PaymentMethods cartItem={cartItem} setCartItem={setCartItem} />
+                    {/* <PaymentMethods cartItem={cartItem} setCartItem={setCartItem} /> */}
                     <Reviews id={id} />
                     <CustomerReviews id={id} />
                     <AddReview id={id} />
