@@ -1,4 +1,5 @@
 import CustomSlider from '@/components/shared/custom-slider/CustomSlider'
+import FallbackImage from '@/components/shared/image/Image'
 import { IMAGE_BASE_URL } from '@/config'
 import Image from 'next/image'
 import React from 'react'
@@ -10,7 +11,14 @@ export default function Banner({ data }) {
                 {
                     data?.map((product, index) => (
                         <React.Fragment key={index}>
-                            <Image
+                            {/* <Image
+                                height={400}
+                                width={400}
+                                className="w-full rounded-md object-cover h-[30vh] lg:h-[60vh]"
+                                src={IMAGE_BASE_URL + product?.image}
+                                alt="Banner"
+                            /> */}
+                            <FallbackImage
                                 height={400}
                                 width={400}
                                 className="w-full rounded-md object-cover h-[30vh] lg:h-[60vh]"

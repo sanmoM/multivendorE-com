@@ -17,14 +17,19 @@ export default function BrowseSection() {
     const axios = useAxios();
     useEffect(() => {
         const fetchData = async () => {
-            const [category, location] = await Promise.all([
-                axios.get("/categories"),
-                axios.get("/show-vendor-address")
-            ]);
+            try {
+                const [category, location] = await Promise.all([
+                    axios.get("/categories"),
+                    axios.get("/show-vendor-address")
+                ]);
 
-            setCategories(category?.data?.categories);
-            setLocations(location?.data?.address);
-            setIsLoading(false);
+                setCategories(category?.data?.categories || []);
+                setLocations(location?.data?.address || []);
+            } catch (error) {
+                console.log(error);
+            } finally {
+                setIsLoading(false);
+            }
         };
         fetchData();
     }, [])

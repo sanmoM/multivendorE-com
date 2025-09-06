@@ -9,7 +9,7 @@ import DesktopNavbar from './components/desktop-navbar/DesktopNavbar';
 import MobileNavbar from './components/mobile-navbar/MobileNavbar';
 
 export default function Header() {
-    const { currentModal, handleCloseModal, handleOpenModal } = useModalAction();
+    const { currentModal, handleCloseModal, handleOpenModal, handleCloseAllModals } = useModalAction();
     return (
         <header className="w-full bg-white shadow-sm font-sans sticky top-0 z-[100]">
             <DesktopNavbar setIsCartOpen={() => handleOpenModal("cart-modal")} setNotificationOpen={() => {
@@ -24,7 +24,7 @@ export default function Header() {
             {/* cart modal */}
             <Modal isOpen={currentModal === "checkout-modal"} setIsOpen={() => handleCloseModal()} title={"Checkout"}>
                 {/* <CartModalContents /> */}
-                <CheckoutModalContents />
+                <CheckoutModalContents handleClose={handleCloseAllModals} />
             </Modal>
         </header>
     );

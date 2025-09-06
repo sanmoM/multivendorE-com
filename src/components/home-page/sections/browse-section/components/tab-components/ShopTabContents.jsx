@@ -1,5 +1,6 @@
 import CustomSlider from '@/components/shared/custom-slider/CustomSlider';
 import Filter from '@/components/shared/filter/Filter';
+import NoDataText from '@/components/shared/no-data-text/NoDataText';
 import PrimaryCard from '@/components/shared/primary-card/PrimaryCard';
 import useAxios from '@/hooks/useAxios';
 import Link from 'next/link';
@@ -19,10 +20,18 @@ export default function ShopTabContents({ categories, locations }) {
 
     // fetch shops data with filters
     useEffect(() => {
-        axios.get(`/vendors/filter/${category?.value}/${location?.value}`).then((res) => {
-            setIsLoading(false);
-            setShops(res?.data?.vendors);
-        });
+        async function fetchData() {
+            try {
+                const res = await axios.get(`/vendors/filter/${category?.value}/${location?.value}`)
+                setShops(res?.data?.vendors);
+            } catch (error) {
+                console.log(error);
+                setShops([]);
+            } finally {
+                setIsLoading(false);
+            }
+        }
+        fetchData();
     }, [category, location]);
 
 
@@ -40,7 +49,7 @@ export default function ShopTabContents({ categories, locations }) {
                             </Link>
                         ))
                     }
-                </CustomSlider> : <h2 className='text-primary font-semibold text-xl h-[20vh] flex items-center justify-center'><span>No shops found</span></h2>
+                </CustomSlider> : <NoDataText text={"No shops found"} />
             }
         </div>
     )

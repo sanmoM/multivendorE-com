@@ -4,9 +4,10 @@ import PrimaryTitle from '@/components/shared/title/PrimaryTitle';
 import useAuthAxios from '@/hooks/useAuthAxios';
 import { useRouter } from 'next/navigation';
 import { useState } from 'react';
+import toast from 'react-hot-toast';
 import { useSelector } from 'react-redux';
 
-const CheckoutModalContents = () => {
+const CheckoutModalContents = ({ handleClose }) => {
     const checkoutItems = useSelector((state) => state?.checkout?.checkoutItems || []);
     const [isAddressOpen, setIsAddressOpen] = useState(false);
     const [isTimeOpen, setIsTimeOpen] = useState(false);
@@ -29,26 +30,32 @@ const CheckoutModalContents = () => {
     }
 
     const handleCakeCheckout = async () => {
-        const res = await axios.post("/pay", {
-            shipping_address: "Dhaka, Bangladesh",
-            payment_percentage: 100,
-            items: [
-                {
-                    product_id: 3,
-                    quantity: 2,
-                    slice: "large-10",
-                    flavor: "Chocolate",
-                    color: "Brown",
-                    weight: "1kg",
-                    design: "Birthday",
-                    delivery_date: "2025-08-28",
-                    notes: "No nuts"
+        try {
+            const res = await axios.post("/pay", {
+                shipping_address: "Dhaka, Bangladesh",
+                payment_percentage: 100,
+                items: [
+                    {
+                        product_id: 3,
+                        quantity: 2,
+                        slice: "large-10",
+                        flavor: "Chocolate",
+                        color: "Brown",
+                        weight: "1kg",
+                        design: "Birthday",
+                        delivery_date: "2025-08-28",
+                        notes: "No nuts"
 
-                }
-            ]
-        })
-        const redirectUrl = res?.data?.url ;
-        window.location.href = redirectUrl;
+                    }
+                ]
+            })
+            const redirectUrl = res?.data?.url;
+            window.location.href = redirectUrl;
+        } catch (error) {
+            toast.error("Something went wrong, please try again later");
+        } finally {
+            handleClose()
+        }
     }
 
     return (

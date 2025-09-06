@@ -4,6 +4,7 @@ import MobileHeaderWithSearchbar from "@/components/root-layout/header/component
 import Container from "@/components/shared/container/Container";
 import FeaturedItems from "@/components/shared/featured-items/FeaturedItems";
 import Items from "@/components/shared/items/Items";
+import NoDataText from "@/components/shared/no-data-text/NoDataText";
 import PrimaryCard from "@/components/shared/primary-card/PrimaryCard";
 import useAxios from "@/hooks/useAxios";
 import Link from "next/link";
@@ -24,12 +25,19 @@ export default function page() {
 
     useEffect(() => {
         const fetchData = async () => {
-            const resellerRes = await axios.get(`/all/reseller`);
-            setResellers(resellerRes?.data?.resellers);
+            try {
+                const resellerRes = await axios.get(`/all/reseller`);
+                setResellers(resellerRes?.data?.resellers);
 
-            const resellerProductsRes = await axios.get(`/reseller/products/show/${resellerId}`);
-            setResellersProducts(resellerProductsRes?.data?.products);
-            setIsLoading(false);
+                const resellerProductsRes = await axios.get(`/reseller/products/show/${resellerId}`);
+                setResellersProducts(resellerProductsRes?.data?.products);
+            } catch (error) {
+                console.log(error);
+                setResellers([]);
+                setResellersProducts([]);
+            } finally {
+                setIsLoading(false);
+            }
         };
         fetchData();
     }, []);
@@ -44,15 +52,17 @@ export default function page() {
                     <Filter />
                 </div> */}
                 <div className={"space-y-10 lg:space-y-16 mt-6 lg:mt-10 "}>
-                    <FeaturedItems title={"All Resellers"} desktopView={6} mobileView={3} >
-                        {
-                            resellers?.map((reseller, index) => (
-                                <Link className="w-full block" href={`/reseller?id=${resellerId}`} key={index} onClick={() => setResellerId(reseller?.reseller?.id)}>
-                                    <PrimaryCard key={index} item={{ image: reseller?.reseller?.image, title: reseller?.reseller?.business_name, subtitle: reseller?.reseller?.bussiness_address }} containerClassName={"px-2 w-full"} isLoading={isLoading} />
-                                </Link>
-                            ))
-                        }
-                    </FeaturedItems>
+                    {
+                        resellers?.length > 0 ? <FeaturedItems title={"All Resellers"} desktopView={6} mobileView={3} >
+                            {
+                                resellers?.map((reseller, index) => (
+                                    <Link className="w-full block" href={`/reseller?id=${resellerId}`} key={index} onClick={() => setResellerId(reseller?.reseller?.id)}>
+                                        <PrimaryCard key={index} item={{ image: reseller?.reseller?.image, title: reseller?.reseller?.business_name, subtitle: reseller?.reseller?.bussiness_address }} containerClassName={"px-2 w-full"} isLoading={isLoading} />
+                                    </Link>
+                                ))
+                            }
+                        </FeaturedItems> : <NoDataText text={"No resellers found"} />
+                    }
                     {
                         resellersProducts?.length > 0 &&
                         <Items title={"Resellers Products"} desktopView={6} mobileView={3} >

@@ -4,11 +4,11 @@ import MobileHeaderWithSearchbar from "@/components/root-layout/header/component
 import Container from "@/components/shared/container/Container";
 import FeaturedItems from "@/components/shared/featured-items/FeaturedItems";
 import Filter from "@/components/shared/filter/Filter";
+import NoDataText from "@/components/shared/no-data-text/NoDataText";
 import PrimaryCard from "@/components/shared/primary-card/PrimaryCard";
 import SectionTitle from "@/components/shared/section-title/SectionTitle";
 import ShopProducts from "@/components/shop/shop-products/ShopProducts";
 import useAxios from "@/hooks/useAxios";
-import { getFormattedShop } from "@/utils/getFormattedData";
 import { useSearchParams } from "next/navigation";
 import { useEffect, useState } from "react";
 
@@ -17,6 +17,9 @@ export default function Page() {
 
     const searchParams = useSearchParams();
     const id = searchParams.get('id');
+
+    const [isLoading, setIsLoading] = useState(true);
+    const [isProductsLoading, setIsProductsLoading] = useState(true);
 
     const [categoryId, setCategoryId] = useState(id);
 
@@ -37,32 +40,60 @@ export default function Page() {
     const [shops, setShops] = useState([]);
     const axios = useAxios();
 
-    // fetch shops data with filters
-    useEffect(() => {
-        axios.get(`/vendors/filter/${category?.value}/${location?.value}`).then((res) => {
-            setShops(res?.data?.vendors);
-        });
-    }, [category, location]);
-
-    // fetch categories and locations
     useEffect(() => {
         const fetchData = async () => {
-            const [category, location] = await Promise.all([
-                axios.get("/categories"),
-                axios.get("/show-vendor-address")
-            ]);
+            setIsLoading(true);
+            setShops(Array(6).fill(null));
+            try {
 
-            setCategories(category?.data?.categories);
-            setLocations(location?.data?.address);
-        };
+                // fetch shops data with filters
+                const res = await axios.get(`/vendors/filter/${category?.value}/${location?.value}`)
+                setShops(res?.data?.vendors);
+            } catch (error) {
+                console.log(error);
+                setShops([]);
+            } finally {
+                setIsLoading(false);
+            }
+        }
         fetchData();
-    }, [])
+    }, [category, location]);
+
+    useEffect(() => {
+        const fetchData = async () => {
+            try {
+                // fetch categories and locations
+                const [category, location] = await Promise.all([
+                    axios.get("/categories"),
+                    axios.get("/show-vendor-address")
+                ]);
+                setCategories(category?.data?.categories);
+                setLocations(location?.data?.address);
+            } catch (error) {
+                console.log(error);
+                setCategories([]);
+            } finally {
+                setIsLoading(false);
+            }
+        }
+        fetchData();
+    }, []);
 
     // get products by category id
     useEffect(() => {
         const fetchData = async () => {
-            const res = await axios.get(`/vendor-product/${categoryId}`);
-            setShopProducts(res?.data?.products || []);
+            if (!categoryId) return;
+            setIsProductsLoading(true);
+            setShopProducts(Array(6).fill(null));
+            try {
+                const res = await axios.get(`/vendor-product/${categoryId}`);
+                setShopProducts(res?.data?.products);
+            } catch (error) {
+                console.log(error);
+                setShopProducts([]);
+            } finally {
+                setIsProductsLoading(false);
+            }
         };
         fetchData();
     }, [categoryId]);
@@ -82,21 +113,28 @@ export default function Page() {
                         category={category}
                         location={location}
                     />
-                    <FeaturedItems desktopView={6} mobileView={3} >
-                        {
-                            shops?.map((shop) => (
-                                <div key={shop.id} onClick={() => setCategoryId(shop.id)} className="w-full cursor-pointer">
-                                    <PrimaryCard key={shop.id} item={{ image: shop?.image, title: shop?.shop_name, subtitle: shop?.address }} containerClassName={"px-2 w-full"} />
-                                </div>
-                            ))
-                        }
-                    </FeaturedItems>
+                    {
+                        shops?.length > 0 ? <FeaturedItems desktopView={6} mobileView={3} >
+                            {
+                                shops?.map((shop) => (
+                                    <div key={shop?.id} onClick={() => setCategoryId(shop.id)} className="w-full cursor-pointer">
+                                        <PrimaryCard item={{ image: shop?.image, title: shop?.shop_name, subtitle: shop?.address }} containerClassName={"px-2 w-full"} isLoading={isLoading} />
+                                    </div>
+                                ))
+                            }
+                        </FeaturedItems> : <NoDataText text={"No shops found"} />
+                    }
                 </div>
 
                 {
-                    shopProducts.length > 0 && (
-                        <ShopProducts products={shopProducts} />
-                    )
+                    categoryId &&
+                    (shopProducts.length > 0 ?
+                        (
+                            <ShopProducts products={shopProducts} isLoading={isProductsLoading} />
+                        ) :
+                        (
+                            <NoDataText text={"No products found"} />
+                        ))
                 }
             </Container>
         </div>
