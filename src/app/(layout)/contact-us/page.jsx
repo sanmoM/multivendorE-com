@@ -9,11 +9,12 @@ import TextAreaInput from '@/components/shared/inputs/text-area-input/TextAreaIn
 import TextInput from '@/components/shared/inputs/text-input/TextInput';
 import PrimaryTitle from '@/components/shared/title/PrimaryTitle';
 import useAuthAxios from '@/hooks/useAuthAxios';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import toast from 'react-hot-toast';
 import { FiMail, FiMapPin, FiPhone, FiPlus } from 'react-icons/fi';
 
 const App = () => {
+    const [contactInfo, setContactInfo] = useState({});
     const [subject, setSubject] = useState('General Inquiry');
     const [firstName, setFirstName] = useState('');
     const [lastName, setLastName] = useState('');
@@ -47,6 +48,24 @@ const App = () => {
         }
     }
 
+
+    useEffect(() => {
+        const fetchData = async () => {
+            try {
+                axios.get("/show/contact-information").then((res) => {
+                    console.log(res)
+                    setContactInfo(res?.data?.info);
+                });
+            } catch (error) {
+                console.log(error);
+            } finally {
+                setIsLoading(false);
+            }
+        }
+        fetchData();
+    }, [])
+
+    console.log(contactInfo)
     return (
         <Container>
             <MobileHeader title={"Contact Us"} containerClassName={"mb-6"} />
@@ -64,15 +83,15 @@ const App = () => {
                             <div className="space-y-4 pt-4">
                                 <div className="flex items-center space-x-3">
                                     <FiMail className="w-5 h-5 text-secondary" />
-                                    <a href="mailto:info@example.com" className="text-sm font-medium text-primary">info@example.com</a>
+                                    <a href="mailto:info@example.com" className="text-sm font-medium text-primary">{contactInfo?.email}</a>
                                 </div>
                                 <div className="flex items-center space-x-3">
                                     <FiPhone className="w-5 h-5 text-secondary" />
-                                    <a href="tel:+158996888" className="text-sm font-medium text-primary">+158 996 888</a>
+                                    <a href="tel:+158996888" className="text-sm font-medium text-primary">{contactInfo?.mobile}</a>
                                 </div>
                                 <div className="flex items-center space-x-3">
                                     <FiMapPin className="w-5 h-5 text-secondary" />
-                                    <p className="text-sm font-medium text-primary">123 Street 256 House</p>
+                                    <p className="text-sm font-medium text-primary">{contactInfo?.address}</p>
                                 </div>
                             </div>
 
