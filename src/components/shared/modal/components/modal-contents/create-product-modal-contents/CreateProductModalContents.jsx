@@ -71,7 +71,7 @@ export default function CreateProductModalContents({ handleCloseModal }) {
             formData.append("discount_percentage", 20);
             formData.append("discount_start", discountStart);
             formData.append("discount_end", discountEnd);
-            formData.append("gallery_image", galleryImages);
+            // formData.append("gallery_image", galleryImages);
             formData.append("type", "general_product");
 
             const product = formData;

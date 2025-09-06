@@ -1,11 +1,10 @@
+import ReactQueryProvider from "@/Providers/ReactQueryProdiver";
+import StoreProvider from "@/Providers/StoreProvider";
 import { Poppins } from "next/font/google";
+import { Toaster } from "react-hot-toast";
 import "./custom.css";
 import "./globals.css";
 import "./main.css";
-import { Toaster } from "react-hot-toast";
-import StoreProvider from "@/Providers/StoreProvider";
-import AuthProvider from "@/Providers/AuthProvider";
-import ReactQueryProvider from "@/Providers/ReactQueryProdiver";
 
 
 const poppinsFront = Poppins({

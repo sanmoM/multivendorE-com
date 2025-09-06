@@ -316,7 +316,7 @@ export default function SingleItem() {
                 <SellerInfo
                     className="lg:hidden"
                     handleCustomOrderModal={handleCustomOrderModal}
-                    data={{ rating: data?.average_rating }}
+                    // data={{ rating: data?.average_rating }}
                 />
                 <SingleItemTabs
                     description={data?.description || data?.full_description}

@@ -22,7 +22,7 @@ const HelpModalContents = () => {
                 },
                 {
                     label: 'Live Chat',
-                    href: '/live-chat',
+                    href: '/ticket',
                 },
             ],
         },

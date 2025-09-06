@@ -1,11 +1,35 @@
 import Button from '@/components/shared/button/Button';
 import PrimaryTitle from '@/components/shared/title/PrimaryTitle';
+import useAxios from '@/hooks/useAxios';
 import { cn } from '@/utils/cn';
 import Image from 'next/image';
 import Link from 'next/link';
+import { useEffect, useState } from 'react';
 
 
 export default function SellerInfo({ className, handleCustomOrderModal, data }) {
+    const [rating, setRating] = useState(0);
+    const [deliveryRate, setDeliveryRate] = useState(0);
+    const axios = useAxios();
+
+    useEffect(() => {
+        const fetchData = async () => {
+            try {
+                const [ratingRes, deliveryRateRes] = await Promise.all([
+                    axios.get("/seller/ratting"),
+                    axios.get("/delivery/rate"),
+                ]);
+                console.log(ratingRes, "ratingRes")
+                console.log(deliveryRateRes, "deliveryRateRes")
+            } catch (error) {
+                console.log(error);
+            } finally {
+                setIsLoading(false);
+            }
+        }
+        fetchData();
+
+    }, [])
 
     return (
         <div className={cn("lg:w-1/3 lg:pl-10 xl:pl-20 lg:pr-0 flex flex-col mt-6 lg:mt-0", className)}>
@@ -31,11 +55,11 @@ export default function SellerInfo({ className, handleCustomOrderModal, data }) 
             {/* Delivery Rate and Rating */}
             <div className="grid grid-cols-[4fr_3fr] gap-3 justify-around items-center mb-6">
                 <div className=" pl-4 py-6 border-2 !border-secondary/30 rounded-lg">
-                    <p className="text-2xl font-bold text-gray-900 mb-2">98%</p>
+                    <p className="text-2xl font-bold text-gray-900 mb-2">{`${deliveryRate || 0}`}</p>
                     <p className="text-sm text-secondary font-medium">Delivery rate</p>
                 </div>
                 <div className=" pl-4 py-6 border-2 !border-secondary/30 rounded-lg">
-                    <p className="text-2xl font-bold text-gray-900 mb-2">{`${data?.rating || 0}`}</p>
+                    <p className="text-2xl font-bold text-gray-900 mb-2">{`${rating || 0}`}</p>
                     <p className="text-sm text-secondary font-medium">Rating</p>
                 </div>
             </div>
