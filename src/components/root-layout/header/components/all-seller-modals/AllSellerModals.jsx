@@ -6,16 +6,11 @@ import ProductsModalContents from '@/components/shared/modal/components/modal-co
 import PromotionModalContents from '@/components/shared/modal/components/modal-contents/promotion-modal-contents/PromotionModalContents';
 import SellerInfoModalContents from '@/components/shared/modal/components/modal-contents/seller-info-modal-contents/SellerInfoModalContents';
 import SellerRootModalContents from '@/components/shared/modal/components/modal-contents/seller-root-modal-contents/SellerRootModalContents';
+import WithdrawModalContents from '@/components/shared/modal/components/modal-contents/withdraw-modal-contents/WithdrawModalContents';
 import useModalAction from '@/hooks/useModalAction';
-import { useEffect, useState } from 'react';
 
 export default function AllSellerModals() {
     const { currentModal, handleCloseAllModals, handleCloseModal } = useModalAction();
-    const [isMobile, setIsMobile] = useState(false);
-
-    useEffect(() => {
-        setIsMobile(window.innerWidth < 768)
-    }, [])
 
 
     return (
@@ -37,6 +32,9 @@ export default function AllSellerModals() {
             </Modal> */}
             <Modal isLeft={false} isOpen={currentModal === "promotion-modal"} setIsOpen={() => handleCloseModal()} title={"Create Promotion"}>
                 <PromotionModalContents handleCloseModal={handleCloseAllModals} />
+            </Modal>
+            <Modal isLeft={false} isOpen={currentModal === "withdraw-modal"} setIsOpen={() => handleCloseModal()} title={"Withdraw"}>
+                <WithdrawModalContents handleCloseModal={handleCloseAllModals} />
             </Modal>
         </div>
     )

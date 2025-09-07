@@ -17,7 +17,6 @@ const MyOrderModalContents = () => {
     const deliveredOrders = data?.filter((order) => order?.order_status === 1);
     const cancelledOrders = data?.filter((order) => order?.order_status === 2);
 
-    console.log(pendingOrders, deliveredOrders, cancelledOrders);
 
     const orders = {
         pending: pendingOrders,

@@ -7,17 +7,15 @@ import AddAddressModalContents from '@/components/shared/modal/components/modal-
 import AddPaymentMethodModalContents from '@/components/shared/modal/components/modal-contents/add-payment-method-modal-contents/AddPaymentMethodModalContents';
 import PasswordAndSecurityModalContents from '@/components/shared/modal/components/modal-contents/password-and-security-modal-contents/PasswordAndSecurityModalContents';
 import PersonalInfoModalContents from '@/components/shared/modal/components/modal-contents/personal-info-modal-contents/PersonalInfoModalContents';
-import useIsMobile from '@/hooks/useIsMobile';
 import useModalAction from '@/hooks/useModalAction';
 
 export default function AllAccountModals() {
     const { currentModal, handleCloseAllModals, handleCloseModal, handleOpenModal } = useModalAction();
-    const isMobile = useIsMobile();
     return (
         <div>
 
-            <Modal isLeft={false} isOpen={currentModal === "account-root-modal"} setIsOpen={() => handleCloseModal()} title={"Personal Information"}>
-                <AccountRootModalContents handleCloseModal={handleCloseAllModals} isMobile={isMobile} />
+            <Modal isLeft={false} isOpen={currentModal === "account-root-modal"} setIsOpen={() => handleCloseModal()} title={"Account"}>
+                <AccountRootModalContents handleCloseModal={handleCloseAllModals} />
             </Modal>
             {/* profile settings modals */}
             <Modal isLeft={false} isOpen={currentModal === "account-information-modal"} setIsOpen={() => handleCloseModal()} title={"Account Information"}>

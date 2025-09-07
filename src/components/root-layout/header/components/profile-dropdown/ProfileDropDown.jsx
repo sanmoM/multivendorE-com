@@ -53,6 +53,7 @@ import { RxExit } from "react-icons/rx";
 import { useDispatch, useSelector } from 'react-redux';
 import AllAccountModals from '../all-account-modals/AllAccountModals';
 import AllSellerModals from '../all-seller-modals/AllSellerModals';
+import MobileRootModalContents from '@/components/shared/modal/components/modal-contents/mobile-root-modal-contents/MobileRootModalContents';
 
 
 export default function ProfileDropDown({ isMobile, isDropdownOpen, setIsDropdownOpen }) {
@@ -84,11 +85,15 @@ export default function ProfileDropDown({ isMobile, isDropdownOpen, setIsDropdow
             }
         },
         {
-            name: 'Seller',
+            name: user?.is_reseller === "0" ? 'Become a Seller' : user?.is_reseller === "1" ? 'Seller is Pending' : 'Seller Settings',
             type: "button",
             handleClick: () => {
-                handleDropdownClose()
-                handleOpenModal("seller-root-modal")
+                console.log(user)
+                if (user?.is_reseller === "0") {
+                    handleOpenModal("seller-info-modal")
+                } else if (user?.is_reseller === "2") {
+                    handleOpenModal("seller-root-modal")
+                }
             }
         },
         {
@@ -106,7 +111,7 @@ export default function ProfileDropDown({ isMobile, isDropdownOpen, setIsDropdow
         <div>
             {
                 isMobile ? (
-                    <button onClick={() => handleOpenModal("account-root-modal")} className='flex flex-col items-center'>
+                    <button onClick={() => handleOpenModal("mobile-root-modal")} className='flex flex-col items-center'>
                         {
                             user?.image ? (
                                 <Image src={IMAGE_BASE_URL + user.image} alt="Profile Picture" className="w-8 h-8 rounded-full object-cover" width={24} height={24} />
@@ -180,9 +185,11 @@ export default function ProfileDropDown({ isMobile, isDropdownOpen, setIsDropdow
 
             {/* all modal for profile  */}
             <div>
-                {/* dropdown modals */}
-                <Modal isLeft={false} isOpen={currentModal === "order-modal"} setIsOpen={() => handleCloseModal()} title={"Orders"}>
-                    <OrderModalContents />
+
+
+                {/* mobileRootModalContents */}
+                <Modal isLeft={false} isOpen={currentModal === "mobile-root-modal"} setIsOpen={() => handleCloseModal()} title={"Account"}>
+                    <MobileRootModalContents />
                 </Modal>
 
                 {/* account modals */}
@@ -194,6 +201,12 @@ export default function ProfileDropDown({ isMobile, isDropdownOpen, setIsDropdow
                 {/* help modals */}
                 <Modal isLeft={false} isOpen={currentModal === "help-modal"} setIsOpen={() => handleCloseModal()} title={"Help"}>
                     <HelpModalContents />
+                </Modal>
+
+
+                {/* dropdown modals */}
+                <Modal isLeft={false} isOpen={currentModal === "order-modal"} setIsOpen={() => handleCloseModal()} title={"Orders"}>
+                    <OrderModalContents />
                 </Modal>
             </div>
         </div>

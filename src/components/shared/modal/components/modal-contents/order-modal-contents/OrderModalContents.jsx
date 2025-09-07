@@ -7,7 +7,6 @@ import { formatDate } from '@/utils/date';
 
 export default function OrderModalContents() {
     const { modalData } = useModalAction();
-    console.log(modalData, "modalData")
     const orderDetails = {
         orderNumber: '9X2Y7Z',
         date: '15/08/23',
@@ -51,13 +50,12 @@ export default function OrderModalContents() {
             } catch (error) {
                 console.log(error);
             } finally {
-                setIsLoading(false);
+                // setIsLoading(false);
             }
         };
         fetchData();
     }, []);
 
-    console.log(data, "data")
     return (
         <div className="w-full space-y-8">
 

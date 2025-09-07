@@ -19,8 +19,8 @@ export default function SellerInfo({ className, handleCustomOrderModal, data }) 
                     axios.get("/seller/ratting"),
                     axios.get("/delivery/rate"),
                 ]);
-                console.log(ratingRes, "ratingRes")
-                console.log(deliveryRateRes, "deliveryRateRes")
+                // console.log(ratingRes, "ratingRes")
+                // console.log(deliveryRateRes, "deliveryRateRes")
             } catch (error) {
                 console.log(error);
             } finally {

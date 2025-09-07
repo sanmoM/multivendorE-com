@@ -26,7 +26,6 @@ export default function ResellerTabContents() {
         fetchData();
     }, []);
 
-    console.log(resellers)
 
     return (
         <div>

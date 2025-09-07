@@ -53,7 +53,6 @@ const App = () => {
         const fetchData = async () => {
             try {
                 axios.get("/show/contact-information").then((res) => {
-                    console.log(res)
                     setContactInfo(res?.data?.info);
                 });
             } catch (error) {
@@ -65,7 +64,6 @@ const App = () => {
         fetchData();
     }, [])
 
-    console.log(contactInfo)
     return (
         <Container>
             <MobileHeader title={"Contact Us"} containerClassName={"mb-6"} />

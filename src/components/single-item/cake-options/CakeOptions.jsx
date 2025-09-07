@@ -13,7 +13,6 @@ const CakeOptions = ({ data, cartItem, setCartItem }) => {
     const cakeQuantity = cartItem?.quantity || 1;
     const selectedColor = cartItem?.color || "Pink";
 
-    console.log(cakeWeight, cakeQuantity, "cakeWeight, cakeQuantity")
 
     const cakeColors = [
         { name: 'Pink', hex: '#FFC0CB' },

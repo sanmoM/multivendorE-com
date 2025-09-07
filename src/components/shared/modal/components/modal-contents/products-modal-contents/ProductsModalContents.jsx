@@ -9,7 +9,6 @@ export default function ProductsModalContents() {
 
     const user = useSelector(state => state?.user?.user);
 
-    console.log(user, "user")
 
     const axios = useAuthAxios()
 

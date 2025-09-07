@@ -1,18 +1,21 @@
 import PrimaryTitle from '@/components/shared/title/PrimaryTitle';
 import useModalAction from '@/hooks/useModalAction';
+import { FaInbox } from 'react-icons/fa';
+import { FiHelpCircle } from "react-icons/fi";
+import { RxExit } from "react-icons/rx";
 import { TbSitemap } from "react-icons/tb";
 import ItemCard from '../../../../item-card/ItemCard';
 
-export default function AccountRootModalContents() {
-    const { handleOpenModal } = useModalAction();
+export default function MobileRootModalContents({ isMobile }) {
+    const { handleCloseModal, handleOpenModal } = useModalAction();
 
     const accountMenuItems = [
         {
             category: 'Account',
             items: [
                 {
-                    title: 'Account Information',
-                    subtitle: 'Manage your account information',
+                    title: 'Account',
+                    subtitle: 'Manage your account',
                     icon: (
                         <svg className="h-6 w-6 text-gray-700" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"></path>
@@ -21,10 +24,22 @@ export default function AccountRootModalContents() {
                     handleClick: () => handleOpenModal("account-information-modal"),
                 },
                 {
-                    title: 'My Orders',
-                    subtitle: 'View your orders',
-                    handleClick: () => handleOpenModal("my-orders-modal"),
-                    icon: <TbSitemap className="h-6 w-6 text-gray-700" />
+                    title: 'Seller',
+                    subtitle: 'Manage your seller',
+                    icon: (
+                        <svg className="h-6 w-6 text-gray-700" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"></path>
+                        </svg>
+                    ),
+                    handleClick: () => handleOpenModal("seller-root-modal"),
+                },
+                {
+                    title: 'Help',
+                    subtitle: 'Get help with your account',
+                    handleClick: () => handleOpenModal("help-modal"),
+                    icon: (
+                        <FiHelpCircle className="h-6 w-6 text-gray-700" />
+                    )
                 },
             ],
         },
@@ -65,6 +80,22 @@ export default function AccountRootModalContents() {
                 },
             ],
         },
+        {
+            category: 'Actions',
+            items: [
+                {
+                    title: 'Logout',
+                    handleClick: () => {
+                        handleLogout()
+                        handleCloseModal()
+                    },
+                    // subtitle: 'Version 1.2.3',
+                    icon: (
+                        <RxExit className="h-6 w-6 text-gray-700" />
+                    ),
+                },
+            ],
+        },
     ];
     return (
         <div className="w-full space-y-6">
@@ -75,6 +106,11 @@ export default function AccountRootModalContents() {
                         {category.items.map((item, itemIndex) => (
                             <ItemCard item={item} key={itemIndex} />
                         ))}
+                        {
+                            isMobile && category?.mobileMenuItems?.map((item, index) => (
+                                <ItemCard item={item} key={index} />
+                            ))
+                        }
                     </div>
                 </div>
             ))}

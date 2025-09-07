@@ -37,7 +37,6 @@ export default function CreateProductModalContents({ handleCloseModal }) {
     const handleSubmit = (e) => {
         e.preventDefault();
 
-        console.log(category, subCategory, productName, shortDescription, fullDescription, stock, image, videoUrl, color, size, regularPrice, discountPrice, discountPercentage, discountStart, discountEnd, tag);
 
         if (
             category ||

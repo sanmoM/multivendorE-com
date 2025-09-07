@@ -102,7 +102,7 @@ export default function SellerInfoModalContents({ handleCloseModal }) {
             </div>
             <Button
                 type="submit"
-                text={mutation.isPending ? 'Registering...' : 'Register'}
+                text={user?.is_reseller === "0" ? "Register" : "Update"}
                 className="bg-red-600 text-white w-full"
                 disabled={mutation.isPending}
             />
