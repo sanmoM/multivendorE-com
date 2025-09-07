@@ -85,7 +85,7 @@ export default function ProfileDropDown({ isMobile, isDropdownOpen, setIsDropdow
             }
         },
         {
-            name: user?.is_reseller === "0" ? 'Become a Seller' : user?.is_reseller === "1" ? 'Seller is Pending' : 'Seller Settings',
+            name: user?.is_reseller === "0" ? 'Become a Seller' : user?.is_reseller === "1" ? 'Seller is Pending' : 'Seller',
             type: "button",
             handleClick: () => {
                 console.log(user)

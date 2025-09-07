@@ -91,14 +91,18 @@ export default function SellerInfoModalContents({ handleCloseModal }) {
                     setValue={setDescription}
                     inputClassName="resize-none h-40"
                 />
-                <div className="flex items-center gap-2">
-                    <CheckBox
-                        checked={user?.reseller ? true : false}
-                        label="I agree to the terms and conditions"
-                        setChecked={user?.reseller ? () => { } : setTermsAndConditions}
-                    />
-                    <p className="text-primary text-sm lg:text-base">I agree to the terms and conditions</p>
-                </div>
+                {
+                    user?.is_reseller === "0" && (
+                        <div className="flex items-center gap-2">
+                            <CheckBox
+                                checked={termsAndConditions}
+                                label="I agree to the terms and conditions"
+                                setChecked={setTermsAndConditions}
+                            />
+                            <p className="text-primary text-sm lg:text-base">I agree to the terms and conditions</p>
+                        </div>
+                    )
+                }
             </div>
             <Button
                 type="submit"

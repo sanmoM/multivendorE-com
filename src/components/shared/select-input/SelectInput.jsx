@@ -20,7 +20,7 @@ export default function SelectInput({ options, value, setValue, icon, placeholde
             </button>
 
             {openDropdown && (
-                <div className="absolute top-full left-1/2 -translate-x-1/2 mt-2 w-max bg-white border border-gray-200 rounded-lg shadow-lg z-10">
+                <div className="absolute top-full left-1/2 -translate-x-1/2 mt-2 w-max bg-white border border-gray-200 rounded-lg shadow-lg z-10 max-h-60 overflow-auto">
                     {options?.map((option, optIndex) => (
                         <button
                             key={optIndex}

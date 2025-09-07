@@ -41,7 +41,7 @@ export default function SellerRootModalContents() {
             icon: (
                 <FaMoneyBill className="h-6 w-6 text-gray-700" />
             ),
-            handleClick: () => handleOpenModal("seller-product-modal"),
+            handleClick: () => handleOpenModal("withdraw-modal"),
         },
     ]
     return (

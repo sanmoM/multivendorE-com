@@ -1,13 +1,14 @@
 import CustomSlider from '@/components/shared/custom-slider/CustomSlider';
+import FallbackImage from '@/components/shared/fallback-image/FallbackImage';
 import SectionTitle from '@/components/shared/section-title/SectionTitle';
 import PrimaryTitle from '@/components/shared/title/PrimaryTitle';
 import useModalAction from '@/hooks/useModalAction';
-import Image from 'next/image';
-import { useRef } from 'react';
+import { useRef, useState } from 'react';
 import SellerInfo from '../shared/seller-info/SellerInfo';
-import FallbackImage from '@/components/shared/fallback-image/FallbackImage';
+import { cn } from '@/utils/cn';
 
 export default function ProductInfo({ data }) {
+    const [activeIndex, setActiveIndex] = useState(0);
     const sliderRef = useRef(null);
 
 
@@ -15,6 +16,7 @@ export default function ProductInfo({ data }) {
     const handleCustomOrderModal = () => {
         handleOpenModal("custom-order-modal")
     }
+    console.log(activeIndex, "activeIndex")
     return (
         <div>
             {/* product image & seller info */}
@@ -24,47 +26,28 @@ export default function ProductInfo({ data }) {
                         <span className='text-secondary '>Cakes</span> / <span className=" text-primary">Chocolate Fudge Cake</span>
                     </div>
                     <hr className="border-t border-gray-200" />
-                    <CustomSlider ref={sliderRef} desktopView={1} mobileView={1} paddingDesktop={0} paddingMobile={0}>
-                        {data?.image_gallery?.map((url, index) => (
-                            <div key={index} className="px-2 outline-0 w-full">
+
+                    <div className="px-2 outline-0 w-full aspect-[7/4] relative overflow-hidden">
+                        {
+                            data?.image_gallery?.map((url, index) => (
                                 <FallbackImage
-                                    src={url}
-                                    alt={`Slide ${index}`}
+                                    src={data?.image_gallery[activeIndex]}
+                                    alt={`Slide`}
                                     height={400}
                                     width={400}
-                                    className="w-full h-auto object-contain aspect-[7/4] rounded-xl"
+                                    className={cn("w-full h-auto absolute inset-0 object-contain aspect-[7/4] rounded-xl duration-300", index === activeIndex ? "opacity-100" : "opacity-0")}
                                 />
-
-                                {/* this section will uncomment if user want to upload video */}
-                                {/* {item.type === "image" && (
-                                        <Image
-                                            src={item.src}
-                                            alt={`Slide ${index}`}
-                                            height={400}
-                                            width={400}
-                                            className="w-full h-auto object-cover aspect-[7/4] rounded-xl"
-                                        />
-                                    )}
-                                    {item.type === "video" && (
-                                        <video
-                                            src={"/video/single-item/cake-video.mp4"}
-                                            autoPlay
-                                            loop
-                                            controls
-                                            muted
-                                            className="w-full h-auto object-cover aspect-[7/4] rounded-xl"
-                                        />
-                                    )} */}
-                            </div>
-                        ))}
-                    </CustomSlider>
+                            ))
+                        }
+                    </div>
 
                     <div className="flex gap-2 mt-4 justify-center">
                         {data?.image_gallery?.map((url, index) => (
                             <button
                                 key={index}
                                 onClick={() => {
-                                    sliderRef.current?.slickGoTo(index)
+                                    // sliderRef.current?.slickGoTo(index)
+                                    setActiveIndex(index)
                                 }}
                                 className="w-16 h-12 border rounded overflow-hidden"
                             >
@@ -75,26 +58,6 @@ export default function ProductInfo({ data }) {
                                     width={400}
                                     className="w-full object-contain aspect-[7/4] rounded-xl"
                                 />
-                                {/* this section will uncomment if user want to upload video */}
-                                {/* {
-                                        item.type === 'image' && <Image
-                                            src={item.src}
-                                            alt={`Thumb ${index}`}
-                                            width={64}
-                                            height={48}
-                                            className="object-cover w-full h-full"
-                                        />
-                                    }
-                                    {
-                                        item.type === 'video' && <video
-                                            disablePictureInPicture
-                                            src={"/video/single-item/cake-video.mp4"}
-                                            alt={`Discount`}
-                                            height={400}
-                                            width={400}
-                                            className="h-auto object-cover aspect-[7/4] rounded-xl cursor-pointer"
-                                        />
-                                    } */}
                             </button>
                         ))}
                     </div>

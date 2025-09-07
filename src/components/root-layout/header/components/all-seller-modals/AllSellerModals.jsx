@@ -8,9 +8,11 @@ import SellerInfoModalContents from '@/components/shared/modal/components/modal-
 import SellerRootModalContents from '@/components/shared/modal/components/modal-contents/seller-root-modal-contents/SellerRootModalContents';
 import WithdrawModalContents from '@/components/shared/modal/components/modal-contents/withdraw-modal-contents/WithdrawModalContents';
 import useModalAction from '@/hooks/useModalAction';
+import { useSelector } from 'react-redux';
 
 export default function AllSellerModals() {
     const { currentModal, handleCloseAllModals, handleCloseModal } = useModalAction();
+    const user = useSelector(state => state?.user?.user);
 
 
     return (
@@ -18,7 +20,7 @@ export default function AllSellerModals() {
             <Modal isLeft={false} isOpen={currentModal === "seller-root-modal"} setIsOpen={() => handleCloseModal()} title={"Seller"}>
                 <SellerRootModalContents handleCloseModal={handleCloseModal} />
             </Modal>
-            <Modal isLeft={false} isOpen={currentModal === "seller-info-modal"} setIsOpen={() => handleCloseModal()} title={"Seller Info"}>
+            <Modal isLeft={false} isOpen={currentModal === "seller-info-modal"} setIsOpen={() => handleCloseModal()} title={`${user?.is_reseller === "0" ? "Become a Seller" : "Seller  Info"}`}>
                 <SellerInfoModalContents handleCloseModal={handleCloseModal} />
             </Modal>
             <Modal isLeft={false} isOpen={currentModal === "create-product-modal"} setIsOpen={() => handleCloseModal()} title={"Create Product"}>

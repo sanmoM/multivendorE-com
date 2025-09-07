@@ -190,6 +190,7 @@ import useModalAction from "@/hooks/useModalAction";
 import { useDispatch } from "react-redux";
 import { addToCart } from "@/lib/redux/features/cartSlice";
 import { setCheckoutItems } from "@/lib/redux/features/checkoutSlice";
+import Loader from "@/components/shared/loader/Loader";
 
 export default function SingleItem() {
     const searchParams = useSearchParams();
@@ -295,73 +296,80 @@ export default function SingleItem() {
         handleOpenModal("checkout-modal");
     };
 
-    if (isLoading) return <p>Loading item...</p>;
-    if (isError) return <p>Failed to load item!</p>;
-
     return (
-        <div className="my-6 lg:my-10">
-            <MobileHeader title={"Single Item"} containerClassName={"mb-6"} />
-            <Container className={"overflow-hidden !pt-0"}>
-                <ProductInfo data={data} />
-                <div className="space-x-4">
-                    {data && data?.type !== "product" && (
-                        <Button text="Add to Cart" onClick={handleAddToCart} />
-                    )}
-                    <Button
-                        text="Buy Now"
-                        className={"bg-tertiary"}
-                        onClick={() => handleBuyNow()}
-                    />
-                </div>
-                <SellerInfo
-                    className="lg:hidden"
-                    handleCustomOrderModal={handleCustomOrderModal}
-                    // data={{ rating: data?.average_rating }}
-                />
-                <SingleItemTabs
-                    description={data?.description || data?.full_description}
-                />
-                <div className="max-w-2xl w-full mt-8 space-y-8">
-                    {data?.type === "product" ? (
-                        <CakeOptions
-                            data={{
-                                price: data?.regular_price || 0,
-                                stock: data?.stock,
-                            }}
-                            cartItem={cartItem}
-                            setCartItem={setCartItem}
-                        />
-                    ) : (
-                        <ProductOptions
-                            data={{
-                                price: data?.regular_price || 0,
-                                variants: data?.image_gallery,
-                                stock: data?.stock,
-                            }}
-                            cartItem={cartItem}
-                            setCartItem={setCartItem}
-                        />
-                    )}
-                    {data?.type === "product" && (
-                        <DeliveryOptions cartItem={cartItem} setCartItem={setCartItem} />
-                    )}
-                    <Reviews id={id} />
-                    <CustomerReviews id={id} />
-                    <AddReview id={id} />
-                </div>
-                {!relatedLoading && !relatedError && (
-                    <SimilarProducts products={relatedProducts} />
-                )}
-            </Container>
+        <div>
+            {
+                isLoading ?
+                    <div className="h-screen flex items-center justify-center">
+                        <div className="w-[25%] lg:w-[10%]">
+                            <Loader />
+                        </div>
+                    </div> :
+                    <div className="my-6 lg:my-10">
+                        <MobileHeader title={"Single Item"} containerClassName={"mb-6"} />
+                        <Container className={"overflow-hidden !pt-0"}>
+                            <ProductInfo data={data} />
+                            <div className="space-x-4">
+                                {data && data?.type !== "product" && (
+                                    <Button text="Add to Cart" onClick={handleAddToCart} />
+                                )}
+                                <Button
+                                    text="Buy Now"
+                                    className={"bg-tertiary"}
+                                    onClick={() => handleBuyNow()}
+                                />
+                            </div>
+                            <SellerInfo
+                                className="lg:hidden"
+                                handleCustomOrderModal={handleCustomOrderModal}
+                            // data={{ rating: data?.average_rating }}
+                            />
+                            <SingleItemTabs
+                                description={data?.description || data?.full_description}
+                            />
+                            <div className="max-w-2xl w-full mt-8 space-y-8">
+                                {data?.type === "product" ? (
+                                    <CakeOptions
+                                        data={{
+                                            price: data?.regular_price || 0,
+                                            stock: data?.stock,
+                                        }}
+                                        cartItem={cartItem}
+                                        setCartItem={setCartItem}
+                                    />
+                                ) : (
+                                    <ProductOptions
+                                        data={{
+                                            price: data?.regular_price || 0,
+                                            variants: data?.image_gallery,
+                                            stock: data?.stock,
+                                        }}
+                                        cartItem={cartItem}
+                                        setCartItem={setCartItem}
+                                    />
+                                )}
+                                {data?.type === "product" && (
+                                    <DeliveryOptions cartItem={cartItem} setCartItem={setCartItem} />
+                                )}
+                                <Reviews id={id} />
+                                <CustomerReviews id={id} />
+                                <AddReview id={id} />
+                            </div>
+                            {!relatedLoading && !relatedError && (
+                                <SimilarProducts products={relatedProducts} />
+                            )}
+                        </Container>
 
-            <Modal
-                isLef={false}
-                isOpen={currentModal === "custom-order-modal"}
-                setIsOpen={() => handleCloseModal()}
-                title={"Custom Order"}
-            >
-                <CustomOrderModalContents handlePlaceOrder={handlePlaceOrder} />
-            </Modal>
-        </div>
+                        <Modal
+                            isLef={false}
+                            isOpen={currentModal === "custom-order-modal"}
+                            setIsOpen={() => handleCloseModal()}
+                            title={"Custom Order"}
+                        >
+                            <CustomOrderModalContents handlePlaceOrder={handlePlaceOrder} />
+                        </Modal>
+                    </div>
+            }
+        </div >
     );
 }

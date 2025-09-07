@@ -34,6 +34,7 @@ export default function page() {
                     password: password,
                     password_confirmation: confirmPassword
                 });
+                toast.success("OTP Sent to your mobile number, please check your SMS")
 
                 router.replace(`/signup-otp-validation?mobile=${mobile}`)
 
@@ -42,7 +43,7 @@ export default function page() {
             }
         }
         catch (error) {
-            toast.error("Registration failed")
+            toast.error(error?.response?.data?.message)
         }
     };
 
