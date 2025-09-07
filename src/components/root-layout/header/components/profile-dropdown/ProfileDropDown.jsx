@@ -106,7 +106,7 @@ export default function ProfileDropDown({ isMobile, isDropdownOpen, setIsDropdow
         <div>
             {
                 isMobile ? (
-                    <button onClick={() => handleOpenModal("account-settings-modal")} className='flex flex-col items-center'>
+                    <button onClick={() => handleOpenModal("account-root-modal")} className='flex flex-col items-center'>
                         {
                             user?.image ? (
                                 <Image src={IMAGE_BASE_URL + user.image} alt="Profile Picture" className="w-8 h-8 rounded-full object-cover" width={24} height={24} />
