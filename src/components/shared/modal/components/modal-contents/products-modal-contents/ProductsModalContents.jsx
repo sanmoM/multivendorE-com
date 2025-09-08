@@ -3,6 +3,7 @@ import useAuthAxios from '@/hooks/useAuthAxios'
 import { useEffect, useState } from 'react'
 import { useSelector } from 'react-redux'
 import HorizontalCard from '../../../../horizontal-card/HorizontalCard'
+import NoDataText from '@/components/shared/no-data-text/NoDataText'
 
 export default function ProductsModalContents() {
     const [products, setProducts] = useState([])
@@ -32,9 +33,9 @@ export default function ProductsModalContents() {
         <div>
             <div className="w-full space-y-6">
                 {
-                    products?.map((product, index) => (
+                    products?.length > 0 ? products?.map((product, index) => (
                         <HorizontalCard key={index} item={{ id: product.id, image: product?.image, title: product?.name, text2: "100+ sold" }} />
-                    ))
+                    )) : <NoDataText text={"No Products Found"} />
                 }
             </div>
         </div>

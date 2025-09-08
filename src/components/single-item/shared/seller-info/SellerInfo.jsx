@@ -19,8 +19,8 @@ export default function SellerInfo({ className, handleCustomOrderModal, data }) 
                     axios.get("/seller/ratting"),
                     axios.get("/delivery/rate"),
                 ]);
-                // console.log(ratingRes, "ratingRes")
-                // console.log(deliveryRateRes, "deliveryRateRes")
+                console.log(ratingRes, "ratingRes")
+                console.log(deliveryRateRes, "deliveryRateRes")
             } catch (error) {
                 console.log(error);
             } finally {
@@ -67,7 +67,7 @@ export default function SellerInfo({ className, handleCustomOrderModal, data }) 
             {/* Action Buttons */}
             <div className="flex space-x-3">
                 <Button text="Contact Seller" />
-                <Button text="Follow" className={"bg-tertiary"} />
+                {/* <Button text="Follow" className={"bg-tertiary"} /> */}
             </div>
 
             {/* Custom Cake Order Section */}

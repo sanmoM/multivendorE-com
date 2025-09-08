@@ -19,7 +19,7 @@ export default function TicketCreate({ setStep }) {
         formData.append('subject', subject)
         formData.append('message', message)
         formData.append('file', image)
-        if (subject && message && image) {
+        if (subject && message) {
             try {
                 const res = await axios.post('/tickets', formData)
                 toast.success("Ticket Created Successfully")
@@ -27,6 +27,8 @@ export default function TicketCreate({ setStep }) {
             } catch (error) {
                 toast.error("Something went wrong, please try again later")
             }
+        }else{
+            toast.error("Please fill all required fields")
         }
     }
     return (
