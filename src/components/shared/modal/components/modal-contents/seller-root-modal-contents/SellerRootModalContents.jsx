@@ -36,6 +36,15 @@ export default function SellerRootModalContents() {
         },
         {
 
+            title: 'Seller Order',
+            subtitle: 'View your selling orders',
+            icon: (
+                <FaInbox className="h-6 w-6 text-gray-700" />
+            ),
+            handleClick: () => handleOpenModal("seller-order-modal"),
+        },
+        {
+
             title: 'Withdraw',
             subtitle: 'Withdraw your balance',
             icon: (

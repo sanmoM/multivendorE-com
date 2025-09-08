@@ -5,6 +5,7 @@ import CreateProductModalContents from '@/components/shared/modal/components/mod
 import ProductsModalContents from '@/components/shared/modal/components/modal-contents/products-modal-contents/ProductsModalContents';
 import PromotionModalContents from '@/components/shared/modal/components/modal-contents/promotion-modal-contents/PromotionModalContents';
 import SellerInfoModalContents from '@/components/shared/modal/components/modal-contents/seller-info-modal-contents/SellerInfoModalContents';
+import SellerOrderModalContents from '@/components/shared/modal/components/modal-contents/seller-order-modal-contents/SellerOrderModalContents';
 import SellerRootModalContents from '@/components/shared/modal/components/modal-contents/seller-root-modal-contents/SellerRootModalContents';
 import WithdrawModalContents from '@/components/shared/modal/components/modal-contents/withdraw-modal-contents/WithdrawModalContents';
 import useModalAction from '@/hooks/useModalAction';
@@ -22,6 +23,9 @@ export default function AllSellerModals() {
             </Modal>
             <Modal isLeft={false} isOpen={currentModal === "seller-info-modal"} setIsOpen={() => handleCloseModal()} title={`${user?.is_reseller === "0" ? "Become a Seller" : "Seller  Info"}`}>
                 <SellerInfoModalContents handleCloseModal={handleCloseModal} />
+            </Modal>
+            <Modal isLeft={false} isOpen={currentModal === "seller-order-modal"} setIsOpen={() => handleCloseModal()} title={`${user?.is_reseller === "0" ? "Become a Seller" : "Seller  Info"}`}>
+                <SellerOrderModalContents handleCloseModal={handleCloseModal} />
             </Modal>
             <Modal isLeft={false} isOpen={currentModal === "create-product-modal"} setIsOpen={() => handleCloseModal()} title={"Create Product"}>
                 <CreateProductModalContents handleCloseModal={handleCloseModal} />
