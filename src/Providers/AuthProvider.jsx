@@ -42,13 +42,5 @@ export default function AuthProvider({ children }) {
         );
     }
 
-    if (isError) {
-        return (
-            <div className="h-screen flex items-center justify-center">
-                <p className="text-red-500">Failed to fetch user info.</p>
-            </div>
-        );
-    }
-
     return <>{children}</>;
 }
