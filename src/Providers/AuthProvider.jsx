@@ -1,20 +1,17 @@
 "use client";
 
-import { useQuery } from "@tanstack/react-query";
-import { useDispatch } from "react-redux";
-import { setUser } from "@/lib/redux/features/userSlice";
-import useAuthAxios from "@/hooks/useAuthAxios";
-import { useEffect } from "react";
 import Loader from "@/components/shared/loader/Loader";
+import useAuthAxios from "@/hooks/useAuthAxios";
+import { setUser } from "@/lib/redux/features/userSlice";
+import { useQuery } from "@tanstack/react-query";
+import { useEffect } from "react";
+import { useDispatch } from "react-redux";
 
 export default function AuthProvider({ children }) {
     const dispatch = useDispatch();
     const axios = useAuthAxios();
 
-    const {
-        data,
-        isLoading,
-    } = useQuery({
+    const { isLoading, isError, data: user } = useQuery({
         queryKey: ["personal-info"],
         queryFn: async () => {
             const res = await axios.get("/my-personal-info");
@@ -29,12 +26,11 @@ export default function AuthProvider({ children }) {
         retry: false,
     });
 
-    // 🧠 Optional: useEffect is still safe to keep if you want redundancy
     useEffect(() => {
-        if (data) {
-            dispatch(setUser(data));
+        if (user) {
+            dispatch(setUser(user));
         }
-    }, [data, dispatch]);
+    }, [user]);
 
     if (isLoading) {
         return (
@@ -46,6 +42,13 @@ export default function AuthProvider({ children }) {
         );
     }
 
+    if (isError) {
+        return (
+            <div className="h-screen flex items-center justify-center">
+                <p className="text-red-500">Failed to fetch user info.</p>
+            </div>
+        );
+    }
 
     return <>{children}</>;
 }

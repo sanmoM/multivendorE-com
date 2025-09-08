@@ -40,6 +40,7 @@
 import Dropdown from '@/components/shared/dropdown/Dropdown';
 import Modal from '@/components/shared/modal/Modal';
 import HelpModalContents from '@/components/shared/modal/components/modal-contents/help-modal-contents/HelpModalContents';
+import MobileRootModalContents from '@/components/shared/modal/components/modal-contents/mobile-root-modal-contents/MobileRootModalContents';
 import OrderModalContents from '@/components/shared/modal/components/modal-contents/order-modal-contents/OrderModalContents';
 import { IMAGE_BASE_URL } from '@/config';
 import useModalAction from '@/hooks/useModalAction';
@@ -53,7 +54,6 @@ import { RxExit } from "react-icons/rx";
 import { useDispatch, useSelector } from 'react-redux';
 import AllAccountModals from '../all-account-modals/AllAccountModals';
 import AllSellerModals from '../all-seller-modals/AllSellerModals';
-import MobileRootModalContents from '@/components/shared/modal/components/modal-contents/mobile-root-modal-contents/MobileRootModalContents';
 
 
 export default function ProfileDropDown({ isMobile, isDropdownOpen, setIsDropdownOpen }) {
@@ -88,7 +88,6 @@ export default function ProfileDropDown({ isMobile, isDropdownOpen, setIsDropdow
             name: user?.is_reseller === "0" ? 'Become a Seller' : user?.is_reseller === "1" ? 'Seller is Pending' : 'Seller',
             type: "button",
             handleClick: () => {
-                console.log(user)
                 if (user?.is_reseller === "0") {
                     handleOpenModal("seller-info-modal")
                 } else if (user?.is_reseller === "2") {
@@ -113,21 +112,39 @@ export default function ProfileDropDown({ isMobile, isDropdownOpen, setIsDropdow
                 isMobile ? (
                     <button onClick={() => handleOpenModal("mobile-root-modal")} className='flex flex-col items-center'>
                         {
-                            user?.image ? (
-                                <Image src={IMAGE_BASE_URL + user.image} alt="Profile Picture" className="w-8 h-8 rounded-full object-cover" width={24} height={24} />
+                            user?.mobile ? (
+                                <>
+                                    {
+                                        user?.image ? (
+                                            <Image src={IMAGE_BASE_URL + user.image} alt="Profile Picture" className="w-8 h-8 rounded-full object-cover" width={24} height={24} />
+                                        ) : (
+                                            <Image src={"/images/user.svg"} width={24} height={24} alt="Profile Picture" className='w-8 h-8 rounded-full object-cover' />
+                                        )
+                                    }
+                                </>
                             ) : (
                                 <LuUserRound className='w-6 h-6 text-secondary' />
                             )
                         }
-                        <span className='text-xs '>Profile</span>
+                        {
+                            isMobile && <span className='text-xs mt-1'>Profile</span>
+                        }
                     </button>
                 ) : (
-                    <button className={cn(" rounded-full bg-tertiary hover:bg-secondary/50 transition-colors duration-200 focus:outline-none focus:ring-1 focus:ring-gray-300 flex flex-col justify-center items-center", !user?.image && "p-3")} onClick={handleDropdownClose}>
+                    <button className={cn(" rounded-full bg-tertiary hover:bg-secondary/50 transition-colors duration-200 focus:outline-none focus:ring-1 focus:ring-gray-300 flex flex-col justify-center items-center", !user?.mobile && "p-3")} onClick={handleDropdownClose}>
                         {
-                            user?.image ? (
-                                <Image src={IMAGE_BASE_URL + user.image} alt="Profile Picture" className="w-12 h-12 rounded-full object-cover" width={36} height={36} />
+                            user?.mobile ? (
+                                <>
+                                    {
+                                        user?.image ? (
+                                            <Image src={IMAGE_BASE_URL + user.image} alt="Profile Picture" className="w-12 h-12 rounded-full object-cover" width={24} height={24} />
+                                        ) : (
+                                            <Image src={"/images/user.svg"} width={24} height={24} alt="Profile Picture" className='w-12 h-12 rounded-full object-cover' />
+                                        )
+                                    }
+                                </>
                             ) : (
-                                <LuUserRound className='w-6 h-6 text-secondary' />
+                                <LuUserRound className='w-8 h-8 lg:w-6 lg:h-6 text-secondary' />
                             )
                         }
                     </button>

@@ -325,8 +325,7 @@ const CheckoutModalContents = ({ handleClose }) => {
                     >
                         <div className="flex-1">
                             <h3 className="font-semibold text-primary">Delivery Address</h3>
-                            <p className="text-sm text-secondary">Springfield, IL 62704</p>
-                            <p className="text-sm text-secondary">123 Maple Street, Apt 4B</p>
+                            <p className="text-sm text-secondary">{`${user?.street}, ${user?.city}, ${user?.state}, ${user?.country}`}</p>
                         </div>
                         <svg
                             className={`h-5 w-5 text-gray-500 transition-transform duration-200 ${isAddressOpen ? 'rotate-90' : ''
@@ -353,8 +352,7 @@ const CheckoutModalContents = ({ handleClose }) => {
                     )}
                 </div>
 
-                {/* Delivery Time Dropdown */}
-                <div>
+                {/* <div>
                     <div
                         className="flex items-center justify-between cursor-pointer"
                         onClick={() => setIsTimeOpen(!isTimeOpen)}
@@ -390,7 +388,6 @@ const CheckoutModalContents = ({ handleClose }) => {
                     )}
                 </div>
 
-                {/* Payment Method Dropdown */}
                 <div>
                     <div
                         className="flex items-center justify-between cursor-pointer"
@@ -423,7 +420,7 @@ const CheckoutModalContents = ({ handleClose }) => {
                             </p>
                         </div>
                     )}
-                </div>
+                </div> */}
 
                 {/* Shopping Bag */}
                 <div>

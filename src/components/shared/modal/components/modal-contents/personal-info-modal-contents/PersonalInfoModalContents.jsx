@@ -21,7 +21,7 @@ export default function PersonalInfoModalContents({ handleCloseModal }) {
     const [phoneNumber, setPhoneNumber] = useState("");
     const [dateOfBirth, setDateOfBirth] = useState("");
     const [bio, setBio] = useState("");
-    const [image, setImage] = useState("");
+    const [image, setImage] = useState(null);
 
 
     useEffect(() => {
@@ -32,7 +32,9 @@ export default function PersonalInfoModalContents({ handleCloseModal }) {
             setPhoneNumber(res.data?.info?.mobile || "");
             setDateOfBirth(res.data?.info?.dateOfBirth || "");
             setBio(res.data?.info?.bio || "");
-            setImage(IMAGE_BASE_URL + res.data?.info?.image || "");
+            if(res.data?.info?.image){
+                setImage(IMAGE_BASE_URL + res.data?.info?.image || "");
+            }
         });
     }, []);
 

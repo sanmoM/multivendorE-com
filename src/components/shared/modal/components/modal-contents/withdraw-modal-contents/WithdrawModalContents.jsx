@@ -14,13 +14,12 @@ export default function WithdrawModalContents({ handleCloseModal }) {
         },
     })
 
-    console.log(data, "data")
     return (
         <div className='flex flex-col justify-between h-full'>
             {/* <PrimaryTitle title={"End date"} className={"mb-4"} /> */}
             <div className='grow'>
                 <PrimaryTitle title={`Available Balance: `} className={"mb-4"} />
-                <TextInput placeholder={"Select end date"} isNumber />
+                <TextInput placeholder={"Withdraw amount"} isNumber />
             </div>
 
             <Button text={"Withdraw"} className={"bg-red-600 text-white w-full"} onClick={() => handleCloseModal()} />

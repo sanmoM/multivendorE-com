@@ -16,7 +16,6 @@ export default function ProductInfo({ data }) {
     const handleCustomOrderModal = () => {
         handleOpenModal("custom-order-modal")
     }
-    console.log(activeIndex, "activeIndex")
     return (
         <div>
             {/* product image & seller info */}
@@ -31,11 +30,11 @@ export default function ProductInfo({ data }) {
                         {
                             data?.image_gallery?.map((url, index) => (
                                 <FallbackImage
-                                    src={data?.image_gallery[activeIndex]}
+                                    src={url}
                                     alt={`Slide`}
                                     height={400}
                                     width={400}
-                                    className={cn("w-full h-auto absolute inset-0 object-contain aspect-[7/4] rounded-xl duration-300", index === activeIndex ? "opacity-100" : "opacity-0")}
+                                    className={cn("w-full h-auto absolute inset-0 object-contain aspect-[7/4] rounded-xl duration-500", index === activeIndex ? "opacity-100" : "opacity-0")}
                                 />
                             ))
                         }
@@ -49,7 +48,7 @@ export default function ProductInfo({ data }) {
                                     // sliderRef.current?.slickGoTo(index)
                                     setActiveIndex(index)
                                 }}
-                                className="w-16 h-12 border rounded overflow-hidden"
+                                className={cn("w-16 h-12 border rounded overflow-hidden", index === activeIndex ? "!border-yellow-300" : "border-secondary")}
                             >
                                 <FallbackImage
                                     src={url}

@@ -165,10 +165,10 @@
 
 
 "use client";
+import useAxios from "@/hooks/useAxios";
 import { useQuery } from "@tanstack/react-query";
 import { useSearchParams } from "next/navigation";
 import { useState } from "react";
-import useAxios from "@/hooks/useAxios";
 
 import MobileHeader from "@/components/root-layout/header/components/mobile-header/MobileHeader";
 import Button from "@/components/shared/button/Button";
@@ -186,11 +186,11 @@ import SellerInfo from "@/components/single-item/shared/seller-info/SellerInfo";
 import SimilarProducts from "@/components/single-item/similar-products/SimilarProducts";
 import SingleItemTabs from "@/components/single-item/single-item-tabs/SingleItemTabs";
 
+import Loader from "@/components/shared/loader/Loader";
 import useModalAction from "@/hooks/useModalAction";
-import { useDispatch } from "react-redux";
 import { addToCart } from "@/lib/redux/features/cartSlice";
 import { setCheckoutItems } from "@/lib/redux/features/checkoutSlice";
-import Loader from "@/components/shared/loader/Loader";
+import { useDispatch } from "react-redux";
 
 export default function SingleItem() {
     const searchParams = useSearchParams();

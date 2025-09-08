@@ -19,6 +19,7 @@ export default function SingleImageInput({
         }
     };
 
+
     const getImageSrc = () => {
         if (!image) return null;
         if (typeof image === "string") return image;
@@ -27,6 +28,7 @@ export default function SingleImageInput({
     };
 
     const imgSrc = getImageSrc();
+
 
     return (
         <div className="flex items-center justify-center w-full">
