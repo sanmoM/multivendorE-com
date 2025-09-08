@@ -34,7 +34,6 @@ export default function WithdrawModalContents({ handleCloseModal }) {
     // ✅ Submit withdrawal mutation
     const withdrawMutation = useMutation({
         mutationFn: async (data) => {
-            console.log(data)
             const res = await axios.post('/customer/withdraw', data)
             return res.data
         },

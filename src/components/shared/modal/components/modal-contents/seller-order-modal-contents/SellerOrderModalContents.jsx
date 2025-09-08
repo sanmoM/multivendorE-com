@@ -15,32 +15,23 @@ const SellerOrderModalContents = () => {
     const axios = useAuthAxios();
 
     // 🚀 Fetch orders via React Query
-    const { data: ordersData = [], isLoading, isError } = useQuery({
-        queryKey: ["my-orders"],
+    const { data: orders = [], isLoading, isError } = useQuery({
+        queryKey: ["seller-orders"],
         queryFn: async () => {
-            const [pendingOrder, deliveredOrder, cancelledOrder] = await Promise.all([
-                axios.get(`/customer/orders`),
-                axios.get(`/customer/orders/pending`),
-                axios.get(`/customer/orders/delivered`),
-                axios.get(`/customer/orders/cancelled`),
+            const [pendingRes, deliveredRes, cancelledRes] = await Promise.all([
+                axios.get("/reseller-product-order-history"),
+                axios.get("/reseller-product-order-history"),
+                axios.get("/reseller-product-reject-history"),
             ]);
-            
+
+
+            return {
+                pending: pendingRes?.data?.items || [],
+                delivered: deliveredRes?.data?.items || [],
+                cancelled: cancelledRes?.data?.items || [],
+            };
         },
-        staleTime: 0,
-        refetchOnMount: true,
-        refetchOnWindowFocus: false,
     });
-
-    // 🗂️ Group orders by status
-    const pendingOrders = ordersData?.filter((order) => order?.order_status === 0);
-    const deliveredOrders = ordersData?.filter((order) => order?.order_status === 1);
-    const cancelledOrders = ordersData?.filter((order) => order?.order_status === 2);
-
-    const orders = {
-        pending: pendingOrders,
-        delivered: deliveredOrders,
-        cancelled: cancelledOrders,
-    };
 
     const arrowIcon = <GoArrowRight className="h-5 w-5 text-primary" />;
 

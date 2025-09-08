@@ -4,6 +4,7 @@ import { FiHelpCircle } from "react-icons/fi";
 import { RxExit } from "react-icons/rx";
 import { useSelector } from 'react-redux';
 import ItemCard from '../../../../item-card/ItemCard';
+import { FaShop } from 'react-icons/fa6';
 
 export default function MobileRootModalContents({ isMobile }) {
     const { handleCloseModal, handleOpenModal } = useModalAction();
@@ -28,9 +29,7 @@ export default function MobileRootModalContents({ isMobile }) {
                     title: user?.is_reseller === "0" ? 'Become a Seller' : user?.is_reseller === "1" ? 'Seller request is Pending' : 'Seller',
                     subtitle: user?.is_reseller === "0" ? 'Become a seller' : user?.is_reseller === "1" ? 'Seller request is pending' : 'Mange your seller account',
                     icon: (
-                        <svg className="h-6 w-6 text-gray-700" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"></path>
-                        </svg>
+                        <FaShop className="h-6 w-6 text-gray-700" />
                     ),
                     handleClick: () => {
                         if (user?.is_reseller === "0") {

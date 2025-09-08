@@ -19,7 +19,6 @@ export default function IncreaseDecreaseButtons({ value, setValue, maxQuantity }
             }
             <button
                 onClick={() => {
-                    console.log(maxQuantity, value < maxQuantity)
                     if (maxQuantity) {
                         if (value < maxQuantity) {
                             setValue(value + 1)

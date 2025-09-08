@@ -28,7 +28,6 @@ export default function ProductsModalContents() {
         fetchData()
     }, [user?.id])
 
-    console.log(products, "products")
     return (
         <div>
             <div className="w-full space-y-6">

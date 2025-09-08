@@ -68,12 +68,6 @@ const CheckoutModalContents = ({ handleClose }) => {
     // ✅ General Product Checkout Mutation
     const generalProductCheckoutMutation = useMutation({
         mutationFn: async (items) => {
-            console.log(items)
-            // return await axios.post('/place-order-generalproduct', {
-            //     shipping_address: `${user?.street}, ${user?.city}, ${user?.state}, ${user?.country}`,
-            //     payment_percentage:100,
-            //     items,
-            // });
             if (items[0]?.deliveryOption === "full-payment") {
                 return await axios.post('/place-order-generalproduct-payment', {
                     shipping_address: `${user?.street}, ${user?.city}, ${user?.state}, ${user?.country}`,

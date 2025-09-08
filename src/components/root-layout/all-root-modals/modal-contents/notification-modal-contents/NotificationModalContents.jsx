@@ -11,7 +11,6 @@ export default function NotificationModalContents() {
 
   useEffect(() => {
     axios.post(`/customer/${user?.id}/show`).then((res) => {
-      console.log(res)
       setNotifications(res?.data?.data)
     })
   }, [user])
