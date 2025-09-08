@@ -2,6 +2,7 @@ import useModalAction from '@/hooks/useModalAction';
 import { FaInbox, FaMoneyBill } from 'react-icons/fa';
 import { IoAddCircleSharp } from 'react-icons/io5';
 import ItemCard from '../../../../item-card/ItemCard';
+import { TbSitemap } from 'react-icons/tb';
 
 export default function SellerRootModalContents() {
     const { handleOpenModal } = useModalAction();
@@ -39,7 +40,7 @@ export default function SellerRootModalContents() {
             title: 'Seller Order',
             subtitle: 'View your selling orders',
             icon: (
-                <FaInbox className="h-6 w-6 text-gray-700" />
+                <TbSitemap className="h-6 w-6 text-gray-700" />
             ),
             handleClick: () => handleOpenModal("seller-order-modal"),
         },

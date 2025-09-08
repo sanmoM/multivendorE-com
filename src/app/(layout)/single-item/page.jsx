@@ -192,6 +192,16 @@ import { addToCart } from "@/lib/redux/features/cartSlice";
 import { setCheckoutItems } from "@/lib/redux/features/checkoutSlice";
 import { useDispatch } from "react-redux";
 
+const cakeDeliveryOptions = [
+    { label: "Full Payment", value: "full-payment" },
+    { label: "Order with 10% Payment", value: "order-with-10-payment" },
+];
+
+const generalProductDeliveryOptions = [
+    { label: "Full Payment", value: "full-payment" },
+    { label: "Cash on Delivery", value: "cash-on-delivery" },
+];
+
 export default function SingleItem() {
     const searchParams = useSearchParams();
     const type = searchParams.get("type");
@@ -348,9 +358,7 @@ export default function SingleItem() {
                                         setCartItem={setCartItem}
                                     />
                                 )}
-                                {data?.type === "product" && (
-                                    <DeliveryOptions cartItem={cartItem} setCartItem={setCartItem} />
-                                )}
+                                <DeliveryOptions cartItem={cartItem} setCartItem={setCartItem} options={data?.type === "product" ? cakeDeliveryOptions : generalProductDeliveryOptions} />
                                 <Reviews id={id} />
                                 <CustomerReviews id={id} />
                                 <AddReview id={id} />

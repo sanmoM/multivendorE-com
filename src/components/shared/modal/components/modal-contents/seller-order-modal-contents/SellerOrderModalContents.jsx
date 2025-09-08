@@ -18,8 +18,13 @@ const SellerOrderModalContents = () => {
     const { data: ordersData = [], isLoading, isError } = useQuery({
         queryKey: ["my-orders"],
         queryFn: async () => {
-            const res = await axios.get(`/customer/orders`);
-            return res.data?.orders || [];
+            const [pendingOrder, deliveredOrder, cancelledOrder] = await Promise.all([
+                axios.get(`/customer/orders`),
+                axios.get(`/customer/orders/pending`),
+                axios.get(`/customer/orders/delivered`),
+                axios.get(`/customer/orders/cancelled`),
+            ]);
+            
         },
         staleTime: 0,
         refetchOnMount: true,

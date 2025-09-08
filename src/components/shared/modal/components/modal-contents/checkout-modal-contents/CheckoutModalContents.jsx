@@ -68,11 +68,25 @@ const CheckoutModalContents = ({ handleClose }) => {
     // ✅ General Product Checkout Mutation
     const generalProductCheckoutMutation = useMutation({
         mutationFn: async (items) => {
-            return await axios.post('/place-order-generalproduct', {
-                shipping_address: `${user?.street}, ${user?.city}, ${user?.state}, ${user?.country}`,
-                payment_percentage: 100,
-                items,
-            });
+            console.log(items)
+            // return await axios.post('/place-order-generalproduct', {
+            //     shipping_address: `${user?.street}, ${user?.city}, ${user?.state}, ${user?.country}`,
+            //     payment_percentage:100,
+            //     items,
+            // });
+            if (items[0]?.deliveryOption === "full-payment") {
+                return await axios.post('/place-order-generalproduct-payment', {
+                    shipping_address: `${user?.street}, ${user?.city}, ${user?.state}, ${user?.country}`,
+                    payment_percentage: 100,
+                    items,
+                });
+            } else {
+                return await axios.post('/place-order-generalproduct', {
+                    shipping_address: `${user?.street}, ${user?.city}, ${user?.state}, ${user?.country}`,
+                    currency: "BDT",
+                    items,
+                });
+            }
         },
         onSuccess: () => {
             // Invalidate queries
@@ -110,6 +124,7 @@ const CheckoutModalContents = ({ handleClose }) => {
             const items = checkoutItems?.map((item) => ({
                 product_id: parseInt(item?.id),
                 quantity: item?.quantity || 1,
+                deliveryOption: item?.deliveryOption || "full-payment",
             }));
             generalProductCheckoutMutation.mutate(items);
         }
@@ -126,7 +141,7 @@ const CheckoutModalContents = ({ handleClose }) => {
                     >
                         <div className="flex-1">
                             <h3 className="font-semibold text-primary">Delivery Address</h3>
-                            <p className="text-sm text-secondary">{`${user?.street}, ${user?.city}, ${user?.state}, ${user?.country}`}</p>
+                            <p className="text-sm text-secondary">{`${user?.street || "No street"}, ${user?.city || "No city"}, ${user?.state || "No state"}, ${user?.country || "No country"}`}</p>
                         </div>
                     </div>
                 </div>

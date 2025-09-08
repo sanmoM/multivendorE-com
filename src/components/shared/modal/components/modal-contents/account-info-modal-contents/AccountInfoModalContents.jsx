@@ -31,13 +31,13 @@ export default function AccountInfoModalContents() {
             handleClick: () => handleOpenModal("add-address-modal"),
             icon: <MdOutlineHomeWork className="h-6 w-6 text-gray-700" />
         },
-        {
-            name: 'Payment Methods',
-            subtitle: 'Manage your payment methods',
-            type: "button",
-            handleClick: () => handleOpenModal("payment-modal"),
-            icon: <IoIosCard className="h-6 w-6 text-gray-700" />
-        },
+        // {
+        //     name: 'Payment Methods',
+        //     subtitle: 'Manage your payment methods',
+        //     type: "button",
+        //     handleClick: () => handleOpenModal("payment-modal"),
+        //     icon: <IoIosCard className="h-6 w-6 text-gray-700" />
+        // },
     ];
 
 

@@ -1,23 +1,25 @@
 "use client";
 
-import { useRouter } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
 import { BsCart3 } from "react-icons/bs";
 import { HiMiniHome } from "react-icons/hi2";
 import { TfiMenuAlt } from "react-icons/tfi";
 import ProfileDropDown from "../profile-dropdown/ProfileDropDown";
 
 const BottomNavbar = ({ setIsCartOpen }) => {
+    const pathname = usePathname();
+
     const router = useRouter()
     const navItems = [
         {
             name: 'Home',
             icon: <HiMiniHome className="h-6 w-6" />,
-            path: "#"
+            path: "/"
         },
         {
             name: 'Categories',
             icon: <TfiMenuAlt className="h-6 w-6" />,
-            path: "#"
+            path: "/category"
         },
         {
             name: 'Cart',
@@ -43,8 +45,8 @@ const BottomNavbar = ({ setIsCartOpen }) => {
                             {...item.type === "button" && { onClick: item.handleClick }}
                             className={`flex flex-col items-center p-2 rounded-md transition-colors duration-200 ${item.active && 'text-primary font-semibold'}`}
                         >
-                            <div className={`mb-1 ${item.active && 'text-primary font-semibold'}`}>{item.icon}</div>
-                            <span className={`text-xs ${item.active && 'text-primary font-semibold'}`}>{item.name}</span>
+                            <div className={`mb-1 ${pathname === item?.path && 'text-yellow-500 font-semibold'}`}>{item.icon}</div>
+                            <span className={`text-xs ${pathname === item?.path && 'text-yellow-500 font-semibold'}`}>{item.name}</span>
                         </button>
                     ))}
                     <ProfileDropDown isMobile />

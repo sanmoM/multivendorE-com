@@ -56,7 +56,7 @@ export default function OrderModalContents() {
     //     fetchData();
     // }, []);
 
-    console.log(modalData)
+    // console.log(modalData)
 
     return (
         <div className="w-full space-y-8">
@@ -81,7 +81,7 @@ export default function OrderModalContents() {
                 </div>
                 <div className="flex justify-between items-center text-primary">
                     <p className='text-secondary'>Shipping Address</p>
-                    <p className="text-primary">{modalData?.shipping_address}</p>
+                    <p className="text-primary">{modalData?.shipping_address || "No Shipping Address"}</p>
                 </div>
             </div>
 

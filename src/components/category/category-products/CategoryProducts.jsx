@@ -7,7 +7,7 @@ export default function CategoryProducts({products}) {
     return (
         <Items title={"Products"} desktopView={6} mobileView={3}>
             {products?.map((product, index) => (
-                <Link href="/single-item" className="block" key={index}>
+                <Link href={`/single-item?&type=${product?.type}&id=${product?.id}`} key={index}>
                     <PrimaryCard
                         item={getFormattedProduct(product)}
                         containerClassName="px-2"
