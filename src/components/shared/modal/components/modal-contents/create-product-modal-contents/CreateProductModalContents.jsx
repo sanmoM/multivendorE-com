@@ -37,33 +37,14 @@ export default function CreateProductModalContents({ handleCloseModal }) {
     const handleSubmit = (e) => {
         e.preventDefault();
 
-        if (!category || !subCategory || !productName || !regularPrice) {
+        if (!category || !subCategory || !productName || !regularPrice || !stock || !image || !user?.id) {
             toast.error("Please fill all required fields.");
             return;
         }
 
-        const product = {
-            category_id: parseInt(category),
-            sub_category_name: subCategory,
-            name: productName,
-            short_description: shortDescription,
-            full_description: fullDescription,
-            stock: parseInt(stock) || 0,
-            image: image,
-            video_url: videoUrl,
-            tag: tag,
-            color: color,
-            size: size,
-            regular_price: parseFloat(regularPrice),
-            discount_price: parseFloat(discountPrice),
-            discount_percentage: parseFloat(discountPercentage),
-            discount_start: discountStart,
-            discount_end: discountEnd,
-            type: "general_product",
-        };
-
-        console.log(product, "product");
         const formData = new FormData();
+
+        // required
         formData.append("customer_id", user?.id);
         formData.append("category_id", category);
         formData.append("sub_category_name", subCategory);
@@ -71,26 +52,30 @@ export default function CreateProductModalContents({ handleCloseModal }) {
         formData.append("short_description", shortDescription);
         formData.append("full_description", fullDescription);
         formData.append("stock", parseInt(stock) || 0);
+        formData.append("regular_price", parseFloat(regularPrice));
 
+        // optional
+        if (discountPrice) formData.append("discount_price", parseFloat(discountPrice));
+        if (discountPercentage) formData.append("discount_percentage", parseFloat(discountPercentage));
+        if (discountStart) formData.append("discount_start", discountStart);
+        if (discountEnd) formData.append("discount_end", discountEnd);
+        if (color) formData.append("color", color);
+        if (size) formData.append("size", size);
+        if (tag) formData.append("tag", tag);
+        if (videoUrl) formData.append("video_url", videoUrl);
+
+        // image (main)
         if (image instanceof File) {
             formData.append("image", image);
         }
 
+        // gallery images
         galleryImages.forEach((file, index) => {
             if (file instanceof File) {
                 formData.append(`gallery_image[${index}]`, file);
             }
         });
 
-        formData.append("video_url", videoUrl);
-        formData.append("tag", tag);
-        formData.append("color", color);
-        formData.append("size", size);
-        formData.append("regular_price", parseFloat(regularPrice));
-        formData.append("discount_price", parseFloat(discountPrice));
-        formData.append("discount_percentage", parseFloat(discountPercentage));
-        formData.append("discount_start", discountStart);
-        formData.append("discount_end", discountEnd);
         formData.append("type", "general_product");
 
         axios
