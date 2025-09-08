@@ -8,7 +8,7 @@ export default function ModalProductCard({ item, imageClassName }) {
             <FallbackImage
                 src={item?.image}
                 alt={item?.name}
-                className={cn('rounded-md object-cover aspect-square w-[55%]', imageClassName)}
+                className={cn('rounded-md object-cover aspect-square', imageClassName)}
                 onError={(e) => { e.target.onerror = null; e.target.src = "https://placehold.co/80x80/E0E0E0/808080?text=Item"; }}
                 height={70}
                 width={70}

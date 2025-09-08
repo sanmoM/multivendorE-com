@@ -14,7 +14,7 @@ export default function CartCard({ item }) {
     };
     return (
         <div className="flex items-center justify-between">
-            <ModalProductCard item={item} />
+            <ModalProductCard item={item} imageClassName={"w-24 h-24 rounded-md object-cover aspect-square"} />
 
             {/* Quantity Selector */}
             <div className="flex items-center space-x-2">
