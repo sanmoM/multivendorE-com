@@ -26,7 +26,7 @@ export default function AllSellerModals() {
             <Modal isLeft={false} isOpen={currentModal === "create-product-modal"} setIsOpen={() => handleCloseModal()} title={"Create Product"}>
                 <CreateProductModalContents handleCloseModal={handleCloseModal} />
             </Modal>
-            <Modal isLeft={false} isOpen={currentModal === "seller-product-modal"} setIsOpen={() => handleCloseModal()} title={"My Products"}>
+            <Modal isLeft={false} isOpen={currentModal === "seller-product-modal"} setIsOpen={() => handleCloseModal()} title={"Seller Products"}>
                 <ProductsModalContents />
             </Modal>
             {/* <Modal isLeft={false} isOpen={currentModal === "seller-settings-modal"} setIsOpen={() => handleCloseModal()} title={"Seller Settings"}>

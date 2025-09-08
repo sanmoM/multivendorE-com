@@ -26,9 +26,10 @@ export default function ProductsModalContents() {
         }
         fetchData()
     }, [user?.id])
+
+    console.log(products, "products")
     return (
         <div>
-            <PrimaryTitle title={"Products"} />
             <div className="w-full space-y-6">
                 {
                     products?.map((product, index) => (

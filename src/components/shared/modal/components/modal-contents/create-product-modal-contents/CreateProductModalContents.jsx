@@ -37,53 +37,72 @@ export default function CreateProductModalContents({ handleCloseModal }) {
     const handleSubmit = (e) => {
         e.preventDefault();
 
-
-        if (
-            category ||
-            subCategory ||
-            productName ||
-            shortDescription ||
-            fullDescription ||
-            stock ||
-            image ||
-            videoUrl ||
-            color ||
-            size ||
-            regularPrice ||
-            tag    
-        ) {
-            const formData = new FormData();
-            formData.append("category_id", category);
-            formData.append("sub_category_id", subCategory);
-            formData.append("sub_category_name", subCategory);
-            formData.append("name", productName);
-            formData.append("short_description", shortDescription);
-            formData.append("full_description", fullDescription);
-            formData.append("stock", parseInt(stock));
-            formData.append("image", image);
-            formData.append("video_url", videoUrl);
-            formData.append("tag", tag);
-            formData.append("color", color);
-            formData.append("size", size);
-            formData.append("regular_price", parseInt(regularPrice));
-            formData.append("discount_price", parseInt(discountPrice));
-            formData.append("discount_percentage", 20);
-            formData.append("discount_start", discountStart);
-            formData.append("discount_end", discountEnd);
-            // formData.append("gallery_image", galleryImages);
-            formData.append("type", "general_product");
-
-            const product = formData;
-            axios.post("/reseller/product-upload", product).then((res) => {
-                toast.success('Product added successfully!');
-                handleCloseModal();
-            }).catch((err) => {
-                toast.error('Something went wrong while adding product.');
-                console.error('Error:', err);
-            });
-        }else{
-            toast.error('Please fill in all fields');
+        if (!category || !subCategory || !productName || !regularPrice) {
+            toast.error("Please fill all required fields.");
+            return;
         }
+
+        const product = {
+            category_id: parseInt(category),
+            sub_category_name: subCategory,
+            name: productName,
+            short_description: shortDescription,
+            full_description: fullDescription,
+            stock: parseInt(stock) || 0,
+            image: image,
+            video_url: videoUrl,
+            tag: tag,
+            color: color,
+            size: size,
+            regular_price: parseFloat(regularPrice),
+            discount_price: parseFloat(discountPrice),
+            discount_percentage: parseFloat(discountPercentage),
+            discount_start: discountStart,
+            discount_end: discountEnd,
+            type: "general_product",
+        };
+
+        console.log(product, "product");
+        const formData = new FormData();
+        formData.append("customer_id", user?.id);
+        formData.append("category_id", category);
+        formData.append("sub_category_name", subCategory);
+        formData.append("name", productName);
+        formData.append("short_description", shortDescription);
+        formData.append("full_description", fullDescription);
+        formData.append("stock", parseInt(stock) || 0);
+
+        if (image instanceof File) {
+            formData.append("image", image);
+        }
+
+        galleryImages.forEach((file, index) => {
+            if (file instanceof File) {
+                formData.append(`gallery_image[${index}]`, file);
+            }
+        });
+
+        formData.append("video_url", videoUrl);
+        formData.append("tag", tag);
+        formData.append("color", color);
+        formData.append("size", size);
+        formData.append("regular_price", parseFloat(regularPrice));
+        formData.append("discount_price", parseFloat(discountPrice));
+        formData.append("discount_percentage", parseFloat(discountPercentage));
+        formData.append("discount_start", discountStart);
+        formData.append("discount_end", discountEnd);
+        formData.append("type", "general_product");
+
+        axios
+            .post("/reseller/product-upload", formData)
+            .then(() => {
+                toast.success("Product added successfully!");
+                handleCloseModal();
+            })
+            .catch((err) => {
+                toast.error("Something went wrong while adding product.");
+                console.error("Error:", err);
+            });
     };
 
     useEffect(() => {
@@ -160,7 +179,7 @@ export default function CreateProductModalContents({ handleCloseModal }) {
                         // setImage={(image) => console.log(image)}
                         setImage={(image) => setGalleryImages(prev => [...prev, image])}
                         placeholder=""
-                        containerClassName={"w-24 h-auto aspect-square"}
+                        containerClassName={"w-full lg:w-24 h-auto aspect-square"}
                         iconClassName={"w-[30%]"}
                     />
                 </div>
