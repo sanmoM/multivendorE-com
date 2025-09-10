@@ -1,4 +1,5 @@
 import Button from '@/components/shared/button/Button';
+import FallbackImage from '@/components/shared/fallback-image/FallbackImage';
 import PrimaryTitle from '@/components/shared/title/PrimaryTitle';
 import useAxios from '@/hooks/useAxios';
 import { cn } from '@/utils/cn';
@@ -7,20 +8,14 @@ import Link from 'next/link';
 import { useEffect, useState } from 'react';
 
 
-export default function SellerInfo({ className, handleCustomOrderModal, data }) {
-    const [rating, setRating] = useState(0);
-    const [deliveryRate, setDeliveryRate] = useState(0);
+export default function SellerInfo({ className, handleCustomOrderModal, vendorId }) {
+    const [data, setData] = useState({});
     const axios = useAxios();
-
     useEffect(() => {
         const fetchData = async () => {
             try {
-                const [ratingRes, deliveryRateRes] = await Promise.all([
-                    axios.get("/seller/ratting"),
-                    axios.get("/delivery/rate"),
-                ]);
-                // console.log(ratingRes, "ratingRes")
-                // console.log(deliveryRateRes, "deliveryRateRes")
+                const sellerInfo = await axios.get(`/my-reviews-customer/${vendorId}`);
+                setData(sellerInfo?.data);
             } catch (error) {
                 console.log(error);
             } finally {
@@ -29,8 +24,9 @@ export default function SellerInfo({ className, handleCustomOrderModal, data }) 
         }
         fetchData();
 
-    }, [])
+    }, [vendorId])
 
+    console.log(data?.vendor?.name, "sellerInfo")
     return (
         <div className={cn("lg:w-1/3 lg:pl-10 xl:pl-20 lg:pr-0 flex flex-col mt-6 lg:mt-0", className)}>
             <PrimaryTitle title="Seller" />
@@ -38,15 +34,22 @@ export default function SellerInfo({ className, handleCustomOrderModal, data }) 
             {/* Seller Info Card */}
             <Link href={`/seller-profile`} className="block">
                 <div className="flex items-center rounded-lg mb-6">
-                    <Image
+                    {/* <Image
                         src="/images/seller-image.png"
+                        alt="Sweet Delights Bakery"
+                        className="w-16 h-16 rounded-full mr-4 object-cover"
+                        width={40}
+                        height={40}
+                    /> */}
+                    <FallbackImage
+                        src={data?.vendor?.image}
                         alt="Sweet Delights Bakery"
                         className="w-16 h-16 rounded-full mr-4 object-cover"
                         width={40}
                         height={40}
                     />
                     <div>
-                        <p className="font-semibold text-primary">Sweet Delights Bakery</p>
+                        <p className="font-semibold text-primary">{data?.vendor?.name}</p>
                         <p className="text-sm text-secondary">Average response time: 2 hours</p>
                     </div>
                 </div>
@@ -55,11 +58,11 @@ export default function SellerInfo({ className, handleCustomOrderModal, data }) 
             {/* Delivery Rate and Rating */}
             <div className="grid grid-cols-[4fr_3fr] gap-3 justify-around items-center mb-6">
                 <div className=" pl-4 py-6 border-2 !border-secondary/30 rounded-lg">
-                    <p className="text-2xl font-bold text-gray-900 mb-2">{`${deliveryRate || 0}`}</p>
+                    <p className="text-2xl font-bold text-gray-900 mb-2">{`${0}`}</p>
                     <p className="text-sm text-secondary font-medium">Delivery rate</p>
                 </div>
                 <div className=" pl-4 py-6 border-2 !border-secondary/30 rounded-lg">
-                    <p className="text-2xl font-bold text-gray-900 mb-2">{`${rating || 0}`}</p>
+                    <p className="text-2xl font-bold text-gray-900 mb-2">{`${0}`}</p>
                     <p className="text-sm text-secondary font-medium">Rating</p>
                 </div>
             </div>

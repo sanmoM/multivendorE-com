@@ -7,7 +7,7 @@ import RatingInput from './components/rating-input/RatingInput';
 import toast from 'react-hot-toast';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 
-export default function AddReview({ id }) {
+export default function AddReview({ id, type }) {
     const [rating, setRating] = useState(0);
     const [review, setReview] = useState("");
 
@@ -17,8 +17,9 @@ export default function AddReview({ id }) {
     // Define mutation
     const { mutate, isLoading } = useMutation({
         mutationFn: async () => {
-            const response = await axios.post(`/product/${id}/review`, {
-                rating,
+            const response = await axios.post(`/${type === "product" ? "product" : "generalproduct"}/${id}/review`, {
+
+                rating: rating,
                 comment: review,
             });
             return response.data;
@@ -29,6 +30,7 @@ export default function AddReview({ id }) {
             setReview("");
             // ✅ Invalidate cache so reviews re-fetch automatically
             queryClient.invalidateQueries(["product-reviews", id]);
+            queryClient.invalidateQueries(["reviews"]);
         },
         onError: () => {
             toast.error("Error submitting review");

@@ -9,15 +9,22 @@ export default function NotificationModalContents() {
   const [notifications, setNotifications] = useState([])
 
   useEffect(() => {
-    axios.get(`/customer/${user?.id}/show`).then((res) => {
-      setNotifications(res?.data?.data)
+    axios.get(`/reseller/notifications-show`).then((res) => {
+      setNotifications(res?.data?.notifications)
     })
-  }, [user?.id])
+  }, [user])
   return (
     <div className='space-y-2 lg:space-y-4'>
-      {/* {notifications.map(notification => (
-        <NotificationModalCard key={notification.id} data={notification} />
-      ))} */}
+      {notifications.map(notification => (
+        < NotificationModalCard
+          key={notification?.id}
+          data={{
+            id: notification?.id,
+            title: notification?.data?.title,
+            message: notification?.data?.message,
+            isRead: notification?.read_at
+          }} />
+      ))}
     </div>
   )
 }

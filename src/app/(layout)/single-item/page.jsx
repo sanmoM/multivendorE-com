@@ -36,7 +36,7 @@ export default function SingleItem() {
 
     // --- Fetch single item ---
     const {
-        data: itemData,
+        data,
         isLoading,
         isError,
     } = useQuery({
@@ -54,17 +54,16 @@ export default function SingleItem() {
         isLoading: relatedLoading,
         isError: relatedError,
     } = useQuery({
-        queryKey: ["related-products", type, itemData?.category?.id],
+        queryKey: ["related-products", type, data?.category?.id],
         queryFn: async () => {
             const res = await axios.get(
-                `/related-product/${type}/${itemData?.category?.id}`
+                `/related-product/${type}/${data?.category?.id}`
             );
             return res.data.data;
         },
-        enabled: !!itemData?.category?.id,
+        enabled: !!data?.category?.id,
     });
 
-    const data = itemData;
     const relatedProducts = relatedProductsData || [];
 
     const { currentModal, handleCloseModal, handleOpenModal } = useModalAction();
@@ -128,7 +127,6 @@ export default function SingleItem() {
         dispatch(setCheckoutItems([productData]));
         handleOpenModal("checkout-modal");
     };
-
     return (
         <div>
             {
@@ -156,7 +154,8 @@ export default function SingleItem() {
                             <SellerInfo
                                 className="lg:hidden"
                                 handleCustomOrderModal={handleCustomOrderModal}
-                            // data={{ rating: data?.average_rating }}
+                                // data={{ rating: data?.average_rating }}
+                                vendorId={data?.vendor_id}
                             />
                             <SingleItemTabs
                                 description={data?.description || data?.full_description}
@@ -184,7 +183,7 @@ export default function SingleItem() {
                                 )}
                                 <Reviews id={id} />
                                 <CustomerReviews id={id} />
-                                <AddReview id={id} />
+                                <AddReview id={id} type={data?.type} />
                             </div>
                             {!relatedLoading && !relatedError && (
                                 <SimilarProducts products={relatedProducts} />

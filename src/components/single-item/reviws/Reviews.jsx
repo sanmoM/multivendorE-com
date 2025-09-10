@@ -20,13 +20,13 @@ const Reviews = ({ id }) => {
     enabled: !!id, // only fetch if id exists
   });
 
-  if (isLoading) {
-    return <p>Loading reviews...</p>;
-  }
+  // if (isLoading) {
+  //   return <p>Loading reviews...</p>;
+  // }
 
-  if (isError) {
-    return <p>Failed to load reviews.</p>;
-  }
+  // if (isError) {
+  //   return <p>Failed to load reviews.</p>;
+  // }
 
   const totalRating = ratingDetails?.average_rating || 0;
   const totalReviews = ratingDetails?.total_reviews || 0;
@@ -54,7 +54,7 @@ const Reviews = ({ id }) => {
 
         {/* Rating Breakdown Bars */}
         <div className="w-full md:w-2/3 space-y-6">
-          {ratingBreakdown.map((item) => (
+          {ratingBreakdown?.map((item) => (
             <div key={item.star} className="flex items-center">
               <span className="text-sm font-medium text-gray-800 w-6">{item.star}</span>
               <div className="flex-grow bg-tertiary rounded-full h-2.5">

@@ -23,17 +23,17 @@ const CustomerReviews = ({ id }) => {
         enabled: !!id, // only run if id exists
     });
 
-    if (isLoading) {
-        return <p>Loading reviews...</p>;
-    }
+    // if (isLoading) {
+    //     return <p>Loading reviews...</p>;
+    // }
 
-    if (isError) {
-        return <p>Failed to load reviews.</p>;
-    }
+    // if (isError) {
+    //     return <p>Failed to load reviews.</p>;
+    // }
 
     return (
         <div className="lg:w-[70%] space-y-8 mt-12">
-            {reviews.map((review) => (
+            {reviews?.map((review) => (
                 <div key={review.id} className="pb-4">
                     <div className="flex items-center mb-2">
                         <Image
