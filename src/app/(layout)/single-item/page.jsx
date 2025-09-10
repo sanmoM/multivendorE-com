@@ -2,7 +2,7 @@
 import useAxios from "@/hooks/useAxios";
 import { useQuery } from "@tanstack/react-query";
 import { useSearchParams } from "next/navigation";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 import MobileHeader from "@/components/root-layout/header/components/mobile-header/MobileHeader";
 import Button from "@/components/shared/button/Button";
@@ -54,7 +54,7 @@ export default function SingleItem() {
         isLoading: relatedLoading,
         isError: relatedError,
     } = useQuery({
-        queryKey: ["related-products", type, data?.category?.id],
+        queryKey: ["related-products"],
         queryFn: async () => {
             const res = await axios.get(
                 `/related-product/${type}/${data?.category?.id}`
@@ -154,9 +154,9 @@ export default function SingleItem() {
                             <SellerInfo
                                 className="lg:hidden"
                                 handleCustomOrderModal={handleCustomOrderModal}
-                                // data={{ rating: data?.average_rating }}
                                 vendorId={data?.vendor_id}
                             />
+
                             <SingleItemTabs
                                 description={data?.description || data?.full_description}
                             />
@@ -182,7 +182,7 @@ export default function SingleItem() {
                                     />
                                 )}
                                 <Reviews id={id} />
-                                <CustomerReviews id={id} />
+                                <CustomerReviews id={id} type={data?.type} />
                                 <AddReview id={id} type={data?.type} />
                             </div>
                             {!relatedLoading && !relatedError && (

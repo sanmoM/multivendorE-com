@@ -30,6 +30,7 @@ export default function ProductInfo({ data }) {
                         {
                             data?.image_gallery?.map((url, index) => (
                                 <FallbackImage
+                                    key={index}
                                     src={url}
                                     alt={`Slide`}
                                     height={400}

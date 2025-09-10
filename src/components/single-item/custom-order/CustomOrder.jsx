@@ -48,9 +48,9 @@ const CustomOrderModalContents = ({ handlePlaceOrder: handlePlaceOrderAction }) 
                     {/* <h3 className="text-lg font-semibold text-primary mb-3">Cake Size</h3> */}
                     <SecondaryTitle title={"Cake Size"} />
                     <div className="flex flex-wrap gap-3">
-                        {cakeSizes.map((size) => (
+                        {cakeSizes.map((size, index) => (
 
-                            <OptionBox value={size.value} setValue={setSelectedSize} currentValue={selectedSize} label={size.label} />
+                            <OptionBox value={size.value} setValue={setSelectedSize} currentValue={selectedSize} label={size.label} key={index} />
                         ))}
                     </div>
                 </div>
@@ -59,8 +59,8 @@ const CustomOrderModalContents = ({ handlePlaceOrder: handlePlaceOrderAction }) 
                 <div className="mb-6">
                     <SecondaryTitle title={"Flavor"} />
                     <div className="flex flex-wrap gap-3">
-                        {cakeFlavors.map((flavor) => (
-                            <OptionBox value={flavor} setValue={setSelectedFlavor} currentValue={selectedFlavor} label={flavor} />
+                        {cakeFlavors.map((flavor, index) => (
+                            <OptionBox value={flavor} key={index} setValue={setSelectedFlavor} currentValue={selectedFlavor} label={flavor} />
                         ))}
                     </div>
                 </div>
@@ -69,9 +69,9 @@ const CustomOrderModalContents = ({ handlePlaceOrder: handlePlaceOrderAction }) 
                 <div className="mb-6">
                     <SecondaryTitle title={"Color"} />
                     <div className="flex flex-wrap gap-3">
-                        {cakeColors.map((color) => (
+                        {cakeColors.map((color, index) => (
 
-                            <ColorPicker setColor={setSelectedColor} color={color} selectedColor={selectedColor} />
+                            <ColorPicker setColor={setSelectedColor} key={index} color={color} selectedColor={selectedColor} />
                         ))}
                     </div>
                 </div>

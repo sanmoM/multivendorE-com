@@ -57,8 +57,8 @@ export default function SellerRootModalContents() {
     return (
         <div className="w-full space-y-6">
             {sellerMenuItems?.map((item, index) => (
-                <div className="space-y-4">
-                    <ItemCard item={item} key={index} />
+                <div className="space-y-4" key={index}>
+                    <ItemCard item={item}  />
                 </div>
             ))}
         </div>

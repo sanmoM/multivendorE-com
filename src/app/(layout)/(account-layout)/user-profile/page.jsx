@@ -32,8 +32,8 @@ export default function page() {
             <div className="p-3">
                 <div className="flex items-center flex-wrap gap-1">
                     {
-                        tabs.map((tab) => (
-                            <TabButton value={tab.name} label={tab.label} handleTabClick={handleTabClick} activeTab={activeTab} />
+                        tabs.map((tab, index) => (
+                            <TabButton value={tab.name} label={tab.label} handleTabClick={handleTabClick} activeTab={activeTab} key={index} />
                         ))
                     }
                 </div>

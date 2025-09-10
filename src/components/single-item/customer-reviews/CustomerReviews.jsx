@@ -7,12 +7,12 @@ import Image from 'next/image';
 import { GoThumbsdown, GoThumbsup } from "react-icons/go";
 import { useQuery } from '@tanstack/react-query';
 
-const CustomerReviews = ({ id }) => {
+const CustomerReviews = ({ id, type }) => {
     const axios = useAxios();
 
     // Fetch function
     const fetchReviews = async () => {
-        const { data } = await axios.get(`/product/${id}/reviews`);
+        const { data } = await axios.get(`/${type === "product" ? "product" : "generalproduct"}/${id}/reviews`);
         return data;
     };
 
@@ -23,13 +23,7 @@ const CustomerReviews = ({ id }) => {
         enabled: !!id, // only run if id exists
     });
 
-    // if (isLoading) {
-    //     return <p>Loading reviews...</p>;
-    // }
 
-    // if (isError) {
-    //     return <p>Failed to load reviews.</p>;
-    // }
 
     return (
         <div className="lg:w-[70%] space-y-8 mt-12">

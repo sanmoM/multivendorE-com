@@ -7,8 +7,8 @@ export default function Tabs({ activeTab, tabs, className }) {
         <div className='overflow-x-auto hide-scrollbar  border-b mb-4 lg:mb-6'>
             <div className={cn(`flex justify-between `, className)}>
                 {
-                    tabs.map((tab) => (
-                        <TabButton text={tab.label} value={tab.value} activeTab={activeTab} setActiveTab={tab.onClick} />
+                    tabs.map((tab, index) => (
+                        <TabButton text={tab.label} value={tab.value} activeTab={activeTab} setActiveTab={tab.onClick} key={index} />
                     ))
                 }
             </div>
