@@ -1,11 +1,12 @@
 import useAxios from '@/hooks/useAxios';
-import React from 'react'
+import toast from 'react-hot-toast';
 
 export default function GoogleSignIn() {
     const axios = useAxios();
     const handleGoogleAuth = async () => {
         try {
             const res = await axios.get(`/auth/google/redirect`);
+            // console.log(res?.data?.url, "res")
             if (res?.data?.url) {
                 window.location.href = res?.data?.url;
             } else {

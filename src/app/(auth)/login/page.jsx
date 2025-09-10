@@ -1,11 +1,13 @@
 "use client";
 import AuthTextInput from '@/components/auth/auth-inputs/auth-text-input/AuthTextInput';
+import GoogleSignIn from '@/components/auth/google-signin/GoogleSignIn';
 import Button from '@/components/shared/button/Button';
 import Container from '@/components/shared/container/Container';
 import CheckBoxWithLabel from '@/components/shared/inputs/check-box-with-label/CheckBoxWithLabel';
 import useAxios from '@/hooks/useAxios';
 import { setUser } from '@/lib/redux/features/userSlice';
 import { handleMobileNumberChange, isValidBDNumber } from '@/utils/number-validation';
+import { setToken } from '@/utils/set-token';
 import { useRouter } from 'next/navigation';
 import { useState } from 'react';
 import toast from 'react-hot-toast';
@@ -33,7 +35,7 @@ export default function page() {
                 });
                 if (res.status === 200) {
                     toast.success("Login successful")
-                    localStorage.setItem("token", res?.data?.token)
+                    setToken(res?.data?.token)
                     router.replace("/")
                 }
 
@@ -59,15 +61,7 @@ export default function page() {
                     See your growth and get consulting support!
                 </p>
 
-                <button
-                    className="w-full flex items-center justify-center gap-2 border bg-white rounded-md py-3 text-sm font-medium mb-6"
-                >
-                    <img
-                        src="https://img.icons8.com/color/16/000000/google-logo.png"
-                        alt="Google"
-                    />
-                    Sign In with Google
-                </button>
+                <GoogleSignIn />
 
                 <div className="text-center text-gray-500 text-sm mb-6 relative">
                     <span className="bg-[#f4f7f9] px-2 z-10 relative"
