@@ -53,13 +53,11 @@ export default function FeaturedProducts() {
         setEnd(prev => prev + 10);
     };
 
-
-
     return (
         <div ref={wrapperRef}>
             <Items title={"More Featured Products"} desktopView={6} mobileView={3}>
                 {showAbleProducts?.map((product, index) => (
-                    <ProductCard item={product} key={index} />
+                    <ProductCard item={product} key={index}  />
                 ))}
             </Items>
         </div>

@@ -6,14 +6,15 @@ export default function NotificationModalContents() {
   const user = useSelector(state => state.user?.user)
   const axios = useAuthAxios()
 
-
   const [notifications, setNotifications] = useState([])
 
   useEffect(() => {
-    axios.post(`/customer/${user?.id}/show`).then((res) => {
+    console.log(user, "user")
+    axios.get(`/customer/${user?.id}/show`).then((res) => {
       setNotifications(res?.data?.data)
     })
-  }, [user])
+  }, [user?.id])
+  console.log(notifications, "notifications")
   return (
     <div className='space-y-2 lg:space-y-4'>
       {/* {notifications.map(notification => (

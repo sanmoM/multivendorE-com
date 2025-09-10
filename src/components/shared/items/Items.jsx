@@ -1,11 +1,8 @@
 "use client";
 
-import PrimaryCard from "@/components/shared/primary-card/PrimaryCard";
 import SectionTitle from "@/components/shared/section-title/SectionTitle";
-import { shops } from "@/data";
 import { useEffect, useState } from "react";
 import LoadMoreBtn from "../load-more-btn/LoadMoreBtn";
-import Link from "next/link";
 
 
 export default function Items({ title, desktopView, mobileView, hasLoadMoreBtn = false, children, titleClassName }) {
@@ -31,7 +28,7 @@ export default function Items({ title, desktopView, mobileView, hasLoadMoreBtn =
     return (
         <div className="mt-6">
             <SectionTitle title={title} className={titleClassName} />
-            <div className=' grid-cols-2 lg:grid-cols-4 gap-x-4 gap-y-8 mt-6 grid'
+            <div className=' grid-cols-2 lg:grid-cols-4  gap-y-8 mt-6 grid'
                 style={{
                     gridTemplateColumns: isMobile ? `repeat(${mobileView}, 1fr)` : `repeat(${desktopView}, 1fr)`,
                 }}

@@ -1,5 +1,6 @@
 "use client";
 import AuthTextInput from '@/components/auth/auth-inputs/auth-text-input/AuthTextInput';
+import GoogleSignIn from '@/components/auth/google-signin/GoogleSignIn';
 import Button from '@/components/shared/button/Button';
 import Container from '@/components/shared/container/Container';
 import CheckBoxWithLabel from '@/components/shared/inputs/check-box-with-label/CheckBoxWithLabel';
@@ -62,16 +63,8 @@ export default function page() {
                     <p className="text-sm text-gray-500 mb-6 text-center">
                         See your growth and get consulting support!
                     </p>
-
-                    <button
-                        className="w-full flex items-center justify-center gap-2 border bg-white rounded-md py-3 text-sm font-medium mb-6"
-                    >
-                        <img
-                            src="https://img.icons8.com/color/16/000000/google-logo.png"
-                            alt="Google"
-                        />
-                        Sign In with Google
-                    </button>
+                    
+                    <GoogleSignIn />
 
                     <div className="text-center text-gray-500 text-sm mb-6 relative">
                         <span className="bg-[#f4f7f9] px-2 z-10 relative"

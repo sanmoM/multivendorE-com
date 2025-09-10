@@ -3,14 +3,25 @@
 import Button from '@/components/shared/button/Button';
 import HorizontalCard from '@/components/shared/horizontal-card/HorizontalCard';
 import PrimaryTitle from '@/components/shared/title/PrimaryTitle';
+import { cartItems } from '@/data';
 import useAuthAxios from '@/hooks/useAuthAxios';
-import { useRouter } from 'next/navigation';
+import { removeAllFromCart } from '@/lib/redux/features/cartSlice';
+import { setCheckoutItems } from '@/lib/redux/features/checkoutSlice';
+import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { useState } from 'react';
 import toast from 'react-hot-toast';
 import { useDispatch, useSelector } from 'react-redux';
-import { useMutation, useQueryClient } from '@tanstack/react-query';
-import { setCheckoutItems } from '@/lib/redux/features/checkoutSlice';
-import { removeAllFromCart } from '@/lib/redux/features/cartSlice';
+import DeliveryOptions from './components/delivery-options/DeliveryOptions';
+
+const cakeDeliveryOptions = [
+    { label: "Full Payment", value: 100 },
+    { label: "Order with 10% Payment", value: 10 },
+];
+
+const generalProductDeliveryOptions = [
+    { label: "Full Payment", value: 100 },
+    { label: "Cash on Delivery", value: 0 },
+];
 
 const CheckoutModalContents = ({ handleClose }) => {
     const user = useSelector((state) => state?.user?.user);
@@ -18,6 +29,8 @@ const CheckoutModalContents = ({ handleClose }) => {
     const checkoutItems = useSelector(
         (state) => state?.checkout?.checkoutItems || []
     );
+
+    const [selectedOption, setSelectedOption] = useState(cakeDeliveryOptions[0]);
     const [isAddressOpen, setIsAddressOpen] = useState(false);
 
     const subtotal = checkoutItems.reduce(
@@ -28,7 +41,6 @@ const CheckoutModalContents = ({ handleClose }) => {
     const [shipping] = useState(5);
     const [taxes] = useState(3);
 
-    const router = useRouter();
     const axios = useAuthAxios();
     const queryClient = useQueryClient();
 
@@ -39,11 +51,16 @@ const CheckoutModalContents = ({ handleClose }) => {
     // ✅ React Query Mutations
     // ✅ Cake Checkout Mutation
     const cakeCheckoutMutation = useMutation({
-        mutationFn: async (items) => {
+        mutationFn: async ({ items, percent }) => {
+            // add product_type to items
+            items?.forEach((item) => {
+                item.product_type = "product";
+            });
+
+
             const res = await axios.post('/pay', {
                 shipping_address: `${user?.street}, ${user?.city}, ${user?.state}, ${user?.country}`,
-                payment_percentage:
-                    items[0]?.deliveryOption === 'full-payment' ? 100 : 10,
+                payment_percentage: percent,
                 items,
             });
             return res.data;
@@ -65,15 +82,24 @@ const CheckoutModalContents = ({ handleClose }) => {
         },
     });
 
-    // ✅ General Product Checkout Mutation
+    // General Product Checkout Mutation
     const generalProductCheckoutMutation = useMutation({
-        mutationFn: async (items) => {
-            if (items[0]?.deliveryOption === "full-payment") {
-                return await axios.post('/place-order-generalproduct-payment', {
+        mutationFn: async ({ items, percent }) => {
+            // add product_type to items
+            items?.forEach((item) => {
+                item.product_type = "general_product";
+            });
+
+            if (percent !== 0) {
+                const res = await axios.post('/place-order-generalproduct-payment', {
                     shipping_address: `${user?.street}, ${user?.city}, ${user?.state}, ${user?.country}`,
-                    payment_percentage: 100,
+                    currency: "BDT",
+                    payment_percentage: percent,
                     items,
                 });
+                if (res?.data?.url) {
+                    window.location.href = res?.data?.url;
+                }
             } else {
                 return await axios.post('/place-order-generalproduct', {
                     shipping_address: `${user?.street}, ${user?.city}, ${user?.state}, ${user?.country}`,
@@ -85,7 +111,7 @@ const CheckoutModalContents = ({ handleClose }) => {
         onSuccess: () => {
             // Invalidate queries
             queryClient.invalidateQueries({ queryKey: ['single-item'] });
-            queryClient.invalidateQueries({ queryKey: ['my-orders'] }); // ✅ added here
+            queryClient.invalidateQueries({ queryKey: ['my-orders'] });
 
             dispatch(setCheckoutItems([]));
             dispatch(removeAllFromCart());
@@ -113,15 +139,15 @@ const CheckoutModalContents = ({ handleClose }) => {
                     type: 'product',
                 },
             ];
-            cakeCheckoutMutation.mutate(items);
+            cakeCheckoutMutation.mutate({ items, percent: selectedOption?.value });
         } else {
             const items = checkoutItems?.map((item) => ({
                 product_id: parseInt(item?.id),
                 quantity: item?.quantity || 1,
-                deliveryOption: item?.deliveryOption || "full-payment",
             }));
-            generalProductCheckoutMutation.mutate(items);
+            generalProductCheckoutMutation.mutate({ items, percent: selectedOption?.value });
         }
+        setSelectedOption({ label: "Full Payment", value: 100 });
     };
 
     return (
@@ -176,6 +202,7 @@ const CheckoutModalContents = ({ handleClose }) => {
                 {/* Order Summary */}
                 <div>
                     <PrimaryTitle title={'Order Summary'} />
+
                     <div className="space-y-2 text-gray-700">
                         <div className="flex justify-between items-center">
                             <p className="text-secondary">Subtotal</p>
@@ -195,6 +222,8 @@ const CheckoutModalContents = ({ handleClose }) => {
                         </div>
                     </div>
                 </div>
+
+                <DeliveryOptions options={cartItems[0]?.type === "product" ? cakeDeliveryOptions : generalProductDeliveryOptions} selectedOption={selectedOption} setSelectedOption={setSelectedOption} />
             </div>
 
             <Button
