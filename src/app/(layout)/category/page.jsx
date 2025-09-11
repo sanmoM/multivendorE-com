@@ -28,7 +28,6 @@ export default function Page() {
         // if user didn't comes by click category navbar
         axios.get(`/categories`).then((res) => {
             if (categoryId || subcategoryId) {
-
                 const newCategories = res?.data?.categories?.filter(category => category?.id === parseInt(categoryId))
                 setCategories(newCategories)
             } else {
@@ -41,13 +40,14 @@ export default function Page() {
     useEffect(() => {
         axios.get(`/categories/${currentCategoryId}/products`).then((res) => {
             setSubcategories(res?.data?.subcategories)
-            setCategoryProducts(res?.data?.products)
-        })
-    }, [currentCategoryId, axios])
 
-    useEffect(() => {
-        axios.get(`/products/category/${currentCategoryId}/subcategory/${currentSubCategory}`).then((res) => {
-            if(res?.data?.products?.length !== 0) {
+            if (currentSubCategory) {
+                axios.get(`/products/category/${currentCategoryId}/subcategory/${currentSubCategory}`).then((res) => {
+                    if (res?.data?.products?.length !== 0) {
+                        setCategoryProducts(res?.data?.products)
+                    }
+                })
+            } else {
                 setCategoryProducts(res?.data?.products)
             }
         })
