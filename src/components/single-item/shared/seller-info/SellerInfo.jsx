@@ -103,7 +103,6 @@ import { cn } from '@/utils/cn';
 import { useQuery } from '@tanstack/react-query';
 
 export default function SellerInfo({ className, handleCustomOrderModal, vendorId }) {
-    console.log("vendorId:", vendorId, typeof vendorId);
 
     const axios = useAxios();
 
@@ -117,35 +116,10 @@ export default function SellerInfo({ className, handleCustomOrderModal, vendorId
         queryKey: ["seller-info", vendorId], // cache per vendor
         queryFn: async () => {
             const res = await axios.get(`/my-reviews-customer/${vendorId}`);
-            console.log(res)
             return res?.data || {};
         },
         enabled: !!vendorId,
     });
-
-    if (isLoading) {
-        return (
-            <div className="p-6">
-                <p className="text-sm text-secondary">Loading seller info...</p>
-            </div>
-        );
-    }
-
-    if (isError) {
-        console.error("Seller info error:", error); // 👈 full error object
-        return (
-            <div className="p-6">
-                <p className="text-sm text-red-500">
-                    Failed to load seller info: {error?.message || "Unknown error"}
-                </p>
-            </div>
-        );
-    }
-
-
-    if(!data) return null;
-
-    // console.log(data, "seller info in seller info", Date.now())
 
     return (
         <div className={cn("lg:w-1/3 lg:pl-10 xl:pl-20 lg:pr-0 flex flex-col mt-6 lg:mt-0", className)}>

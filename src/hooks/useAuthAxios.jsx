@@ -1,35 +1,44 @@
 import { BASE_URL } from "@/config";
 import axios from "axios";
-import { useSelector } from "react-redux";
+import { useRouter } from "next/navigation"; // ✅ Next.js 13+ navigation
 
 export default function useAuthAxios() {
-    // const token = useSelector((state) => state?.user?.user?.token);
-    // Add a request interceptor
-    axios.interceptors.request.use(function (config) {
-        // Do something before request is sent
-        return {
-            ...config,
-            baseURL: BASE_URL,
-            headers: {
-                Authorization: `Bearer ${localStorage.getItem("token") || ""}`,
-            }
-        };
-    }, function (error) {
-        // Do something with request error
-        return Promise.reject(error);
-    },
-        { synchronous: true, runWhen: () => { } }
+    const router = useRouter();
+
+    // Request interceptor
+    axios.interceptors.request.use(
+        function (config) {
+            return {
+                ...config,
+                baseURL: BASE_URL,
+                headers: {
+                    Authorization: `Bearer ${localStorage.getItem("token") || ""}`,
+                    ...config.headers, // merge headers safely
+                },
+            };
+        },
+        function (error) {
+            return Promise.reject(error);
+        },
+        { synchronous: true }
     );
 
-    // Add a response interceptor
-    axios.interceptors.response.use(function onFulfilled(response) {
-        // Any status code that lie within the range of 2xx cause this function to trigger
-        // Do something with response data
-        return response;
-    }, function onRejected(error) {
-        // Any status codes that falls outside the range of 2xx cause this function to trigger
-        // Do something with response error
-        return Promise.reject(error);
-    });
+    // Response interceptor
+    axios.interceptors.response.use(
+        function onFulfilled(response) {
+            return response;
+        },
+        function onRejected(error) {
+            if (error?.response?.status === 401) {
+                // ✅ Clear token (optional, but recommended)
+                localStorage.removeItem("token");
+
+                // ✅ Redirect to login
+                router.push("/login");
+            }
+            return Promise.reject(error);
+        }
+    );
+
     return axios;
 }

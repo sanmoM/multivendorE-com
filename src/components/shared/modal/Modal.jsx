@@ -18,7 +18,9 @@ export default function Modal({ isLeft, children, isOpen, setIsOpen, title }) {
                         </div>
                     </div>
                     <div className='grow overflow-y-scroll hide-scrollbar px-6 min-w-[100vw] lg:min-w-lg w-fit'>
-                        {children}
+                        {
+                            isOpen && children
+                        }
                     </div>
                 </div>
             </div>

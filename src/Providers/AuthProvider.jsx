@@ -15,7 +15,7 @@ export default function AuthProvider({ children }) {
         queryKey: ["personal-info"],
         queryFn: async () => {
             const res = await axios.get("/my-personal-info");
-            return res.data?.info;
+            return res?.data?.info;
         },
         enabled: !!axios,
         staleTime: 0,
@@ -27,9 +27,7 @@ export default function AuthProvider({ children }) {
     });
 
     useEffect(() => {
-        if (user) {
-            dispatch(setUser(user));
-        }
+        dispatch(setUser(user || {}));
     }, [user]);
 
     if (isLoading) {
