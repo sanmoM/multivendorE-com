@@ -8,6 +8,7 @@ import CategoryTabContents from "./components/tab-components/CategoryTabContents
 import ResellerTabContents from "./components/tab-components/ResellerTabContents";
 import ShopTabContents from "./components/tab-components/ShopTabContents";
 import Tabs from "@/components/shared/Tabs/Tabs";
+import FoodTabContents from "./components/tab-components/FoodTabContents";
 
 export default function BrowseSection() {
     const [isLoading, setIsLoading] = useState(true);
@@ -47,10 +48,15 @@ export default function BrowseSection() {
             onClick: () => setActiveTab('shop')
         },
         {
-            label: 'Reseller',
-            value: 'reseller',
-            onClick: () => setActiveTab('reseller')
+            label: 'Food',
+            value: 'food',
+            onClick: () => setActiveTab('food')
         }
+        // {
+        //     label: 'Reseller',
+        //     value: 'reseller',
+        //     onClick: () => setActiveTab('reseller')
+        // }
     ]
 
 
@@ -73,6 +79,9 @@ export default function BrowseSection() {
 
             {
                 activeTab === 'reseller' && <ResellerTabContents resellers={resellers} />
+            }
+            {
+                activeTab === 'food' && <FoodTabContents />
             }
         </div>
     );

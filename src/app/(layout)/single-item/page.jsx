@@ -40,31 +40,12 @@ export default function SingleItem() {
         isLoading,
         isError,
     } = useQuery({
-        queryKey: ["single-item", type, id],
+        queryKey: ["single-item"],
         queryFn: async () => {
             const res = await axios.get(`/item-details/${type}/${id}`);
             return res.data.data;
         },
-        enabled: !!type && !!id,
     });
-
-    // --- Fetch related products ---
-    const {
-        data: relatedProductsData,
-        isLoading: relatedLoading,
-        isError: relatedError,
-    } = useQuery({
-        queryKey: ["related-products"],
-        queryFn: async () => {
-            const res = await axios.get(
-                `/related-product/${type}/${data?.category?.id}`
-            );
-            return res.data.data;
-        },
-        enabled: !!data?.category?.id,
-    });
-
-    const relatedProducts = relatedProductsData || [];
 
     const { currentModal, handleCloseModal, handleOpenModal } = useModalAction();
 
@@ -127,6 +108,7 @@ export default function SingleItem() {
         dispatch(setCheckoutItems([productData]));
         handleOpenModal("checkout-modal");
     };
+
     return (
         <div>
             {
@@ -153,7 +135,7 @@ export default function SingleItem() {
                             </div>
                             <SellerInfo
                                 className="lg:hidden"
-                                handleCustomOrderModal={handleCustomOrderModal}
+                                // handleCustomOrderModal={handleCustomOrderModal}
                                 vendorId={data?.vendor_id}
                             />
 
@@ -185,9 +167,9 @@ export default function SingleItem() {
                                 <CustomerReviews id={id} type={data?.type} />
                                 <AddReview id={id} type={data?.type} />
                             </div>
-                            {!relatedLoading && !relatedError && (
-                                <SimilarProducts products={relatedProducts} />
-                            )}
+
+                            <SimilarProducts type={data?.type} categoryId={data?.category?.id} />
+
                         </Container>
 
                         <Modal

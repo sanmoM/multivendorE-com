@@ -4,8 +4,8 @@ import SectionTitle from '@/components/shared/section-title/SectionTitle';
 import PrimaryTitle from '@/components/shared/title/PrimaryTitle';
 import useModalAction from '@/hooks/useModalAction';
 import { useRef, useState } from 'react';
-import SellerInfo from '../shared/seller-info/SellerInfo';
 import { cn } from '@/utils/cn';
+import SellerInfo from '../shared/seller-info/SellerInfo';
 
 export default function ProductInfo({ data }) {
     const [activeIndex, setActiveIndex] = useState(0);
@@ -64,7 +64,7 @@ export default function ProductInfo({ data }) {
                 </div>
 
                 {/* Right Section - Seller Info and Custom Order */}
-                <SellerInfo className="hidden lg:block" handleCustomOrderModal={handleCustomOrderModal} />
+                <SellerInfo className="hidden lg:block" handleCustomOrderModal={handleCustomOrderModal}  vendorId={data?.vendor_id}  />
             </div>
 
             <PrimaryTitle title={data?.category?.categoryName} className={"my-6"} />

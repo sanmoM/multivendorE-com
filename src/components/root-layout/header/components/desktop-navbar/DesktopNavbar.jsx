@@ -16,7 +16,7 @@ const navItems = [
     { name: 'Home', href: '/' },
     { name: 'Category', href: '/category' },
     { name: 'Shop', href: '/shop' },
-    { name: 'Reseller', href: '/reseller' },
+    // { name: 'Reseller', href: '/reseller' },
 ];
 
 export default function DesktopNavbar({ setIsCartOpen, setNotificationOpen }) {
