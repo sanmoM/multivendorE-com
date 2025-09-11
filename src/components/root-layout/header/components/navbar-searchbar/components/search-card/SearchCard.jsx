@@ -3,8 +3,9 @@ import Image from 'next/image'
 import Link from 'next/link'
 
 export default function SearchCard({ data }) {
+    console.log(data)
     return (
-        <Link href={"/single-item"}>
+        <Link href={`/single-item?&type=${data.type}&id=${data.id}`}>
             <div className="p-4 border-b border-gray-200 hover:bg-gray-100 flex items-center gap-4 cursor-pointer">
                 <Image
                     src={IMAGE_BASE_URL + data.image}

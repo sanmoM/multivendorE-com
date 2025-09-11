@@ -6,7 +6,8 @@ export const getFormattedProduct = (data) => {
         image: data?.product_image || data?.image,
         title: data?.cake_name || data?.name,
         subtitle: data?.short_description || data?.description,
-        price: `$${data?.regular_price}`
+        price: `$${data?.regular_price}`,
+        type: data?.type,
     };
 
     return formattedData;
