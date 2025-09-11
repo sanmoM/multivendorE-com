@@ -10,6 +10,7 @@ export default function FallbackImage({ src, alt, ...props }) {
   let imagePath
   if (src?.startsWith('http')) {
     imagePath = src
+    console.log(imagePath)
   } else if (src?.startsWith('/')) {
     imagePath = IMAGE_BASE_URL + src.slice(1)
   } else {
@@ -18,7 +19,6 @@ export default function FallbackImage({ src, alt, ...props }) {
 
   const fallback = '/images/default-banner.jpg'
   const [imgSrc, setImgSrc] = useState(imagePath)
-
   return (
     <Image
       {...props}

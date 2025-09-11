@@ -118,7 +118,7 @@ export default function SingleItem() {
                             <Loader />
                         </div>
                     </div> :
-                    <div className="my-6 lg:my-10">
+                    <div className="lg:my-10">
                         <MobileHeader title={"Single Item"} containerClassName={"mb-6"} />
                         <Container className={"overflow-hidden !pt-0"}>
                             <ProductInfo data={data} />

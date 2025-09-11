@@ -5,12 +5,13 @@ import TextAreaInput from '@/components/shared/inputs/text-area-input/TextAreaIn
 import TextInput from '@/components/shared/inputs/text-input/TextInput';
 import SingleImageInput from '@/components/shared/single-image-input/SingleImageInput';
 import useAuthAxios from '@/hooks/useAuthAxios';
+import useModalAction from '@/hooks/useModalAction';
 import { useEffect, useState } from 'react';
 import toast from 'react-hot-toast';
 import { IoClose } from 'react-icons/io5';
 import { useSelector } from 'react-redux';
 
-export default function CreateProductModalContents({ handleCloseModal }) {
+export default function CreateProductModalContents() {
     const user = useSelector((state) => state.user?.user);
     const [productName, setProductName] = useState("");
     const [categoryOptions, setCategoryOption] = useState([]);
@@ -32,6 +33,7 @@ export default function CreateProductModalContents({ handleCloseModal }) {
     const [discountEnd, setDiscountEnd] = useState("");
     const [tag, setTag] = useState("");
 
+    const { handleOpenModal, handleCloseModal } = useModalAction();
     const axios = useAuthAxios();
 
     const handleSubmit = (e) => {
@@ -83,9 +85,10 @@ export default function CreateProductModalContents({ handleCloseModal }) {
             .then(() => {
                 toast.success("Product added successfully!");
                 handleCloseModal();
+                handleOpenModal("seller-product-modal");
             })
             .catch((err) => {
-                toast.error("Something went wrong while adding product.");
+                toast.error(err?.response?.data?.message || "Something went wrong while adding product.");
                 console.error("Error:", err);
             });
     };

@@ -11,6 +11,7 @@ import { IoMdNotificationsOutline } from "react-icons/io";
 import { IoCartOutline } from "react-icons/io5";
 import NavbarSearchbar from '../navbar-searchbar/NavbarSearchbar';
 import ProfileDropDown from '../profile-dropdown/ProfileDropDown';
+import { useSelector } from 'react-redux';
 
 const navItems = [
     { name: 'Home', href: '/' },
@@ -22,6 +23,7 @@ const navItems = [
 export default function DesktopNavbar({ setIsCartOpen, setNotificationOpen }) {
     const [isDropdownOpen, setIsDropdownOpen] = useState(false);
     const pathname = usePathname();
+    const user = useSelector(state => state?.user?.user);
 
     return (
         <Container className="lg:flex items-center justify-between hidden">
@@ -47,14 +49,17 @@ export default function DesktopNavbar({ setIsCartOpen, setNotificationOpen }) {
                 <NavbarSearchbar inputClassName={'w-48'} />
 
                 <div className='flex gap-2 items-center'>
-                    <button
-                        onClick={() => {
-                            setNotificationOpen()
-                            setIsDropdownOpen(false)
-                        }}
-                        className="p-3 rounded-full bg-tertiary hover:bg-secondary/50 transition-colors duration-200 focus:outline-none focus:ring-1 focus:ring-gray-300">
-                        <IoMdNotificationsOutline className='w-6 h-6 text-secondary' />
-                    </button>
+                    {
+                        user?.mobile ?
+                            <button
+                                onClick={() => {
+                                    setNotificationOpen()
+                                    setIsDropdownOpen(false)
+                                }}
+                                className="p-3 rounded-full bg-tertiary hover:bg-secondary/50 transition-colors duration-200 focus:outline-none focus:ring-1 focus:ring-gray-300">
+                                <IoMdNotificationsOutline className='w-6 h-6 text-secondary' />
+                            </button> : <div></div>
+                    }
 
                     {/* Cart Icon */}
                     <button onClick={() => {

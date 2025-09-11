@@ -88,6 +88,7 @@ export default function ProfileDropDown({ isMobile, isDropdownOpen, setIsDropdow
             name: user?.is_reseller === "0" ? 'Become a Seller' : user?.is_reseller === "1" ? 'Seller is Pending' : 'Seller',
             type: "button",
             handleClick: () => {
+                console.log(user?.is_reseller)
                 if (user?.is_reseller === "0") {
                     handleOpenModal("seller-info-modal")
                 } else if (user?.is_reseller === "2") {
