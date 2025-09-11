@@ -1,6 +1,7 @@
 "use client"
 
 import CategoryProducts from '@/components/category/category-products/CategoryProducts'
+import Subcategories from '@/components/category/subcategories/Subcategories'
 import MobileHeader from '@/components/root-layout/header/components/mobile-header/MobileHeader'
 import Container from '@/components/shared/container/Container'
 import PrimaryCard from '@/components/shared/primary-card/PrimaryCard'
@@ -13,37 +14,54 @@ export default function Page() {
     const searchParams = useSearchParams()
     const router = useRouter()
     const categoryId = searchParams.get('category')
-    const [currentId, setCurrentId] = useState(categoryId)
+    const subcategoryId = searchParams.get('subcategory')
+    const [currentCategoryId, setCurrentCategoryId] = useState(categoryId)
+    const [currentSubCategory, setCurrentSubCategory] = useState(subcategoryId)
     const axios = useAxios()
 
     const [categories, setCategories] = useState([])
+    const [subcategories, setSubcategories] = useState([])
     const [categoryProducts, setCategoryProducts] = useState([])
 
 
     useEffect(() => {
+        // if user didn't comes by click category navbar
         axios.get(`/categories`).then((res) => {
-            setCategories(res?.data?.categories)
+            if (categoryId || subcategoryId) {
+
+                const newCategories = res?.data?.categories?.filter(category => category?.id === parseInt(categoryId))
+                setCategories(newCategories)
+            } else {
+                setCategories(res?.data?.categories)
+            }
         })
+
     }, [axios])
 
     useEffect(() => {
-        if (currentId) {
-            axios.get(`/categories/${currentId}/products`).then((res) => {
+        axios.get(`/categories/${currentCategoryId}/products`).then((res) => {
+            setSubcategories(res?.data?.subcategories)
+            setCategoryProducts(res?.data?.products)
+        })
+    }, [currentCategoryId, axios])
+
+    useEffect(() => {
+        axios.get(`/products/category/${currentCategoryId}/subcategory/${currentSubCategory}`).then((res) => {
+            if(res?.data?.products?.length !== 0) {
                 setCategoryProducts(res?.data?.products)
-            })
-        }
-    }, [currentId, axios])
+            }
+        })
+    }, [currentCategoryId, currentSubCategory, axios])
 
     const handleCategoryClick = (id) => {
-        setCurrentId(id)
+        setCurrentCategoryId(id)
         const params = new URLSearchParams(searchParams.toString())
         params.set("category", id)
         router.push(`?${params.toString()}`)
     }
 
-
     return (
-        <div className={`${categories.length === 0 ? 'min-h-screen' : ''}`}>
+        <div className={`${categories?.length === 0 ? 'min-h-screen' : ''}`}>
             <MobileHeader title={"Categories"} />
             <Container className={"space-y-10"}>
                 <div>
@@ -62,8 +80,9 @@ export default function Page() {
                         }
                     </div>
                 </div>
+                <Subcategories items={subcategories} selectedSubcategory={currentSubCategory} setSelectedSubcategory={setCurrentSubCategory} />
                 {
-                    categoryProducts.length > 0 && (
+                    categoryProducts?.length > 0 && (
                         <CategoryProducts products={categoryProducts} />
                     )
                 }

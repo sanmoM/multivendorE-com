@@ -10,7 +10,6 @@ export default function FallbackImage({ src, alt, ...props }) {
   let imagePath
   if (src?.startsWith('http')) {
     imagePath = src
-    console.log(imagePath)
   } else if (src?.startsWith('/')) {
     imagePath = IMAGE_BASE_URL + src.slice(1)
   } else {

@@ -39,7 +39,6 @@ export default function ProductsModalContents() {
                     axios.get(`/reseller-generalproducts/show`),
                     axios.get(`/reseller-reject-products/show`),
                 ])
-                // console.log(pendingProducts?.data?.products)
                 setProducts({
                     pending: pendingProducts?.data?.products,
                     approved: approvedProducts?.data?.products,
@@ -49,7 +48,7 @@ export default function ProductsModalContents() {
             } catch (error) {
                 console.log(error)
             } finally {
-                // setIsLoading(false)
+                setIsLoading(false)
             }
         }
         fetchData()
