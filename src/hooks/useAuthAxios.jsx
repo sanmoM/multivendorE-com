@@ -30,6 +30,9 @@ export default function useAuthAxios() {
         },
         function onRejected(error) {
             if (error?.response?.status === 401) {
+                if (error.config.url === "/my-personal-info") {
+                    return Promise.reject(error);
+                }
                 // ✅ Clear token (optional, but recommended)
                 localStorage.removeItem("token");
 
