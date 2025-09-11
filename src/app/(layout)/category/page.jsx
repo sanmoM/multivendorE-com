@@ -80,7 +80,14 @@ export default function Page() {
                         }
                     </div>
                 </div>
-                <Subcategories items={subcategories} selectedSubcategory={currentSubCategory} setSelectedSubcategory={setCurrentSubCategory} />
+                {
+                    subcategories?.length > 0 && (
+                        <div>
+                            <SectionTitle title='Subcategories' className={"mb-6"} />
+                            <Subcategories items={subcategories} selectedSubcategory={currentSubCategory} setSelectedSubcategory={setCurrentSubCategory} />
+                        </div>
+                    )
+                }
                 {
                     categoryProducts?.length > 0 && (
                         <CategoryProducts products={categoryProducts} />
