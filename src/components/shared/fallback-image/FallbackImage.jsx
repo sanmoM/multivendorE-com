@@ -1,9 +1,9 @@
 
 
 
-'use client'
+// 'use client'
 import Image from 'next/image'
-import { useState } from 'react'
+// import { useState } from 'react'
 import { IMAGE_BASE_URL } from '@/config'
 
 export default function FallbackImage({ src, alt, ...props }) {
@@ -16,18 +16,18 @@ export default function FallbackImage({ src, alt, ...props }) {
     imagePath = IMAGE_BASE_URL + src
   }
 
-  const fallback = '/images/default-banner.jpg'
-  const [imgSrc, setImgSrc] = useState(imagePath)
+  // const fallback = '/images/default-banner.jpg'
+  // const [imgSrc, setImgSrc] = useState(imagePath)
   return (
     <Image
       {...props}
-      src={imgSrc}
+      src={imagePath}
       alt={alt}
-      onError={() => {
-        if (imgSrc !== fallback) {
-          setImgSrc(fallback)
-        }
-      }}
+    // onError={() => {
+    //   if (imgSrc !== fallback) {
+    //     setImgSrc(fallback)
+    //   }
+    // }}
     />
   )
 }

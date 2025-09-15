@@ -24,6 +24,7 @@ export default function Banner({ data }) {
                                 className="w-full rounded-md object-cover h-[30vh] lg:h-[60vh]"
                                 src={IMAGE_BASE_URL + product?.image}
                                 alt="Banner"
+                                quality={100}
                             />
                         </React.Fragment>
                     ))
