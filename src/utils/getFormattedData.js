@@ -9,7 +9,6 @@ export const getFormattedProduct = (data) => {
         price: `$${data?.regular_price}`,
         type: data?.type,
     };
-
     return formattedData;
 };
 
