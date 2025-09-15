@@ -117,7 +117,7 @@ export default function Page() {
                         shops?.length > 0 ? <FeaturedItems desktopView={6} mobileView={3} >
                             {
                                 shops?.map((shop) => (
-                                    <div key={shop?.id} onClick={() => setCategoryId(shop.id)} className="w-full cursor-pointer">
+                                    <div key={shop?.id} onClick={() => setCategoryId(shop?.user?.id)} className="w-full cursor-pointer">
                                         <PrimaryCard item={{ image: shop?.image, title: shop?.shop_name, subtitle: shop?.address }} containerClassName={"px-2 w-full"} isLoading={isLoading} />
                                     </div>
                                 ))

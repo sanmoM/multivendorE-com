@@ -44,7 +44,7 @@ export default function ShopTabContents({ categories, locations }) {
                 shops?.length > 0 ? <CustomSlider mobileView={3} desktopView={6}>
                     {
                         shops.map((shop, index) => (
-                            <Link href={`/shop?id=${shop?.id}`} className='block w-full'>
+                            <Link href={`/shop?id=${shop?.user?.id}`} className='block w-full'>
                                 <PrimaryCard key={index} item={{ image: shop?.image, title: shop?.shop_name, subtitle: shop?.address }} containerClassName={"px-2"} isLoading={isLoading} />
                             </Link>
                         ))
