@@ -16,8 +16,8 @@ export default function FeaturedProducts() {
     // get all products
     useEffect(() => {
         axios.get("/all-products").then((res) => {
-            setAllProducts(res?.data?.products);
-            setShowAbleProducts(res?.data?.products?.slice(0, end));
+            setAllProducts([...res?.data?.products, ...res?.data?.general_product]);
+            setShowAbleProducts([...res?.data?.products, ...res?.data?.general_product]?.slice(0, end));
             setEnd(end + 10);
         });
     }, []);
