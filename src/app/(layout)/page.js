@@ -10,7 +10,9 @@ import Container from "@/components/shared/container/Container";
 import { getData } from "@/utils/fetch";
 
 export default async function Home() {
-  const res = await getData("/home");
+  const res = await getData("/home", {
+    cache: "no-store",
+  });
 
   return (
     <div>
