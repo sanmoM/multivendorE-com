@@ -126,6 +126,10 @@ const CheckoutModalContents = ({ handleClose }) => {
 
     // ✅ Checkout Handler
     const handleCheckout = () => {
+        if (!user?.street || !user?.city || !user?.state || !user?.country) {
+            toast.error('Please fill all the fields');
+            return;
+        }
         if (checkoutItems[0]?.type === 'product') {
             const items = [
                 {
