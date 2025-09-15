@@ -3,6 +3,7 @@ import PrimaryCard from '@/components/shared/primary-card/PrimaryCard';
 import PrimaryTitle from '@/components/shared/title/PrimaryTitle';
 import useAxios from '@/hooks/useAxios';
 import { useQuery } from '@tanstack/react-query';
+import Link from 'next/link';
 
 
 export default function SimilarProducts({ type, categoryId }) {
@@ -26,9 +27,11 @@ export default function SimilarProducts({ type, categoryId }) {
             <CustomSlider desktopView={6} mobileView={2} paddingDesktop={60} paddingMobile={30} autoplay>
                 {
                     products?.map((item, index) => (
-                        <>
+
+                        <Link href={`/single-item?&type=${item?.type}&id=${item?.id}`} className='block w-full' key={index}>
                             <PrimaryCard item={{ image: item?.product_image || item?.image, title: item?.cake_name || item?.name, subtitle: `৳ ${item?.regular_price}` }} containerClassName={"px-2"} />
-                        </>
+                        </Link>
+
                     ))
                 }
             </CustomSlider>

@@ -40,7 +40,7 @@ export default function SingleItem() {
         isLoading,
         isError,
     } = useQuery({
-        queryKey: ["single-item"],
+        queryKey: ["single-item", id],
         queryFn: async () => {
             const res = await axios.get(`/item-details/${type}/${id}`);
             return res.data.data;
