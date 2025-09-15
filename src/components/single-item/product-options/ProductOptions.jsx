@@ -44,7 +44,7 @@ export default function ProductOptions({ data, cartItem, setCartItem }) {
 
       {/* Total Price */}
       <div className="mb-8 border-gray-200">
-        <p className=" text-gray-800">Total Price: ${data?.price * quantity}</p>
+        <p className=" text-gray-800">Total Price: ৳ {data?.price * quantity}</p>
       </div>
     </div>
   )

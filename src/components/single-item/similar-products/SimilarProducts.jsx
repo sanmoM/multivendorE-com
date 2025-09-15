@@ -27,7 +27,7 @@ export default function SimilarProducts({ type, categoryId }) {
                 {
                     products?.map((item, index) => (
                         <>
-                            <PrimaryCard item={{ image: item?.product_image || item?.image, title: item?.cake_name || item?.name, subtitle: `$${item?.regular_price}` }} containerClassName={"px-2"} />
+                            <PrimaryCard item={{ image: item?.product_image || item?.image, title: item?.cake_name || item?.name, subtitle: `৳ ${item?.regular_price}` }} containerClassName={"px-2"} />
                         </>
                     ))
                 }
