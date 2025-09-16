@@ -57,7 +57,7 @@ export default function CreateProductModalContents() {
         formData.append("regular_price", parseFloat(regularPrice));
 
         // optional
-        if (discountPrice) formData.append("discount_price", parseFloat(discountPrice));
+        // if (discountPrice) formData.append("discount_price", parseFloat(discountPrice));
         if (discountPercentage) formData.append("discount_percentage", parseFloat(discountPercentage));
         if (discountStart) formData.append("discount_start", discountStart);
         if (discountEnd) formData.append("discount_end", discountEnd);
@@ -124,7 +124,7 @@ export default function CreateProductModalContents() {
                 <TextInput placeholder="Size" value={size} setValue={setSize} />
                 <TextInput placeholder="Tag" value={tag} setValue={setTag} />
                 <TextInput placeholder="Regular Price" value={regularPrice} setValue={setRegularPrice} isNumber />
-                <TextInput placeholder="Discount Price" value={discountPrice} setValue={setDiscountPrice} isNumber />
+                {/* <TextInput placeholder="Discount Price" value={discountPrice} setValue={setDiscountPrice} isNumber /> */}
                 <TextInput placeholder="Discount Percentage" value={discountPercentage} setValue={setDiscountPercentage} isNumber />
                 <div className='grid grid-cols-2 gap-4'>
                     <DateInput placeholder="Discount Start" value={discountStart} setValue={setDiscountStart} />

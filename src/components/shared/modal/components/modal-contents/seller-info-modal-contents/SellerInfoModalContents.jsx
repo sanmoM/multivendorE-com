@@ -32,7 +32,7 @@ export default function SellerInfoModalContents({ handleCloseModal }) {
             queryClient.invalidateQueries({ queryKey: ['personal-info'] });
         },
         onError: (error) => {
-            toast.error('Something went wrong while registering.');
+            toast.error(error.response.data.message);
             console.error('Mutation error:', error);
         },
     });
