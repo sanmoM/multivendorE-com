@@ -11,7 +11,7 @@ export default async function PromotionalSection() {
         cache: "no-store",
     })
     return (
-        <div className="rounded-lg  mt-6 md:mt-8 max-w-[calc(1280px+1rem)] mx-auto hidden lg:block">
+        <div className="rounded-lg  mt-6 md:mt-8 mx-auto hidden lg:block">
             <CustomSlider>
                 {
                     offer?.map((item, index) => (
