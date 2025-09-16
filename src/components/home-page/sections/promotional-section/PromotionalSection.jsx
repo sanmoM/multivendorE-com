@@ -7,7 +7,9 @@ import "slick-carousel/slick/slick-theme.css";
 import "slick-carousel/slick/slick.css";
 
 export default async function PromotionalSection() {
-    const { offer } = await getData("/vendor-slider")
+    const { offer } = await getData("/vendor-slider", {
+        cache: "no-store",
+    })
     return (
         <div className="rounded-lg  mt-6 md:mt-8 max-w-[calc(1280px+1rem)] mx-auto hidden lg:block">
             <CustomSlider>

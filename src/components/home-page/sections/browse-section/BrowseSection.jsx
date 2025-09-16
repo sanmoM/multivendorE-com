@@ -13,7 +13,7 @@ import FoodTabContents from "./components/tab-components/FoodTabContents";
 export default function BrowseSection() {
     const [isLoading, setIsLoading] = useState(true);
     const [activeTab, setActiveTab] = useState('category');
-    const [categories, setCategories] = useState(Array(6).fill(null));
+    const [categories, setCategories] = useState(Array(5).fill(null));
     const [locations, setLocations] = useState([]);
     const axios = useAxios();
     useEffect(() => {
