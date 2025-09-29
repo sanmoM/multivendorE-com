@@ -53,7 +53,7 @@ export default function Page() {
                 })
             }
 
-            if (currentSubCategory) {
+            if (currentCategoryId) {
                 setCategoryProducts(res?.data?.products)
             }
         })
