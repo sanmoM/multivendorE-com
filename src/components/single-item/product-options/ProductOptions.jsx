@@ -15,19 +15,21 @@ export default function ProductOptions({ data, cartItem, setCartItem }) {
       {/* variant */}
       <div className="mb-6">
         <SecondaryTitle title={"Variant"} />
-        {
-          data?.variants?.map((variant, index) => (
-            <FallbackImage
-              key={index}
-              src={variant}
-              alt={variant}
-              width={60}
-              height={60}
-              className={`rounded-sm aspect-square border-2 ${selectedVariant === variant ? '!border-secondary' : 'border-transparent'} cursor-pointer object-contain`}
-              onClick={() => setCartItem({ ...cartItem, variant: variant })}
-            />
-          ))
-        }
+        <div className='flex items-center gap-4'>
+          {
+            data?.variants?.map((variant, index) => (
+              <FallbackImage
+                key={index}
+                src={variant}
+                alt={variant}
+                width={60}
+                height={60}
+                className={`rounded-sm aspect-square border-2 ${selectedVariant === variant ? '!border-secondary' : 'border-transparent'} cursor-pointer object-contain`}
+                onClick={() => setCartItem({ ...cartItem, variant: variant })}
+              />
+            ))
+          }
+        </div>
       </div>
 
       <div className="mb-6">
