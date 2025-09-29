@@ -19,7 +19,7 @@ export default function PrimaryCard({ item, containerClassName, isLoading }) {
                     </div> :
                     <div className={cn("relative", containerClassName)}>
                         {
-                            item?.discount_percentage && <span className="bg-red-500 text-white py-0.5 px-2 rounded-full text-[10px] top-2 right-4 absolute">-{parseInt(item?.discount_percentage)}%</span>
+                            item?.discount_percentage && <span className="bg-red-500 text-white py-0.5 px-3 rounded-full text-[10px] top-2 right-4 absolute">-{parseInt(item?.discount_percentage)}%</span>
                         }
                         <Image src={IMAGE_BASE_URL + item?.image} alt="product-1" width={300} height={400} className="w-full aspect-square object-cover rounded-lg" />
                         <h3 className="text-primary font-medium mt-4 text-sm lg:text-lg flex justify-between items-center">
