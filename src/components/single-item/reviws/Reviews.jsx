@@ -9,7 +9,7 @@ const Reviews = ({ id, type }) => {
 
   // Fetch function
   const fetchRatingDetails = async () => {
-    const response = await axios.get(`/${type}/${id}/reviews-summary`);
+    const response = await axios.get(`/${type === "product" ? "product" : "generalproduct"}/${id}/reviews-summary`);
     return response.data;
   };
 
