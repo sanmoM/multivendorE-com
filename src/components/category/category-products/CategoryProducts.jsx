@@ -11,7 +11,7 @@ export default function CategoryProducts({ products }) {
             {products?.map((product, index) => (
                 <Link href={`/single-item?&type=${product?.type}&id=${product?.id}`} key={index}>
                     <PrimaryCard
-                        item={{ ...getFormattedProduct(product), image: product?.image }}
+                        item={{ ...getFormattedProduct(product) }}
                         containerClassName="px-2"
                     />
                 </Link>

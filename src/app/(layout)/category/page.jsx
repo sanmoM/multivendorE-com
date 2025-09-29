@@ -34,8 +34,12 @@ export default function Page() {
                 setCategories(res?.data?.categories)
             }
         })
+        axios.get("/all-products").then((res) => {
+            const merged = [...res?.data?.products, ...res?.data?.general_product];
+            setCategoryProducts(merged);
+        });
 
-    }, [axios])
+    }, [])
 
     useEffect(() => {
         axios.get(`/categories/${currentCategoryId}/products`).then((res) => {
@@ -47,7 +51,9 @@ export default function Page() {
                         setCategoryProducts(res?.data?.products)
                     }
                 })
-            } else {
+            }
+
+            if (currentSubCategory) {
                 setCategoryProducts(res?.data?.products)
             }
         })
@@ -59,6 +65,8 @@ export default function Page() {
         params.set("category", id)
         router.push(`?${params.toString()}`)
     }
+
+    console.log(categoryProducts)
 
     return (
         <div className={`${categories?.length === 0 ? 'min-h-screen' : ''}`}>
