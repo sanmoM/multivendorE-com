@@ -24,9 +24,8 @@ export default function ProductInfo({ data }) {
                     <div className="text-base lg:text-lg font-medium text-gray-600 mb-4 lg:mb-8">
                         <span className='text-secondary '>Cakes</span> / <span className=" text-primary">Chocolate Fudge Cake</span>
                     </div>
-                    <hr className="border-t border-gray-200" />
 
-                    <div className="px-2 outline-0 w-full aspect-[7/4] relative overflow-hidden">
+                    <div className="px-2 outline-0 w-full aspect-[7/4] relative overflow-hidden border-2 !border-secondary/30 rounded-xl">
                         {
                             data?.image_gallery?.map((url, index) => (
                                 <FallbackImage

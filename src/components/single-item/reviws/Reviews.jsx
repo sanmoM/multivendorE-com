@@ -4,12 +4,12 @@ import useAxios from '@/hooks/useAxios';
 import React from 'react';
 import { useQuery } from '@tanstack/react-query';
 
-const Reviews = ({ id }) => {
+const Reviews = ({ id, type }) => {
   const axios = useAxios();
 
   // Fetch function
   const fetchRatingDetails = async () => {
-    const response = await axios.get(`/product/${id}/reviews-summary`);
+    const response = await axios.get(`/${type}/${id}/reviews-summary`);
     return response.data;
   };
 
@@ -19,7 +19,7 @@ const Reviews = ({ id }) => {
     queryFn: fetchRatingDetails,
     enabled: !!id, // only fetch if id exists
   });
-
+  console.log(ratingDetails)
   // if (isLoading) {
   //   return <p>Loading reviews...</p>;
   // }

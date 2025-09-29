@@ -163,7 +163,7 @@ export default function SingleItem() {
                                         setCartItem={setCartItem}
                                     />
                                 )}
-                                <Reviews id={id} />
+                                <Reviews id={id} type={data?.type} />
                                 <CustomerReviews id={id} type={data?.type} />
                                 <AddReview id={id} type={data?.type} />
                             </div>
