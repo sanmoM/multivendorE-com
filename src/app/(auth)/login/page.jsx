@@ -34,7 +34,6 @@ export default function page() {
                     password: password,
                 });
                 if (res.status === 200) {
-                    console.log(res.data, "userData")
                     toast.success("Login successful")
                     setToken(res?.data?.token)
                     router.replace("/")

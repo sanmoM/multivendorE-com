@@ -24,6 +24,7 @@ export default function DesktopNavbar({ setIsCartOpen, setNotificationOpen }) {
     const [isDropdownOpen, setIsDropdownOpen] = useState(false);
     const pathname = usePathname();
     const user = useSelector(state => state?.user?.user);
+    const cartItems = useSelector((state) => state.cart.cartItems);
 
     return (
         <Container className="lg:flex items-center justify-between hidden">
@@ -65,8 +66,9 @@ export default function DesktopNavbar({ setIsCartOpen, setNotificationOpen }) {
                     <button onClick={() => {
                         setIsCartOpen()
                         setIsDropdownOpen(false)
-                    }} className="p-3 rounded-full bg-tertiary hover:bg-secondary/50 transition-colors duration-200 focus:outline-none focus:ring-1 focus:ring-gray-300">
+                    }} className="relative p-3 rounded-full bg-tertiary hover:bg-secondary/50 transition-colors duration-200 focus:outline-none focus:ring-1 focus:ring-gray-300">
                         <IoCartOutline className='w-6 h-6 text-secondary' />
+                        <div className='w-6 absolute top-0 right-0 bg-orange-500 text-white aspect-square rounded-full'>{cartItems.length}</div>
                     </button>
                     <ProfileDropDown isDropdownOpen={isDropdownOpen} setIsDropdownOpen={setIsDropdownOpen} />
                 </div>

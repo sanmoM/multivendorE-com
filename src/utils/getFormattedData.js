@@ -8,6 +8,7 @@ export const getFormattedProduct = (data) => {
         subtitle: data?.short_description || data?.description,
         price: `$${data?.regular_price}`,
         type: data?.type,
+        discount_percentage: data?.discount_percentage,
     };
     return formattedData;
 };

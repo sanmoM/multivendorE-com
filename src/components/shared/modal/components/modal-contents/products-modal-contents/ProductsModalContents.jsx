@@ -54,7 +54,6 @@ export default function ProductsModalContents() {
         fetchData()
     }, [user?.id])
 
-    console.log(products)
 
     return (
         <div>

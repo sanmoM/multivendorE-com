@@ -3,6 +3,7 @@ import Link from 'next/link'
 import React from 'react'
 import SecondaryButton from '../../../../../shared/secondary-button/SecondaryButton'
 import { useRouter } from 'next/navigation'
+import { capitalizeText } from '@/utils/format-string'
 
 export default function CategoryTabContents({ category, isLoading }) {
     const router = useRouter()

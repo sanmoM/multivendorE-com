@@ -5,13 +5,11 @@ import { getFormattedProduct } from '@/utils/getFormattedData'
 import Link from 'next/link'
 
 export default function CategoryProducts({ products }) {
-    console.log(products, "products")
 
     return (
         <Items title={"Products"} desktopView={6} mobileView={3}>
             {products?.map((product, index) => (
                 <Link href={`/single-item?&type=${product?.type}&id=${product?.id}`} key={index}>
-                    {console.log({ ...getFormattedProduct(product), image: product?.product_image }, "product")}
                     <PrimaryCard
                         item={{ ...getFormattedProduct(product), image: product?.image }}
                         containerClassName="px-2"
